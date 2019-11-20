@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29505.145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "coil-levels-csharp", "coil-levels-csharp.csproj", "{53206E67-9CA5-4612-8916-33CEAFD8A2E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53206E67-9CA5-4612-8916-33CEAFD8A2E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53206E67-9CA5-4612-8916-33CEAFD8A2E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53206E67-9CA5-4612-8916-33CEAFD8A2E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53206E67-9CA5-4612-8916-33CEAFD8A2E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E38345B-D9D3-463A-82AE-CD295825E3A3}
+	EndGlobalSection
+EndGlobal
