@@ -29,7 +29,7 @@ namespace coil
         public Dictionary<(int, int), List<Seg>> Hits { get; private set; }
 
         //Path[1] is the first path.  So the first path will leave a trail of 1s in rows.
-        public List<Seg> Segs { get; private set; }
+        public LinkedList<Seg> Segs { get; private set; }
 
         //w/h are the "real" version
         public Level(int width, int height, Random rnd)
@@ -37,7 +37,7 @@ namespace coil
             Rnd = rnd;
             Width = width + 2;
             Height = height + 2;
-            Segs = new List<Seg>();
+            Segs = new LinkedList<Seg>();
             InitBoard();
             MakeLevel();
         }
@@ -130,7 +130,8 @@ namespace coil
             // WL("Hits after adding seg.");
             // ShowSeg(this);
             // ShowHit(this);
-            Segs.Add(seg);
+
+            Segs.AddLast(seg);
         }
 
         private void InitialWander()
@@ -179,35 +180,26 @@ namespace coil
             var success = true;
             var tweakct = 0;
             var tweakfailct = 0;
-            var segFails = new Dictionary<Seg, int>();
-
-            // WL(tweakct.ToString());
+            //it's interesting to use the linkedlist feature of segs to drill super hard into recently added segments.
+            //
 
             while (success)
             {
                 success = false;
-
-                // ShowSeg(this);
-                foreach (var seg in Segs)
+                foreach (var seg in Segs.OrderByDescending(el=>el.Index))
                 {
-                    if (!segFails.ContainsKey(seg))
+                    if (seg.Index % 13 == 0)
                     {
-                        segFails[seg] = 0;
+                        continue;
                     }
-                }
-
-                var segChoices = Segs.Where(ss => ss.Len >= 3)
-                                     .OrderByDescending(ss => Math.Sqrt(ss.Index) + ss.Len + Rnd.Next(3))
-                                     .ToList();
-
-                while (segChoices.Any())
-                {
-                    var seg = Util.PopFirst(segChoices);
+                    if (seg.Len < 3)
+                    {
+                        continue;
+                    }
                     var tweak = GetTweak(seg, tweakct);
                     if (tweak == null)
                     {
                         tweakfailct++;
-                        segFails[seg]++;
                     }
                     else
                     {
@@ -221,6 +213,10 @@ namespace coil
                                 SaveWithPath(this, $"../../../tweaks/Tweak-{tweakct}.png");
                                 //SaveEmpty(this, $"../../../tweaks/Tweak-{tweakct}-empty.png");
                             }
+                        }
+                        if (tweakct % 100 == 0)
+                        {
+                            WL($"Tweakct: {tweakct,6} fails: {tweakfailct,6}");
                         }
 
                         success = true;
@@ -244,7 +240,6 @@ namespace coil
             }
 
             var starts = Enumerable.Range(1, seg.Len - 2)
-                                   .ToList()
                                    .OrderBy(el => el)
                                    .ToList();
 
@@ -264,8 +259,6 @@ namespace coil
 
             return null;
         }
-
-        
 
         public Tweak InnerGetTweak(Seg seg, bool right, int start)
         {
@@ -290,16 +283,15 @@ namespace coil
             var longTweak = false;
 
             //this can get super cubic!
-            var len1Choices = Enumerable.Range(1, maxLen1).OrderByDescending(el => el).ToList();
+            var len1Choices = Enumerable.Range(1, maxLen1)
+                                        .OrderByDescending(el => el)
+                                        .ToList();
             //len1Choices.Shuffle(Rnd);
             while (len1Choices.Any())
             {
                 var len1 = PopFirst(len1Choices);
                 var len1last = Add(tweakStartSq, len1dir, len1);
 
-                // if (seg.Index==12 && right){
-                //     var a = 23;
-                // }
                 //very annoying that this tries to go as far as possible
                 //it may fail to find shorter valid tweak len2s
                 var maxLen2 = GetSafeLength(len1last, seg.Dir, index: seg.Index, max: len2max);
@@ -311,7 +303,6 @@ namespace coil
                 }
 
                 var len2Choices = Enumerable.Range(2, maxLen2 - 1)
-                                            .ToList()
                                             .OrderByDescending(el => el)
                                             .ToList();
 
@@ -322,6 +313,25 @@ namespace coil
 
                     //figure out if it's a return fromtweak or from longtweak
                     // ShowSeg(this);
+
+                    //we are inefficient because we repeatedly try to return. i.e. go out 10, left 10, then try to return.  go out 9, left 10, try to return. this is backwards.
+                    //we should look out from seg3end and only ever go out that far when we're trying it! this whole thing is somewhat backwards.
+                    //new structure:
+                    //foreach start: determine len1s (which is also the len3)
+                    //then pick a start (as start) and another one (as len3end) and check whether len2 can exist.
+                    //much fewer combinations and if you have a bad section like this it will still work:
+                    //>--------------->
+                    //
+                    //
+                    //<----------<
+                    //>----------^
+                    //
+                    //
+                    //<---------------s-<
+                    //i.e. trying to build a tweak from S as start in the bottom row. you'll go up far, left around the obvious block, and try to return a ton of times.  the farther
+                    //the top block is away the more expensive it will be.
+                    //the better way to do this would be to determine "maxlen1" from each start.
+                    //it'd be 2 for most of the path so you'd only check that, and like 5 for the first few s. So you can just take your choice
                     bool okay = false;
                     if (start + len2 == seg.Len)
                     {
@@ -420,7 +430,7 @@ namespace coil
                 return 0;
             }
 
-            return Math.Min(16, res);
+            return res;
         }
 
         //just make sure the space is clear, and that the overlap hit is okay.
@@ -577,12 +587,13 @@ namespace coil
             //perhaps we should just keep going here til we hit a null/earlier filled sq?
             //that way it's easier
             var len3effectiveLength = tweak.Len1;
-            Seg oldNextSeg = null;
+
+            LinkedListNode<Seg> segNode = Segs.Find(seg);
+            LinkedListNode<Seg> oldNextSeg = segNode.Next;
 
             if (tweak.LongTweak)
             {
-                oldNextSeg = Segs[seg.Index];
-                len3effectiveLength += oldNextSeg.Len;
+                len3effectiveLength += oldNextSeg.Value.Len;
 
                 //also take over hits that that segment might have had.
                 //do we actually use this? yes.
@@ -596,7 +607,7 @@ namespace coil
                 Show(this);
             }
 
-            //what about the square's hit at the end of the original seg+1? in a longtweak it's not done anymore.
+            //what about the squares hit at the end of the original seg+1? in a longtweak it's not done anymore.
             while (len3filled < len3effectiveLength)
             {
                 Rows[len3candidate] = seg3;
@@ -615,13 +626,10 @@ namespace coil
 
             if (tweak.LongTweak)
             {
-                Hits[len3candidate].Remove(oldNextSeg);
+                Hits[len3candidate].Remove(oldNextSeg.Value);
 
                 var originalEnd = Add(seg.Start, seg.Dir, seg.Len + 1);
                 Hits[originalEnd].Remove(seg); //hmm this is very suspicious
-
-                //possibly having a simple hit map is not sufficient and i need to know everybody who hits something.
-                //or at least the lowest/highest seg index which does so.
             }
 
             if (debug)
@@ -644,7 +652,6 @@ namespace coil
             if (tweak.LongTweak)
             {
                 seg4bump = -1;
-
                 //we have taken over the squares.
             }
             else
@@ -686,12 +693,6 @@ namespace coil
                 Show(this);
             }
 
-            //adjust indexes
-            if (tweak.LongTweak)
-            {
-                var ae = 34;
-            }
-
             foreach (var s in Segs.Where(ss => ss.Index > seg.Index))
             {
                 s.Index += 3 + seg4bump;
@@ -704,31 +705,23 @@ namespace coil
                 Show(this);
             }
 
-            //what about all old hits and rows? those are fucked up too.
-            //restructure data.  rather than inlining values, inline pointers to segments
-            //that wya when segments get updated things are okay.
-
             //have to fix the original segment.
             seg.Len = tweak.Start;
 
             //add in new segments
-
             if (tweak.LongTweak)
             {
-                Segs.RemoveAt(Segs.IndexOf(oldNextSeg));
+                Segs.Remove(oldNextSeg);
             }
             else
             {
-                Segs.Insert(seg.Index, seg4);
+                Segs.AddAfter(segNode, seg4);
             }
 
-            Segs.Insert(seg.Index, seg3);
-            Segs.Insert(seg.Index, seg2);
-            Segs.Insert(seg.Index, seg1);
-
-            // foreach (var segs in Segs){
-            //     WL(segs.ToString());
-            // }
+            Segs.AddAfter(segNode, seg3);
+            Segs.AddAfter(segNode, seg2);
+            Segs.AddAfter(segNode, seg1);
+            //debug = true;
             if (debug)
             {
                 ShowSeg(this);
@@ -736,6 +729,18 @@ namespace coil
                 Show(this);
             }
         }
+
+        //private void ValidateSegIndexes()
+        //{
+        //    foreach (var seg in Segs)
+        //    {
+        //        if (seg.Index != Segs.IndexOf(seg) + 1)
+        //        {
+        //            //bad
+        //            //var ae = 3;
+        //        }
+        //    }
+        //}
 
         public (int, int) GetRandomPoint()
         {

@@ -18,7 +18,7 @@ namespace coil
             var imageWidth = level.Width * Scale;
             var imageHeight = level.Height * Scale;
 
-            Console.Write($"Size: {imageWidth}x{imageHeight}");
+            Console.Write($"Size: {imageWidth}x{imageHeight} - ");
             using (var result = new Image<Rgba32>(imageWidth, imageHeight))
             {
                 for (var yy = 0; yy < level.Height; yy++)

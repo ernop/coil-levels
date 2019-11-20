@@ -1,3 +1,12 @@
+todo now:
+convert to linkedlist
+profiling
+timing
+what actually takes the time?
+unbound length of tweaks
+
+pre-long tweaks (extend first)
+
 data structure
 Rows Dictionary<(int,int),Seg> for every square what seg owns it.
 -seg going a,b,c
@@ -36,4 +45,3 @@ Problems;
         down to N, over M, back up- if this fails, then
             down to N-1, over M, back up is also likely to fail
             what if we started going out as far as possible, but didn't accept it til the last one?
-        

@@ -6,7 +6,5 @@ namespace coil
         Right = 1,
         Down = 2,
         Left = 3,
-        //dependent or empty squares. not actually used much
-        None = 4,
     }
 }

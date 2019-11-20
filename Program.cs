@@ -10,8 +10,8 @@ namespace coil
         {
             var ii = 6;
             var mm = 7;
-            var x = 310;
-            var y = 220;
+            var x = 295;
+            var y = 195;
             var stem = $"../../../output/{x}x{y}";
 
             if (!System.IO.Directory.Exists(stem))
@@ -36,7 +36,7 @@ namespace coil
                 Util.SaveEmpty(l,$"{stem}/{ii}-empty.png");
                 Util.SaveWithPath(l, $"{stem}/{ii}-path.png");
 
-                l.Tweak(true, 40);
+                l.Tweak(true, 1000);
                 Util.SaveEmpty(l, $"{stem}/{ii}-tweaked.png");
                 Util.SaveWithPath(l, $"{stem}/{ii}-path-tweaked.png");
                 Report(l);

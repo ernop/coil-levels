@@ -113,10 +113,10 @@ namespace coil
                 }
             }
 
-            var start = l.Segs[0].Start;
+            var start = l.Segs.First.Value.Start;
             ins[start.Item2][start.Item1] = "s";
 
-            var end = GetEnd(l.Segs[l.Segs.Count - 1]);
+            var end = GetEnd(l.Segs.Last.Value);
             outs[end.Item2][end.Item1] = "e";
 
             return new Tuple<List<List<string>>, List<List<string>>>(ins, outs);
@@ -251,8 +251,8 @@ namespace coil
             (int, int) end = (0, 0);
             if (l.Segs.Count > 0)
             {
-                start = l.Segs[0].Start;
-                end = GetEnd(l.Segs[l.Segs.Count - 1]);
+                start = l.Segs.First.Value.Start;
+                end = GetEnd(l.Segs.Last.Value);
                 hasStart = true;
             }
 
