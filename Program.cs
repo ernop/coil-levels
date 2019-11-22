@@ -11,7 +11,7 @@ namespace coil
             var ii = 6;
             var mm = 7;
             var x = 20;
-            var y = 10;
+            var y = 15;
             var test = true;
             var stem = $"../../../output/{x}x{y}";
 

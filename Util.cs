@@ -62,7 +62,7 @@ namespace coil
             ImageUtil.Save(_Images, level, baseMap, fn);
         }
 
-        public static void SaveWithPath(Level level, string fn)
+        public static void SaveWithPath(BaseLevel level, string fn)
         {
             var baseMap = GetOutputMap(level);
             var path = GetInOutStrings(level);
@@ -83,7 +83,7 @@ namespace coil
         }
 
         //for image creation - just get the path parts - rest ""
-        public static Tuple<List<List<string>>, List<List<string>>> GetInOutStrings(Level l)
+        public static Tuple<List<List<string>>, List<List<string>>> GetInOutStrings(BaseLevel l)
         {
             var ins = new List<List<string>>();
             var outs = new List<List<string>>();
@@ -244,7 +244,7 @@ namespace coil
             }
         }
 
-        public static List<List<string>> GetOutputMap(Level l)
+        public static List<List<string>> GetOutputMap(BaseLevel l)
         {
             var hasStart = false;
             (int, int) start = (0, 0);

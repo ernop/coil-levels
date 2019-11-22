@@ -4,10 +4,11 @@ using System.Linq;
 
 using static coil.Navigation;
 using static coil.Util;
+using static coil.SegDescriptor;
 
 namespace coil
 {
-    public class BaseLevel
+    public partial class BaseLevel
     {
         public int Width { get; protected set; }
 
@@ -82,8 +83,7 @@ namespace coil
 
             //equally distributed
             var choice = validDirs[Rnd.Next(validDirs.Count)];
-            var len = choice.Item2;
-            //var len = Rnd.Next(choice.Item2 - 1) + 1;
+            var len = Rnd.Next(choice.Item2 - 1) + 1;
             var seg = new Seg(start, choice.Item1, len);
             return seg;
         }
@@ -116,14 +116,15 @@ namespace coil
         /// <summary>
         /// construct a level for testing.
         /// </summary>
-        public void SimpleBentPath()
+        public void SimpleBentPath((int,int) start, List<SegDescriptor> segDescriptors)
         {
-            var start = (10, 10);
-            var seg = MakeRandomSegFrom(start, new List<Dir>() { Dir.Right }, 6, 6);
-            AddSeg(seg);
-            var end = Add(seg.Start, seg.Dir, seg.Len);
-            var seg2 = MakeRandomSegFrom(end, new List<Dir>() { Dir.Up }, 2, 2);
-            AddSeg(seg2);
+            var cur = start;
+            foreach (var sd in segDescriptors)
+            {
+                var seg = new Seg(cur, sd.Dir, sd.Len);
+                AddSeg(seg);
+                cur = Add(seg.Start, seg.Dir, seg.Len);
+            }
         }
 
         protected void InitialWander()
@@ -165,7 +166,8 @@ namespace coil
         {
             if (test)
             {
-                SimpleBentPath();
+                var simpleMap = new List<SegDescriptor>() { GetSD(Dir.Up, 2), GetSD(Dir.Right, 6), GetSD(Dir.Up, 3), GetSD(Dir.Left, 3), GetSD(Dir.Up, 5)};
+                SimpleBentPath((2, 12), simpleMap);
             }
             else
             {
@@ -200,6 +202,25 @@ namespace coil
             }
 
             return true;
+        }
+
+        public void MaybeSaveDuringTweaking(bool saveTweaks, int saveEvery, Tweak tweak, int tweakct, int tweakfailct)
+        {
+            if (saveTweaks)
+            {
+                if (tweakct % saveEvery == 0)
+                {
+                    Console.WriteLine($"Applied tweak: {tweak} {tweakct}");
+                    SaveWithPath(this, $"../../../tweaks/Tweak-{tweakct}.png");
+
+                    //SaveEmpty(this, $"../../../tweaks/Tweak-{tweakct}-empty.png");
+                }
+            }
+
+            if (tweakct % 100 == 0)
+            {
+                WL($"Tweakct: {tweakct,6} fails: {tweakfailct,6}");
+            }
         }
     }
 }

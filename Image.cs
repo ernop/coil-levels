@@ -11,7 +11,7 @@ namespace coil
     public static class ImageUtil
     {
         public static int Scale = 15;
-        public static void Save(Dictionary<string, Image> images, Level level, List<List<string>> outstrings, string fn)
+        public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn)
         {
             //juggle the path to determine what should be written in each square.
             //allows partial segments

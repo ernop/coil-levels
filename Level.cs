@@ -25,14 +25,9 @@ namespace coil
 
         public void Tweak(bool saveTweaks, int saveEvery)
         {
-            //locate a enough segment.
             var success = true;
             var tweakct = 0;
             var tweakfailct = 0;
-
-            //it's interesting to use the linkedlist feature of segs to drill super hard into recently added segments.
-            //
-
             while (success)
             {
                 success = false;
@@ -57,21 +52,7 @@ namespace coil
                     {
                         ApplyTweak(seg, tweak);
                         tweakct++;
-                        if (saveTweaks)
-                        {
-                            if (tweakct % saveEvery == 0)
-                            {
-                                Console.WriteLine($"Applied tweak: {tweak} {tweakct}");
-                                SaveWithPath(this, $"../../../tweaks/Tweak-{tweakct}.png");
-
-                                //SaveEmpty(this, $"../../../tweaks/Tweak-{tweakct}-empty.png");
-                            }
-                        }
-
-                        if (tweakct % 100 == 0)
-                        {
-                            WL($"Tweakct: {tweakct,6} fails: {tweakfailct,6}");
-                        }
+                        MaybeSaveDuringTweaking(saveTweaks, saveEvery, tweak, tweakct, tweakfailct);
 
                         success = true;
                         break;
@@ -116,7 +97,7 @@ namespace coil
 
         public void TestTweaks()
         {
-            GetTweaks(Segs.First.Value, 1, false);
+            GetTweaks(Segs.First.Next.Value, 1, false);
         }
 
         /// <summary>
@@ -132,7 +113,42 @@ namespace coil
             var res = new List<Tweak>();
             //from each square how much upper room is there starting from zero.
             //these can be used to determine len1; index is "start"
-            List<int> Verticals = new List<int>();
+            var len1dir = right
+                ? Rot(seg.Dir)
+                : ARot(seg.Dir);
+
+            var len2dir = right ? ARot(len1dir) : Rot(len1dir);
+            var len3dir = right ? ARot(len2dir) : Rot(len2dir);
+
+            var verticals = new Dictionary<int, int>();
+            var returns = new List<int>();
+            var maxVertical = 0;
+            for (var st = 0; st <= seg.Len; st++)
+            {
+                var stpt = Add(seg.Start, seg.Dir, st, true);
+                var vertical = GetSafeLength(stpt, len1dir, seg.Index);
+
+                verticals[st] = vertical;
+                maxVertical = Math.Max(maxVertical, vertical);
+
+                //now we have to figure out how much of each up can be returned from.
+                //from the point at index i of verticals how far up can you come DOWN from
+
+                //ensure the next square to the right is hittable
+                returns[0] = 0;
+                if (st == 0) { continue; }
+                var maxVert = Add(stpt, len1dir, vertical);
+                returns[st] = GetMaxReturnFrom(maxVert, len3dir);
+
+            }
+
+
+
+            for (var st = 0;st<=seg.Len; st++)
+            {
+                var stpt = Add(seg.Start, seg.Dir, st, true);
+            }
+
 
             //for every point in Vertical, we need to know how far over we can go.
             //hhhhhh
@@ -149,21 +165,20 @@ namespace coil
 
             Util.SaveEmpty(this, "../../../tweaks/tweak.png");
 
-            var len1dir = right
-                ? Rot(seg.Dir)
-                : ARot(seg.Dir);
+            //valid points which you can go down legally from
+            var returns = new Dictionary<(int,int), bool>();
 
-            for (var stindex = 0; stindex <= seg.Len; stindex++)
+            for (var y = 1; y < maxVertical; y++)
             {
-                //keep a running count of how far over you've gone and don't try to go farther.
-                var maxOver = seg.Len;
-                var spaceAbove = Verticals[stindex];
-                for (var y = 1; y < spaceAbove; y++)
+                //find the horizontal strips available s,e, such that verticals s..e are all >=y
+                //AND all of which are returnable to.
+                for (var st = 1; st <= seg.Len; st++)
                 {
                     //figure out how far over we can go.
-                    var start = Add(seg.Start, seg.Dir, stindex);
-                    var len1start = Add(start, len1dir, y);
-                    var xspan = GetOpenSquareSpanFrom(len1start, seg.Dir, maxOver);
+                    var start = Add(seg.Start, seg.Dir, st);
+                    var len2start = Add(start, len1dir, y);
+                    //we know len2start is valid
+                    var xspan = GetOpenSquareSpanFrom(len2start, seg.Dir, maxOver);
                     maxOver = Math.Min(maxOver, xspan);
                 }
             }
@@ -331,7 +346,8 @@ namespace coil
                 }
 
                 //not running over earlier locked squares
-                if (Hits[candidate].Any(hc => hc != null && hc.Index < index))
+                //BUT we do allow running over index-1 squares so you can do earlytweaks.
+                if (Hits[candidate].Any(hc => hc != null && hc.Index < index - 1))
                 {
                     res--;
                     break;

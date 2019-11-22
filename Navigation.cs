@@ -49,9 +49,20 @@ namespace coil{
             }
         }
 
-        public static (int,int) Add((int,int) start, Dir dir, int n){
-            if (n<1){
-                throw new Exception("Invalid n");
+        public static (int,int) Add((int,int) start, Dir dir, int n, bool allowZero = false){
+            if (allowZero)
+            {
+                if (n < 0)
+                {
+                    throw new Exception("Invalid n");
+                }
+            }
+            else
+            {
+                if (n < 1)
+                {
+                    throw new Exception("Invalid n");
+                }
             }
             var x = start.Item1;
             var y = start.Item2;
