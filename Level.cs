@@ -8,170 +8,19 @@ using static coil.Util;
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
-    public class Level
+    public class Level : BaseLevel
     {
-        public int Width { get; }
-
-        public int Height { get; }
-
-        public Random Rnd { get; }
-
-        //null meaning not owned by any segment
-        //pointing at a segment will include the xest segment covering it.
-        public Dictionary<(int, int), Seg> Rows { get; private set; }
-
-        //pointing to the xest segment hitting it? (low/highest)        
-        //actually we need both. we need lowest for when we want to erase one - for example
-        //seg2 wants to erase a point which is logged as being hit by 4 - would consider it fine.
-        //but that would break 1.
-        //and we need a backup hit beause imagine if 2 and 10 hit a sq.
-        //and we replace 10 with a longtweak so it doesn't hit anymore. we still need to know 2 hit it!
-        public Dictionary<(int, int), List<Seg>> Hits { get; private set; }
-
-        //Path[1] is the first path.  So the first path will leave a trail of 1s in rows.
-        public LinkedList<Seg> Segs { get; private set; }
+        private static bool _DoDebug = false;
 
         //w/h are the "real" version
-        public Level(int width, int height, Random rnd)
+        public Level(int width, int height, Random rnd, bool test)
         {
             Rnd = rnd;
             Width = width + 2;
             Height = height + 2;
             Segs = new LinkedList<Seg>();
             InitBoard();
-            MakeLevel();
-        }
-
-        //set up empty board with strong border bigger than the input
-        private void InitBoard()
-        {
-            Rows = new Dictionary<(int, int), Seg>();
-            Hits = new Dictionary<(int, int), List<Seg>>();
-            for (var yy = 0; yy < Height; yy++)
-            {
-                for (var xx = 0; xx < Width; xx++)
-                {
-                    Hits[(xx, yy)] = new List<Seg>();
-                    Rows[(xx, yy)] = null;
-                }
-            }
-        }
-
-        public bool InBounds((int, int) candidate)
-        {
-            if (candidate.Item1 == 0 || candidate.Item1 == Width - 1 || candidate.Item2 == 0 || candidate.Item2 == Height - 1)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        // only used by initial random walk.
-        public int GetAvailableSegmentLengthInDirection((int, int) start, Dir dir)
-        {
-            var res = 0;
-            var candidate = Add(start, dir);
-            while (Rows[candidate] == null && Hits[candidate].Count == 0 && InBounds(candidate))
-            {
-                res++;
-                candidate = Add(candidate, dir);
-            }
-
-            return res;
-        }
-
-        //check dependencies looking some direction from start safely overriding spaces.
-        //take up an equally distributed set of the space you can fill.
-        //keep trying til failure
-        public Seg MakeRandomSegFrom((int, int) start, List<Dir> dirs)
-        {
-            //project over available directions and pick one, then create segment and return it.
-            var validDirs = new List<Tuple<Dir, int>>();
-            foreach (var dir in dirs)
-            {
-                var availableLength = GetAvailableSegmentLengthInDirection(start, dir);
-                if (availableLength > 0)
-                {
-                    validDirs.Add(new Tuple<Dir, int>(dir, availableLength));
-                }
-            }
-
-            if (!validDirs.Any())
-            {
-                return null;
-            }
-
-            //equally distributed
-            var choice = validDirs[Rnd.Next(validDirs.Count)];
-            var len = Rnd.Next(choice.Item2 - 1) + 1;
-            var seg = new Seg(start, choice.Item1, len);
-            return seg;
-        }
-
-        //only used by initial random walk
-        private void AddSeg(Seg seg)
-        {
-            seg.Index = Segs.Count + 1;
-
-            var candidate = seg.Start;
-            var ii = 0;
-
-            //gotta go to the end
-            while (ii <= seg.Len)
-            {
-                Rows[candidate] = seg;
-                candidate = Add(candidate, seg.Dir);
-                ii++;
-            }
-
-            Hits[candidate].Add(seg);
-
-            // WL("Hits after adding seg.");
-            // ShowSeg(this);
-            // ShowHit(this);
-
-            Segs.AddLast(seg);
-        }
-
-        private void InitialWander()
-        {
-            var start = GetRandomPoint();
-
-            //hack;
-            var nextDirs = AllDirs;
-
-            while (true)
-            {
-                var seg = MakeRandomSegFrom(start, nextDirs);
-                if (seg == null)
-                {
-                    break;
-                }
-
-                AddSeg(seg);
-                start = GetEnd(seg);
-                switch (seg.Dir)
-                {
-                    case Dir.Up:
-                    case Dir.Down:
-                        nextDirs = HDirs;
-                        break;
-
-                    case Dir.Right:
-                    case Dir.Left:
-                        nextDirs = VDirs;
-                        break;
-
-                    default:
-                        throw new Exception("Bad");
-                }
-            }
-        }
-
-        private void MakeLevel()
-        {
-            InitialWander();
+            MakeLevel(test);
         }
 
         public void Tweak(bool saveTweaks, int saveEvery)
@@ -180,22 +29,25 @@ namespace coil
             var success = true;
             var tweakct = 0;
             var tweakfailct = 0;
+
             //it's interesting to use the linkedlist feature of segs to drill super hard into recently added segments.
             //
 
             while (success)
             {
                 success = false;
-                foreach (var seg in Segs.OrderByDescending(el=>el.Index))
+                foreach (var seg in Segs.OrderByDescending(el => el.Index))
                 {
                     if (seg.Index % 13 == 0)
                     {
                         continue;
                     }
+
                     if (seg.Len < 3)
                     {
                         continue;
                     }
+
                     var tweak = GetTweak(seg, tweakct);
                     if (tweak == null)
                     {
@@ -211,9 +63,11 @@ namespace coil
                             {
                                 Console.WriteLine($"Applied tweak: {tweak} {tweakct}");
                                 SaveWithPath(this, $"../../../tweaks/Tweak-{tweakct}.png");
+
                                 //SaveEmpty(this, $"../../../tweaks/Tweak-{tweakct}-empty.png");
                             }
                         }
+
                         if (tweakct % 100 == 0)
                         {
                             WL($"Tweakct: {tweakct,6} fails: {tweakfailct,6}");
@@ -260,6 +114,74 @@ namespace coil
             return null;
         }
 
+        public void TestTweaks()
+        {
+            GetTweaks(Segs.First.Value, 1, false);
+        }
+
+        /// <summary>
+        /// couple strategies here.
+        /// It would be nice to quickly know all available tweaks and then just pick one based on level generation rules.
+        /// Assume  base is a horizontal path staring at 0,0 and going to x,0.
+        /// You will tweak up.
+        /// We need to know the connectivity of every point xx,y, y>0, xx>0, with every other point xx2, y2, y2>y, xx2>xx, and als o the same going upwards.
+        /// So for every len1 up, walk horizontally and figire it out.  as you do that you'll virtually also figure out the vertical.
+        /// </summary>
+        public List<Tweak> GetTweaks(Seg seg, int tweakct, bool right)
+        {
+            var res = new List<Tweak>();
+            //from each square how much upper room is there starting from zero.
+            //these can be used to determine len1; index is "start"
+            List<int> Verticals = new List<int>();
+
+            //for every point in Vertical, we need to know how far over we can go.
+            //hhhhhh
+            //   h
+            //    h
+            //----->
+            //0,1 => 3
+            //0,2 ==> 2
+            //actually short-circuiting is allowed due to overall structure.
+            //if 0,n ==m, then 0,n+1 <=m
+
+            //go upwards from each start.
+            //
+
+            Util.SaveEmpty(this, "../../../tweaks/tweak.png");
+
+            var len1dir = right
+                ? Rot(seg.Dir)
+                : ARot(seg.Dir);
+
+            for (var stindex = 0; stindex <= seg.Len; stindex++)
+            {
+                //keep a running count of how far over you've gone and don't try to go farther.
+                var maxOver = seg.Len;
+                var spaceAbove = Verticals[stindex];
+                for (var y = 1; y < spaceAbove; y++)
+                {
+                    //figure out how far over we can go.
+                    var start = Add(seg.Start, seg.Dir, stindex);
+                    var len1start = Add(start, len1dir, y);
+                    var xspan = GetOpenSquareSpanFrom(len1start, seg.Dir, maxOver);
+                    maxOver = Math.Min(maxOver, xspan);
+                }
+            }
+
+            return res;
+
+        }
+
+        public int GetOpenSquareSpanFrom((int, int) pt, Dir d, int maxOver)
+        {
+            return 0;
+        }
+
+        public Tweak PickTweak(List<Tweak> tweaks)
+        {
+            return tweaks.First();
+        }
+
         public Tweak InnerGetTweak(Seg seg, bool right, int start)
         {
             //validate initial turn.
@@ -286,6 +208,7 @@ namespace coil
             var len1Choices = Enumerable.Range(1, maxLen1)
                                         .OrderByDescending(el => el)
                                         .ToList();
+
             //len1Choices.Shuffle(Rnd);
             while (len1Choices.Any())
             {
@@ -508,6 +431,7 @@ namespace coil
         }
 
         //only tweaks with nonzero start and nonzero 4th segment.
+        //TODO generalize this and also allow pretweaks (start=0) and double tweaks (start=0, len2==seg.len)
         public void ApplyTweak(Seg seg, Tweak tweak)
         {
             var par = 0;
@@ -515,12 +439,7 @@ namespace coil
             var candidate = Add(len1start, seg.Dir);
             Hits[candidate].Add(seg);
             var debug = false;
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             //TODO: target square of seg1 is getting set in Rows as screwed up.
             //validate this and should be good to go with long tweaks!
@@ -547,12 +466,7 @@ namespace coil
             }
 
             Hits[len1candidate].Add(seg1);
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             var len2start = Add(len1start, tweak.Len1Dir, tweak.Len1);
             var seg2 = new Seg(len2start, seg.Dir, tweak.Len2);
@@ -568,12 +482,7 @@ namespace coil
             }
 
             Hits[len2candidate].Add(seg2);
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             var len3start = Add(len2start, seg.Dir, tweak.Len2);
             var len3dir = Rot(Rot(tweak.Len1Dir));
@@ -600,12 +509,7 @@ namespace coil
                 //TODO we should check for segs that are still alive, but aren't in the board.
             }
 
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             //what about the squares hit at the end of the original seg+1? in a longtweak it's not done anymore.
             while (len3filled < len3effectiveLength)
@@ -617,12 +521,7 @@ namespace coil
 
             seg3.Len = len3effectiveLength;
 
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             if (tweak.LongTweak)
             {
@@ -632,12 +531,7 @@ namespace coil
                 Hits[originalEnd].Remove(seg); //hmm this is very suspicious
             }
 
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             var len3hit = Add(len3candidate, len3dir);
             Hits[len3candidate].Add(seg3);
@@ -652,6 +546,7 @@ namespace coil
             if (tweak.LongTweak)
             {
                 seg4bump = -1;
+
                 //we have taken over the squares.
             }
             else
@@ -678,32 +573,17 @@ namespace coil
                 var virtualSeg4EndSq = Add(len4candidate, seg.Dir);
                 Hits[virtualSeg4EndSq].Add(seg4);
                 Hits[virtualSeg4EndSq].Remove(seg);
-                if (debug)
-                {
-                    ShowSeg(this);
-                    ShowHit(this);
-                    Show(this);
-                }
+                Debug();
             }
 
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             foreach (var s in Segs.Where(ss => ss.Index > seg.Index))
             {
                 s.Index += 3 + seg4bump;
             }
 
-            if (debug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            Debug();
 
             //have to fix the original segment.
             seg.Len = tweak.Start;
@@ -721,43 +601,19 @@ namespace coil
             Segs.AddAfter(segNode, seg3);
             Segs.AddAfter(segNode, seg2);
             Segs.AddAfter(segNode, seg1);
+
             //debug = true;
-            if (debug)
+            Debug();
+        }
+
+        public void Debug()
+        {
+            if (_DoDebug)
             {
                 ShowSeg(this);
                 ShowHit(this);
                 Show(this);
             }
-        }
-
-        //private void ValidateSegIndexes()
-        //{
-        //    foreach (var seg in Segs)
-        //    {
-        //        if (seg.Index != Segs.IndexOf(seg) + 1)
-        //        {
-        //            //bad
-        //            //var ae = 3;
-        //        }
-        //    }
-        //}
-
-        public (int, int) GetRandomPoint()
-        {
-            int x = 0;
-            int y = 0;
-            if (Width > 20 && Height > 20)
-            {
-                x = Rnd.Next(Width - 7) + 3;
-                y = Rnd.Next(Height - 7) + 3;
-            }
-            else
-            {
-                x = Rnd.Next(Width - 2) + 1;
-                y = Rnd.Next(Height - 2) + 1;
-            }
-
-            return (x, y);
         }
     }
 }
