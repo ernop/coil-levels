@@ -4,7 +4,7 @@ namespace coil
 {
     public class Seg
     {
-        public (int, int) Start { get; private set; }
+        public (int, int) Start { get; set; }
         public Dir Dir { get; private set; }
 
         //a seg covering 2 squars has a length of 1.  squares "covered" is len-1
@@ -22,7 +22,7 @@ namespace coil
 
         public override string ToString()
         {
-            return $"Seg{Index,5}: {Start} going {Dir,4} ({Len})";
+            return $"Seg{Index,5}: {Start} going {Dir,6} ({Len})";
         }
     }
 }

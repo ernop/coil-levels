@@ -4,102 +4,338 @@ using System.Linq;
 
 using static coil.Navigation;
 using static coil.Util;
+using static coil.Debug;
 
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
-    public class Level : BaseLevel
+    public partial class Level : BaseLevel
     {
-        private static bool _DoDebug = false;
 
         //w/h are the "real" version
-        public Level(int width, int height, Random rnd, bool test)
+        public Level(int width, int height, Random rnd, bool test, bool debug)
         {
             Rnd = rnd;
             Width = width + 2;
             Height = height + 2;
             Segs = new LinkedList<Seg>();
+            DoDebug = debug;
+            Hits = new HitManager(Width, Height, DoDebug, this);
             InitBoard();
             MakeLevel(test);
         }
 
-        public void Tweak(bool saveTweaks, int saveEvery)
+        public void Tweak2(bool saveState, int saveEvery)
         {
-            var success = true;
             var tweakct = 0;
-            var tweakfailct = 0;
-            while (success)
-            {
+            //randomize this
+
+            var success = true;
+            while (success) {
                 success = false;
-                foreach (var seg in Segs.OrderByDescending(el => el.Index))
+                //control this
+                LinkedListNode<Seg> segnode = Segs.First;
+                //WL("Another round.");
+                while (segnode != null)
                 {
-                    if (seg.Index % 13 == 0)
-                    {
-                        continue;
-                    }
-
-                    if (seg.Len < 3)
-                    {
-                        continue;
-                    }
-
-                    var tweak = GetTweak(seg, tweakct);
+                    //DoDebug(this, true);
+                    //WL(segnode.Value.ToString());
+                    var rtweaks = GetTweaks(segnode.Value, tweakct, true);
+                    var ltweaks = GetTweaks(segnode.Value, tweakct, false);
+                    var tweaks = new List<Tweak>();
+                    tweaks.AddRange(rtweaks);
+                    tweaks.AddRange(ltweaks);
+                    //use this to control picking - maybe incorporate right/left into it.
+                    var tweak = PickTweak(tweaks);
+                    
                     if (tweak == null)
                     {
-                        tweakfailct++;
+                        //WL("No tweaks were available for seg.");
+                        segnode = segnode.Next;
+                        continue;
                     }
-                    else
+                    //WL($"Got: {tweaks.Count} picked {tweak} for {segnode.Value}");
+                    //DoDebug(this, true, true);
+                    ApplyTweak(segnode, tweak);
+                    if (tweakct % 100 == 0)
                     {
-                        ApplyTweak(seg, tweak);
-                        tweakct++;
-                        MaybeSaveDuringTweaking(saveTweaks, saveEvery, tweak, tweakct, tweakfailct);
-
-                        success = true;
-                        break;
+                        WL($"tweakct: {tweakct} {Report(this)}");
                     }
+                    if (saveState && tweakct % saveEvery == 0)
+                    {
+                        var fn = $"../../../output/{Width-2}x{Height-2}/Segs{Segs.Count}-empty.png";
+                        var pathfn = $"../../../output/{Width - 2}x{Height - 2}/Segs{Segs.Count}-path.png";
+                        //SaveEmpty(this, fn);
+                        SaveWithPath(this, pathfn);
+                    }
+                    DoDebug(this, true, false);
+                    success = true;
+                    tweakct++;
+                    break;
                 }
             }
         }
 
-        public Tweak GetTweak(Seg seg, int tweakct)
+        private void ApplyTweak(LinkedListNode<Seg> segnode, Tweak tweak)
         {
-            var n = Rnd.Next(2);
-            List<bool> rl;
-            if (n == 0)
+            var seg = segnode.Value;
+            var prevnode = segnode.Previous;
+            var nextnode = segnode.Next;
+            if (tweak.ShortTweak && tweak.LongTweak)
             {
-                rl = Bools;
+                //DoDebug(this, true);
+                //remove hit, fill in squares
+                UnapplySeg(seg);
+                //DoDebug(this, false);
+                //remove hit, lengthen and dig, add hit
+                Lengthen(prevnode.Value, tweak);
+                //DoDebug(this, false);
+                //move start back, increase length, dig squares
+                Unlengthen(nextnode.Value, tweak);
+                //DoDebug(this, false);
+                var seg3 = MakeSeg(tweak, TweakSection.Three, seg.Index);
+                //add the hit, dig out board.
+                ApplySeg(seg3);
+                //DoDebug(this, false);
+                Segs.Remove(segnode);
+                Segs.AddAfter(prevnode, seg3);
+                //no index adjustments
+                //DoDebug(this, true);
+            }
+            else if (tweak.ShortTweak)
+            {
+                UnapplySeg(seg);
+                //DoDebug(this, false);
+                Lengthen(prevnode.Value, tweak);
+                //DoDebug(this, false);
+                var seg3 = MakeSeg(tweak, TweakSection.Three, seg.Index);
+                var seg4 = MakeSeg(tweak, TweakSection.Four, seg.Index + 1);
+                var seg5 = MakeSeg(tweak, TweakSection.Five, seg.Index + 2);
+                ApplySeg(seg3);
+                //DoDebug(this, false);
+                ApplySeg(seg4);
+                //DoDebug(this, false);
+                ApplySeg(seg5, endEarly: true);
+                //DoDebug(this, false);
+                var seg5end = Add(seg5.Start, seg5.Dir, seg5.Len);
+                if (nextnode != null)
+                {
+                    Rows[seg5end] = nextnode.Value;
+                }
+                else
+                {
+                    Rows[seg5end] = seg5;
+                }
+                Segs.Remove(segnode);
+                var seg3node = Segs.AddAfter(prevnode, seg3);
+                var seg4node = Segs.AddAfter(seg3node, seg4);
+                var seg5node = Segs.AddAfter(seg4node, seg5);
+                AdjustIndexAfter(seg5node, 2);
+                //DoDebug(this, true);
+            }
+            else if (tweak.LongTweak)
+            {
+                UnapplySeg(seg);
+                Unlengthen(nextnode.Value, tweak);
+                var seg1 = MakeSeg(tweak, TweakSection.One, seg.Index);
+                var seg2 = MakeSeg(tweak, TweakSection.Two, seg.Index + 1);
+                var seg3 = MakeSeg(tweak, TweakSection.Three, seg.Index + 2);
+                ApplySeg(seg1);
+                ApplySeg(seg2);
+                ApplySeg(seg3);
+                Segs.Remove(segnode);
+                var seg1node = Segs.AddAfter(prevnode, seg1);
+                var seg2node = Segs.AddAfter(seg1node, seg2);
+                var seg3node = Segs.AddAfter(seg2node, seg3);
+                AdjustIndexAfter(seg3node, 2);
+                //DoDebug(this, true);
             }
             else
             {
-                rl = Bools2;
-            }
-
-            var starts = Enumerable.Range(1, seg.Len - 2)
-                                   .OrderBy(el => el)
-                                   .ToList();
-
-            //starts.Shuffle(Rnd);
-            while (starts.Any())
-            {
-                var start = PopFirst(starts);
-                foreach (var right in rl)
+                //DoDebug(this, false);
+                UnapplySeg(seg);
+                //DoDebug(this, false);
+                var seg1 = MakeSeg(tweak, TweakSection.One, seg.Index);
+                var seg2 = MakeSeg(tweak, TweakSection.Two, seg.Index + 1);
+                var seg3 = MakeSeg(tweak, TweakSection.Three, seg.Index + 2);
+                var seg4 = MakeSeg(tweak, TweakSection.Four, seg.Index + 3);
+                var seg5 = MakeSeg(tweak, TweakSection.Five, seg.Index + 4);
+                //DoDebug(this, false);
+                ApplySeg(seg1);
+                //DoDebug(this, false);
+                ApplySeg(seg2);
+                //DoDebug(this, false);
+                ApplySeg(seg3);
+                //DoDebug(this, false);
+                ApplySeg(seg4);
+                //DoDebug(this, false);
+                ApplySeg(seg5);
+                //we need to fix up the ownership of the last square of seg5.
+                var seg5end = Add(seg5.Start, seg5.Dir, seg5.Len);
+                if (nextnode != null)
                 {
-                    var tw = InnerGetTweak(seg, right, start);
-                    if (tw != null)
-                    {
-                        return tw;
-                    }
+                    Rows[seg5end] = nextnode.Value;
                 }
+                else
+                {
+                    Rows[seg5end] = seg5;
+                }
+                //DoDebug(this, false);
+                
+                var seg1node = Segs.AddAfter(segnode, seg1);
+                var seg2node = Segs.AddAfter(seg1node, seg2);
+                var seg3node = Segs.AddAfter(seg2node, seg3);
+                var seg4node = Segs.AddAfter(seg3node, seg4);
+                var seg5node = Segs.AddAfter(seg4node, seg5);
+                Segs.Remove(segnode);
+                AdjustIndexAfter(seg5node, 4);
+                //DoDebug(this, true);
             }
+        }
 
-            return null;
+        public void Unlengthen(Seg seg, Tweak tweak)
+        {
+            //back up the seg.
+            //adjust length
+            //adjust start
+
+            var candidate = seg.Start;
+            var len = 0;
+            var backingDirection = Rot(Rot(seg.Dir));
+            while (len <= tweak.Len2)
+            {
+                len++;
+                Rows[candidate] = seg;
+                candidate = Add(candidate, backingDirection);
+            }
+            seg.Len += tweak.Len2;
+            var newStart = Add(seg.Start, backingDirection, tweak.Len2);
+            //adjust start.
+            seg.Start = newStart;
+        }
+
+        public void Lengthen(Seg seg, Tweak tweak)
+        {
+            //we lengthen by tweak.Len1.
+            //remove old hit
+            //add new hit.
+
+            var oldHit = Add(seg.Start, seg.Dir, seg.Len + 1);
+            Hits.Remove(oldHit, seg);
+
+            var segEnd = Add(seg.Start, seg.Dir, seg.Len);
+            var len = 0;
+            while (len <= tweak.Len2)
+            {
+                Rows[segEnd] = seg;
+                segEnd = Add(segEnd, seg.Dir);
+                len++;
+            }
+            seg.Len += tweak.Len2;
+            var hit = Add(seg.Start, seg.Dir, seg.Len+1);
+            Hits.Add(hit, seg);
+        }
+
+        //completely remove both start and end.
+        //this causes complications for others!
+        public void UnapplySeg(Seg seg)
+        {
+            //fill in the squares
+            //remove the hit
+            var len = 0;
+            var candidate = seg.Start;
+            while (len <= seg.Len)
+            {
+                Rows[candidate] = null;
+                candidate = Add(candidate, seg.Dir);
+                len++;
+            }
+            var hit = Add(seg.Start, seg.Dir, seg.Len+1);
+            Hits.Remove(hit, seg);
+        }
+
+        //you own the first square of a seg but not the last (in Rows)
+        public void ApplySeg(Seg seg, bool endEarly = false)
+        {
+            //dig out squares of rows.
+            //add hit at the end.
+            var len = 0;
+            var target = seg.Len;
+            if (endEarly)
+            {
+                //target--;
+            }
+            var candidate = seg.Start;
+            while (len < target)
+            {
+                //we never fill the origin square of the seg
+                Rows[candidate] = seg;
+                len++;
+                candidate = Add(candidate, seg.Dir);
+            }
+            var hit = Add(seg.Start, seg.Dir, seg.Len+1);
+            Hits.Add(hit, seg);
+        }
+
+        /// <summary>
+        /// Somewhat convoluted way to create segs.
+        /// </summary>
+        public static Seg MakeSeg(Tweak tweak, TweakSection section, int index)
+        {
+            switch (section)
+            {
+                case TweakSection.One:
+                    var seg = new Seg(tweak.Seg.Start, tweak.Seg.Dir, tweak.Len1);
+                    seg.Index = index;
+                    return seg;
+                case TweakSection.Two:
+                    var seg2start = Add(tweak.Seg.Start, tweak.Seg.Dir, tweak.Len1);
+                    var seg2 = new Seg(seg2start, tweak.Len2dir, tweak.Len2);
+                    seg2.Index = index;
+                    return seg2;
+                case TweakSection.Three:
+                    var seg2start2 = Add(tweak.Seg.Start, tweak.Seg.Dir, tweak.Len1, true);
+                    var seg3start = Add(seg2start2, tweak.Len2dir, tweak.Len2);
+                    var seg3 = new Seg(seg3start, tweak.Seg.Dir, tweak.Len3);
+                    seg3.Index = index;
+                    return seg3;
+                case TweakSection.Four:
+                    var seg4base = Add(tweak.Seg.Start, tweak.Seg.Dir, tweak.Len1 + tweak.Len3);
+                    var seg4start = Add(seg4base, tweak.Len2dir, tweak.Len2);
+                    var seg4 = new Seg(seg4start, Rot(Rot(tweak.Len2dir)), tweak.Len2);
+                    seg4.Index = index;
+                    return seg4;
+                case TweakSection.Five:
+                    var seg5start = Add(tweak.Seg.Start, tweak.Seg.Dir, tweak.Len1 + tweak.Len3);
+                    var seg5len = tweak.Seg.Len - tweak.Len1 - tweak.Len3;
+                    var seg5 = new Seg(seg5start, tweak.Seg.Dir, seg5len);
+                    seg5.Index = index;
+                    return seg5;
+                default:
+                    throw new Exception("Invalid tweakSection.");
+            }
+        }
+
+        public void AdjustIndexAfter(LinkedListNode<Seg> seg, int amount)
+        {
+            var el = seg.Next;
+            while (el != null)
+            {
+                el.Value.Index += amount;
+                el = el.Next;
+            }
         }
 
         public void TestTweaks()
         {
-            GetTweaks(Segs.First.Next.Value, 1, false);
-        }
+            var tweaks1 = GetTweaks(Segs.First.Next.Value, 0, false);
+            //should be 7.
 
+            var tweaks2 = GetTweaks(Segs.First.Next.Next.Value, 0, true);
+
+            var tweaks3 = GetTweaks(Segs.First.Next.Next.Next.Value, 0, true);
+        }
+               
         /// <summary>
         /// couple strategies here.
         /// It would be nice to quickly know all available tweaks and then just pick one based on level generation rules.
@@ -107,220 +343,156 @@ namespace coil
         /// You will tweak up.
         /// We need to know the connectivity of every point xx,y, y>0, xx>0, with every other point xx2, y2, y2>y, xx2>xx, and als o the same going upwards.
         /// So for every len1 up, walk horizontally and figire it out.  as you do that you'll virtually also figure out the vertical.
+        /// //TODO bug: this will miss SL tweaks which just extend outwards.
         /// </summary>
         public List<Tweak> GetTweaks(Seg seg, int tweakct, bool right)
         {
+            //TODO if seg.Index==1 there is no prior tweak; hard to do an early tweak there but maybe possible
             var res = new List<Tweak>();
-            //from each square how much upper room is there starting from zero.
-            //these can be used to determine len1; index is "start"
+            //DoDebug(this);
+
             var len1dir = right
                 ? Rot(seg.Dir)
                 : ARot(seg.Dir);
 
-            var len2dir = right ? ARot(len1dir) : Rot(len1dir);
+            var len2dir = seg.Dir;
             var len3dir = right ? ARot(len2dir) : Rot(len2dir);
 
+            //for start pt index s, how far can you go up?
             var verticals = new Dictionary<int, int>();
-            var returns = new List<int>();
-            var maxVertical = 0;
+
+            //how far away can you return to this square from.
+            //zero means nothing and can be due to multiple causes.
+            var returnableDistance = new Dictionary<int, int>();
+
+            //first figure out how far up you can go from each square, and how far down you can return to each square
+            //each with their accompanying overlap into the next square being validated.
             for (var st = 0; st <= seg.Len; st++)
             {
                 var stpt = Add(seg.Start, seg.Dir, st, true);
+
                 var vertical = GetSafeLength(stpt, len1dir, seg.Index);
 
                 verticals[st] = vertical;
-                maxVertical = Math.Max(maxVertical, vertical);
 
-                //now we have to figure out how much of each up can be returned from.
-                //from the point at index i of verticals how far up can you come DOWN from
-
-                //ensure the next square to the right is hittable
-                returns[0] = 0;
-                if (st == 0) { continue; }
-                var maxVert = Add(stpt, len1dir, vertical);
-                returns[st] = GetMaxReturnFrom(maxVert, len3dir);
-
-            }
-
-
-
-            for (var st = 0;st<=seg.Len; st++)
-            {
-                var stpt = Add(seg.Start, seg.Dir, st, true);
-            }
-
-
-            //for every point in Vertical, we need to know how far over we can go.
-            //hhhhhh
-            //   h
-            //    h
-            //----->
-            //0,1 => 3
-            //0,2 ==> 2
-            //actually short-circuiting is allowed due to overall structure.
-            //if 0,n ==m, then 0,n+1 <=m
-
-            //go upwards from each start.
-            //
-
-            Util.SaveEmpty(this, "../../../tweaks/tweak.png");
-
-            //valid points which you can go down legally from
-            var returns = new Dictionary<(int,int), bool>();
-
-            for (var y = 1; y < maxVertical; y++)
-            {
-                //find the horizontal strips available s,e, such that verticals s..e are all >=y
-                //AND all of which are returnable to.
-                for (var st = 1; st <= seg.Len; st++)
+                //now figure out if this st allows returning (len3hit is legit)
+                var hitsq = Add(stpt, len3dir);
+                if (Rows[hitsq] == null || Rows[hitsq].Index <= seg.Index + 1)
                 {
-                    //figure out how far over we can go.
-                    var start = Add(seg.Start, seg.Dir, st);
-                    var len2start = Add(start, len1dir, y);
-                    //we know len2start is valid
-                    var xspan = GetOpenSquareSpanFrom(len2start, seg.Dir, maxOver);
-                    maxOver = Math.Min(maxOver, xspan);
+                    //either hit a full square or an earlier segment.
+                    //now figure out how far above you can return from
+                    var clen = 0;
+                    var candidate = Add(stpt, len1dir);
+                    while (true)
+                    {
+                        if (!InBounds(candidate))
+                        {
+                            break;
+                        }
+                        if (Rows[candidate] != null)
+                        {
+                            break;
+                        }
+                        if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
+                        {
+                            break;
+                        }
+                        clen++;
+                        candidate = Add(candidate, len1dir);
+                    }
+                    returnableDistance[st] = clen;
+                }
+                else
+                {
+                    returnableDistance[st] = 0;
                 }
             }
 
+            //what does the set of all possible tweaks even look like?
+            //hhhhhhhhh
+            //   hh   h
+            //       hh
+            //        h
+            //=======>h
+            //e   e  |
+
+            //maybe just find loops ignoring hits and check them later?
+            //Note: there is never a need to have len1>1.  Just repeatedly apply 1 and you'll get n
+            //DoDebug(this);
+            //check every square in every vertical for a possible len1 starting up
+            for (var st = 0; st <= seg.Len - 2; st++) //last checked is 2 before end
+            {
+                var stpt = Add(seg.Start, seg.Dir, st, true);
+
+                //todo later expand this to cover all verticals, although it's not really necessary.
+                var v = verticals[st]+1;
+                while (v > 1)
+                {
+                    v--;
+                    if (verticals[st] < v)
+                    {
+                        continue;
+                    }
+                    //figure out valid return points
+                    //if earlytweak >st, if other >st+1
+                    var lengthMinimum = 2;
+                    if (st == 0)
+                    {
+                        lengthMinimum = 1;
+                    }
+
+                    //we know ups and downs.
+                    //for the current len1st, find the downs which are greater than the limitation away.
+                    var len2st = Add(stpt, len1dir, v);
+                    var len2maxindex = GetSafeLength(len2st, len2dir, seg.Index) + st;
+                    //We have a candidate st with vertical>0
+                    //we know how far over we can go.
+                    //go over all squares within that to find a down that satisfies.
+                    for (var len2endcandidate = st + lengthMinimum; len2endcandidate <= len2maxindex && len2endcandidate <= seg.Len; len2endcandidate++)
+                    {
+                        if (returnableDistance[len2endcandidate] < v)
+                        {
+                            continue;
+                        }
+                        var len2 = len2endcandidate - st;
+                        //this is cacheable - GSL(2,1)=1+GSL(3,1) assuming GSL(2,1)>1
+
+                        //st=st, v=1, len2=len2
+                        //we need to check:
+                        //eptiness from st+v for len2 sqs
+                        //that plus one for hittable
+                        //down down from there is valid (can shortcircuit from verticals)
+                        //once you get to the end of len2 you are good.
+                        var shortTweak = st == 0;
+                        var longTweak = st + len2 == seg.Len;
+                        var tw = new Tweak(seg, right, st, v, len2, len1dir, shortTweak, longTweak);
+                        res.Add(tw);
+                    
+                    }
+                    if (res.Count > 0)
+                    {
+                        break;
+                    }
+                }
+                if (res.Count > 0)
+                {
+                    break;
+                }
+            }
+
+            //TODO this is a hack. Basically don't have shorttweaks where seg.index is 1 because it changes the first answer.
+            res = res.Where(tw => tw.Seg.Index != 1 || 
+                tw.Seg.Index == 1 && (!tw.ShortTweak && !tw.LongTweak)).ToList();
             return res;
 
         }
 
-        public int GetOpenSquareSpanFrom((int, int) pt, Dir d, int maxOver)
-        {
-            return 0;
-        }
-
-        public Tweak PickTweak(List<Tweak> tweaks)
-        {
-            return tweaks.First();
-        }
-
-        public Tweak InnerGetTweak(Seg seg, bool right, int start)
-        {
-            //validate initial turn.
-            var tweakStartSq = Add(seg.Start, seg.Dir, start);
-            var len1dir = right
-                ? Rot(seg.Dir)
-                : ARot(seg.Dir);
-
-            //dig til you hit the border OR 
-            var maxLen1 = GetSafeLength(tweakStartSq, len1dir, seg.Index);
-            if (maxLen1 == 0)
-            {
-                return null;
-            }
-
-            var approvedLen1 = 0;
-            var approvedLen2 = 0;
-            var found = false;
-            var len2max = seg.Len - start;
-            var len3dir = Rot(Rot(len1dir));
-            var longTweak = false;
-
-            //this can get super cubic!
-            var len1Choices = Enumerable.Range(1, maxLen1)
-                                        .OrderByDescending(el => el)
-                                        .ToList();
-
-            //len1Choices.Shuffle(Rnd);
-            while (len1Choices.Any())
-            {
-                var len1 = PopFirst(len1Choices);
-                var len1last = Add(tweakStartSq, len1dir, len1);
-
-                //very annoying that this tries to go as far as possible
-                //it may fail to find shorter valid tweak len2s
-                var maxLen2 = GetSafeLength(len1last, seg.Dir, index: seg.Index, max: len2max);
-
-                //this goes too far down; if there's a cluster, it should back off.
-                if (maxLen2 == 0 || maxLen2 == 1)
-                {
-                    continue;
-                }
-
-                var len2Choices = Enumerable.Range(2, maxLen2 - 1)
-                                            .OrderByDescending(el => el)
-                                            .ToList();
-
-                while (len2Choices.Any())
-                {
-                    var len2 = PopFirst(len2Choices);
-                    var len2last = Add(len1last, seg.Dir, len2);
-
-                    //figure out if it's a return fromtweak or from longtweak
-                    // ShowSeg(this);
-
-                    //we are inefficient because we repeatedly try to return. i.e. go out 10, left 10, then try to return.  go out 9, left 10, try to return. this is backwards.
-                    //we should look out from seg3end and only ever go out that far when we're trying it! this whole thing is somewhat backwards.
-                    //new structure:
-                    //foreach start: determine len1s (which is also the len3)
-                    //then pick a start (as start) and another one (as len3end) and check whether len2 can exist.
-                    //much fewer combinations and if you have a bad section like this it will still work:
-                    //>--------------->
-                    //
-                    //
-                    //<----------<
-                    //>----------^
-                    //
-                    //
-                    //<---------------s-<
-                    //i.e. trying to build a tweak from S as start in the bottom row. you'll go up far, left around the obvious block, and try to return a ton of times.  the farther
-                    //the top block is away the more expensive it will be.
-                    //the better way to do this would be to determine "maxlen1" from each start.
-                    //it'd be 2 for most of the path so you'd only check that, and like 5 for the first few s. So you can just take your choice
-                    bool okay = false;
-                    if (start + len2 == seg.Len)
-                    {
-                        okay = ReturnFromLongTweak(len2last, len3dir, seg.Index, len1);
-                        longTweak = true;
-                    }
-                    else
-                    {
-                        okay = ReturnFromTweak(len2last, len3dir, seg.Index, len1);
-                        longTweak = false;
-                    }
-
-                    if (!okay)
-                    {
-                        continue;
-                    }
-
-                    //got one
-                    approvedLen1 = len1;
-                    approvedLen2 = len2;
-                    found = true;
-                    break;
-                }
-
-                if (found)
-                {
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                return null;
-            }
-
-            var tweak = new Tweak(right, start, approvedLen1, approvedLen2, len1dir, longTweak);
-            return tweak;
-        }
-
-        //including not hitting a later empty sq
-        //todo seems something of a duplicate of the random walk
-        //but this case can optionally override squares that later paths hit - they are okay
-        //leaving as hit, or being part of an earlier path
-        //capped at 60
+        //How far can you go from start in dir, including not overwriting an existing path,
+        //not replacing a square which is hit by an earlier path, and not trickling straight into an already occupied square?
         public int GetSafeLength((int, int) start, Dir dir, int index, int? max = null)
         {
             var candidate = Add(start, dir);
             var res = 1;
-
-            //TODO rewrite this loop.
-            //we may be returning to ourself.
 
             while (true)
             {
@@ -347,7 +519,7 @@ namespace coil
 
                 //not running over earlier locked squares
                 //BUT we do allow running over index-1 squares so you can do earlytweaks.
-                if (Hits[candidate].Any(hc => hc != null && hc.Index < index - 1))
+                if (Hits.Get(candidate).Any(hc => hc != null && hc.Index < index - 1))
                 {
                     res--;
                     break;
@@ -372,264 +544,37 @@ namespace coil
             return res;
         }
 
-        //just make sure the space is clear, and that the overlap hit is okay.
-        public bool ReturnFromTweak((int, int) start, Dir dir, int index, int len)
+        public Tweak PickTweak(List<Tweak> tweaks)
         {
-            var candidate = Add(start, dir);
-            var ii = 1;
-            while (ii < len)
+            if (!tweaks.Any())
             {
-                if (Rows[candidate] != null)
-                {
-                    return false;
-                }
+                return null;
+            }
+            tweaks = tweaks.OrderByDescending(el => el.Len1 + el.Len2 + el.Len3).ToList();
 
-                candidate = Add(candidate, dir);
-                ii++;
+            var normal = tweaks.Where(t => t.LongTweak == false && t.ShortTweak == false);
+            if (normal.Any())
+            {
+                return normal.First();
             }
 
-            if (Rows[candidate] == null)
+            var longs = tweaks.Where(t => t.LongTweak == true);
+            if (longs.Any())
             {
-                return false;
+                return longs.First();
             }
 
-            var hitSegment = Rows[candidate];
-            if (hitSegment.Index != index)
+            var shorts = tweaks.Where(t => t.ShortTweak == true);
+            if (shorts.Any())
             {
-                //how did you hit someone else?
-                return false;
+                return shorts.First();
             }
 
-            var nextHit = Add(candidate, dir);
-            if (Rows[nextHit] != null && Rows[nextHit].Index > index)
+            if (tweaks.Any())
             {
-                return false;
+                return tweaks.First();
             }
-
-            return true;
-        }
-
-        //return, and expect the next square to be the next segment
-        public bool ReturnFromLongTweak((int, int) start, Dir dir, int index, int len)
-        {
-            var candidate = Add(start, dir);
-            var ii = 1;
-            while (ii < len)
-            {
-                if (Rows[candidate] != null)
-                {
-                    return false;
-                }
-
-                candidate = Add(candidate, dir);
-                ii++;
-            }
-
-            if (Rows[candidate] == null)
-            {
-                return false;
-            }
-
-            var hitSegment = Rows[candidate];
-            if (hitSegment.Index != index + 1)
-            {
-                //you sohuld have hit someone else
-                return false;
-            }
-
-            var nextHit = Add(candidate, dir);
-            if (Rows[nextHit] != null && Rows[nextHit].Index != index + 1)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        //only tweaks with nonzero start and nonzero 4th segment.
-        //TODO generalize this and also allow pretweaks (start=0) and double tweaks (start=0, len2==seg.len)
-        public void ApplyTweak(Seg seg, Tweak tweak)
-        {
-            var par = 0;
-            var len1start = Add(seg.Start, seg.Dir, tweak.Start);
-            var candidate = Add(len1start, seg.Dir);
-            Hits[candidate].Add(seg);
-            var debug = false;
-            Debug();
-
-            //TODO: target square of seg1 is getting set in Rows as screwed up.
-            //validate this and should be good to go with long tweaks!
-
-            //fill in squares
-            while (par < tweak.Len2)
-            {
-                Rows[candidate] = null;
-                candidate = Add(candidate, seg.Dir);
-                par++;
-            }
-
-            //filled in the body. now go up.
-            var seg1 = new Seg(len1start, tweak.Len1Dir, tweak.Len1);
-            seg1.Index = seg.Index + 1;
-            Rows[len1start] = seg1;
-            var len1candidate = Add(len1start, tweak.Len1Dir);
-            var len1filled = 0;
-            while (len1filled < tweak.Len1)
-            {
-                Rows[len1candidate] = seg1;
-                len1filled++;
-                len1candidate = Add(len1candidate, tweak.Len1Dir);
-            }
-
-            Hits[len1candidate].Add(seg1);
-            Debug();
-
-            var len2start = Add(len1start, tweak.Len1Dir, tweak.Len1);
-            var seg2 = new Seg(len2start, seg.Dir, tweak.Len2);
-            Rows[len2start] = seg2;
-            seg2.Index = seg.Index + 2;
-            var len2filled = 0;
-            var len2candidate = Add(len2start, seg.Dir);
-            while (len2filled < tweak.Len2)
-            {
-                Rows[len2candidate] = seg2;
-                len2candidate = Add(len2candidate, seg.Dir);
-                len2filled++;
-            }
-
-            Hits[len2candidate].Add(seg2);
-            Debug();
-
-            var len3start = Add(len2start, seg.Dir, tweak.Len2);
-            var len3dir = Rot(Rot(tweak.Len1Dir));
-            var seg3 = new Seg(len3start, len3dir, tweak.Len1);
-            Rows[len3start] = seg3;
-            seg3.Index = seg.Index + 3;
-
-            var len3filled = 0;
-            var len3candidate = Add(len3start, len3dir);
-
-            //perhaps we should just keep going here til we hit a null/earlier filled sq?
-            //that way it's easier
-            var len3effectiveLength = tweak.Len1;
-
-            LinkedListNode<Seg> segNode = Segs.Find(seg);
-            LinkedListNode<Seg> oldNextSeg = segNode.Next;
-
-            if (tweak.LongTweak)
-            {
-                len3effectiveLength += oldNextSeg.Value.Len;
-
-                //also take over hits that that segment might have had.
-                //do we actually use this? yes.
-                //TODO we should check for segs that are still alive, but aren't in the board.
-            }
-
-            Debug();
-
-            //what about the squares hit at the end of the original seg+1? in a longtweak it's not done anymore.
-            while (len3filled < len3effectiveLength)
-            {
-                Rows[len3candidate] = seg3;
-                len3candidate = Add(len3candidate, len3dir);
-                len3filled++;
-            }
-
-            seg3.Len = len3effectiveLength;
-
-            Debug();
-
-            if (tweak.LongTweak)
-            {
-                Hits[len3candidate].Remove(oldNextSeg.Value);
-
-                var originalEnd = Add(seg.Start, seg.Dir, seg.Len + 1);
-                Hits[originalEnd].Remove(seg); //hmm this is very suspicious
-            }
-
-            Debug();
-
-            var len3hit = Add(len3candidate, len3dir);
-            Hits[len3candidate].Add(seg3);
-
-            //TODO have to make sure seg3's hit is valid.
-
-            var len4len = seg.Len - tweak.Start - tweak.Len2;
-
-            Seg seg4 = null;
-            var seg4bump = 0;
-
-            if (tweak.LongTweak)
-            {
-                seg4bump = -1;
-
-                //we have taken over the squares.
-            }
-            else
-            {
-                var len4start = Add(len3start, len3dir, tweak.Len1);
-                seg4bump = 1;
-                seg4 = new Seg(len4start, seg.Dir, len4len);
-                Rows[len4start] = seg4;
-                var len4filled = 0;
-                var len4candidate = Add(len4start, seg.Dir);
-
-                //last step of seg4 do NOT write it since it'll overwrite.
-                while (len4filled < len4len - 1)
-                {
-                    Rows[len4candidate] = seg4;
-                    len4candidate = Add(len4candidate, seg.Dir);
-                    len4filled++;
-                }
-
-                seg4.Index = seg.Index + 4;
-
-                //we didn't fill in the last len4 sq, but it is there and needs to hit the *next* sq.
-
-                var virtualSeg4EndSq = Add(len4candidate, seg.Dir);
-                Hits[virtualSeg4EndSq].Add(seg4);
-                Hits[virtualSeg4EndSq].Remove(seg);
-                Debug();
-            }
-
-            Debug();
-
-            foreach (var s in Segs.Where(ss => ss.Index > seg.Index))
-            {
-                s.Index += 3 + seg4bump;
-            }
-
-            Debug();
-
-            //have to fix the original segment.
-            seg.Len = tweak.Start;
-
-            //add in new segments
-            if (tweak.LongTweak)
-            {
-                Segs.Remove(oldNextSeg);
-            }
-            else
-            {
-                Segs.AddAfter(segNode, seg4);
-            }
-
-            Segs.AddAfter(segNode, seg3);
-            Segs.AddAfter(segNode, seg2);
-            Segs.AddAfter(segNode, seg1);
-
-            //debug = true;
-            Debug();
-        }
-
-        public void Debug()
-        {
-            if (_DoDebug)
-            {
-                ShowSeg(this);
-                ShowHit(this);
-                Show(this);
-            }
+            return null;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace coil
 {
     public partial class BaseLevel
     {
+        public bool DoDebug;
+
         public int Width { get; protected set; }
 
         public int Height { get; protected set; }
@@ -20,13 +22,7 @@ namespace coil
         //pointing at a segment will include the xest segment covering it.
         public Dictionary<(int, int), Seg> Rows { get; protected set; }
 
-        //pointing to the xest segment hitting it? (low/highest)        
-        //actually we need both. we need lowest for when we want to erase one - for example
-        //seg2 wants to erase a point which is logged as being hit by 4 - would consider it fine.
-        //but that would break 1.
-        //and we need a backup hit beause imagine if 2 and 10 hit a sq.
-        //and we replace 10 with a longtweak so it doesn't hit anymore. we still need to know 2 hit it!
-        public Dictionary<(int, int), List<Seg>> Hits { get; protected set; }
+        public HitManager Hits;
 
         //Path[1] is the first path.  So the first path will leave a trail of 1s in rows.
         public LinkedList<Seg> Segs { get; protected set; }
@@ -34,13 +30,12 @@ namespace coil
         //set up empty board with strong border bigger than the input
         protected void InitBoard()
         {
+            
             Rows = new Dictionary<(int, int), Seg>();
-            Hits = new Dictionary<(int, int), List<Seg>>();
             for (var yy = 0; yy < Height; yy++)
             {
                 for (var xx = 0; xx < Width; xx++)
                 {
-                    Hits[(xx, yy)] = new List<Seg>();
                     Rows[(xx, yy)] = null;
                 }
             }
@@ -51,7 +46,7 @@ namespace coil
         {
             var res = 0;
             var candidate = Add(start, dir);
-            while (Rows[candidate] == null && Hits[candidate].Count == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || res < max))
+            while (Rows[candidate] == null && Hits.GetCount(candidate) == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || res < max))
             {
                 res++;
                 candidate = Add(candidate, dir);
@@ -104,7 +99,7 @@ namespace coil
                 ii++;
             }
 
-            Hits[candidate].Add(seg);
+            Hits.Add(candidate, seg);
 
             // WL("Hits after adding seg.");
             // ShowSeg(this);
@@ -116,7 +111,7 @@ namespace coil
         /// <summary>
         /// construct a level for testing.
         /// </summary>
-        public void SimpleBentPath((int,int) start, List<SegDescriptor> segDescriptors)
+        public void SimpleBentPath((int, int) start, List<SegDescriptor> segDescriptors)
         {
             var cur = start;
             foreach (var sd in segDescriptors)
@@ -159,6 +154,7 @@ namespace coil
                     default:
                         throw new Exception("Bad");
                 }
+                //break;
             }
         }
 
@@ -166,7 +162,7 @@ namespace coil
         {
             if (test)
             {
-                var simpleMap = new List<SegDescriptor>() { GetSD(Dir.Up, 2), GetSD(Dir.Right, 6), GetSD(Dir.Up, 3), GetSD(Dir.Left, 3), GetSD(Dir.Up, 5)};
+                var simpleMap = new List<SegDescriptor>() { GetSD(Dir.Up, 2), GetSD(Dir.Right, 6), GetSD(Dir.Up, 3), GetSD(Dir.Left, 3), GetSD(Dir.Up, 5) };
                 SimpleBentPath((2, 12), simpleMap);
             }
             else

@@ -172,9 +172,9 @@ namespace coil
             {
                 for (var xx = 0; xx < l.Width; xx++)
                 {
-                    if (l.Hits.ContainsKey((xx, yy)))
+                    if (l.Hits.Contains((xx, yy)))
                     {
-                        var hits = l.Hits[(xx, yy)];
+                        var hits = l.Hits.Get((xx, yy));
                         if (hits.Count == 0)
                         {
                             W(".");
@@ -281,7 +281,7 @@ namespace coil
                         }
                     }
 
-                    var hit = l.Hits[point];
+                    var hit = l.Hits.Get(point);
                     var val = l.Rows[point];
                     if (val != null)
                     {
@@ -308,14 +308,26 @@ namespace coil
             return outputMap;
         }
 
-        public static void W(string s)
+        public static void W(object s)
         {
-            Console.Write(s);
+            Console.Write(s.ToString());
         }
 
-        public static void WL(string s)
+        public static void WL(object s)
         {
-            Console.WriteLine(s);
+            Console.WriteLine(s.ToString());
+        }
+
+        public static string Report(Level level)
+        {
+            var sqs = (level.Height - 2) * (level.Width - 2);
+            var sum = 1;
+            foreach (var seg in level.Segs)
+            {
+                sum += seg.Len;
+            }
+            var perc = 100.0 * sum / sqs;
+            return $"Fill: sqs={sqs}, sum={sum}, perc={perc}";
         }
     }
 }

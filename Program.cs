@@ -8,11 +8,15 @@ namespace coil
     {
         static void Main(string[] args)
         {
-            var ii = 6;
-            var mm = 7;
-            var x = 20;
-            var y = 15;
-            var test = true;
+            var ii = 0;
+            var mm = 100;
+            var x = 190;
+            var y = 170;
+            var test = false;
+
+            //re-validate the board at every step
+            var debug = false;
+
             var stem = $"../../../output/{x}x{y}";
 
             if (!System.IO.Directory.Exists(stem))
@@ -27,36 +31,20 @@ namespace coil
             while (ii < mm)
             {
                 var rnd = new System.Random(ii);
-                var l = new Level(x, y, rnd, test);
+                var l = new Level(x, y, rnd, test, debug);
                 Console.WriteLine($"rnd seed: {ii}");
-                // Show(l);
-                // foreach (var seg in l.Segs){
-                //     Console.WriteLine(seg);
-                // }
+   
+                //Util.SaveEmpty(l, $"{stem}/{ii}-empty.png");
+                //Util.SaveWithPath(l, $"{stem}/{ii}-path.png");
 
-                Util.SaveEmpty(l, $"{stem}/{ii}-empty.png");
-                Util.SaveWithPath(l, $"{stem}/{ii}-path.png");
+                l.Tweak2(true, 1000);
 
-                l.TestTweaks();
-
-                l.Tweak(true, 50);
+                //l.Tweak(true, 50);
                 Util.SaveEmpty(l, $"{stem}/{ii}-tweaked.png");
                 Util.SaveWithPath(l, $"{stem}/{ii}-path-tweaked.png");
-                Report(l);
+                WL(Report(l));
                 ii++;
             }
-        }
-
-        public static void Report(Level level)
-        {
-            var sqs = (level.Height - 2) * (level.Width - 2);
-            var sum = 1;
-            foreach (var seg in level.Segs)
-            {
-                sum += seg.Len;
-            }
-            var perc = 100.0 * sum / sqs;
-            WL($"Fill: sqs={sqs}, sum={sum}, perc={perc}");
         }
     }
 }
