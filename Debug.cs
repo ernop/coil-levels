@@ -9,9 +9,9 @@ namespace coil
     public static class Debug
     {
         //this should really check everything about the board - regen hits and replay everything.
-        public static void DoDebug(Level l, bool validateBoard = false, bool show=false)
+        public static void DoDebug(Level l, bool show=false)
         {
-            if (l.DoDebug)
+            if (l.DoBoardValidation)
             {
                 if (show)
                 {
@@ -25,9 +25,9 @@ namespace coil
 
                 foreach (var seg in l.Segs)
                 {
-
                     if (seg.Len == 0)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                     if (show)
@@ -36,6 +36,7 @@ namespace coil
                     }
                     if (seg.Index != last + 1)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                     last++;
@@ -50,16 +51,13 @@ namespace coil
                         if ((HDirs.Contains(lastSeg.Dir) && !VDirs.Contains(seg.Dir))
                             || (VDirs.Contains(lastSeg.Dir) && !HDirs.Contains(seg.Dir)))
                         {
+                            WL("Bad");
                             var ae = 3;
                         }
                     }
                     lastSeg = seg;
                 }
-            }
-
-
-            if (validateBoard)
-            {
+          
                 //recalculate the entire board and segs.
                 var fakeRows = new Dictionary<(int, int), Seg>();
                 var fakeHits = new Dictionary<(int, int), List<Seg>>();
@@ -75,10 +73,10 @@ namespace coil
                 var current = l.Segs.First.Value.Start;
                 fakeRows[current] = l.Segs.First.Value;
 
-                Seg lastSeg = null;
+                Seg lastSeg2 = null;
                 foreach (var seg in l.Segs)
                 {
-                    lastSeg = seg;
+                    lastSeg2 = seg;
                     //trace path
                     var lstep = 0;
                     while (lstep < seg.Len)
@@ -86,6 +84,12 @@ namespace coil
                         fakeRows[current] = seg;
                         current = Add(current, seg.Dir);
                         lstep++;
+                    }
+
+                    if (fakeRows[current] != null)
+                    {
+                        WL("Bad");
+                        var ae = 32;
                     }
 
                     //track hits.
@@ -96,8 +100,8 @@ namespace coil
                     }
                     fakeHits[seghit].Add(seg);
                 }
-                var end = Add(lastSeg.Start, lastSeg.Dir, lastSeg.Len);
-                fakeRows[end] = lastSeg;
+                var end = Add(lastSeg2.Start, lastSeg2.Dir, lastSeg2.Len);
+                fakeRows[end] = lastSeg2;
 
                 //validate that every hit is in a null row!
                 //this is not currently true.
@@ -126,6 +130,7 @@ namespace coil
                     //just check count for now.
                     if (realHitvalue.Count != fakeHitValue.Count)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                 }
@@ -137,6 +142,7 @@ namespace coil
                     //just check count for now.
                     if (realHitvalue.Count != fakeHitValue.Count)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                 }
@@ -145,10 +151,12 @@ namespace coil
                 {
                     if (l.Rows[sq]?.Index != fakeRows[sq]?.Index)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                     if (fakeRows[sq]?.Index != l.Rows[sq]?.Index)
                     {
+                        WL("Bad");
                         var ae = 3;
                     }
                 }

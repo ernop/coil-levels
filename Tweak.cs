@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace coil
 {
     public class Tweak
@@ -5,7 +7,7 @@ namespace coil
         //tweak right or left
         public bool Right { get; set; }
 
-        public Seg Seg { get; set; }
+        public LinkedListNode<Seg> SegNode { get; set; }
         
         //steps into the segment to start
         public int Len1 { get; set; }
@@ -24,9 +26,9 @@ namespace coil
         //seg4==null
         public bool LongTweak { get; set; }
 
-        public Tweak(Seg seg, bool right, int len1, int len2, int len3, Dir len2dir, bool shortTweak, bool longTweak)
+        public Tweak(LinkedListNode<Seg> segnode, bool right, int len1, int len2, int len3, Dir len2dir, bool shortTweak, bool longTweak)
         {
-            Seg = seg;
+            SegNode = segnode;
             Right = right;
             Len1 = len1;
             Len2 = len2;

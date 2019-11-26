@@ -10,7 +10,7 @@ namespace coil
 {
     public partial class BaseLevel
     {
-        public bool DoDebug;
+        public bool DoBoardValidation;
 
         public int Width { get; protected set; }
 
@@ -122,7 +122,7 @@ namespace coil
             }
         }
 
-        protected void InitialWander()
+        public void InitialWander()
         {
             var start = GetRandomPoint();
 
@@ -131,7 +131,7 @@ namespace coil
 
             while (true)
             {
-                var seg = MakeRandomSegFrom(start, nextDirs);
+                var seg = MakeRandomSegFrom(start, nextDirs, max:100);
                 if (seg == null)
                 {
                     break;
@@ -156,20 +156,6 @@ namespace coil
                 }
                 //break;
             }
-        }
-
-        protected void MakeLevel(bool test)
-        {
-            if (test)
-            {
-                var simpleMap = new List<SegDescriptor>() { GetSD(Dir.Up, 2), GetSD(Dir.Right, 6), GetSD(Dir.Up, 3), GetSD(Dir.Left, 3), GetSD(Dir.Up, 5) };
-                SimpleBentPath((2, 12), simpleMap);
-            }
-            else
-            {
-                InitialWander();
-            }
-
         }
 
         public (int, int) GetRandomPoint()

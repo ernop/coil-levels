@@ -69,7 +69,7 @@ namespace coil
                 {
                     if (ol.Start == seg.Start)
                     {
-                        DoDebug(Level, false, true);
+                        DoDebug(Level, true);
                         var ae = 43;
                     }
                 }

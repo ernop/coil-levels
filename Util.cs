@@ -327,7 +327,7 @@ namespace coil
                 sum += seg.Len;
             }
             var perc = 100.0 * sum / sqs;
-            return $"Fill: sqs={sqs}, sum={sum}, perc={perc}";
+            return $"Fill: sqs={sqs}, sum={sum}, perc={perc.ToString("##0.00")}";
         }
     }
 }
