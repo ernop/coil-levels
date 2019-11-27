@@ -31,5 +31,10 @@ namespace coil
         public int? MaxLen1;
         public int? MaxLen2;
         public int? MaxLen3;
+
+        public string GetStr()
+        {
+            return Name;
+        }
     }
 }

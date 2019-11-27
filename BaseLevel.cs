@@ -11,7 +11,7 @@ namespace coil
     public partial class BaseLevel
     {
         public bool DoBoardValidation;
-
+        public LevelConfiguration LevelConfiguration;
         public int Width { get; protected set; }
 
         public int Height { get; protected set; }
@@ -42,11 +42,11 @@ namespace coil
         }
 
         // only used by initial random walk.
-        public int GetAvailableSegmentLengthInDirection((int, int) start, Dir dir, int min = 0, int max = 0)
+        public int GetAvailableSegmentLengthInDirection((int, int) start, Dir dir, int min = 0, int? max = 0)
         {
             var res = 0;
             var candidate = Add(start, dir);
-            while (Rows[candidate] == null && Hits.GetCount(candidate) == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || res < max))
+            while (Rows[candidate] == null && Hits.GetCount(candidate) == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || max == null || res < max))
             {
                 res++;
                 candidate = Add(candidate, dir);
@@ -58,7 +58,7 @@ namespace coil
         //check dependencies looking some direction from start safely overriding spaces.
         //take up an equally distributed set of the space you can fill.
         //keep trying til failure
-        public Seg MakeRandomSegFrom((int, int) start, List<Dir> dirs, int min = 0, int max = 0)
+        public Seg MakeRandomSegFrom((int, int) start, List<Dir> dirs, int min = 0, int? max = 0)
         {
             //project over available directions and pick one, then create segment and return it.
             var validDirs = new List<Tuple<Dir, int>>();
@@ -78,7 +78,15 @@ namespace coil
 
             //equally distributed
             var choice = validDirs[Rnd.Next(validDirs.Count)];
-            var len = Rnd.Next(choice.Item2 - 1) + 1;
+            int len = 0;
+            if (LevelConfiguration.InitialWanderSetup.GoMax)
+            {
+                len = choice.Item2;
+            }
+            else
+            {
+                len = Rnd.Next(choice.Item2 - 1) + 1;
+            }
             var seg = new Seg(start, choice.Item1, len);
             return seg;
         }
@@ -124,20 +132,34 @@ namespace coil
 
         public void InitialWander()
         {
-            var start = GetRandomPoint();
-
+            var start = (1,1);
+            if (LevelConfiguration.InitialWanderSetup.StartPoint.HasValue)
+            {
+                start = LevelConfiguration.InitialWanderSetup.StartPoint.Value;
+            }
+            else
+            {
+                start = GetRandomPoint();
+            }
+            
             //hack;
             var nextDirs = AllDirs;
-
+            int? max = null;
+            if (LevelConfiguration.InitialWanderSetup.MaxLen.HasValue)
+            {
+                max = LevelConfiguration.InitialWanderSetup.MaxLen;
+            }
+            var segCount = 0;
             while (true)
             {
-                var seg = MakeRandomSegFrom(start, nextDirs, max:100);
+                var seg = MakeRandomSegFrom(start, nextDirs, max:max);
                 if (seg == null)
                 {
                     break;
                 }
 
                 AddSeg(seg);
+                segCount++;
                 start = GetEnd(seg);
                 switch (seg.Dir)
                 {
@@ -154,14 +176,16 @@ namespace coil
                     default:
                         throw new Exception("Bad");
                 }
-                //break;
+                if (LevelConfiguration.InitialWanderSetup.StepLimit.HasValue && LevelConfiguration.InitialWanderSetup.StepLimit.Value == segCount) {
+                    break;
+                }
             }
         }
 
         public (int, int) GetRandomPoint()
         {
-            int x = 0;
-            int y = 0;
+            int x;
+            int y;
             if (Width > 20 && Height > 20)
             {
                 x = Rnd.Next(Width - 7) + 3;

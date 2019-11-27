@@ -4,6 +4,16 @@ using System.Collections.Generic;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.Fonts;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using System.Linq;
+using SixLabors.ImageSharp.Processing.Processors.Text;
+using static coil.Util;
+using System.Numerics;
 
 namespace coil
 {
@@ -11,14 +21,21 @@ namespace coil
     public static class ImageUtil
     {
         public static int Scale = 15;
-        public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn)
+
+        public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false)
         {
             //juggle the path to determine what should be written in each square.
             //allows partial segments
-            var imageWidth = level.Width * Scale;
             var imageHeight = level.Height * Scale;
-
-            Console.Write($"Size: {imageWidth}x{imageHeight} - ");
+            var imageWidth = level.Width * Scale;
+            var writeSubtitle = false;
+            if (!String.IsNullOrEmpty(subtitle))
+            {
+                imageHeight += 1 * Scale+8;
+                writeSubtitle = true;
+            }
+            
+            
             using (var result = new Image<Rgba32>(imageWidth, imageHeight))
             {
                 for (var yy = 0; yy < level.Height; yy++)
@@ -29,13 +46,34 @@ namespace coil
                         var key = outstrings[yy][xx];
 
                         result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
+                        
                     }
                 }
+                if (writeSubtitle)
+                {
+                    //var fo = SystemFonts.Find("Arial");
+                    var cs = SystemFonts.Find("Comic Sans MS");
+                    var font = new Font(cs, 17, FontStyle.Bold);
+                    var location = new SixLabors.Primitives.PointF(0, 0);
+                    var color = SixLabors.ImageSharp.Color.Black;
+                    //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
+                    var center = new Vector2(0, imageHeight-18);
+                    try
+                    {
+                        result.Mutate(oo => oo.DrawText(subtitle, font, color, center));
+                    }catch (Exception ex)
+                    {
+                        //silly imagesharp, writing even when you claim you can't.
+                    }
 
+                }
                 result.Save($"{fn}");
             }
 
-            Console.WriteLine($"Saved to: {fn}");
+            if (!quiet)
+            {
+                Console.WriteLine($"Saved to: {fn}");
+            }
         }
 
         public static Dictionary<string, Image> GetImages()
@@ -60,6 +98,30 @@ namespace coil
             d["ur"] = d["rd"].Clone(oo => oo.Rotate(-90));
             d["lu"] = d["rd"].Clone(oo => oo.Rotate(-180));
             d["dl"] = d["rd"].Clone(oo => oo.Rotate(-270));
+
+            //"Decision hard" tiles
+            keyfp = $"{stem}/tiles/ru-easy.png";
+            d["ru-easy"] = Image.Load<Rgba32>(keyfp);
+            d["ul-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-90));
+            d["ld-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-180));
+            d["dr-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-270));
+
+            d["rd-easy"] = d["ru-easy"].Clone(oo => oo.Flip(FlipMode.Vertical));
+            d["ur-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-90));
+            d["lu-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-180));
+            d["dl-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-270));
+
+            //"Decision easy" tiles
+            keyfp = $"{stem}/tiles/ru-hard.png";
+            d["ru-hard"] = Image.Load<Rgba32>(keyfp);
+            d["ul-hard"] = d["ru-hard"].Clone(oo => oo.Rotate(-90));
+            d["ld-hard"] = d["ru-hard"].Clone(oo => oo.Rotate(-180));
+            d["dr-hard"] = d["ru-hard"].Clone(oo => oo.Rotate(-270));
+
+            d["rd-hard"] = d["ru-hard"].Clone(oo => oo.Flip(FlipMode.Vertical));
+            d["ur-hard"] = d["rd-hard"].Clone(oo => oo.Rotate(-90));
+            d["lu-hard"] = d["rd-hard"].Clone(oo => oo.Rotate(-180));
+            d["dl-hard"] = d["rd-hard"].Clone(oo => oo.Rotate(-270));
 
             keyfp = $"{stem}/tiles/su.png";
             d["su"] = Image.Load<Rgba32>(keyfp);

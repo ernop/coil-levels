@@ -33,7 +33,7 @@ namespace coil
             }
         }
 
-        public static void SaveEmpty(Level level, string fn)
+        public static void SaveEmpty(Level level, string fn, string subtitle="", bool quiet = false)
         {
             var baseMap = GetOutputMap(level);
 
@@ -59,27 +59,41 @@ namespace coil
                 }
             }
 
-            ImageUtil.Save(_Images, level, baseMap, fn);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
         }
 
-        public static void SaveWithPath(BaseLevel level, string fn)
+        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
         {
             var baseMap = GetOutputMap(level);
             var path = GetInOutStrings(level);
+            var decisions = GetDecisions(level);
+            var easyDecisions = decisions.Item1;
+            var hardDecisions = decisions.Item2;
             var ins = path.Item1;
             var outs = path.Item2;
+            //TODO add in decision markers.
+            //throw new Exception();
             for (var y = 0; y < baseMap.Count; y++)
             {
                 for (var x = 0; x < baseMap[0].Count; x++)
                 {
                     if (ins[y][x] != "")
                     {
+                        
                         baseMap[y][x] = ins[y][x] + outs[y][x];
+                        if (hardDecisions.Contains((x,y)))
+                        {
+                            if (baseMap[y][x].Length != 2)
+                            {
+                                WL("Bad basemap len");
+                            }
+                            baseMap[y][x] += "-hard";
+                        }
                     }
                 }
             }
 
-            ImageUtil.Save(_Images, level, baseMap, fn);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
         }
 
         //for image creation - just get the path parts - rest ""
@@ -318,16 +332,50 @@ namespace coil
             Console.WriteLine(s.ToString());
         }
 
-        public static string Report(Level level)
+        public static (HashSet<(int,int)>,HashSet<(int, int)>) GetDecisions(BaseLevel level)
+        {
+            //one side is an obvious dead end.
+            var easyDecisions = new List<(int,int)>();
+            
+            //those where one side isn't an obvious dead end.
+            var hardDecisions = new List<(int, int)>();
+            foreach (var seg in level.Segs)
+            {
+                var end = seg.GetEnd();
+                var right = Add(end, Rot(seg.Dir));
+                var left = Add(end, ARot(seg.Dir));
+
+                //decision if left and right are empty, and the seg that fills them has index greater than current.
+                if (level.Rows[right] != null && level.Rows[left] != null
+                    && level.Rows[right].Index > seg.Index && level.Rows[left].Index > seg.Index)
+                {
+                    //we have a decision to make!
+                    //TODO hmm how to implement this with an untouched board?
+                    hardDecisions.Add(end);
+                }
+            }
+            return (new HashSet<(int,int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
+        }
+
+        public static string Report(Level level, TimeSpan ts)
         {
             var sqs = (level.Height - 2) * (level.Width - 2);
             var sum = 1;
+            var decisions = GetDecisions(level);
+            var easyDecisions = decisions.Item1;
+            var hardDecisions = decisions.Item2;
+            var decisionCount = easyDecisions.Count + hardDecisions.Count;
             foreach (var seg in level.Segs)
             {
                 sum += seg.Len;
             }
             var perc = 100.0 * sum / sqs;
-            return $"Fill: sqs={sqs}, sum={sum}, perc={perc.ToString("##0.00")}";
+            var decisionPercent = 100.0 * decisionCount / level.Segs.Count;
+            //TODO determine how many "decisions" have to be made. More decisions == better!
+
+            return $"{level.Width}x{level.Height} {level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s " +
+                $"segs={level.Segs.Count} cov={perc.ToString("##0.0")}% " +
+                $"dec={decisionPercent.ToString("0.0")}% ({decisionCount})";
         }
     }
 }
