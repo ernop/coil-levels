@@ -5,13 +5,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.Fonts;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using System.Linq;
-using SixLabors.ImageSharp.Processing.Processors.Text;
 using static coil.Util;
 using System.Numerics;
 

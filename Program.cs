@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 using static coil.Util;
+using static coil.Debug;
 
 namespace coil
 {
@@ -11,10 +12,10 @@ namespace coil
     {
         static void Main(string[] args)
         {
-            var ii = 2;
-            var mm = 3;
-            var x = 182*2*2*2;
-            var y = 130*2*2*2;
+            var ii = 21;
+            var mm = 22;
+            var x = 26;
+            var y = 20;
             var target = "rand99-sizelim5";
             //target = "rand99";
             //re-validate the board at every step
@@ -45,57 +46,52 @@ namespace coil
                 //segpickers unused
                 var sp = new BackwardSegPicker();
 
-                foreach (var rule in new List<bool>() { true})
+                foreach (var rule in new List<bool>() { true, false })
                 {
-                    foreach (var rule2 in new List<bool>() { true })
+                    
+                    //warning: pickers are stateful (through globalrand)
+                    var cs = new OptimizationSetup();
+                    cs.UseSTVCache = true;
+                    cs.UseSpaceFillingIndexes = rule;
+                    foreach (var picker in TweakPickers.GetPickers())
                     {
-                        foreach (var rule3 in new List<bool>() { true })
+                        if (false && picker.Name != "fifth-rand10")
                         {
-                            foreach (var rule4 in new List<bool>() { true })
-                            {
-                                foreach (var rule5 in new List<bool>() { true })
-                                {
-                                    //warning: pickers are stateful (through globalrand)
-
-                                    foreach (var picker in TweakPickers.GetPickers())
-                                    {
-                                        //picker.Name!= "first5-sizelim5" && 
-                                        if (picker.Name!= "order-fifth-size-lim5")
-                                        {
-                                            continue;
-                                        }
-                                        //var picker = TweakPickers.GetNew(target);
-                                        var cs = new OptimizationSetup();
-                                        cs.UseSTVCache = rule;
-                                        cs.UseTweakLen1Rule = rule2;
-                                        cs.UseTweakLen2RuleInGetTweaks = rule3;
-                                        cs.UseTweakLen2RuleInGetVerticals = rule4;
-                                        cs.UseTweakLen3Rule = rule5;
-
-                                        var rnd = new System.Random(ii);
-                                        var lc = new LevelConfiguration(picker, sp, cs, ws);
-                                        runCount++;
-                                        var l = new Level(lc, x, y, rnd, debug, ii);
-                                        l.InitialWander();
-                                        if (runCount == 0)
-                                        {
-                                            Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
-                                            Util.SaveWithPath(l, $"{stem}/p-{ii}.png");
-                                        }
-
-                                        var st = Stopwatch.StartNew();
-                                        l.RepeatedlyTweak(true, 100000);
-                                        //WL($"Done with {lc.GetStr()} in {st.Elapsed}");
-                                        var rep = Report(l, st.Elapsed);
-                                        WL(rep);
-                                        Util.SaveEmpty(l, $"{stem}/e-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet:true);
-                                        Util.SaveWithPath(l, $"{stem}/p-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet:true);
-                                        
-                                        lc2hash[lc] = l.GetHash();
-                                    }
-                                }
-                            }
+                            continue;
                         }
+                        if (picker.Name!= "first5-sizelim5")
+                        {
+                            continue;
+                        }
+
+                        var rnd = new System.Random(ii);
+                        var lc = new LevelConfiguration(picker, sp, cs, ws);
+                        runCount++;
+                        var log = new Log(lc);
+                        var l = new Level(lc, log, x, y, rnd, debug, ii);
+
+                        l.InitialWander();
+                        if (lc.OptimizationSetup.UseSpaceFillingIndexes)
+                        {
+                            l.RedoAllIndexesSpaceFillndexes();
+                        }
+
+                        var st = Stopwatch.StartNew();
+                        l.RepeatedlyTweak(true, 300000);
+                        var rep = Report(l, st.Elapsed);
+
+                        if (runCount == 0)
+                        {
+                            Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
+                            Util.SaveWithPath(l, $"{stem}/p-{ii}.png");
+                        }
+                        //leave this in for one final sense check.
+                        DoDebug(l, false);
+                        log.Info(rep);
+                        Util.SaveEmpty(l, $"{stem}/e-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet: true);
+                        Util.SaveWithPath(l, $"{stem}/p-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet: true);
+
+                        lc2hash[lc] = l.GetHash();
                     }
                 }
                 // TODO: compare hashes generated by all the cache usage combinations tested above and alert if different.

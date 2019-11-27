@@ -112,9 +112,9 @@ namespace coil
                     } , "size-23limit30"),
                    new TweakPicker((List<Tweak> tweaks) =>
                     {
-                        return tweaks.Where(tw=>tw.Len1<=5 && tw.Len2<=5 && tw.Len3 <=5)
+                        return tweaks.Where(tw=>tw.Len2<=5 && tw.Len3 <=5)
                             .OrderByDescending(tw=>tw.Len2+tw.Len3+globalRand.Next(5)).FirstOrDefault();
-                    } , "first5-sizelim5", 5, 5, 5),
+                    } , "first5-sizelim5", null, 5, 5),
                    new TweakPicker((List<Tweak> tweaks) =>
                     {
 
@@ -155,8 +155,6 @@ namespace coil
                             : tw.Len2+tw.Len3);
                         return ordered.First();
                     } , "equal-segs-lim5", 5, 5, 5),
-                //10,10 5k in 4s
-                //50,50
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len1==tw.SegNode.Value.Len-tw.Len1-tw.Len2? 1000+tw.Len2+tw.Len3+OneFraction(10, globalRand) : tw.Len2);
@@ -171,8 +169,6 @@ namespace coil
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2<51 ? 1000+tw.Len2+tw.Len3 : tw.Len2);
                         return ordered.First();
                     } , "size-limit50-tenthrandom"),
-
-
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>(tw.Len2dir==Dir.Up) ?  -1*tw.Len2-tw.Len3 : tw.Len2+tw.Len3);
@@ -263,12 +259,12 @@ namespace coil
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks
-                            .Where(tw=>tw.Len2<6 && tw.Len3<6)
-                            .OrderByDescending(tw=>tw.Len2+tw.Len3);
+                            .Where(tw=>tw.Len1<6 && tw.Len2<6 && tw.Len3<6 + globalRand.Next(10))
+                            .OrderByDescending(tw=>tw.Len1+tw.Len2+tw.Len3);
                         if (!ordered.Any()){return null; }
                         var mid = ordered.Count()/5;
                         return ordered.Skip(mid).First();
-                    } , "order-fifth-size-lim5", null, 6, 6),
+                    } , "fifth-rand10", 6, 6, 6),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);

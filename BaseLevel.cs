@@ -94,7 +94,7 @@ namespace coil
         //only used by initial random walk
         private void AddSeg(Seg seg)
         {
-            seg.Index = Segs.Count + 1;
+            seg.Index = (uint)Segs.Count + 1;
 
             var candidate = seg.Start;
             var ii = 0;

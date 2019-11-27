@@ -1,47 +1,79 @@
 todo now:
-convert to linkedlist
-profiling
-timing
-what actually takes the time?
-unbound length of tweaks
+1. remove dependencies in comparing indexes - it should only compare > or <, not >+1
+	the main problem is from longtweaks, how GetReturns doesn't just check that it hits GetEnd of the seg.
+2. 30%+=>99% of time is devoted to adjustindexes. Figure out a way to make this more efficient.
+	bisection with periodic re-spacing.
+		first segments are denoted -maxint, maxint
+		3 children:
+			when adding 2 segs for example,
+				gap = prevseg.Index-nextseg.index
+				seg1.index = prevseg.index+gap/3
+				seg2.index = prevseg.index+2*gap/3
+		when addition is impossible due to lack of space, rescan
+		this should drastically
+	block numbers + scan
+3. segPickers
+	threshold (long first)
+	threshold (seg.length*seg lateness)
+4. reproducible logging
+	configuration as string
+	timing logging - step N reached after time T
+5. profiling
+6. level output in some useful format for others to use
+7. eventually pick a format to actually generate levels
+8. website with a frontend to allow level submission
 
-pre-long tweaks (extend first)
-
-data structure
+data structures:
 Rows Dictionary<(int,int),Seg> for every square what seg owns it.
 -seg going a,b,c
     it doesn't own c (since that's the start of the next seg)
         -except for the end square
 Hits Dictionary<(int,int),List<Seg>) all the segs that hit sq
 
-Seg
-    start
-    index - why do we need this? Isn't this identical to segs.IndexOf(seg)?
-        how long does that take to calculate?
-        when we insert a seg it's annoying that we have to increment all downstream indexes
-        even if we use indexof, how would it even be possible to increment them?
-1. go til you can't
-    limit of path length? but nice to go far.
-2. add a kink
-    we have normal ones and long ones (where the return continues the next seg)
-3. parameterize everything and find the highest density:
-    v1: just control the order we try tweaks
-        start ordering
-        len1 ordering - max is better
-        len2 ordering - long is better
-    problem: super long len1/len2 can really inefficiently waste time trying tons of obviously non-legal parts. no meta framework for this
-    v2: examine multiple/all tweaks available and pick the "biggest" / "best" one - more work but gets more density
-what are we trying to do? get max density? or is there a max reasonable? can get ~67% now which is visually nice. Wonder what 80% is like. But more may be bad at some point.
+Algo
+-random walk to start
+-pick a segment to tweak
+-generate all tweaks
+	-for every len1, figure out how much room to go up there is, and from how far returning is allowed (not the same thing, but lots of duplication)
+	-for every len1, try every height you could go
+		- look left (for a right tweak) looking for a spot where returning is allowed
+		- save this to STVcache so the next st can use it
+	- this generates a list of all available tweaks (of which there are many)
+		- built in limits to this logic depending on segpicker rules (only len<5 etc.)
+	- pick one and apply it
+	- this has a big cost adjusting all downstream indexes
+	- can't use List<Seg> because that would require constantly moving the remainder of the list
+		- tested and near the start this was super slow
+
+Goals
+- high density
+- high decision count and percentage - meaningful left/right decisions
+	- refinement: hard vs easy decisions
+	- easy are those where going one way instantly creates a deadend
+	- hard where it doesn't
+	- *very hard are where there are larger sections on both sides (which still would be room-solvable)
+ - generate 5k x 5k levels in <1m
+ - generate every possible tweak
+ - generate visualization of "neighboring same direction paths"
+ - everything should be repeatable
+
+Analysis:
+	it's very hard to see the metastructure of big maps
+	what about for every 100 squares, calculating the average position, then drawing overlay arrows on the board of this?
+	- varying 100 to show how the path gets more complex as N => 0
+	- expected: although many of the current normal map generating tweakpickers appear to generate roughly similar levels, in actuality there may be defects
+	It may not be ideal to maximally tweak til nothing more can be done - because a solver seeing a missing tweak will reveal the directionality of squares
+	- maybe just occasionally randomly don't make a tweak which you could. That hides it.
+	Path alternation - lines drawn through the board cross alternating left/right paths in all regions with some exclusion around start/end
+	- why is this? it's from graph theory.
+	- neighboring same direction paths are very suspicious.
 
 Status:
-    basic board generation done.
-    what about a UI for board generation and testing?
-    nah just static files is fine at least.
+    caching working
+	generate 1kx1k levels in ~15 minutes
     
 Problems;
-    can't do super long tweaks.
-        because of hooks.
-        how to detect them in general?
-        down to N, over M, back up- if this fails, then
-            down to N-1, over M, back up is also likely to fail
-            what if we started going out as far as possible, but didn't accept it til the last one?
+    being able to do longer tweaks would be nice
+	but the "generate all" method makes this costly
+	can i implement a way to look for the longest few first, and then just shortcircuit GetTweaks?
+

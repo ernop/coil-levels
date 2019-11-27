@@ -36,6 +36,7 @@ namespace coil
                     }
                     if (seg.Index != last + 1)
                     {
+                        //in preparation for well-spaced indexes, this should be > last rather than ==last+1
                         WL("Bad");
                         var ae = 3;
                     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static coil.Debug;
+using static coil.Util;
 
 namespace coil
 {
@@ -53,6 +54,7 @@ namespace coil
             {
                 if (!Hits[pos].Contains(seg))
                 {
+                    WL("Bad!");
                     var ae = 32;
                 }
             }
@@ -70,6 +72,7 @@ namespace coil
                     if (ol.Start == seg.Start)
                     {
                         DoDebug(Level, true);
+                        WL("Bad!");
                         var ae = 43;
                     }
                 }

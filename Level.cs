@@ -31,7 +31,7 @@ namespace coil
         }
 
         //w/h are the "real" version
-        public Level(LevelConfiguration lc, int width, int height, Random rnd, bool validateBoard, int index)
+        public Level(LevelConfiguration lc, Log log, int width, int height, Random rnd, bool validateBoard, int index)
         {
             LevelConfiguration = lc;
             TweakPicker = lc.TweakPicker;
@@ -110,38 +110,17 @@ namespace coil
                     //control this
                     //this makes it obvious that lastsegnode may not even be in segs anymore!
                     var nextSegnode = currentSegnode.Previous;
-                    
+
                     var rtweaks = GetTweaks(currentSegnode, true);
                     var ltweaks = GetTweaks(currentSegnode, false);
 
-                    //if (LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks == true)
-                    //{
-                    //    LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks = false;
-                    //    var rtweaksFalse = GetTweaks(currentSegnode, true);
-                    //    //var rtf= LevelConfiguration.TweakPicker.Picker.Invoke(rtweaksFalse);
-                    //    LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks = true;
-                    //    if (currentSegnode.Value.Index == 2)
-                    //    {
-                    //        if (rtweaks.Count() != rtweaksFalse.Count())
-                    //        {
-                    //            //DoDebug(this, true);
-                    //            var ae = 4;
-                    //        }
-                    //    }
-                    //}
-
                     var tweaks = new List<Tweak>();
-                    
+
                     tweaks.AddRange(rtweaks);
                     tweaks.AddRange(ltweaks);
 
-                    //if (tweaks.Count > 10000)
-                    //{
-                    //    WL($"Trying: {currentSegnode.Value} {tweaks.Count}");
-                    //}
                     if (tweaks.Count() == 0)
                     {
-                        //WL("No tweaks were available for seg.");
                         currentSegnode = nextSegnode;
                         continue;
                     }
@@ -149,19 +128,13 @@ namespace coil
                     var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
                     if (tweak == null)
                     {
-                        //WL("No tweaks were available for seg.");
                         currentSegnode = nextSegnode;
                         continue;
                     }
 
-
-
                     //PossiblySaveAvailableTweaks(tweaks, tweakct);
-
-                    if (tweaks.Count() > 10000)
-                    {
-                        WL($"Got tweaks: {currentSegnode.Value.Index,4} ({currentSegnode.Value.Len,4}) {tweaks.Count(),10}. picked:{tweak}");
-                    }
+                    
+                    WL($"Got tweaks: {currentSegnode.Value.Index,4} ({currentSegnode.Value.Len,4}) {tweaks.Count(),10}. picked:{tweak}");
 
                     ApplyTweak(tweak);
                     tweakct++;
@@ -176,7 +149,7 @@ namespace coil
                         //SaveEmpty(this, fn);
                         SaveWithPath(this, pathfn);
                     }
-                    
+
                     success = true;
                     currentSegnode = nextSegnode;
                 }
@@ -187,7 +160,7 @@ namespace coil
         {
             var seg = segnode.Value;
             //TODO if seg.Index==1 there is no prior tweak; hard to do an early tweak there but maybe possible
-            
+
             var len2dir = right
                 ? Rot(seg.Dir)
                 : ARot(seg.Dir);
@@ -202,6 +175,8 @@ namespace coil
             //zero means nothing and can be due to multiple causes.
             var returnableDistance = new Dictionary<int, int>();
 
+            var segEnd = seg.GetEnd();
+
             //first figure out how far up you can go from each square, and how far down you can return to each square
             //each with their accompanying overlap into the next square being validated.
 
@@ -214,8 +189,8 @@ namespace coil
             for (var st = 0; st <= seg.Len; st++)
             {
                 var stpt = Add(seg.Start, seg.Dir, st, true);
-                var vertical = GetSafeLength(stpt, len2dir, seg.Index, knownLen2max);
-
+                var vertical = GetSafeLength(segnode, stpt, len2dir, seg.Index, knownLen2max);
+                //TODO add in verticals[seg.Len]=0, and returns[0]=0
                 verticals[st] = vertical;
 
                 //now figure out if this st allows returning (len3hit is legit)
@@ -223,7 +198,16 @@ namespace coil
                 //when the next seg is just length one, the hitsq will mistakenly be owned by seg.Next.Next
 
                 //bump into a full square, or the next segment, or the start of the next-next segment if next len is zero
-                if (Rows[hitsq] == null || Rows[hitsq].Index <= seg.Index + 1 || (Rows[hitsq].Index == seg.Index+2 && Rows[hitsq].Start==hitsq))
+
+                //old system: comlpex comparisions to generate returns
+                //new: hitsq is valid if it's full, earlier path, or we returned to end of current seg.
+
+                if (stpt == segEnd)
+                {
+                    var ae = 44;
+                }
+
+                if (Rows[hitsq]==null || Rows[hitsq].Index<seg.Index || stpt == segEnd)
                 {
                     //either hit a full square or an earlier segment.
                     //now figure out how far above you can return from
@@ -259,7 +243,7 @@ namespace coil
                     returnableDistance[st] = 0;
                 }
             }
-            
+
             return (verticals, returnableDistance);
         }
 
@@ -302,7 +286,7 @@ namespace coil
             //DoDebug(this, true);
             var STVCache = new Dictionary<(int, int), int>();
 
-            for (var st = 0; st <= seg.Len - 2 || st==0 && st<=seg.Len-1; st++) //last checked is 2 before end
+            for (var st = 0; st <= seg.Len - 2 || st == 0 && st <= seg.Len - 1; st++) //last checked is 2 before end
             {
                 var stpt = Add(seg.Start, seg.Dir, st, true);
 
@@ -312,7 +296,7 @@ namespace coil
                     continue;
                 }
                 var v = verticals[st];
-                
+
                 //TODO the problem occurs here.
                 if (TweakPicker.MaxLen2.HasValue && LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks)
                 {
@@ -357,7 +341,7 @@ namespace coil
                             }
                         }
                     }
-                    
+
                     if (!foundInCache)
                     {
                         int len3knownmax = seg.Len - st;
@@ -367,7 +351,7 @@ namespace coil
                         {
                             len3knownmax = Math.Min(TweakPicker.MaxLen3.Value, len3knownmax);
                         }
-                        len3roomavailable = GetSafeLength(len2st, len3dir, seg.Index, len3knownmax);
+                        len3roomavailable = GetSafeLength(segnode, len2st, len3dir, seg.Index, len3knownmax);
 
                         //problem: this has information about seg maxlength in it
                         //but when we fall back to using the cache we can run over.
@@ -377,9 +361,9 @@ namespace coil
                     //we know how far over we can go.
                     //go over all squares within that to find a down that satisfies.
                     var len3effectivemax = Math.Min(len3roomavailable, seg.Len);
-                    
+
                     //checking 
-                    for (var len3endcandidate = st + lengthMinimum; len3endcandidate <= len3effectivemax+st; len3endcandidate++)
+                    for (var len3endcandidate = st + lengthMinimum; len3endcandidate <= len3effectivemax + st; len3endcandidate++)
                     {
                         if (returnableDistance[len3endcandidate] < v)
                         {
@@ -404,22 +388,20 @@ namespace coil
             }
 
             //TODO this is a hack. Basically don't have shorttweaks where seg.index is 1 because it changes the first answer.
-            res = res.Where(tw => (tw.SegNode.Value.Index != 1 && tw.SegNode.Value.Index != Segs.Count) ||
-                (!(tw.SegNode.Value.Index == 1 && tw.ShortTweak)
-                && !(tw.SegNode.Value.Index == Segs.Count && tw.LongTweak))).ToList();
-            if (seg.Index == 2 && seg.Len==5)
-            {
-                var ae = 34;
-            }
+            res = res.Where(tw => (tw.SegNode.Previous != null && tw.SegNode.Next!=null) ||
+                (!(tw.SegNode.Previous==null && tw.ShortTweak)
+                && !(tw.SegNode.Next==null && tw.LongTweak))).ToList();
+            //TODO ==1 and equal length
             return res;
         }
 
         //How far can you go from start in dir, including not overwriting an existing path,
         //not replacing a square which is hit by an earlier path, and not trickling straight into an already occupied square?
-        public int GetSafeLength((int, int) start, Dir dir, int index, int? max = null)
+        public int GetSafeLength(LinkedListNode<Seg> segnode, (int, int) start, Dir dir, uint index, int? max = null)
         {
             var candidate = Add(start, dir);
             var res = 1;
+            //res refers to candidate index. So if there's a failure, step back one square
 
             while (true)
             {
@@ -446,11 +428,27 @@ namespace coil
 
                 //not running over earlier locked squares
                 //BUT we do allow running over index-1 squares so you can do earlytweaks.
-                //if (Hits.Get(candidate).Any(hc => hc != null && hc.Index < index - 1))
-                if (Hits.Get(candidate).Any(hc => hc.Index < index - 1))
+
+                //this needs to be fixed since there is no longer a guarantee that the previous seg will have index == currentseg.index-1
+
+                
+                if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
                 {
-                    res--;
-                    break;
+                    var previousSegIndex = segnode.Previous?.Value?.Index ?? 0;
+
+                    if (Hits.Get(candidate).Any(hc => hc.Index < previousSegIndex))
+                    {
+                        res--;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (Hits.Get(candidate).Any(hc => hc.Index < index - 1))
+                    {
+                        res--;
+                        break;
+                    }
                 }
 
                 //some trickiness here with the indexes
@@ -489,7 +487,7 @@ namespace coil
                 var seg3 = MakeSeg(tweak, TweakSection.Three, seg.Index);
                 //add the hit, dig out board.
                 ApplySeg(seg3);
-                
+
                 Segs.AddAfter(segnode, seg3);
                 Segs.Remove(segnode);
                 //no index adjustments
@@ -513,12 +511,19 @@ namespace coil
                 {
                     Rows[seg5end] = seg5;
                 }
-                
+
                 var seg3node = Segs.AddAfter(segnode, seg3);
                 var seg4node = Segs.AddAfter(seg3node, seg4);
                 var seg5node = Segs.AddAfter(seg4node, seg5);
                 Segs.Remove(segnode);
-                AdjustIndexAfter(seg5node, 2);
+                if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
+                {
+                    SpaceFillIndexes(new List<LinkedListNode<Seg>>() { seg3node, seg4node, seg5node });
+                }
+                else
+                {
+                    AdjustIndexAfter(seg5node, 2);
+                }
             }
             else if (tweak.LongTweak)
             {
@@ -530,12 +535,19 @@ namespace coil
                 ApplySeg(seg1);
                 ApplySeg(seg2);
                 ApplySeg(seg3);
-                
+
                 var seg1node = Segs.AddAfter(segnode, seg1);
                 var seg2node = Segs.AddAfter(seg1node, seg2);
                 var seg3node = Segs.AddAfter(seg2node, seg3);
                 Segs.Remove(segnode);
-                AdjustIndexAfter(seg3node, 2);
+                if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
+                {
+                    SpaceFillIndexes(new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node });
+                }
+                else
+                {
+                    AdjustIndexAfter(seg3node, 2);
+                }
             }
             else
             {
@@ -567,7 +579,13 @@ namespace coil
                 var seg4node = Segs.AddAfter(seg3node, seg4);
                 var seg5node = Segs.AddAfter(seg4node, seg5);
                 Segs.Remove(segnode);
-                AdjustIndexAfter(seg5node, 4);
+                if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
+                {
+                    SpaceFillIndexes(new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node, seg4node, seg5node });
+                }
+                else {
+                    AdjustIndexAfter(seg5node, 4); 
+                }
             }
         }
 
@@ -658,7 +676,7 @@ namespace coil
         /// <summary>
         /// Somewhat convoluted way to create segs.
         /// </summary>
-        public static Seg MakeSeg(Tweak tweak, TweakSection section, int index)
+        public static Seg MakeSeg(Tweak tweak, TweakSection section, uint index)
         {
             switch (section)
             {
@@ -694,7 +712,50 @@ namespace coil
             }
         }
 
-        public void AdjustIndexAfter(LinkedListNode<Seg> seg, int amount)
+        public void SpaceFillIndexes(List<LinkedListNode<Seg>> todo)
+        {
+            //figure out the range
+            //pick indexes for each one
+            //figure out if there is enough room - if not, redo all
+            var r0 = todo.First().Previous;
+            var r1 = todo.Last().Next;
+
+            uint rangestart = r0?.Value?.Index ?? 0;
+            uint rangeend = r1?.Value?.Index ?? uint.MaxValue;
+            var gap = rangeend - rangestart;
+            if (gap - 1 < todo.Count)
+            {
+                RedoAllIndexesSpaceFillndexes();
+                return;
+                //need to reassign everything
+            }
+
+            //plus one to leave space at the end too
+            uint chunksize = gap / ((uint)todo.Count+1);
+            uint current = rangestart + chunksize;
+            WL($"Previous to next: {rangestart} => {rangeend}");
+            foreach (var el in todo)
+            {
+                el.Value.Index = current;
+                //WL($"Assigned {current}");
+                current += chunksize;
+                
+            }
+        }
+
+        //this will leave some spurious space at the beginning when doing a full redo
+        public void RedoAllIndexesSpaceFillndexes()
+        {
+            var l = new List<LinkedListNode<Seg>>();
+            var first = Segs.First;
+            while (first != null) { 
+                l.Add(first);
+                first = first.Next;
+            }
+            SpaceFillIndexes(l);
+        }
+
+        public void AdjustIndexAfter(LinkedListNode<Seg> seg, uint amount)
         {
             var el = seg.Next;
             while (el != null)
