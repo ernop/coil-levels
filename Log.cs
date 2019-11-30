@@ -23,6 +23,7 @@ namespace coil
 
         public void Info(string logMessage)
         {
+            WL(logMessage);
             using (StreamWriter w = File.AppendText(LogName))
             {
                 w.WriteLine($"{DateTime.Now.ToLongTimeString()} {logMessage}");

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using SixLabors.ImageSharp;
 
@@ -33,7 +34,7 @@ namespace coil
             }
         }
 
-        public static void SaveEmpty(Level level, string fn, string subtitle="", bool quiet = false)
+        public static List<List<string>> GetBaseMapForEmpty(BaseLevel level)
         {
             var baseMap = GetOutputMap(level);
 
@@ -58,11 +59,133 @@ namespace coil
                     }
                 }
             }
+            return baseMap;
+        }
+
+        public static void SaveEmpty(Level level, string fn, string subtitle = "", bool quiet = false)
+        {
+            var baseMap = GetBaseMapForEmpty(level);
 
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
         }
 
-        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
+        /// <summary>
+        /// Savewithpath / empty but with big overlay arrows showing general regional progression
+        /// </summary>
+        public static void SaveAverageOnPath(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        {
+
+            var baseMap = GetBaseMapForPath(level);
+            var pointTexts = GetAveragePoints(level, step);
+
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts);
+        }
+
+        /// <summary>
+        /// Savewithpath / empty but with big overlay arrows showing general regional progression
+        /// </summary>
+        public static void SaveAverageOnPathWithArrows(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        {
+
+            var baseMap = GetBaseMapForPath(level);
+            var pointTexts = GetAveragePoints(level, step);
+
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows:true);
+        }
+
+        /// <summary>
+        /// Savewithpath / empty but with big overlay arrows showing general regional progression
+        /// </summary>
+        public static void SaveAverageOnEmptyWithArrows(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        {
+
+            var baseMap = GetBaseMapForEmpty(level);
+            var pointTexts = GetAveragePoints(level, step);
+
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true);
+        }
+
+        public static void SaveAverageOnEmpty(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        {
+
+            var baseMap = GetBaseMapForEmpty(level);
+            var pointTexts = GetAveragePoints(level, step);
+
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts);
+        }
+
+        public class PointText
+        {
+            public string Text;
+            public (int, int) Point;
+            public PointText (string text, (int,int) point)
+            {
+                Text = text;
+                Point = point;
+            }
+        }
+
+        //return the average of the last step points, every step points.
+        //ideally including start and end as the first and last steps.
+        public static List<PointText> GetAveragePoints(BaseLevel level, int step)
+        {
+            var res = new List<PointText>();
+            var allPoints = level.Iterate();
+            var skip = 0;
+            var lastpt = 0;
+            res.Add(new PointText(0.ToString(), level.Segs.First.Value.Start));
+            while (skip < allPoints.Count)
+            {
+                var elements = allPoints.Skip(skip).Take(step);
+                var avgx = elements.Select(el => el.Item1).Sum() / elements.Count();
+                var avgy = elements.Select(el => el.Item2).Sum() / elements.Count();
+                
+                lastpt = skip / step+1;
+                skip += step;
+                res.Add(new PointText(lastpt.ToString(), (avgx, avgy)));
+            }
+
+            res.Add(new PointText(lastpt.ToString(), level.Segs.Last.Value.GetEnd()));
+            return res;
+        }
+
+
+        public static int GridDist((int,int)a, (int, int) b)
+        {
+            return Math.Abs(a.Item1 - b.Item1) + Math.Abs(a.Item2 - b.Item2);
+        }
+
+
+        /// <summary>
+        /// Generalize the path by taking its point after N steps.
+        /// </summary>
+        public static Dictionary<(int, int), string> GetRawTracePoints(BaseLevel level, int step)
+        {
+            var sqct = 0;
+            var target = step;
+            var points = new List<(int, int)>();
+            foreach (var seg in level.Segs)
+            {
+                var needed = (target - sqct % target);
+                if (seg.Len >= needed)
+                {
+                    var nextPoint = Add(seg.Start, seg.Dir, needed);
+                    target = target + step;
+                    points.Add(nextPoint);
+                }
+                sqct += seg.Len;
+            }
+            var ii = 0;
+            var pointTexts = new Dictionary<(int, int), string>();
+            foreach (var point in points)
+            {
+                pointTexts[(point.Item1, point.Item2)] = ii.ToString();
+                ii++;
+            }
+            return pointTexts;
+        }
+
+        public static List<List<string>> GetBaseMapForPath(BaseLevel level)
         {
             var baseMap = GetOutputMap(level);
             var path = GetInOutStrings(level);
@@ -79,9 +202,9 @@ namespace coil
                 {
                     if (ins[y][x] != "")
                     {
-                        
+
                         baseMap[y][x] = ins[y][x] + outs[y][x];
-                        if (hardDecisions.Contains((x,y)))
+                        if (hardDecisions.Contains((x, y)))
                         {
                             if (baseMap[y][x].Length != 2)
                             {
@@ -92,7 +215,12 @@ namespace coil
                     }
                 }
             }
+            return baseMap;
+        }
 
+        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
+        {
+            var baseMap = GetBaseMapForPath(level);
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
         }
 
@@ -332,11 +460,56 @@ namespace coil
             Console.WriteLine(s.ToString());
         }
 
-        public static (HashSet<(int,int)>,HashSet<(int, int)>) GetDecisions(BaseLevel level)
+
+        //public void ApplySaveAndUndoTweak(Tweak tweak, string fn)
+        //{
+        //    var fakeLevel = new Level(Width - 2, Height - 2, Rnd, false, 0, TweakPicker);
+        //    Seg lastSeg = null;
+        //    LinkedListNode<Seg> tweakSegNode = null;
+        //    foreach (var seg in Segs)
+        //    {
+        //        lastSeg = seg;
+        //        var fakeSeg = new Seg(seg.Start, seg.Dir, seg.Len);
+        //        fakeSeg.Index = seg.Index;
+        //        fakeLevel.ApplySeg(fakeSeg);
+        //        fakeLevel.Segs.AddLast(fakeSeg);
+        //        if (seg.Index == tweak.SegNode.Value.Index)
+        //        {
+        //            tweakSegNode = fakeLevel.Segs.Last;
+        //        }
+        //    }
+        //    fakeLevel.Rows[lastSeg.GetEnd()] = lastSeg;
+
+        //    //gotta copy the tweak too.
+        //    var fakeTweak = new Tweak(tweakSegNode, tweak.Right, tweak.Len1, tweak.Len2, tweak.Len3, tweak.Len2dir, tweak.ShortTweak, tweak.LongTweak);
+
+        //    fakeLevel.ApplyTweak(fakeTweak);
+        //    SaveWithPath(fakeLevel, fn);
+        //    //SaveEmpty(fakeLevel, fn.Replace(".png","-empty.png"));
+        //}
+
+
+        //we have to validate that the full possible set of tweaks for this seg is really being generated.
+        //create an image of each tweak.
+        //public void PossiblySaveAvailableTweaks(List<Tweak> tweaks, int tweakct)
+        //{
+        //    if (false)
+        //    {
+        //        var ii = 0;
+        //        foreach (var testtweak in tweaks)
+        //        {
+        //            var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-{ii}.png";
+        //            ApplySaveAndUndoTweak(testtweak, fn);
+        //            ii++;
+        //        }
+        //    }
+        //}
+
+        public static (HashSet<(int, int)>, HashSet<(int, int)>) GetDecisions(BaseLevel level)
         {
             //one side is an obvious dead end.
-            var easyDecisions = new List<(int,int)>();
-            
+            var easyDecisions = new List<(int, int)>();
+
             //those where one side isn't an obvious dead end.
             var hardDecisions = new List<(int, int)>();
             foreach (var seg in level.Segs)
@@ -354,7 +527,7 @@ namespace coil
                     hardDecisions.Add(end);
                 }
             }
-            return (new HashSet<(int,int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
+            return (new HashSet<(int, int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
         }
 
         public static string Report(Level level, TimeSpan ts)

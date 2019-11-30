@@ -26,7 +26,7 @@ namespace coil
         //seg4==null
         public bool LongTweak { get; set; }
 
-        public Tweak(LinkedListNode<Seg> segnode, bool right, int len1, int len2, int len3, Dir len2dir, bool shortTweak, bool longTweak)
+        public Tweak(LinkedListNode<Seg> segnode, bool right, int len1, int len2, int len3, Dir len2dir)
         {
             SegNode = segnode;
             Right = right;
@@ -34,8 +34,8 @@ namespace coil
             Len2 = len2;
             Len3 = len3;
             Len2dir = len2dir;
-            ShortTweak = shortTweak;
-            LongTweak = longTweak;
+            ShortTweak = len1==0;
+            LongTweak = len1+len3==segnode.Value.Len;
         }
 
         public override string ToString()

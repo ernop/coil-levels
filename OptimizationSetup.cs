@@ -7,6 +7,7 @@
     public class OptimizationSetup
     {
         //rather than increment indexes in order, go from 0..uint.max and fill the space between them.
+        //this works but the speed improvement is unclear
         public bool UseSpaceFillingIndexes { get; set; } = false;
 
         /// <summary>

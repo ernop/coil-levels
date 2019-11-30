@@ -8,10 +8,10 @@ using static coil.SegDescriptor;
 
 namespace coil
 {
-    public partial class BaseLevel
+    public class BaseLevel
     {
-        public bool DoBoardValidation;
-        public LevelConfiguration LevelConfiguration;
+        public bool DoBoardValidation { get; set; }
+        public LevelConfiguration LevelConfiguration { get; set; }
         public int Width { get; protected set; }
 
         public int Height { get; protected set; }
@@ -227,6 +227,61 @@ namespace coil
             {
                 WL($"Tweakct: {tweakct,6} fails: {tweakfailct,6}");
             }
+        }
+
+        public int TotalLength()
+        {
+            var len = 1;
+            foreach (var seg in Segs)
+            {
+                len += seg.Len;
+            }
+            return len;
+        }
+
+        //return the point one advanced from the given seg and point.
+        public List<(int, int)> Iterate()
+        {
+            var res = new List<(int, int)>();
+            var currentSeg = Segs.First;
+            var st = 0;
+            var current = Segs.First.Value.Start;
+            res.Add(current);
+            while (true)
+            {
+                if (currentSeg == null || currentSeg.Value == null)
+                {
+                    break;
+                }
+                st++;
+                if (st <= currentSeg.Value.Len)
+                {
+                    current = Add(currentSeg.Value.Start, currentSeg.Value.Dir, st);
+                    res.Add(current);
+                }
+                else
+                {
+                    st = 0;
+                    currentSeg = currentSeg.Next;
+                }
+            }
+
+            (int,int)? last = null;
+            foreach (var el in res)
+            {
+                if (last != null)
+                {
+                    var d = GridDist(el, last.Value);
+                    if (d != 1)
+                    {
+                        WL("A");
+                    }
+                }
+                last = el;
+            }
+
+            return res;
+
         }
     }
 }
