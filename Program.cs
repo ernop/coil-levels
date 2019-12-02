@@ -12,104 +12,141 @@ namespace coil
     {
         static void Main(string[] args)
         {
-            var ii = 21;
-            var mm = 22;
-            var x = 60;
-            var y = 43;
+            var seed = 22;
+            var mm = 23;
+            var x = 59 * 1;
+            var y = 60 * 1;
+            //CreateLevel(seed, x, y);
+            //CreateMultiple(seed, mm, x, y)
+
+            var minx = 3;
+            var miny = 2;
+            var xincrement = 1;
+            var yincrement = 1;
+            var maxx = 200;
+            var maxy = 200;
+            var countper = 2;
+            var mass = true;
+
+            CreateLots(minx, miny, xincrement, yincrement, maxx, maxy, countper, mass);
+        }
+
+        static void CreateLots(int minx, int miny, int xincrement, int yincrement, int maxx, int maxy, int countper, bool mass)
+        {
+            var x = minx;
+            var y = miny;
+            var seed = 0;
+            while (x < maxx && y < maxy) {
+                CreateMultiple(seed, countper, x, y, mass);
+                x += xincrement;
+                y += yincrement;
+            }
+        }
+
+        static void CreateMultiple(int seed, int seedmax, int x, int y, bool mass) {
+            while (seed < seedmax)
+            {
+                CreateLevel(seed, x, y, mass);
+                seed++;
+            }
+        }
+
+
+        static void CreateLevel(int seed, int x, int y, bool mass)
+        {
+            
             //target = "rand99";
             //re-validate the board at every step
             var debug = false;
 
-            var stem = $"../../../output/{x}x{y}";
+            var stem = "../../..";
+            var levelstem = $"../../../output/{x}x{y}";
 
-            if (!System.IO.Directory.Exists(stem))
+            if (!System.IO.Directory.Exists(levelstem))
             {
-                System.IO.Directory.CreateDirectory($"{stem}");
-            }
-            if (!System.IO.Directory.Exists($"../../../tweaks/"))
-            {
-                System.IO.Directory.CreateDirectory($"../../../tweaks/");
+                System.IO.Directory.CreateDirectory($"{levelstem}");
             }
 
-            while (ii < mm)
+            var runCount = 0;
+            //var lc2hash = new Dictionary<LevelConfiguration, string>();
+            //var ws = new InitialWanderSetup(steplimit:1, startPoint:(1,1), gomax:true);
+            var ws = new InitialWanderSetup();
+            //not used
+
+            //problems with the whole validation thing: 
+            //hmm, there should be no randomness in tweak generation.
+
+            //segpickers unused
+            foreach (var tweakPicker in TweakPickers.GetPickers())
             {
-                var runCount = 0;
-                var lc2hash = new Dictionary<LevelConfiguration, string>();
-                //var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1));
-                var ws = new InitialWanderSetup();
-                //not used
-
-                //problems with the whole validation thing: 
-                //hmm, there should be no randomness in tweak generation.
-
-                //segpickers unused
-                var sp = new BackwardSegPicker();
-
-                foreach (var rule in new List<bool>() { true})
+                if (tweakPicker.Name != "rand3")
                 {
-                    
-                    //warning: pickers are stateful (through globalrand)
-                    var cs = new OptimizationSetup();
-                    cs.UseSpaceFillingIndexes = rule;
-                    foreach (var picker in TweakPickers.GetPickers())
-                    {
-                        //if (picker.Name != "equal-remainders" )
-                        //{
-                        //    continue;
-                        //}
+                    continue;
+                }
 
-                        var rnd = new System.Random(ii);
-                        var lc = new LevelConfiguration(picker, sp, cs, ws);
+                foreach (var el in new List<int?>() { 3 }) // 1, 100, 10000
+                {
+                    var cs = new OptimizationSetup();
+                    cs.GlobalTweakLim = el;
+
+                    foreach (var segPicker in SegPickers.GetSegPickers(seed))
+                    {
+                        if (segPicker.Name != "NewR")
+                        {
+                            continue;
+                        }
+                        var rnd = new System.Random(seed);
+                        var lc = new LevelConfiguration(tweakPicker, segPicker, cs, ws);
                         runCount++;
                         var log = new Log(lc);
                         var counter = new Counter(lc);
-                        var l = new Level(lc, log, x, y, rnd, debug, ii, counter);
+                        var level = new Level(lc, log, x, y, rnd, debug, seed, counter);
 
-                        l.InitialWander();
+                        level.InitialWander();
                         if (lc.OptimizationSetup.UseSpaceFillingIndexes)
                         {
-                            l.RedoAllIndexesSpaceFillndexes();
+                            level.RedoAllIndexesSpaceFillndexes();
                         }
 
                         var st = Stopwatch.StartNew();
-                        l.RepeatedlyTweak(true, 1000);
-                        counter.Show();
-                        var rep = Report(l, st.Elapsed);
+                        level.RepeatedlyTweak(false, 100);
+                        //counter.Show();
+                        var rep = Report(level, st.Elapsed);
 
-                        if (runCount == 0)
+                        if (runCount == 1 && !mass)
                         {
-                            Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
-                            Util.SaveWithPath(l, $"{stem}/p-{ii}.png");
+                            //Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
+                            Util.SaveWithPath(level, $"{levelstem}/p-{seed}.png");
                         }
                         //leave this in for one final sense check.
-                        DoDebug(l, false);
+                        var dst = Stopwatch.StartNew();
+                            
+                        DoDebug(level, false);
+                        WL($"Dodebug done: {dst.Elapsed}");
                         log.Info(rep);
-                        Util.SaveEmpty(l, $"{stem}/e-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet: true);
-                        Util.SaveWithPath(l, $"{stem}/p-{ii}-{lc.GetStr()}.png", subtitle: rep, quiet: true);
+                        
+                        var ist = Stopwatch.StartNew();
+                        Util.SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
+                        WL($"Saving image. {ist.Elapsed}");
+                        Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        WL($"Saving pathimage. {ist.Elapsed}");
 
                         //lc2hash[lc] = l.GetHash();
-                        var step = l.TotalLength();
-                        while (step > 100)
+                            
+                        SaveLevelAsText(level, seed);
+
+                        if (false)
                         {
-                            step = step / 2;
-                            var tpfn = $"{stem}/ap-{ii}-{step}-{lc.GetStr()}.png";
-                            SaveAverageOnPath(l, step, tpfn, quiet:false);
-                            var arrowfn = $"{stem}/arrow-{ii}-{step}-{lc.GetStr()}.png";
-                            SaveAverageOnPathWithArrows(l, step, arrowfn, quiet: false);
-                            var tefn = $"{stem}/ae-{ii}-{step}-{lc.GetStr()}.png";
-                            SaveAverageOnEmpty(l, step, tefn, quiet: false);
-                            var arrowefn = $"{stem}/arrow-empty-{ii}-{step}-{lc.GetStr()}.png";
-                            SaveAverageOnEmptyWithArrows(l, step, arrowefn, quiet: false);
+                            Util.SaveArrowVersions(level, seed, levelstem);
                         }
                     }
                 }
-                // TODO: compare hashes generated by all the cache usage combinations tested above and alert if different.
-                //foreach (var k in lc2hash.Keys)
-                //{
-                //    WL($"{k} = {lc2hash[k].Length} {lc2hash[k]}");
-                //}
-                ii++;
             }
+            // TODO: compare hashes generated by all the cache usage combinations tested above and alert if different.
+            //foreach (var k in lc2hash.Keys)
+            //{
+            //    WL($"{k} = {lc2hash[k].Length} {lc2hash[k]}");
+            //}
         }
     }
 }

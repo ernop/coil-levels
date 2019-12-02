@@ -9,12 +9,6 @@ using SixLabors.Fonts;
 using static coil.Util;
 using System.Numerics;
 using SixLabors.Primitives;
-using System;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 using SixLabors.Shapes;
 
 namespace coil
@@ -36,9 +30,11 @@ namespace coil
             var imageHeight = level.Height * Scale;
             var imageWidth = level.Width * Scale;
             var writeSubtitle = false;
+            int? extra = null;
             if (!String.IsNullOrEmpty(subtitle))
             {
-                imageHeight += 1 * Scale+8;
+                extra = Math.Max(Scale, (int)(0.5*level.Height))+8;
+                imageHeight += extra.Value;
                 writeSubtitle = true;
             }
             
@@ -58,13 +54,15 @@ namespace coil
                 }
                 if (writeSubtitle)
                 {
+                    //TODO make this bigger in proportion to the size of the image so it stays readable.
                     var location = new SixLabors.Primitives.PointF(0, 0);
                     var color = SixLabors.ImageSharp.Color.Black;
+                    var font = new Font(SystemFonts.Find("Comic Sans MS"), (int)(extra*0.7), FontStyle.Bold);
                     //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
-                    var center = new Vector2(0, imageHeight-18);
+                    var center = new Vector2(0, imageHeight-extra.Value);
                     try
                     {
-                        result.Mutate(oo => oo.DrawText(subtitle, Font, color, center));
+                        result.Mutate(oo => oo.DrawText(subtitle, font, color, center));
                     }catch (Exception ex)
                     {
                         //silly imagesharp, writing even when you claim you can't.

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using static coil.Util;
 
 namespace coil
 {
@@ -10,65 +13,111 @@ namespace coil
     /// As you iterate, continuously tweaking segs, which seg should you actually tweak next?
     /// This depends in complex ways on the data structure used to store tweaks
     /// As of now using a linkedlist makes it a big pain to navigate around, especially since you're constantly removing segs.
+    /// 
+    /// TODO: seg ordering is a bit confusing.
+    /// a,b,c=>
+    ///   a is the first, c is the last
+    ///   at b a is previous, c is next. This is conceptually opposite for the normal rule of "back to front"
     /// </summary>
 
-    public abstract class SegPickerBase
+    public class SegPicker
     {
-        public virtual string Name { get; set; }
+        public string Name { get; }
         public LinkedListNode<Seg> PreviousSeg { get; set; }
         public LinkedListNode<Seg> NextSeg { get; set; }
         public LinkedList<Seg> Segs { get; set; }
+        public System.Random Random { get; set; }
 
-        public string GetStr()
+        public string GetName() { return Name; }
+
+        public Func<LinkedList<Seg>, LinkedListNode<Seg>> InitialPick;
+        private Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, List<LinkedListNode<Seg>>, bool, LinkedListNode<Seg>> InnerPicker;
+
+        public SegPicker(int seed,
+            string name,
+            
+            Func<LinkedList<Seg>, LinkedListNode<Seg>> initialPicker,
+            Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, List<LinkedListNode<Seg>>, bool, LinkedListNode<Seg>> picker) //the context for the pick
         {
-            return Name;
+            Random = new System.Random(seed);
+            Name = name;
+            InitialPick = initialPicker;
+            InnerPicker = picker;
         }
-    }
 
-    public class BackwardSegPicker : SegPickerBase, ISegPicker
-    {
-        public LinkedListNode<Seg> PickSeg(LinkedList<Seg> segs, LinkedListNode<Seg> previousSeg, LinkedListNode<Seg> nextSeg)
+        public LinkedListNode<Seg> Pick(LinkedList<Seg> segs, LinkedListNode<Seg> prev, LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool justCreated)
         {
-            return previousSeg;
-        }
-    }
-
-    public class ThresholdSegPicker : SegPickerBase, ISegPicker
-    {
-        private int threshold = 100;
-        public string Name { get; set; } = "threshold";
-        public LinkedListNode<Seg> PickSeg(LinkedList<Seg> segs, LinkedListNode<Seg> previousSeg, LinkedListNode<Seg> nextSeg)
-        {
-            while (previousSeg != null)
-            {
-                if (previousSeg.Value.Len < threshold)
-                {
-                    previousSeg = previousSeg.Previous;
-                }
-                return previousSeg;
-            }
-            threshold -= 10;
-            return null;
+            return InnerPicker.Invoke(Random, segs, prev, next, news, justCreated);
         }
     }
 
     public static class SegPickers
     {
-        public static List<ISegPicker> GetSegPickers(LinkedListNode<Seg> segs)
+        public static List<SegPicker> GetSegPickers(int seed)
         {
-            return new List<ISegPicker>()
+            var pickers = new List<SegPicker>()
             {
-                new BackwardSegPicker(),
-                new ThresholdSegPicker()
+                new SegPicker(seed: seed,
+                    name:"Previous",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created)=>previous
+                ),
+                new SegPicker(seed: seed,
+                    name:"New",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    {
+                        if (news != null && news.Any())
+                        {
+                            return news.Last();
+                        }
+                        return previous;
+                    }
+                ),
+                new SegPicker(seed: seed,
+                    name:"NewR",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    {
+                        if (news != null && news.Any() && rnd.Next(2)==0)
+                        {
+                            return news.Last();
+                        }
+                        return previous;
+                    }
+                ),
+                new SegPicker(seed: seed,
+                    name:"Bigger",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    {
+                        var ii = 0;
+                        var choices = new List<LinkedListNode<Seg>>();
+                        while (ii < 10 && previous != null)
+                        {
+                            choices.Add(previous);
+                            ii++;
+                        }
+                        if (!choices.Any())
+                        {
+                            return null;
+                        }
+                        return choices.OrderByDescending(el=>el.Value.Len).First();
+                    }
+                ),
+                new SegPicker(seed: seed,
+                    name:"PreviousR",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    {
+                        if (rnd.Next(2)==0){
+                            return previous;
+                        }
+                        return previous?.Previous;
+                    }
+                ),
             };
+            return pickers.OrderBy(el => el.Name).ToList();
         }
-    }
-
-
-    //we will create a segpicker for a run and continuously hit it to decide next seg.
-    //possibilities: forward, backward, extend recent ones, decreasing threshold
-    public interface ISegPicker
-    {
-        LinkedListNode<Seg> PickSeg(LinkedList<Seg> segs, LinkedListNode<Seg> previousSeg, LinkedListNode<Seg> nextSeg);
     }
 }

@@ -18,7 +18,7 @@ namespace coil
                 System.IO.Directory.CreateDirectory(logdir);
             }
             LogName = $"{logdir}/{lc.GetStr()}.log";
-            WL($"Log created at: {LogName}");
+            //WL($"Log created at: {LogName}");
         }
 
         public void Info(string logMessage)

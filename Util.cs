@@ -1,6 +1,8 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 using SixLabors.ImageSharp;
 
@@ -64,6 +66,10 @@ namespace coil
 
         public static void SaveEmpty(Level level, string fn, string subtitle = "", bool quiet = false)
         {
+            if (fn.Contains(":"))
+            {
+                throw new Exception(fn);
+            }
             var baseMap = GetBaseMapForEmpty(level);
 
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
@@ -72,45 +78,101 @@ namespace coil
         /// <summary>
         /// Savewithpath / empty but with big overlay arrows showing general regional progression
         /// </summary>
-        public static void SaveAverageOnPath(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        public static void SaveAverageOnPath(BaseLevel level, int step, string fn,
+            List<List<string>> baseMap, List<PointText> pointTexts,
+            string subtitle = "", bool quiet = false
+            )
         {
-
-            var baseMap = GetBaseMapForPath(level);
-            var pointTexts = GetAveragePoints(level, step);
-
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts);
         }
 
         /// <summary>
         /// Savewithpath / empty but with big overlay arrows showing general regional progression
         /// </summary>
-        public static void SaveAverageOnPathWithArrows(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        public static void SaveAverageOnPathWithArrows(BaseLevel level, int step, string fn,
+            List<List<string>> baseMap, List<PointText> pointTexts,
+            string subtitle = "", bool quiet = false
+            )
         {
-
-            var baseMap = GetBaseMapForPath(level);
-            var pointTexts = GetAveragePoints(level, step);
-
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows:true);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true);
         }
 
         /// <summary>
         /// Savewithpath / empty but with big overlay arrows showing general regional progression
         /// </summary>
-        public static void SaveAverageOnEmptyWithArrows(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        public static void SaveAverageOnEmptyWithArrows(BaseLevel level, int step, string fn,
+            List<List<string>> baseMap, List<PointText> pointTexts,
+            string subtitle = "", bool quiet = false
+            )
         {
-
-            var baseMap = GetBaseMapForEmpty(level);
-            var pointTexts = GetAveragePoints(level, step);
-
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true);
         }
 
-        public static void SaveAverageOnEmpty(BaseLevel level, int step, string fn, string subtitle = "", bool quiet = false)
+        internal static void SaveArrowVersions(Level l, int ii, string stem)
         {
+            var step = l.TotalLength();
+            //var baseEmptyMap = GetBaseMapForEmpty(l);
+            var basePathMap = GetBaseMapForPath(l);
+            var lc = l.LevelConfiguration;
+            var ct = 0;
+            while (step > 50)
+            {
+                ct++;
+                if (ct > 4)
+                {
+                    break;
+                }
+                step = step / 2;
+                //var tpfn = $"{stem}/ap-{ii}-{step}-{lc.GetStr()}.png";
+                //SaveAverageOnPath(l, step, tpfn, quiet:false);
+                var arrowfn = $"{stem}/{lc.GetStr()}-arrow-{ii}-{step}.png";
 
-            var baseMap = GetBaseMapForEmpty(level);
-            var pointTexts = GetAveragePoints(level, step);
+                var pointTexts = GetAveragePoints(l, step);
 
+                SaveAverageOnPathWithArrows(l, step, arrowfn, basePathMap, pointTexts, quiet: false);
+                //var tefn = $"{stem}/ae-{ii}-{step}-{lc.GetStr()}.png";
+                //SaveAverageOnEmpty(l, step, tefn, quiet: false);
+                //var arrowefn = $"{stem}/{lc.GetStr()}-arrow-empty-{ii}-{step}.png";
+                //SaveAverageOnEmptyWithArrows(l, step, arrowefn, baseEmptyMap, pointTexts, quiet: false);
+            }
+        }
+
+        public static void SaveLevelAsText(Level l, int seed)
+        {
+            if (!System.IO.Directory.Exists("../../../levels"))
+            {
+                System.IO.Directory.CreateDirectory("../../../levels");
+            }
+            var textfn = $"../../../levels/{l.Width - 2}x{l.Height - 2} seed={seed} lc={l.LevelConfiguration.GetStr()}.coil";
+            using (StreamWriter oo = File.AppendText(textfn))
+            {
+                var line1 = $"{l.Width-2}x{l.Height-2} - {l.LevelConfiguration.GetStr()}";
+                oo.WriteLine(line1);
+                for (var yy = 1; yy <= l.Height - 2; yy++)
+                {
+                    var row = new StringBuilder();
+                    for (var xx = 1; xx <= l.Width - 2; xx++)
+                        {
+                        if (l.Rows[(xx, yy)] == null)
+                        {
+                            row.Append("X");
+                        }
+                        else
+                        {
+                            row.Append(".");
+                        }
+                    }
+                    oo.WriteLine(row);
+                }
+            }
+        }
+
+
+        public static void SaveAverageOnEmpty(BaseLevel level, int step, string fn,
+            List<List<string>> baseMap, List<PointText> pointTexts,
+            string subtitle = "", bool quiet = false
+            )
+        {
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts);
         }
 
@@ -118,7 +180,7 @@ namespace coil
         {
             public string Text;
             public (int, int) Point;
-            public PointText (string text, (int,int) point)
+            public PointText(string text, (int, int) point)
             {
                 Text = text;
                 Point = point;
@@ -139,8 +201,8 @@ namespace coil
                 var elements = allPoints.Skip(skip).Take(step);
                 var avgx = elements.Select(el => el.Item1).Sum() / elements.Count();
                 var avgy = elements.Select(el => el.Item2).Sum() / elements.Count();
-                
-                lastpt = skip / step+1;
+
+                lastpt = skip / step + 1;
                 skip += step;
                 res.Add(new PointText(lastpt.ToString(), (avgx, avgy)));
             }
@@ -150,7 +212,7 @@ namespace coil
         }
 
 
-        public static int GridDist((int,int)a, (int, int) b)
+        public static int GridDist((int, int) a, (int, int) b)
         {
             return Math.Abs(a.Item1 - b.Item1) + Math.Abs(a.Item2 - b.Item2);
         }

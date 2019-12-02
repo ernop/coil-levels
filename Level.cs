@@ -11,7 +11,7 @@ using static coil.Debug;
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
-    public partial class Level : BaseLevel
+    public class Level : BaseLevel
     {
         public int Index;
         public TweakPicker TweakPicker;
@@ -22,13 +22,6 @@ namespace coil
         public string GetHash()
         {
             var str = "";
-            //var sb = new StringBuilder();
-            //foreach (var seg in Segs)
-            //{
-            //    sb.Add($",{seg.Index}-{seg.Dir}-{seg.Len})";
-            //}
-
-            //return sb.ToString();
             return str;
         }
 
@@ -51,6 +44,87 @@ namespace coil
         }
 
         public void RepeatedlyTweak(bool saveState, int saveEvery)
+        {
+            //after doing the tweak we will call the segpicker with previous, new segs, next seg, success
+            
+            //initial setup.
+            var current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
+            //WL($"Initial seg: {current.Value}");
+            var tweakct = 0;
+            var loopct = 0;
+            var success = false;
+            while (true)
+            {
+                if (current == null)
+                {
+                    if (success)
+                    {
+                        current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
+                        //WL($"Reset to pick: {current?.Value}");
+                        if (current == null)
+                        {
+                            WL("XX");
+                        }
+                        loopct++;
+                        success = false;
+                    }
+                    else
+                    {
+                        //done. if the picker returns null without a success, end it.
+                        break;
+                    }
+                }
+                //WL($"Handling tweak with: {LevelConfiguration.SegPicker.GetName()} => {current?.Value}");
+                //setup, storing info to call next seg.
+                var previous = current.Previous;
+                //Show(this);
+                //ShowSeg(this);
+                var next = current.Next;
+
+                var tweaks = new List<Tweak>() {};
+                tweaks.AddRange(GetTweaks(current, true));
+                tweaks.AddRange(GetTweaks(current, false));
+                if (!tweaks.Any())
+                {
+                    current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
+                    //WL($"failed, advanced to: {current?.Value}");
+                    continue;
+                }
+
+                var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
+                if (tweak == null)
+                {
+                    current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
+                    //WL($"failed, advanced to: {current?.Value}");
+                    continue;
+                }
+
+                var news = ApplyTweak(tweak);
+                PossiblySaveDuringTweak(saveState, tweakct, saveEvery, loopct, current.Value);
+                tweakct++;
+                if (tweakct % 1000 == 0)
+                {
+                    WL($"tweaks={tweakct} loopct={loopct} {Report(this, TimeSpan.FromSeconds(0))}");
+                }
+                success = true;
+                current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, news, true);
+                //WL($"success, advanced to: {current?.Value}");
+            }
+        }
+
+        public void PossiblySaveDuringTweak(bool saveState, int tweakct, int saveEvery, int loopct, Seg seg)
+        {
+            if (saveState && tweakct % saveEvery == 0)
+            {
+                var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-lc{LevelConfiguration.GetStr()}-i{Index}-l{loopct}-tw{tweakct}-{seg.Index}-{seg.Len}-p.png";
+                SaveWithPath(this, pathfn);
+
+                //var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
+                //SaveEmpty(this, fn);
+            }
+        }
+        
+        public void RepeatedlyTweakOld(bool saveState, int saveEvery)
         {
             
             var tweakct = 0;
@@ -118,6 +192,70 @@ namespace coil
             }
         }
 
+        public int GetVertical(int st, LinkedListNode<Seg> segnode, Dir len2dir, int? knownLen2max)
+        {
+            var seg = segnode.Value;
+            var stpt = Add(seg.Start, seg.Dir, st, true);
+            var vertical = GetSafeLength(segnode, stpt, len2dir, seg.Index, knownLen2max);
+            //TODO add in verticals[seg.Len]=0, and returns[0]=0
+            return vertical;
+        }
+
+        public int GetReturnable(int st, Dir len2dir, int? knownLen2max, Dir len4dir, LinkedListNode<Seg> segnode)
+        {
+            var seg = segnode.Value;
+            var segEnd = seg.GetEnd();
+            var stpt = Add(seg.Start, seg.Dir, st, true);
+            var hitsq = Add(stpt, len4dir);
+            //when the next seg is just length one, the hitsq will mistakenly be owned by seg.Next.Next
+
+            //bump into a full square, or the next segment, or the start of the next-next segment if next len is zero
+
+            //old system: comlpex comparisions to generate returns
+            //new: hitsq is valid if it's full, earlier path, or we returned to end of current seg.
+
+            //if (stpt == segEnd)
+            //{
+            //    var ae = 44;
+            //}
+
+            if (Rows[hitsq] == null || Rows[hitsq].Index < seg.Index || stpt == segEnd)
+            {
+                //either hit a full square or an earlier segment.
+                //now figure out how far above you can return from
+                var clen = 0;
+                var candidate = Add(stpt, len2dir);
+                while (true)
+                {
+                    if (!InBounds(candidate))
+                    {
+                        break;
+                    }
+                    if (Rows[candidate] != null)
+                    {
+                        break;
+                    }
+                    if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
+                    {
+                        break;
+                    }
+                    clen++;
+
+                    if (knownLen2max.HasValue && clen > knownLen2max)
+                    {
+                        break;
+                    }
+                    candidate = Add(candidate, len2dir);
+                }
+                return clen;
+                //TODO these are being calculated as if there was no max.
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public (Dictionary<int, int>, Dictionary<int, int>) GetVerticalsAndReturnables(LinkedListNode<Seg> segnode, bool right)
         {
             Counter.Inc(nameof(GetVerticalsAndReturnables));
@@ -138,8 +276,6 @@ namespace coil
             //zero means nothing and can be due to multiple causes.
             var returnableDistance = new Dictionary<int, int>();
 
-            var segEnd = seg.GetEnd();
-
             //first figure out how far up you can go from each square, and how far down you can return to each square
             //each with their accompanying overlap into the next square being validated.
 
@@ -149,62 +285,15 @@ namespace coil
                 knownLen2max = TweakPicker.MaxLen2.Value;
             }
 
+            //It is very annoying that we get all the verticals and returnables, yet barely use any of them.
+            //convert this to a method.
             for (var st = 0; st <= seg.Len; st++)
             {
-                var stpt = Add(seg.Start, seg.Dir, st, true);
-                var vertical = GetSafeLength(segnode, stpt, len2dir, seg.Index, knownLen2max);
+                //var stpt = Add(seg.Start, seg.Dir, st, true);
+                //var vertical = GetSafeLength(segnode, stpt, len2dir, seg.Index, knownLen2max);
                 //TODO add in verticals[seg.Len]=0, and returns[0]=0
-                verticals[st] = vertical;
-
-                //now figure out if this st allows returning (len3hit is legit)
-                var hitsq = Add(stpt, len4dir);
-                //when the next seg is just length one, the hitsq will mistakenly be owned by seg.Next.Next
-
-                //bump into a full square, or the next segment, or the start of the next-next segment if next len is zero
-
-                //old system: comlpex comparisions to generate returns
-                //new: hitsq is valid if it's full, earlier path, or we returned to end of current seg.
-
-                if (stpt == segEnd)
-                {
-                    var ae = 44;
-                }
-
-                if (Rows[hitsq]==null || Rows[hitsq].Index<seg.Index || stpt == segEnd)
-                {
-                    //either hit a full square or an earlier segment.
-                    //now figure out how far above you can return from
-                    var clen = 0;
-                    var candidate = Add(stpt, len2dir);
-                    while (true)
-                    {
-                        if (!InBounds(candidate))
-                        {
-                            break;
-                        }
-                        if (Rows[candidate] != null)
-                        {
-                            break;
-                        }
-                        if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
-                        {
-                            break;
-                        }
-                        clen++;
-
-                        if (knownLen2max.HasValue && clen > knownLen2max)
-                        {
-                            break;
-                        }
-                        candidate = Add(candidate, len2dir);
-                    }
-                    returnableDistance[st] = clen;
-                    //TODO these are being calculated as if there was no max.
-                }
-                else
-                {
-                    returnableDistance[st] = 0;
-                }
+                verticals[st] = GetVertical(st, segnode, len2dir, knownLen2max);
+                returnableDistance[st] = GetReturnable(st, len2dir, knownLen2max, len4dir, segnode);
             }
 
             return (verticals, returnableDistance);
@@ -217,7 +306,10 @@ namespace coil
         /// You will tweak up.
         /// We need to know the connectivity of every point xx,y, y>0, xx>0, with every other point xx2, y2, y2>y, xx2>xx, and als o the same going upwards.
         /// So for every len1 up, walk horizontally and figire it out.  as you do that you'll virtually also figure out the vertical.
-        /// //TODO bug: this will miss SL tweaks which just extend outwards.
+        /// 
+        /// TODO: This is still to fine-grained. Is there a higher concept of what a tweak is?
+        /// i.e. metadata about there region "above" a seg (and returanbles) which can abstractly be used to pull out a seg
+        /// without having to pregenerate every single one and pick from among them?
         /// </summary>
         public List<Tweak> GetTweaks(LinkedListNode<Seg> segnode, bool right)
         {
@@ -230,9 +322,15 @@ namespace coil
 
             var len3dir = seg.Dir;
             var len4dir = right ? ARot(len3dir) : Rot(len3dir);
+
+            int? knownLen2max = null;
+            if (TweakPicker.MaxLen2.HasValue && LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetVerticals)
+            {
+                knownLen2max = TweakPicker.MaxLen2.Value;
+            }
             var s = GetVerticalsAndReturnables(segnode, right);
-            var verticals = s.Item1;
-            var returnableDistance = s.Item2;
+            //var verticals = s.Item1;
+            //var returnableDistance = s.Item2;
 
             //what does the set of all possible tweaks even look like?
             //hhhhhhhhh
@@ -256,25 +354,47 @@ namespace coil
                 len1start = 1;
             }
 
+            //TODO it would be nice to start in the middle and break up segs from there.
+            //or start at 1/3 and go forward so that stvcache still works...
 
-            for (var len1 = len1start; len1 <= seg.Len - 2 || len1 == 0 && len1 <= seg.Len - 1; len1++) //last checked is 2 before end
+            var storder = new List<int>();
+
+            for (var len1 = len1start; len1 <= seg.Len - 2 || len1 == 0 && len1 <= seg.Len - 1; len1++)
+            {
+                storder.Add(len1);
+                //W(len1);
+                //W(",");
+                
+            }
+            //WL("");
+            storder = storder.OrderBy(el => el > seg.Len / 3 ? el : el + seg.Len).ToList();
+            //foreach (var el in storder)
+            //{
+            //    W(el);
+            //    W(",");
+            //}
+            //WL("");
+            
+            foreach (var len1 in storder)
             {
                 var len1end = Add(seg.Start, seg.Dir, len1, true);
 
                 //todo later expand this to cover all verticals, although it's not really necessary.
-                if (verticals[len1] == 0)
+
+                var len2max = GetVertical(len1, segnode, len2dir, knownLen2max);
+
+                if (len2max==0)
                 {
                     continue;
                 }
-                var len2candidate = verticals[len1];
 
                 //TODO the problem occurs here.
                 if (TweakPicker.MaxLen2.HasValue && LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks)
                 {
-                    var newmax = Math.Min(TweakPicker.MaxLen2.Value, len2candidate);
-                    if (len2candidate > newmax)
+                    var newmax = Math.Min(TweakPicker.MaxLen2.Value, len2max);
+                    if (len2max > newmax)
                     {
-                        len2candidate = newmax;
+                        len2max = newmax;
                     }
                 }
 
@@ -285,7 +405,16 @@ namespace coil
                     len3absolutemax = Math.Min(TweakPicker.MaxLen3.Value, len3absolutemax);
                 }
 
-                while (len2candidate > 0)
+                var len2choices = new List<int>();
+                for (var ii = 1; ii <= len2max;ii++) {
+                    len2choices.Add(ii);
+                }
+                len2choices = len2choices.OrderBy(el => el > len2max / 2 ? el : el + len2max).ToList();
+                if (len2choices.Count > 10)
+                {
+                    var ae = 3;
+                }
+                foreach (var len2 in len2choices)
                 {
                     //what is the structural problem that causes this bug?
                     //I don't distinguish between absolute points (pt), absolute x positions (x), relative x positions (st)
@@ -299,7 +428,7 @@ namespace coil
 
                     //we know ups and downs.
                     //for the current len1st, find the downs which are greater than the limitation away.
-                    var len3start = Add(len1end, len2dir, len2candidate);
+                    var len3start = Add(len1end, len2dir, len2max);
 
                     //this is costly and is repeated calculation.
                     //we're at some st and some st, and looking right.
@@ -309,14 +438,14 @@ namespace coil
 
                     if (len1 > 0 && LevelConfiguration.OptimizationSetup.UseSTVCache)
                     {
-                        var previousStvCacheKey = (len1 - 1, len2candidate);
+                        var previousStvCacheKey = (len1 - 1, len2max);
                         if (STVCache.ContainsKey(previousStvCacheKey))
                         {
                             var prevValue = STVCache[previousStvCacheKey];
                             if (prevValue > 0)
                             {
                                 len3available = prevValue - 1;
-                                STVCache[(len1, len2candidate)] = len3available;
+                                STVCache[(len1, len2max)] = len3available;
                                 foundInCache = true;
                             }
                         }
@@ -327,21 +456,29 @@ namespace coil
                         len3available = GetSafeLength(segnode, len3start, len3dir, seg.Index, len3absolutemax);
                         //problem: this has information about seg maxlength in it
                         //but when we fall back to using the cache we can run over.
-                        STVCache[(len1, len2candidate)] = len3available;
+                        STVCache[(len1, len2max)] = len3available;
                     }
                     //We have a candidate st with vertical>0
                     //we know how far over we can go.
                     //go over all squares within that to find a down that satisfies.
                     //var len3effectivemax = Math.Min(len3available, seg.Len);
 
-                    //checking 
-                    for (var len3 = lengthMinimum;len3<=len3available;len3++)
-                    //for (var len3endcandidate = st + lengthMinimum; len3endcandidate <= len3available; len3endcandidate++)
+                    //pick longest len3s first.
+                    var len3choices = new List<int>();
+                    for (var len3 = len3available; len3 >= lengthMinimum; len3--)
+                    {
+                        len3choices.Add(len3);
+                    }
+                    len3choices = len3choices.OrderBy(el => el > len3available * 2 / 3 ? el : el + len3available).ToList();
+
+                    foreach (var len3 in len3choices)
                     {
 
                         var len3endcandidate = len3 + len1;
 
-                        if (returnableDistance[len3endcandidate] < len2candidate)
+                        var returnableDistance = GetReturnable(len3endcandidate, len2dir, knownLen2max, len4dir, segnode);
+
+                        if (returnableDistance < len2max)
                         {
                             continue;
                         }
@@ -357,18 +494,22 @@ namespace coil
                         {
                             continue;
                         }
-                        var tw = new Tweak(segnode, right, len1, len2candidate, len3, len2dir);
+                        var tw = new Tweak(segnode, right, len1, len2, len3, len2dir);
                         res.Add(tw);
-                        if (LevelConfiguration.TweakPicker.TweakLim.HasValue && res.Count > LevelConfiguration.TweakPicker.TweakLim)
+
+                        if (LevelConfiguration.TweakPicker.TweakLim.HasValue && res.Count >= LevelConfiguration.TweakPicker.TweakLim)
                         {
                             //WL("Broke.");
-                            break;
+                            return res;
                         }
-                    }
-                    len2candidate--;
-                    if (LevelConfiguration.TweakPicker.TweakLim.HasValue && res.Count > LevelConfiguration.TweakPicker.TweakLim)
-                    {
-                        break;
+                        //TODO this is also applicable to getverticals and returnables...
+                        if (LevelConfiguration.OptimizationSetup.GlobalTweakLim.HasValue)
+                        {
+                            if (res.Count >= LevelConfiguration.OptimizationSetup.GlobalTweakLim)
+                            {
+                                return res;
+                            }
+                        }
                     }
                 }
             }
@@ -452,7 +593,8 @@ namespace coil
             return res;
         }
 
-        private void ApplyTweak(Tweak tweak)
+        //core logic.
+        private List<LinkedListNode<Seg>> ApplyTweak(Tweak tweak)
         {
             Counter.Inc(nameof(ApplyTweak));
             var segnode = tweak.SegNode;
@@ -471,9 +613,10 @@ namespace coil
                 //add the hit, dig out board.
                 ApplySeg(seg3);
 
-                Segs.AddAfter(segnode, seg3);
+                var seg3node = Segs.AddAfter(segnode, seg3);
                 Segs.Remove(segnode);
                 //no index adjustments
+                return new List<LinkedListNode<Seg>>() { seg3node };
             }
             else if (tweak.ShortTweak)
             {
@@ -507,6 +650,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg5node, 2);
                 }
+                return new List<LinkedListNode<Seg>>() { seg3node, seg4node, seg5node };
             }
             else if (tweak.LongTweak)
             {
@@ -531,6 +675,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg3node, 2);
                 }
+                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node};
             }
             else
             {
@@ -561,6 +706,7 @@ namespace coil
                 var seg3node = Segs.AddAfter(seg2node, seg3);
                 var seg4node = Segs.AddAfter(seg3node, seg4);
                 var seg5node = Segs.AddAfter(seg4node, seg5);
+
                 Segs.Remove(segnode);
                 if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
                 {
@@ -569,6 +715,8 @@ namespace coil
                 else {
                     AdjustIndexAfter(seg5node, 4); 
                 }
+
+                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node, seg4node, seg5node };
             }
         }
 
@@ -745,7 +893,7 @@ namespace coil
             var t1 = st.Elapsed;
             var st2 = Stopwatch.StartNew();
             SpaceFillIndexes(l);
-            WL($"Redoallindexes in {t1}, {st2.Elapsed}");
+            //WL($"Redoallindexes in {t1}, {st2.Elapsed}");
         }
 
         public void AdjustIndexAfter(LinkedListNode<Seg> seg, uint amount)
