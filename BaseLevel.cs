@@ -24,12 +24,12 @@ namespace coil
         public Seg[] Rows { get; set; }
         public Seg GetRowValue((int,int) pos)
         {
-            var index = pos.Item2*Height+pos.Item1;
+            var index = pos.Item2*Width+pos.Item1;
             return Rows[index];
         }
         public void SetRowValue((int,int) pos, Seg seg)
         {
-            var index = pos.Item2 * Height + pos.Item1;
+            var index = pos.Item2 * Width + pos.Item1;
             Rows[index] = seg;
         }
 

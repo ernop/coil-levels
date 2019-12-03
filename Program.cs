@@ -13,14 +13,14 @@ namespace coil
         static void Main(string[] args)
         {
             var seed = 22;
-            var x = 100;
-            var y = 100;
-            var count = 1;
+            var x = 200;
+            var y = 160;
+            var count = 10;
             
             var segPickerName = "NextR";
             segPickerName = "Previous";
-            CreateLevel(seed, x, y, false, segPickerName);
-            //CreateMultiple(seed, count, x, y, true, segPickerName);
+            //CreateLevel(seed, x, y, false, segPickerName);
+            CreateMultiple(seed, count, x, y, true, segPickerName);
 
             var minx = 3;
             var miny = 2;
@@ -47,7 +47,8 @@ namespace coil
         }
 
         static void CreateMultiple(int seed, int count, int x, int y, bool mass, string segPickerName = null) {
-            while (seed < seed+count)
+            var max = seed + count;
+            while (seed < max)
             {
                 CreateLevel(seed, x, y, mass, segPickerName: segPickerName);
                 seed++;
@@ -106,6 +107,7 @@ namespace coil
                         var level = new Level(lc, log, x, y, rnd, debug, seed, counter);
 
                         level.InitialWander();
+                        //Show(level);
                         if (lc.OptimizationSetup.UseSpaceFillingIndexes)
                         {
                             level.RedoAllIndexesSpaceFillndexes();
@@ -131,14 +133,15 @@ namespace coil
                         var ist = Stopwatch.StartNew();
                         Util.SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
                         WL($"Saving image. {ist.Elapsed}");
-                        //Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
-                        //WL($"Saving pathimage. {ist.Elapsed}");
+                        Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        WL($"Saving pathimage. {ist.Elapsed}");
+                        //Show(level);
 
                         //lc2hash[lc] = l.GetHash();
-                            
+
                         SaveLevelAsText(level, seed);
 
-                        if (false)
+                        if (true)
                         {
                             Util.SaveArrowVersions(level, seed, levelstem);
                         }

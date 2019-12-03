@@ -118,7 +118,7 @@ namespace coil
             while (step > 50)
             {
                 ct++;
-                if (ct > 4)
+                if (ct > 6)
                 {
                     break;
                 }
