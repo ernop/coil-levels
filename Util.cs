@@ -89,12 +89,12 @@ namespace coil
         /// <summary>
         /// Savewithpath / empty but with big overlay arrows showing general regional progression
         /// </summary>
-        public static void SaveAverageOnPathWithArrows(BaseLevel level, int step, string fn,
+        public static void SaveAverageOnPathWithArrows(BaseLevel level, string fn,
             List<List<string>> baseMap, List<PointText> pointTexts,
             string subtitle = "", bool quiet = false
             )
         {
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true, overrideScale:1);
         }
 
         /// <summary>
@@ -112,13 +112,13 @@ namespace coil
         {
             var step = l.TotalLength();
             //var baseEmptyMap = GetBaseMapForEmpty(l);
-            var basePathMap = GetBaseMapForPath(l);
+            //var basePathMap = GetBaseMapForPath(l);
             var lc = l.LevelConfiguration;
             var ct = 0;
             while (step > 50)
             {
                 ct++;
-                if (ct > 6)
+                if (ct > 10)
                 {
                     break;
                 }
@@ -129,7 +129,7 @@ namespace coil
 
                 var pointTexts = GetAveragePoints(l, step);
 
-                SaveAverageOnPathWithArrows(l, step, arrowfn, basePathMap, pointTexts, quiet: false);
+                SaveAverageOnPathWithArrows(l, arrowfn, null, pointTexts, quiet: false);
                 //var tefn = $"{stem}/ae-{ii}-{step}-{lc.GetStr()}.png";
                 //SaveAverageOnEmpty(l, step, tefn, quiet: false);
                 //var arrowefn = $"{stem}/{lc.GetStr()}-arrow-empty-{ii}-{step}.png";

@@ -13,8 +13,8 @@ namespace coil
         static void Main(string[] args)
         {
             var seed = 22;
-            var x = 200;
-            var y = 160;
+            var x = 1000;
+            var y = 1000;
             var count = 10;
             
             var segPickerName = "NextR";

@@ -23,17 +23,20 @@ namespace coil
         public static Font BigFont = new Font(SystemFonts.Find("Comic Sans MS"), 36, FontStyle.Bold);
 
         public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false,
-            List<PointText> pointTexts = null, bool arrows = false)
+            List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null)
         {
             //juggle the path to determine what should be written in each square.
+
+            var effectiveScale = overrideScale.HasValue ? overrideScale.Value : Scale;
+
             //allows partial segments
-            var imageHeight = level.Height * Scale;
-            var imageWidth = level.Width * Scale;
+            var imageHeight = level.Height * effectiveScale;
+            var imageWidth = level.Width * effectiveScale;
             var writeSubtitle = false;
             int? extra = null;
             if (!String.IsNullOrEmpty(subtitle))
             {
-                extra = Math.Max(Scale, (int)(0.5*level.Height))+8;
+                extra = Math.Max(effectiveScale, (int)(0.5*level.Height))+8;
                 imageHeight += extra.Value;
                 writeSubtitle = true;
             }
@@ -41,15 +44,18 @@ namespace coil
             
             using (var result = new Image<Rgba32>(imageWidth, imageHeight))
             {
-                for (var yy = 0; yy < level.Height; yy++)
+                if (outstrings != null)
                 {
-                    for (var xx = 0; xx < level.Width; xx++)
+                    for (var yy = 0; yy < level.Height; yy++)
                     {
-                        var target = new SixLabors.Primitives.Point(xx * Scale, yy * Scale);
-                        var key = outstrings[yy][xx];
+                        for (var xx = 0; xx < level.Width; xx++)
+                        {
+                            var target = new SixLabors.Primitives.Point(xx * effectiveScale, yy * effectiveScale);
+                            var key = outstrings[yy][xx];
 
-                        result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
-                        
+                            result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
+
+                        }
                     }
                 }
                 if (writeSubtitle)
@@ -76,13 +82,13 @@ namespace coil
                     if (arrows)
                     {
                         //arrow width scales with board height+width.
-                        int arrowWidth = (int)((level.Width + level.Height) * 0.04)+1;
+                        int arrowWidth = (int)((level.Width + level.Height) * 0.005)+1;
                         PointText? lastPoint = null;
                         foreach (var pt in pointTexts)
                         {
                             if (lastPoint!=null)
                             {
-                                DrawArrowFrom(result, lastPoint, pt, arrowWidth);
+                                DrawArrowFrom(result, lastPoint, pt, arrowWidth, effectiveScale);
                             }
                             lastPoint = pt;
                         }
@@ -91,7 +97,7 @@ namespace coil
                     {
                         foreach (var pt in pointTexts)
                         {
-                            DrawTextAtPoint(result, pt.Point, pt.Text);
+                            DrawTextAtPoint(result, pt.Point, pt.Text, effectiveScale);
                         }
                     }
                 }
@@ -106,10 +112,10 @@ namespace coil
         }
 
         //adjust point to center of square.
-        public static void DrawArrowFrom(Image<Rgba32> image, PointText start, PointText end, int arrowWidth)
+        public static void DrawArrowFrom(Image<Rgba32> image, PointText start, PointText end, int arrowWidth, int effectiveScale)
         {
-            var s = new PointF(start.Point.Item1 * Scale+Scale/2, start.Point.Item2 * Scale+ Scale / 2);
-            var e = new PointF(end.Point.Item1*Scale + Scale / 2, end.Point.Item2 * Scale + Scale / 2);
+            var s = new PointF(start.Point.Item1 * effectiveScale + effectiveScale / 2, start.Point.Item2 * effectiveScale + effectiveScale / 2);
+            var e = new PointF(end.Point.Item1* effectiveScale + effectiveScale / 2, end.Point.Item2 * effectiveScale + effectiveScale / 2);
             
             var go = new GraphicsOptions(true, 1.0f);
 
@@ -118,13 +124,13 @@ namespace coil
             image.Save("abc.png");
         }
 
-        public static void DrawTextAtPoint(Image<Rgba32> image, (int, int) point, string text) {
+        public static void DrawTextAtPoint(Image<Rgba32> image, (int, int) point, string text, int effectiveScale) {
 
             var location = new SixLabors.Primitives.PointF(0, 0);
             //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
             try {
-                var pointful = new PointF(point.Item1 * Scale - 5, point.Item2 * Scale - 5);
-                var pointf = new PointF(point.Item1 * Scale, point.Item2* Scale);
+                var pointful = new PointF(point.Item1 * effectiveScale - 5, point.Item2 * effectiveScale - 5);
+                var pointf = new PointF(point.Item1 * effectiveScale, point.Item2* effectiveScale);
                 image.Mutate(oo => oo.DrawText(text, BigFont, SixLabors.ImageSharp.Color.Yellow, pointful));
                 image.Mutate(oo => oo.DrawText(text, MedFont, SixLabors.ImageSharp.Color.Black, pointf));
             }
