@@ -102,7 +102,7 @@ namespace coil
                 var news = ApplyTweak(tweak);
                 PossiblySaveDuringTweak(saveState, tweakct, saveEvery, loopct, current.Value);
                 tweakct++;
-                if (tweakct % 1000 == 0)
+                if (tweakct % 10000 == 0)
                 {
                     WL($"tweaks={tweakct} loopct={loopct} {Report(this, TimeSpan.FromSeconds(0))}");
                 }
@@ -124,73 +124,7 @@ namespace coil
             }
         }
         
-        public void RepeatedlyTweakOld(bool saveState, int saveEvery)
-        {
-            
-            var tweakct = 0;
-            //start at the last.
-            //try it, then try the next
-            var success = true;
-            var loopct = 0;
-            var sw = Stopwatch.StartNew();
-            while (success)
-            {
-                loopct++;
-                success = false;
-                var currentSegnode = Segs.Last;
-
-                //TODO add segpicking logic
-
-                while (currentSegnode != null)
-                {
-                    //control this
-                    //this makes it obvious that lastsegnode may not even be in segs anymore!
-                    var nextSegnode = currentSegnode.Previous;
-
-                    var rtweaks = GetTweaks(currentSegnode, true);
-                    var ltweaks = GetTweaks(currentSegnode, false);
-
-                    var tweaks = new List<Tweak>();
-
-                    tweaks.AddRange(rtweaks);
-                    tweaks.AddRange(ltweaks);
-
-                    if (tweaks.Count() == 0)
-                    {
-                        currentSegnode = nextSegnode;
-                        continue;
-                    }
-
-                    var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
-                    if (tweak == null)
-                    {
-                        currentSegnode = nextSegnode;
-                        continue;
-                    }
-
-                    //PossiblySaveAvailableTweaks(tweaks, tweakct);
-                    
-                    //WL($"Got tweaks: {currentSegnode.Value.Index,4} ({currentSegnode.Value.Len,4}) {tweaks.Count(),10}. picked:{tweak}");
-
-                    ApplyTweak(tweak);
-                    tweakct++;
-                    if (tweakct % 1000 == 0)
-                    {
-                        WL($"Loop={loopct} tweakct={tweakct} {Report(this, sw.Elapsed)}");
-                    }
-                    if (saveState && tweakct > 0 && tweakct % saveEvery == 0)
-                    {
-                        //var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
-                        var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-lc{LevelConfiguration.GetStr()}-i{Index}-l{loopct}-tw{tweakct}-p.png";
-                        //SaveEmpty(this, fn);
-                        SaveWithPath(this, pathfn);
-                    }
-
-                    success = true;
-                    currentSegnode = nextSegnode;
-                }
-            }
-        }
+       
 
         public int GetVertical(int st, LinkedListNode<Seg> segnode, Dir len2dir, int? knownLen2max)
         {
@@ -258,7 +192,6 @@ namespace coil
 
         public (Dictionary<int, int>, Dictionary<int, int>) GetVerticalsAndReturnables(LinkedListNode<Seg> segnode, bool right)
         {
-            Counter.Inc(nameof(GetVerticalsAndReturnables));
             var seg = segnode.Value;
             //TODO if seg.Index==1 there is no prior tweak; hard to do an early tweak there but maybe possible
 
@@ -313,7 +246,6 @@ namespace coil
         /// </summary>
         public List<Tweak> GetTweaks(LinkedListNode<Seg> segnode, bool right)
         {
-            Counter.Inc(nameof(GetTweaks));
             var res = new List<Tweak>();
             var seg = segnode.Value;
             var len2dir = right
@@ -328,7 +260,7 @@ namespace coil
             {
                 knownLen2max = TweakPicker.MaxLen2.Value;
             }
-            var s = GetVerticalsAndReturnables(segnode, right);
+            //var s = GetVerticalsAndReturnables(segnode, right);
             //var verticals = s.Item1;
             //var returnableDistance = s.Item2;
 
@@ -521,7 +453,6 @@ namespace coil
         //not replacing a square which is hit by an earlier path, and not trickling straight into an already occupied square?
         public int GetSafeLength(LinkedListNode<Seg> segnode, (int, int) start, Dir dir, uint index, int? max = null)
         {
-            Counter.Inc(nameof(GetSafeLength));
             var candidate = Add(start, dir);
             var res = 1;
             //res refers to candidate index. So if there's a failure, step back one square
@@ -595,8 +526,7 @@ namespace coil
 
         //core logic.
         private List<LinkedListNode<Seg>> ApplyTweak(Tweak tweak)
-        {
-            Counter.Inc(nameof(ApplyTweak));
+        { 
             var segnode = tweak.SegNode;
             var seg = segnode.Value;
             var prevnode = segnode.Previous;
@@ -722,7 +652,6 @@ namespace coil
 
         public void Unlengthen(Seg seg, Tweak tweak)
         {
-            Counter.Inc(nameof(Unlengthen));
             //back up the seg.
             //adjust length
             //adjust start
@@ -744,7 +673,6 @@ namespace coil
 
         public void Lengthen(Seg seg, Tweak tweak)
         {
-            Counter.Inc(nameof(Lengthen));
             //we lengthen by tweak.Len1.
             //remove old hit
             //add new hit.
@@ -769,7 +697,6 @@ namespace coil
         //this causes complications for others!
         public void UnapplySeg(Seg seg)
         {
-            Counter.Inc(nameof(UnapplySeg));
             //fill in the squares
             //remove the hit
             var len = 0;
@@ -787,7 +714,6 @@ namespace coil
         //you own the first square of a seg but not the last (in Rows)
         public void ApplySeg(Seg seg, bool endEarly = false)
         {
-            Counter.Inc(nameof(ApplySeg));
             //dig out squares of rows.
             //add hit at the end.
             var len = 0;
@@ -813,7 +739,6 @@ namespace coil
         /// </summary>
         public Seg MakeSeg(Tweak tweak, TweakSection section, uint index)
         {
-            Counter.Inc(nameof(MakeSeg));
             switch (section)
             {
                 case TweakSection.One:
@@ -850,7 +775,6 @@ namespace coil
 
         public void SpaceFillIndexes(List<LinkedListNode<Seg>> todo)
         {
-            Counter.Inc(nameof(SpaceFillIndexes));
             //figure out the range
             //pick indexes for each one
             //figure out if there is enough room - if not, redo all

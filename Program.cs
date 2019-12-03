@@ -13,10 +13,9 @@ namespace coil
         static void Main(string[] args)
         {
             var seed = 22;
-            var mm = 23;
-            var x = 59 * 1;
-            var y = 60 * 1;
-            //CreateLevel(seed, x, y);
+            var x = 1000;
+            var y = 1000;
+            CreateLevel(seed, x, y, true);
             //CreateMultiple(seed, mm, x, y)
 
             var minx = 3;
@@ -28,7 +27,7 @@ namespace coil
             var countper = 2;
             var mass = true;
 
-            CreateLots(minx, miny, xincrement, yincrement, maxx, maxy, countper, mass);
+            //CreateLots(minx, miny, xincrement, yincrement, maxx, maxy, countper, mass);
         }
 
         static void CreateLots(int minx, int miny, int xincrement, int yincrement, int maxx, int maxy, int countper, bool mass)
@@ -52,7 +51,7 @@ namespace coil
         }
 
 
-        static void CreateLevel(int seed, int x, int y, bool mass)
+        static void CreateLevel(int seed, int x, int y, bool mass = false)
         {
             
             //target = "rand99";
@@ -135,7 +134,7 @@ namespace coil
                             
                         SaveLevelAsText(level, seed);
 
-                        if (false)
+                        if (true)
                         {
                             Util.SaveArrowVersions(level, seed, levelstem);
                         }

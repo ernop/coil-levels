@@ -15,6 +15,10 @@ namespace coil
         //but that would break 1.
         //and we need a backup hit beause imagine if 2 and 10 hit a sq.
         //and we replace 10 with a longtweak so it doesn't hit anymore. we still need to know 2 hit it!
+
+        /// <summary>
+        /// TODO: test converting this to an array of lists.  Currently represents 50% of time when generating big levels.
+        /// </summary>
         private Dictionary<(int, int), List<Seg>> Hits { get; set; }
         private bool Debug { get; set; }
         private Level Level { get; set; }
