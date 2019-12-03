@@ -137,6 +137,42 @@ namespace coil
             }
         }
 
+        /// <summary>
+        /// Return int values from min to max in order of increasing distance from the midpoint.
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public static IEnumerable<int> Pivot (int min, int max)
+        {
+            var adder = 1;
+            var now = (max+min)/2;
+            yield return now;
+            while (true)
+            {
+                var success = false;
+                now += adder;
+                
+                if (now <= max)
+                {
+                    yield return now;
+                    success = true;
+                }
+                adder++;
+                now -= adder;
+                adder++;
+                if (now >= min)
+                {
+                    yield return now;
+                    success = true;
+                }
+                if (!success)
+                {
+                    break;
+                }
+            }
+        }
+
         public static void SaveLevelAsText(Level l, int seed)
         {
             if (!System.IO.Directory.Exists("../../../levels"))
@@ -153,7 +189,7 @@ namespace coil
                     var row = new StringBuilder();
                     for (var xx = 1; xx <= l.Width - 2; xx++)
                         {
-                        if (l.Rows[(xx, yy)] == null)
+                        if (l.GetRowValue((xx,yy))==null)
                         {
                             row.Append("X");
                         }
@@ -433,10 +469,10 @@ namespace coil
             {
                 for (var xx = 0; xx < l.Width; xx++)
                 {
-                    if (l.Rows.ContainsKey((xx, yy))
-                        && l.Rows[(xx, yy)] != null)
+                    var rv = l.GetRowValue((xx, yy));
+                    if (rv != null)
                     {
-                        Console.Write(l.Rows[(xx, yy)].Index % 10);
+                        Console.Write(rv.Index % 10);
                     }
                     else
                     {
@@ -486,7 +522,7 @@ namespace coil
                     }
 
                     var hit = l.Hits.Get(point);
-                    var val = l.Rows[point];
+                    var val = l.GetRowValue(point);
                     if (val != null)
                     {
                         row.Add(".");
@@ -581,8 +617,10 @@ namespace coil
                 var left = Add(end, ARot(seg.Dir));
 
                 //decision if left and right are empty, and the seg that fills them has index greater than current.
-                if (level.Rows[right] != null && level.Rows[left] != null
-                    && level.Rows[right].Index > seg.Index && level.Rows[left].Index > seg.Index)
+                var rval = level.GetRowValue(right);
+                var lval = level.GetRowValue(left);
+                if (rval != null && lval != null
+                    && rval.Index > seg.Index && lval.Index > seg.Index)
                 {
                     //we have a decision to make!
                     //TODO hmm how to implement this with an untouched board?

@@ -31,13 +31,13 @@ namespace coil
         public string GetName() { return Name; }
 
         public Func<LinkedList<Seg>, LinkedListNode<Seg>> InitialPick;
-        private Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, List<LinkedListNode<Seg>>, bool, LinkedListNode<Seg>> InnerPicker;
+        private Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, bool, LinkedListNode<Seg>> InnerPicker;
 
         public SegPicker(int seed,
             string name,
             
             Func<LinkedList<Seg>, LinkedListNode<Seg>> initialPicker,
-            Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, List<LinkedListNode<Seg>>, bool, LinkedListNode<Seg>> picker) //the context for the pick
+            Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, bool, LinkedListNode<Seg>> picker) //the context for the pick
         {
             Random = new System.Random(seed);
             Name = name;
@@ -45,9 +45,9 @@ namespace coil
             InnerPicker = picker;
         }
 
-        public LinkedListNode<Seg> Pick(LinkedList<Seg> segs, LinkedListNode<Seg> prev, LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool justCreated)
+        public LinkedListNode<Seg> Pick(LinkedList<Seg> segs, LinkedListNode<Seg> prev, LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool justCreated)
         {
-            return InnerPicker.Invoke(Random, segs, prev, next, news, justCreated);
+            return InnerPicker.Invoke(Random, segs, prev, next, newseg, justCreated);
         }
     }
 
@@ -60,36 +60,74 @@ namespace coil
                 new SegPicker(seed: seed,
                     name:"Previous",
                     initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created)=>previous
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created)=>previous
                 ),
                 new SegPicker(seed: seed,
                     name:"New",
                     initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
                     {
-                        if (news != null && news.Any())
+                        if (created)
                         {
-                            return news.Last();
+                            return newseg;
                         }
                         return previous;
                     }
                 ),
                 new SegPicker(seed: seed,
+                    name:"Next",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+                    {
+                        //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
+                        //you'll naturally fall through to the next.
+                        if (created)
+                        {
+                            return next;
+                        }
+                        return previous;
+                    }
+                ),
+                 new SegPicker(seed: seed,
+                    name:"NextR",
+                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+                    {
+                        //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
+                        //you'll naturally fall through to the next.
+                        if (created){
+                            if (rnd.Next(5) == 0)
+                            {
+                                return newseg;
+                            }
+                            else
+                            {
+                                return next;
+                            }
+                        }
+                        
+                        return previous;
+                    }
+                ),
+
+            new SegPicker(seed: seed,
                     name:"NewR",
                     initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
-                    {
-                        if (news != null && news.Any() && rnd.Next(2)==0)
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+                    { 
+                        if (newseg != null && rnd.Next(2)==0)
                         {
-                            return news.Last();
+                            return newseg;
                         }
+                        
+                        //theory: this is doing a bunch of useless work.
                         return previous;
                     }
                 ),
                 new SegPicker(seed: seed,
                     name:"Bigger",
                     initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
                     {
                         var ii = 0;
                         var choices = new List<LinkedListNode<Seg>>();
@@ -108,9 +146,9 @@ namespace coil
                 new SegPicker(seed: seed,
                     name:"PreviousR",
                     initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, List<LinkedListNode<Seg>> news, bool created) =>
+                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
                     {
-                        if (rnd.Next(2)==0){
+                        if (rnd.Next(3)==0){
                             return previous;
                         }
                         return previous?.Previous;

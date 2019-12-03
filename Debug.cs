@@ -119,20 +119,26 @@ namespace coil
                 //}
 
                 //check both ways!
-                foreach (var key in l.Hits.GetKeys())
-                {
-                    var realHitvalue = l.Hits.Get(key);
-                    var fakeHitValue = new List<Seg>();
-                    if (fakeHits.ContainsKey(key))
-                    {
-                        fakeHitValue = fakeHits[key];
-                    }
 
-                    //just check count for now.
-                    if (realHitvalue.Count != fakeHitValue.Count)
+                for (var xx = 0; xx <= l.Width; xx++)
+                {
+                    for (var yy = 0; yy <= l.Height; yy++)
                     {
-                        WL("Bad");
-                        var ae = 3;
+                        var key = (xx, yy);
+
+                        var realHitvalue = l.Hits.Get(key);
+                        var fakeHitValue = new List<Seg>();
+                        if (fakeHits.ContainsKey(key))
+                        {
+                            fakeHitValue = fakeHits[key];
+                        }
+
+                        //just check count for now.
+                        if (realHitvalue.Count != fakeHitValue.Count)
+                        {
+                            WL("Bad");
+                            var ae = 3;
+                        }
                     }
                 }
 
@@ -148,17 +154,22 @@ namespace coil
                     }
                 }
 
-                foreach (var sq in l.Rows.Keys)
+                for (var yy = 0; yy <= l.Height;yy++)
                 {
-                    if (l.Rows[sq]?.Index != fakeRows[sq]?.Index)
+                    for (var xx = 0; xx < l.Width; yy++)
                     {
-                        WL("Bad");
-                        var ae = 3;
-                    }
-                    if (fakeRows[sq]?.Index != l.Rows[sq]?.Index)
-                    {
-                        WL("Bad");
-                        var ae = 3;
+                        var sq = (xx, yy);
+                    
+                        if (l.GetRowValue(sq)?.Index != fakeRows[sq]?.Index)
+                        {
+                            WL("Bad");
+                            var ae = 3;
+                        }
+                        if (fakeRows[sq]?.Index != l.GetRowValue(sq)?.Index)
+                        {
+                            WL("Bad");
+                            var ae = 3;
+                        }
                     }
                 }
                 //validate fakehits and fakerows match rows!

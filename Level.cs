@@ -43,18 +43,25 @@ namespace coil
             InitBoard();
         }
 
-        public void RepeatedlyTweak(bool saveState, int saveEvery)
+        public void RepeatedlyTweak(bool saveState, int saveEvery, Stopwatch st)
         {
             //after doing the tweak we will call the segpicker with previous, new segs, next seg, success
             
             //initial setup.
             var current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
-            //WL($"Initial seg: {current.Value}");
+            WL($"Initial seg: {current.Value}");
             var tweakct = 0;
             var loopct = 0;
             var success = false;
+            var failct = 0;
+            var notweakct = 0;
+
             while (true)
             {
+                if (tweakct % 10000 == 0)
+                {
+                    WL($"loop={loopct} successes={tweakct} notweakct={notweakct} failct={failct}");
+                }
                 if (current == null)
                 {
                     if (success)
@@ -77,8 +84,7 @@ namespace coil
                 //WL($"Handling tweak with: {LevelConfiguration.SegPicker.GetName()} => {current?.Value}");
                 //setup, storing info to call next seg.
                 var previous = current.Previous;
-                //Show(this);
-                //ShowSeg(this);
+                
                 var next = current.Next;
 
                 var tweaks = new List<Tweak>() {};
@@ -88,6 +94,7 @@ namespace coil
                 {
                     current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
                     //WL($"failed, advanced to: {current?.Value}");
+                    failct++;
                     continue;
                 }
 
@@ -96,18 +103,20 @@ namespace coil
                 {
                     current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
                     //WL($"failed, advanced to: {current?.Value}");
+                    notweakct++;
                     continue;
                 }
 
-                var news = ApplyTweak(tweak);
+                var lastnewseg = ApplyTweak(tweak);
+                
                 PossiblySaveDuringTweak(saveState, tweakct, saveEvery, loopct, current.Value);
                 tweakct++;
                 if (tweakct % 10000 == 0)
                 {
-                    WL($"tweaks={tweakct} loopct={loopct} {Report(this, TimeSpan.FromSeconds(0))}");
+                    WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{tweakct*1.0/failct*100.0}%");
                 }
                 success = true;
-                current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, news, true);
+                current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, lastnewseg, true);
                 //WL($"success, advanced to: {current?.Value}");
             }
         }
@@ -123,8 +132,6 @@ namespace coil
                 //SaveEmpty(this, fn);
             }
         }
-        
-       
 
         public int GetVertical(int st, LinkedListNode<Seg> segnode, Dir len2dir, int? knownLen2max)
         {
@@ -153,7 +160,9 @@ namespace coil
             //    var ae = 44;
             //}
 
-            if (Rows[hitsq] == null || Rows[hitsq].Index < seg.Index || stpt == segEnd)
+            var rowValue = GetRowValue(hitsq);
+
+            if (rowValue == null || rowValue.Index < seg.Index || stpt == segEnd)
             {
                 //either hit a full square or an earlier segment.
                 //now figure out how far above you can return from
@@ -165,7 +174,7 @@ namespace coil
                     {
                         break;
                     }
-                    if (Rows[candidate] != null)
+                    if (GetRowValue(candidate) != null)
                     {
                         break;
                     }
@@ -246,6 +255,10 @@ namespace coil
         /// </summary>
         public List<Tweak> GetTweaks(LinkedListNode<Seg> segnode, bool right)
         {
+            //TODO even better than my current attept to take the first reasonable tweak, would be to be able to apply a size limit to a tweak.
+            //simply taking max 50 or something with rarer longer ones would solve the "too long section" problem.
+            //TODO also, generating the entire order for every len1 and len2 candidate when the first one is likely to hit is pointless.
+            //what does a function look like this: F(10) = 5,6,4,7,3,8,2,9,1...?
             var res = new List<Tweak>();
             var seg = segnode.Value;
             var len2dir = right
@@ -337,16 +350,7 @@ namespace coil
                     len3absolutemax = Math.Min(TweakPicker.MaxLen3.Value, len3absolutemax);
                 }
 
-                var len2choices = new List<int>();
-                for (var ii = 1; ii <= len2max;ii++) {
-                    len2choices.Add(ii);
-                }
-                len2choices = len2choices.OrderBy(el => el > len2max / 2 ? el : el + len2max).ToList();
-                if (len2choices.Count > 10)
-                {
-                    var ae = 3;
-                }
-                foreach (var len2 in len2choices)
+                foreach (var len2 in Pivot(1,len2max))
                 {
                     //what is the structural problem that causes this bug?
                     //I don't distinguish between absolute points (pt), absolute x positions (x), relative x positions (st)
@@ -465,9 +469,10 @@ namespace coil
                     break;
                 }
 
-                if (Rows[candidate] != null)
+                var canValue = GetRowValue(candidate);
+                if (canValue != null)
                 {
-                    var hitSegment = Rows[candidate];
+                    var hitSegment = canValue;
 
                     //hit some other path; pull back.
                     res--;
@@ -525,7 +530,7 @@ namespace coil
         }
 
         //core logic.
-        private List<LinkedListNode<Seg>> ApplyTweak(Tweak tweak)
+        private LinkedListNode<Seg> ApplyTweak(Tweak tweak)
         { 
             var segnode = tweak.SegNode;
             var seg = segnode.Value;
@@ -546,7 +551,7 @@ namespace coil
                 var seg3node = Segs.AddAfter(segnode, seg3);
                 Segs.Remove(segnode);
                 //no index adjustments
-                return new List<LinkedListNode<Seg>>() { seg3node };
+                return seg3node;
             }
             else if (tweak.ShortTweak)
             {
@@ -561,11 +566,11 @@ namespace coil
                 var seg5end = Add(seg5.Start, seg5.Dir, seg5.Len);
                 if (nextnode != null)
                 {
-                    Rows[seg5end] = nextnode.Value;
+                    SetRowValue(seg5end, nextnode.Value);
                 }
                 else
                 {
-                    Rows[seg5end] = seg5;
+                    SetRowValue(seg5end, seg5);
                 }
 
                 var seg3node = Segs.AddAfter(segnode, seg3);
@@ -580,7 +585,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg5node, 2);
                 }
-                return new List<LinkedListNode<Seg>>() { seg3node, seg4node, seg5node };
+                return seg5node;
             }
             else if (tweak.LongTweak)
             {
@@ -605,7 +610,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg3node, 2);
                 }
-                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node};
+                return seg3node;
             }
             else
             {
@@ -624,11 +629,11 @@ namespace coil
                 var seg5end = Add(seg5.Start, seg5.Dir, seg5.Len);
                 if (nextnode != null)
                 {
-                    Rows[seg5end] = nextnode.Value;
+                    SetRowValue(seg5end, nextnode.Value);
                 }
                 else
                 {
-                    Rows[seg5end] = seg5;
+                    SetRowValue(seg5end, seg5);
                 }
 
                 var seg1node = Segs.AddAfter(segnode, seg1);
@@ -646,7 +651,7 @@ namespace coil
                     AdjustIndexAfter(seg5node, 4); 
                 }
 
-                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node, seg4node, seg5node };
+                return seg5node;
             }
         }
 
@@ -662,7 +667,7 @@ namespace coil
             while (len <= tweak.Len2)
             {
                 len++;
-                Rows[candidate] = seg;
+                SetRowValue(candidate, seg);
                 candidate = Add(candidate, backingDirection);
             }
             seg.Len += tweak.Len2;
@@ -684,7 +689,7 @@ namespace coil
             var len = 0;
             while (len <= tweak.Len2)
             {
-                Rows[segEnd] = seg;
+                SetRowValue(segEnd, seg);
                 segEnd = Add(segEnd, seg.Dir);
                 len++;
             }
@@ -703,7 +708,7 @@ namespace coil
             var candidate = seg.Start;
             while (len <= seg.Len)
             {
-                Rows[candidate] = null;
+                SetRowValue(candidate, null);
                 candidate = Add(candidate, seg.Dir);
                 len++;
             }
@@ -726,7 +731,7 @@ namespace coil
             while (len < target)
             {
                 //we never fill the origin square of the seg
-                Rows[candidate] = seg;
+                SetRowValue(candidate, seg);
                 len++;
                 candidate = Add(candidate, seg.Dir);
             }

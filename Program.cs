@@ -13,10 +13,14 @@ namespace coil
         static void Main(string[] args)
         {
             var seed = 22;
-            var x = 1000;
-            var y = 1000;
-            CreateLevel(seed, x, y, true);
-            //CreateMultiple(seed, mm, x, y)
+            var x = 100;
+            var y = 100;
+            var count = 1;
+            
+            var segPickerName = "NextR";
+            segPickerName = "Previous";
+            CreateLevel(seed, x, y, false, segPickerName);
+            //CreateMultiple(seed, count, x, y, true, segPickerName);
 
             var minx = 3;
             var miny = 2;
@@ -42,16 +46,16 @@ namespace coil
             }
         }
 
-        static void CreateMultiple(int seed, int seedmax, int x, int y, bool mass) {
-            while (seed < seedmax)
+        static void CreateMultiple(int seed, int count, int x, int y, bool mass, string segPickerName = null) {
+            while (seed < seed+count)
             {
-                CreateLevel(seed, x, y, mass);
+                CreateLevel(seed, x, y, mass, segPickerName: segPickerName);
                 seed++;
             }
         }
 
 
-        static void CreateLevel(int seed, int x, int y, bool mass = false)
+        static void CreateLevel(int seed, int x, int y, bool mass = false, string segPickerName = null)
         {
             
             //target = "rand99";
@@ -78,20 +82,20 @@ namespace coil
             //segpickers unused
             foreach (var tweakPicker in TweakPickers.GetPickers())
             {
-                if (tweakPicker.Name != "rand3")
+                if (tweakPicker.Name != "rand5")
                 {
                     continue;
                 }
 
-                foreach (var el in new List<int?>() { 3 }) // 1, 100, 10000
+                foreach (var el in new List<int?>() { 3 }) // null, 1, 100, 10000
                 {
                     var cs = new OptimizationSetup();
                     cs.GlobalTweakLim = el;
 
                     foreach (var segPicker in SegPickers.GetSegPickers(seed))
                     {
-                        if (segPicker.Name != "NewR")
-                        {
+                        if (!string.IsNullOrEmpty(segPickerName) && segPicker.Name != segPickerName) 
+                        { 
                             continue;
                         }
                         var rnd = new System.Random(seed);
@@ -108,7 +112,7 @@ namespace coil
                         }
 
                         var st = Stopwatch.StartNew();
-                        level.RepeatedlyTweak(false, 100);
+                        level.RepeatedlyTweak(false, 100, st);
                         //counter.Show();
                         var rep = Report(level, st.Elapsed);
 
@@ -119,22 +123,22 @@ namespace coil
                         }
                         //leave this in for one final sense check.
                         var dst = Stopwatch.StartNew();
-                            
+                        log.Info(rep);
+
                         DoDebug(level, false);
                         WL($"Dodebug done: {dst.Elapsed}");
-                        log.Info(rep);
                         
                         var ist = Stopwatch.StartNew();
                         Util.SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
                         WL($"Saving image. {ist.Elapsed}");
-                        Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
-                        WL($"Saving pathimage. {ist.Elapsed}");
+                        //Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        //WL($"Saving pathimage. {ist.Elapsed}");
 
                         //lc2hash[lc] = l.GetHash();
                             
                         SaveLevelAsText(level, seed);
 
-                        if (true)
+                        if (false)
                         {
                             Util.SaveArrowVersions(level, seed, levelstem);
                         }

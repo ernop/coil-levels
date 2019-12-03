@@ -19,57 +19,62 @@ namespace coil
         /// <summary>
         /// TODO: test converting this to an array of lists.  Currently represents 50% of time when generating big levels.
         /// </summary>
-        private Dictionary<(int, int), List<Seg>> Hits { get; set; }
+        //private Dictionary<(int, int), List<Seg>> Hits { get; set; }
+
+        private List<Seg>[] Hits { get; set; }
+
         private bool Debug { get; set; }
         private Level Level { get; set; }
+
+        public int GetHitIndex((int, int) pos)
+        {
+            return pos.Item2 * Level.Width + pos.Item1;
+        }
 
         public HitManager(int width, int height, bool debug, Level level)
         {
             Debug = debug;
             Level = level;
-            Hits = new Dictionary<(int, int), List<Seg>>();
+            Hits = new List<Seg>[Level.Height*Level.Width];
             for (var yy = 0; yy < height; yy++)
             {
                 for (var xx = 0; xx < width; xx++)
                 {
-                    Hits[(xx, yy)] = new List<Seg>();
+                    Hits[GetHitIndex((xx, yy))] = new List<Seg>();
                 }
             }
         }
 
         public bool Contains((int,int) key)
         {
-            return Hits.ContainsKey(key);
-        }
-
-        public List<(int,int)> GetKeys()
-        {
-            return Hits.Keys.ToList();
+            return Hits[GetHitIndex(key)].Any();
         }
 
         public List<Seg> Get((int,int) pos)
         {
-            return Hits[pos];
+            return Hits[GetHitIndex(pos)];
         }
 
         public void Remove((int,int) pos, Seg seg)
         {
+            var l = Hits[GetHitIndex(pos)];
             if (Debug)
             {
-                if (!Hits[pos].Contains(seg))
+                if (!l.Contains(seg))
                 {
                     WL("Bad!");
                     var ae = 32;
                 }
             }
-            Hits[pos].Remove(seg);
+            l.Remove(seg);
         }
 
         public void Add((int,int) pos, Seg seg)
         {
+            var l = Hits[GetHitIndex(pos)];
             if (Debug)
             {
-                var overlaps = Hits[pos].Where(ss => ss.Index == seg.Index);
+                var overlaps =l.Where(ss => ss.Index == seg.Index);
                 //you can temporarily have segs with the same index
                 foreach (var ol in overlaps)
                 {
@@ -82,12 +87,12 @@ namespace coil
                 }
             }
 
-            Hits[pos].Add(seg);
+            l.Add(seg);
         }
 
         public int GetCount((int,int) pos)
         {
-            return Hits[pos].Count;
+            return Hits[GetHitIndex(pos)].Count;
         }
     }
 }

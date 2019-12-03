@@ -20,7 +20,18 @@ namespace coil
 
         //null meaning not owned by any segment
         //pointing at a segment will include the xest segment covering it.
-        public Dictionary<(int, int), Seg> Rows { get; protected set; }
+        //public Dictionary<(int, int), Seg> Rows { get; protected set; }
+        public Seg[] Rows { get; set; }
+        public Seg GetRowValue((int,int) pos)
+        {
+            var index = pos.Item2*Height+pos.Item1;
+            return Rows[index];
+        }
+        public void SetRowValue((int,int) pos, Seg seg)
+        {
+            var index = pos.Item2 * Height + pos.Item1;
+            Rows[index] = seg;
+        }
 
         public HitManager Hits;
 
@@ -30,13 +41,14 @@ namespace coil
         //set up empty board with strong border bigger than the input
         protected void InitBoard()
         {
-            
-            Rows = new Dictionary<(int, int), Seg>();
+
+            Rows = new Seg[Height * Width];
             for (var yy = 0; yy < Height; yy++)
             {
                 for (var xx = 0; xx < Width; xx++)
                 {
-                    Rows[(xx, yy)] = null;
+                    //Rows[(xx, yy)] = null;
+                    SetRowValue((xx, yy), null);
                 }
             }
         }
@@ -46,7 +58,7 @@ namespace coil
         {
             var res = 0;
             var candidate = Add(start, dir);
-            while (Rows[candidate] == null && Hits.GetCount(candidate) == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || max == null || res < max))
+            while (GetRowValue(candidate) == null && Hits.GetCount(candidate) == 0 && InBounds(candidate) && (min == 0 || res < min) && (max == 0 || max == null || res < max))
             {
                 res++;
                 candidate = Add(candidate, dir);
@@ -102,7 +114,7 @@ namespace coil
             //gotta go to the end
             while (ii <= seg.Len)
             {
-                Rows[candidate] = seg;
+                SetRowValue(candidate, seg);
                 candidate = Add(candidate, seg.Dir);
                 ii++;
             }
