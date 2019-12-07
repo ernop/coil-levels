@@ -4,6 +4,7 @@ using System.Linq;
 
 using static coil.Navigation;
 using static coil.Util;
+using static coil.Coilutil;
 using static coil.SegDescriptor;
 
 namespace coil

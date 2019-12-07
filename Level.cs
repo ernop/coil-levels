@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using static coil.Navigation;
 using static coil.Util;
 using static coil.Debug;
-
+using static coil.Coilutil;
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
@@ -142,6 +142,9 @@ namespace coil
             return vertical;
         }
 
+        /// <summary>
+        /// There is some cacheability.  i.e. if x,y is returnable, then x,y-1 is also returnable, y>1
+        /// </summary>
         public int GetReturnable(int st, Dir len2dir, int? knownLen2max, Dir len4dir, LinkedListNode<Seg> segnode)
         {
             var seg = segnode.Value;
@@ -199,48 +202,6 @@ namespace coil
             }
         }
 
-        public (Dictionary<int, int>, Dictionary<int, int>) GetVerticalsAndReturnables(LinkedListNode<Seg> segnode, bool right)
-        {
-            var seg = segnode.Value;
-            //TODO if seg.Index==1 there is no prior tweak; hard to do an early tweak there but maybe possible
-
-            var len2dir = right
-                ? Rot(seg.Dir)
-                : ARot(seg.Dir);
-
-            var len3dir = seg.Dir;
-            var len4dir = right ? ARot(len3dir) : Rot(len3dir);
-
-            //for start pt index s, how far can you go up?
-            var verticals = new Dictionary<int, int>();
-
-            //how far away can you return to this square from.
-            //zero means nothing and can be due to multiple causes.
-            var returnableDistance = new Dictionary<int, int>();
-
-            //first figure out how far up you can go from each square, and how far down you can return to each square
-            //each with their accompanying overlap into the next square being validated.
-
-            int? knownLen2max = null;
-            if (TweakPicker.MaxLen2.HasValue && LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetVerticals)
-            {
-                knownLen2max = TweakPicker.MaxLen2.Value;
-            }
-
-            //It is very annoying that we get all the verticals and returnables, yet barely use any of them.
-            //convert this to a method.
-            for (var st = 0; st <= seg.Len; st++)
-            {
-                //var stpt = Add(seg.Start, seg.Dir, st, true);
-                //var vertical = GetSafeLength(segnode, stpt, len2dir, seg.Index, knownLen2max);
-                //TODO add in verticals[seg.Len]=0, and returns[0]=0
-                verticals[st] = GetVertical(st, segnode, len2dir, knownLen2max);
-                returnableDistance[st] = GetReturnable(st, len2dir, knownLen2max, len4dir, segnode);
-            }
-
-            return (verticals, returnableDistance);
-        }
-
         /// <summary>
         /// couple strategies here.
         /// It would be nice to quickly know all available tweaks and then just pick one based on level generation rules.
@@ -273,9 +234,6 @@ namespace coil
             {
                 knownLen2max = TweakPicker.MaxLen2.Value;
             }
-            //var s = GetVerticalsAndReturnables(segnode, right);
-            //var verticals = s.Item1;
-            //var returnableDistance = s.Item2;
 
             //what does the set of all possible tweaks even look like?
             //hhhhhhhhh
@@ -302,26 +260,31 @@ namespace coil
             //TODO it would be nice to start in the middle and break up segs from there.
             //or start at 1/3 and go forward so that stvcache still works...
 
-            var storder = new List<int>();
+            //var storder = new List<int>();
 
-            for (var len1 = len1start; len1 <= seg.Len - 2 || len1 == 0 && len1 <= seg.Len - 1; len1++)
-            {
-                storder.Add(len1);
-                //W(len1);
-                //W(",");
-                
-            }
-            //WL("");
-            storder = storder.OrderBy(el => el > seg.Len / 3 ? el : el + seg.Len).ToList();
-            //foreach (var el in storder)
+            //var len1limit =
+                //0,5 => [0,4]
+                //1,5 => [1,3]
+                //0,1 => [0]
+                //1,2 => []
+                //0,2 => [0]
+
+            //for (var len1 = len1start; len1 <= seg.Len - 2 || len1 == 0 && len1 <= seg.Len - 1; len1++)
             //{
-            //    W(el);
-            //    W(",");
+            //    storder.Add(len1);
             //}
-            //WL("");
-            
-            foreach (var len1 in storder)
+            //storder = storder.OrderBy(el => el > seg.Len / 3 ? el : el + seg.Len).ToList();
+
+            //foreach (var len1 in storder))
+            //TODO make sure this matches the previous system.
+
+            //RETURNABLE cache
+            foreach (var len1 in Pivot(len1start, seg.Len-1))
             {
+                if (len1!=0 && len1 == seg.Len - 1)
+                {
+                    continue;
+                }
                 var len1end = Add(seg.Start, seg.Dir, len1, true);
 
                 //todo later expand this to cover all verticals, although it's not really necessary.
@@ -331,16 +294,6 @@ namespace coil
                 if (len2max==0)
                 {
                     continue;
-                }
-
-                //TODO the problem occurs here.
-                if (TweakPicker.MaxLen2.HasValue && LevelConfiguration.OptimizationSetup.UseTweakLen2RuleInGetTweaks)
-                {
-                    var newmax = Math.Min(TweakPicker.MaxLen2.Value, len2max);
-                    if (len2max > newmax)
-                    {
-                        len2max = newmax;
-                    }
                 }
 
                 int len3absolutemax = seg.Len - len1;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static coil.Navigation;
 using static coil.Util;
+using static coil.Coilutil;
 
 namespace coil
 {

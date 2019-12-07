@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 using static coil.Util;
 using static coil.Debug;
-
+using static coil.Coilutil;
 namespace coil
 {
     class Program
@@ -13,14 +13,14 @@ namespace coil
         static void Main(string[] args)
         {
             var seed = 22;
-            var x = 1000;
-            var y = 1000;
-            var count = 10;
+            var x = 1500;
+            var y = 1500;
+            var count = 1;
             
             var segPickerName = "NextR";
             segPickerName = "Previous";
-            //CreateLevel(seed, x, y, false, segPickerName);
-            CreateMultiple(seed, count, x, y, true, segPickerName);
+            CreateLevel(seed, x, y, true, segPickerName);
+            //CreateMultiple(seed, count, x, y, true, segPickerName);
 
             var minx = 3;
             var miny = 2;
@@ -121,7 +121,7 @@ namespace coil
                         if (runCount == 1 && !mass)
                         {
                             //Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
-                            Util.SaveWithPath(level, $"{levelstem}/p-{seed}.png");
+                            SaveWithPath(level, $"{levelstem}/p-{seed}.png");
                         }
                         //leave this in for one final sense check.
                         var dst = Stopwatch.StartNew();
@@ -131,9 +131,9 @@ namespace coil
                         WL($"Dodebug done: {dst.Elapsed}");
                         
                         var ist = Stopwatch.StartNew();
-                        Util.SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
+                        SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
                         WL($"Saving image. {ist.Elapsed}");
-                        Util.SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
                         WL($"Saving pathimage. {ist.Elapsed}");
                         //Show(level);
 
@@ -143,7 +143,7 @@ namespace coil
 
                         if (true)
                         {
-                            Util.SaveArrowVersions(level, seed, levelstem);
+                            SaveArrowVersions(level, seed, levelstem);
                         }
                     }
                 }
