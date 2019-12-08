@@ -10,9 +10,9 @@ namespace coil
     public static class Debug
     {
         //this should really check everything about the board - regen hits and replay everything.
-        public static void DoDebug(Level l, bool show=false)
+        public static void DoDebug(Level l, bool show=false, bool validateBoard = false)
         {
-            if (l.DoBoardValidation)
+            if (validateBoard)
             {
                 if (show)
                 {
@@ -22,26 +22,29 @@ namespace coil
                 }
 
                 //always validate segs.
-                var last = 0;
+                uint lastIndex = 0;
 
                 foreach (var seg in l.Segs)
                 {
                     if (seg.Len == 0)
                     {
-                        WL("Bad");
-                        var ae = 3;
+                        WL("Bada");
                     }
                     if (show)
                     {
                         WL(seg.ToString());
                     }
-                    if (seg.Index != last + 1)
+                    if (lastIndex == 0)
+                    {
+                        lastIndex = seg.Index;
+                        continue;
+                    }
+                    if (seg.Index < lastIndex)
                     {
                         //in preparation for well-spaced indexes, this should be > last rather than ==last+1
-                        WL("Bad");
-                        var ae = 3;
+                        WL("Badb");
                     }
-                    last++;
+                    lastIndex = seg.Index;
 
                 }
 
@@ -53,8 +56,7 @@ namespace coil
                         if ((HDirs.Contains(lastSeg.Dir) && !VDirs.Contains(seg.Dir))
                             || (VDirs.Contains(lastSeg.Dir) && !HDirs.Contains(seg.Dir)))
                         {
-                            WL("Bad");
-                            var ae = 3;
+                            WL("Badc");
                         }
                     }
                     lastSeg = seg;
@@ -90,8 +92,7 @@ namespace coil
 
                     if (fakeRows[current] != null)
                     {
-                        WL("Bad");
-                        var ae = 32;
+                        WL("Badd");
                     }
 
                     //track hits.
@@ -107,23 +108,49 @@ namespace coil
 
                 //validate that every hit is in a null row!
                 //this is not currently true.
-                //foreach (var key in l.Hits.GetKeys())
-                //{
-                //    var realHits = l.Hits.Get(key);
-                //    if (realHits.Count > 0)
-                //    {
-                //        if (l.Rows[key] != null)
-                //        {
-                //            var ae = 44;
-                //        }
-                //    }
-                //}
+                foreach (var seg in l.Segs)
+                {
+                    var candidate = seg.Start;
+                    var ii = 1;
+                    //you don't own your last square (unless at end, not accounted for)
+                    while (ii < seg.Len)
+                    {
+                        candidate = Add(candidate, seg.Dir);
+                        var rv = l.GetRowValue(candidate);
+                        if (rv.Index == seg.Index)
+                        {
+                            ii++;
+                            continue;
+                        }
+                        Show(l);
+                        ShowSeg(l);
+                        SaveWithPath(l, "../../../abc.png");
+                        WL("Bad - mismapped square");
+                        
+                    }
+
+                    var segend = seg.GetHit();
+                    var hit = l.GetRowValue(segend);
+                    if (hit == null)
+                    {
+                        continue;
+                    }
+                    if (hit.Index < seg.Index)
+                    {
+                        continue;
+                    }
+                    WL("Bade");
+                    Show(l);
+                    ShowSeg(l);
+                    SaveWithPath(l, "../../../abc.png");
+                    WL(l.LevelConfiguration.GetStr());
+                }
 
                 //check both ways!
 
-                for (var xx = 0; xx <= l.Width; xx++)
+                for (var xx = 0; xx < l.Width; xx++)
                 {
-                    for (var yy = 0; yy <= l.Height; yy++)
+                    for (var yy = 0; yy < l.Height; yy++)
                     {
                         var key = (xx, yy);
 
@@ -137,8 +164,7 @@ namespace coil
                         //just check count for now.
                         if (realHitvalue.Count != fakeHitValue.Count)
                         {
-                            WL("Bad");
-                            var ae = 3;
+                            WL("Badf");
                         }
                     }
                 }
@@ -150,26 +176,27 @@ namespace coil
                     //just check count for now.
                     if (realHitvalue.Count != fakeHitValue.Count)
                     {
-                        WL("Bad");
+                        WL("Badg");
                         var ae = 3;
                     }
                 }
 
-                for (var yy = 0; yy <= l.Height;yy++)
+                for (var yy = 0; yy < l.Height;yy++)
                 {
-                    for (var xx = 0; xx < l.Width; yy++)
+                    for (var xx = 0; xx < l.Width; xx++)
                     {
                         var sq = (xx, yy);
                     
                         if (l.GetRowValue(sq)?.Index != fakeRows[sq]?.Index)
                         {
-                            WL("Bad");
-                            var ae = 3;
+                            WL("Badh");
+                            ShowSeg(l);
+                            Show(l);
+                            SaveWithPath(l, "../../../abc.png");
                         }
                         if (fakeRows[sq]?.Index != l.GetRowValue(sq)?.Index)
                         {
-                            WL("Bad");
-                            var ae = 3;
+                            WL("Badi");
                         }
                     }
                 }

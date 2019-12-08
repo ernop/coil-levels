@@ -28,7 +28,7 @@ namespace coil
         public Counter Counter { get; set; }
 
         //w/h are the "real" version
-        public Level(LevelConfiguration lc, Log log, int width, int height, Random rnd, bool validateBoard, int index, Counter c)
+        public Level(LevelConfiguration lc, Log log, int width, int height, Random rnd, int index, Counter c)
         {
             Counter = c;
             LevelConfiguration = lc;
@@ -38,8 +38,7 @@ namespace coil
             Width = width + 2;
             Height = height + 2;
             Segs = new LinkedList<Seg>();
-            DoBoardValidation = validateBoard;
-            Hits = new HitManager(Width, Height, DoBoardValidation, this);
+            Hits = new HitManager(Width, Height, false, this);
             InitBoard();
         }
 
@@ -49,7 +48,7 @@ namespace coil
             
             //initial setup.
             var current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
-            WL($"Initial seg: {current.Value}");
+            //WL($"Initial seg: {current.Value}");
             var tweakct = 0;
             var loopct = 0;
             var success = false;
@@ -58,7 +57,7 @@ namespace coil
 
             while (true)
             {
-                if (tweakct % 10000 == 0)
+                if (tweakct % 10000 == 0 && tweakct>0)
                 {
                     WL($"loop={loopct} successes={tweakct} notweakct={notweakct} failct={failct}");
                 }
@@ -88,6 +87,7 @@ namespace coil
                 var next = current.Next;
 
                 var tweaks = new List<Tweak>() {};
+  
                 tweaks.AddRange(GetTweaks(current, true));
                 tweaks.AddRange(GetTweaks(current, false));
                 if (!tweaks.Any())
@@ -98,6 +98,8 @@ namespace coil
                     continue;
                 }
 
+                //Show(this);
+                //ShowSeg(this);
                 var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
                 if (tweak == null)
                 {
@@ -108,7 +110,8 @@ namespace coil
                 }
 
                 var lastnewseg = ApplyTweak(tweak);
-                
+                //Show(this);
+                //ShowSeg(this);
                 PossiblySaveDuringTweak(saveState, tweakct, saveEvery, loopct, current.Value);
                 tweakct++;
                 if (tweakct % 10000 == 0)
@@ -126,7 +129,7 @@ namespace coil
             if (saveState && tweakct % saveEvery == 0)
             {
                 var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-lc{LevelConfiguration.GetStr()}-i{Index}-l{loopct}-tw{tweakct}-{seg.Index}-{seg.Len}-p.png";
-                SaveWithPath(this, pathfn);
+                SaveWithPath(this, pathfn, subtitle:$"TweakCt:{tweakct}");
 
                 //var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
                 //SaveEmpty(this, fn);
@@ -243,12 +246,6 @@ namespace coil
             //=======>h
             //e   e  |
 
-            //maybe just find loops ignoring hits and check them later?
-            //Note: there is never a need to have len1>1.  Just repeatedly apply 1 and you'll get n
-            //check every square in every vertical for a possible len1 starting up
-
-            //at st and v, what is GetSafeLength in the dir?
-            //DoDebug(this, true);
             var STVCache = new Dictionary<(int, int), int>();
 
             var len1start = 0;
@@ -259,25 +256,7 @@ namespace coil
 
             //TODO it would be nice to start in the middle and break up segs from there.
             //or start at 1/3 and go forward so that stvcache still works...
-
-            //var storder = new List<int>();
-
-            //var len1limit =
-                //0,5 => [0,4]
-                //1,5 => [1,3]
-                //0,1 => [0]
-                //1,2 => []
-                //0,2 => [0]
-
-            //for (var len1 = len1start; len1 <= seg.Len - 2 || len1 == 0 && len1 <= seg.Len - 1; len1++)
-            //{
-            //    storder.Add(len1);
-            //}
-            //storder = storder.OrderBy(el => el > seg.Len / 3 ? el : el + seg.Len).ToList();
-
-            //foreach (var len1 in storder))
-            //TODO make sure this matches the previous system.
-
+            
             //RETURNABLE cache
             foreach (var len1 in Pivot(len1start, seg.Len-1))
             {
@@ -317,7 +296,7 @@ namespace coil
 
                     //we know ups and downs.
                     //for the current len1st, find the downs which are greater than the limitation away.
-                    var len3start = Add(len1end, len2dir, len2max);
+                    var len3start = Add(len1end, len2dir, len2);
 
                     //this is costly and is repeated calculation.
                     //we're at some st and some st, and looking right.
@@ -327,14 +306,14 @@ namespace coil
 
                     if (len1 > 0 && LevelConfiguration.OptimizationSetup.UseSTVCache)
                     {
-                        var previousStvCacheKey = (len1 - 1, len2max);
+                        var previousStvCacheKey = (len1 - 1, len2);
                         if (STVCache.ContainsKey(previousStvCacheKey))
                         {
                             var prevValue = STVCache[previousStvCacheKey];
                             if (prevValue > 0)
                             {
                                 len3available = prevValue - 1;
-                                STVCache[(len1, len2max)] = len3available;
+                                STVCache[(len1, len2)] = len3available;
                                 foundInCache = true;
                             }
                         }
@@ -345,7 +324,7 @@ namespace coil
                         len3available = GetSafeLength(segnode, len3start, len3dir, seg.Index, len3absolutemax);
                         //problem: this has information about seg maxlength in it
                         //but when we fall back to using the cache we can run over.
-                        STVCache[(len1, len2max)] = len3available;
+                        STVCache[(len1, len2)] = len3available;
                     }
                     //We have a candidate st with vertical>0
                     //we know how far over we can go.
@@ -360,9 +339,11 @@ namespace coil
                     }
                     len3choices = len3choices.OrderBy(el => el > len3available * 2 / 3 ? el : el + len3available).ToList();
 
+                    //var ba;
+
+                    //foreach (var len3 in Pivot(lengthMinimum, len3available))
                     foreach (var len3 in len3choices)
                     {
-
                         var len3endcandidate = len3 + len1;
 
                         var returnableDistance = GetReturnable(len3endcandidate, len2dir, knownLen2max, len4dir, segnode);
@@ -379,10 +360,17 @@ namespace coil
                         //that plus one for hittable
                         //down down from there is valid (can shortcircuit from verticals)
                         //once you get to the end of len2 you are good.
+
+                        //no longtweaks to the last tweak.
                         if (segnode.Next==null && len1 + len3 == seg.Len)
                         {
                             continue;
                         }
+                        if (segnode.Previous == null && len1 == 0)
+                        {
+                            continue;
+                        }
+
                         var tw = new Tweak(segnode, right, len1, len2, len3, len2dir);
                         res.Add(tw);
 

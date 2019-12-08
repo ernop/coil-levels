@@ -32,13 +32,20 @@ namespace coil
             //allows partial segments
             var imageHeight = level.Height * effectiveScale;
             var imageWidth = level.Width * effectiveScale;
+            
             var writeSubtitle = false;
             int? extra = null;
+            var subtitleLineCount = 1;
+            var subtitleLines = subtitle?.Split("\n");
+            var subtitleLineHeight = 0;
             if (!String.IsNullOrEmpty(subtitle))
             {
-                extra = Math.Max(effectiveScale, (int)(0.5*level.Height))+8;
+                subtitleLineCount = subtitleLines.Length;
+                
+                extra = Math.Max(effectiveScale, (int)(1.1* subtitleLineCount * level.Height))+8;
                 imageHeight += extra.Value;
                 writeSubtitle = true;
+                subtitleLineHeight = extra.Value / subtitleLineCount;
             }
             
             
@@ -63,16 +70,28 @@ namespace coil
                     //TODO make this bigger in proportion to the size of the image so it stays readable.
                     var location = new SixLabors.Primitives.PointF(0, 0);
                     var color = SixLabors.ImageSharp.Color.Black;
-                    var font = new Font(SystemFonts.Find("Comic Sans MS"), (int)(extra*0.7), FontStyle.Bold);
+                    var font = new Font(SystemFonts.Find("Comic Sans MS"), (int)(extra*0.9/subtitleLineCount), FontStyle.Bold);
                     //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
-                    var center = new Vector2(0, imageHeight-extra.Value);
-                    try
+
+                    var lines = subtitle.Split("\n");
+                    
+                    var currentLine = 0;
+                    foreach (var line in lines)
                     {
-                        result.Mutate(oo => oo.DrawText(subtitle, font, color, center));
-                    }catch (Exception ex)
-                    {
-                        //silly imagesharp, writing even when you claim you can't.
+                        var ul = new Vector2(0, imageHeight - extra.Value + currentLine * subtitleLineHeight);
+                        try
+                        {
+                            result.Mutate(oo => oo.DrawText(line, font, color, ul));
+                        }
+                        catch (Exception ex)
+                        {
+                            //imagesharp throws exceptions even when it writes.
+                            //but failures will break the next line writing.
+                        }
+                        currentLine++;
                     }
+
+                    
 
                 }
 

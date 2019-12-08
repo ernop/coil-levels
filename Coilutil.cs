@@ -115,7 +115,7 @@ namespace coil
             while (step > 50)
             {
                 ct++;
-                if (ct > 10)
+                if (ct > 9)
                 {
                     break;
                 }
@@ -386,9 +386,19 @@ namespace coil
             }
         }
 
+        //TODO this needs fixing to show the actual index not the space-filling index.
         public static void ShowSeg(Level l)
         {
             WL("SEG");
+            var segindex = 1;
+            var indexes = new Dictionary<uint, int>();
+            foreach (var seg in l.Segs)
+            {
+                indexes[seg.Index] = segindex;
+                segindex++;
+            }
+
+
             for (var yy = 0; yy < l.Height; yy++)
             {
                 for (var xx = 0; xx < l.Width; xx++)
@@ -396,12 +406,13 @@ namespace coil
                     var rv = l.GetRowValue((xx, yy));
                     if (rv != null)
                     {
-                        Console.Write(rv.Index % 10);
+                        Console.Write(indexes[rv.Index] % 10);
                     }
                     else
                     {
                         Console.Write(".");
                     }
+                    segindex++;
                 }
 
                 Console.Write("\n");
@@ -500,7 +511,7 @@ namespace coil
             return (new HashSet<(int, int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
         }
 
-        public static string Report(Level level, TimeSpan ts)
+        public static string Report(Level level, TimeSpan ts, bool multiLine=false)
         {
             var sqs = (level.Height - 2) * (level.Width - 2);
             var sum = 1;
@@ -516,9 +527,23 @@ namespace coil
             var decisionPercent = 100.0 * decisionCount / level.Segs.Count;
             //TODO determine how many "decisions" have to be made. More decisions == better!
 
-            return $"{level.Width}x{level.Height} {level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s " +
+            var linebreak = multiLine ? "\n" : "";
+
+            //Divergence = per seg, how distant other segs does it see?
+            //problem - this prioritizes long paths.
+            var divergence = GetDivergence(level);
+
+            return $"{level.Width-2}x{level.Height-2} {level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s {linebreak}" +
                 $"segs={level.Segs.Count} cov={perc.ToString("##0.0")}% " +
-                $"dec={decisionPercent.ToString("0.0")}% ({decisionCount})";
+                $"dec={decisionPercent.ToString("0.0")}% ct={decisionCount}{linebreak}"+
+                $"div={divergence}";
+        }
+
+        //TODO it would be nice to have a sparkline of block size/pathsize/neighbor size
+
+        public static float GetDivergence(Level level)
+        {
+            return 0;
         }
     }
 }

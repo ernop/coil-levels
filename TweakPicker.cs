@@ -27,6 +27,11 @@ namespace coil
             TweakLim = tweaklim;
         }
 
+        public override string ToString()
+        {
+            return $"TweakPicker:{Name} {MaxLen1},{MaxLen2},{MaxLen3},{TweakLim}";
+        }
+
         public Func<List<Tweak>, Tweak> Picker;
 
         public string Name;

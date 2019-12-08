@@ -12,15 +12,18 @@ namespace coil
     {
         static void Main(string[] args)
         {
-            var seed = 22;
-            var x = 1500;
-            var y = 1500;
+            var seed = 0;
+            var x = 80;
+            var y = 80;
             var count = 1;
             
             var segPickerName = "NextR";
-            segPickerName = "Previous";
-            CreateLevel(seed, x, y, true, segPickerName);
-            //CreateMultiple(seed, count, x, y, true, segPickerName);
+            segPickerName = "Next";
+            segPickerName = "";
+            var tweakPickerName = "equal23";
+            tweakPickerName = "";
+            //CreateLevel(seed, x, y, false, segPickerName, tweakPickerName);
+            CreateMultiple(seed, count, x, y, true, segPickerName, tweakPickerName);
 
             var minx = 3;
             var miny = 2;
@@ -46,17 +49,16 @@ namespace coil
             }
         }
 
-        static void CreateMultiple(int seed, int count, int x, int y, bool mass, string segPickerName = null) {
+        static void CreateMultiple(int seed, int count, int x, int y, bool mass, string segPickerName = null, string tweakPickerName=null) {
             var max = seed + count;
             while (seed < max)
             {
-                CreateLevel(seed, x, y, mass, segPickerName: segPickerName);
+                CreateLevel(seed, x, y, mass, segPickerName: segPickerName, tweakPickerName:tweakPickerName);
                 seed++;
             }
         }
 
-
-        static void CreateLevel(int seed, int x, int y, bool mass = false, string segPickerName = null)
+        static void CreateLevel(int seed, int x, int y, bool mass = false, string segPickerName = null, string tweakPickerName = null)
         {
             
             //target = "rand99";
@@ -81,14 +83,15 @@ namespace coil
             //hmm, there should be no randomness in tweak generation.
 
             //segpickers unused
-            foreach (var tweakPicker in TweakPickers.GetPickers())
+            var pickers = TweakPickers.GetPickers();
+            foreach (var tweakPicker in pickers)
             {
-                if (tweakPicker.Name != "rand5")
+                if (!String.IsNullOrEmpty(tweakPickerName) && tweakPicker.Name!= tweakPickerName)
                 {
                     continue;
                 }
 
-                foreach (var el in new List<int?>() { 3 }) // null, 1, 100, 10000
+                foreach (var el in new List<int?>() {3}) // null, 1, 100, 10000
                 {
                     var cs = new OptimizationSetup();
                     cs.GlobalTweakLim = el;
@@ -104,7 +107,7 @@ namespace coil
                         runCount++;
                         var log = new Log(lc);
                         var counter = new Counter(lc);
-                        var level = new Level(lc, log, x, y, rnd, debug, seed, counter);
+                        var level = new Level(lc, log, x, y, rnd, seed, counter);
 
                         level.InitialWander();
                         //Show(level);
@@ -114,9 +117,9 @@ namespace coil
                         }
 
                         var st = Stopwatch.StartNew();
-                        level.RepeatedlyTweak(false, 100, st);
+                        level.RepeatedlyTweak(false, 1, st);
                         //counter.Show();
-                        var rep = Report(level, st.Elapsed);
+                        var rep = Report(level, st.Elapsed, true);
 
                         if (runCount == 1 && !mass)
                         {
@@ -125,23 +128,25 @@ namespace coil
                         }
                         //leave this in for one final sense check.
                         var dst = Stopwatch.StartNew();
-                        log.Info(rep);
+                        log.Info(rep.Replace("\n", ""));
 
-                        DoDebug(level, false);
-                        WL($"Dodebug done: {dst.Elapsed}");
+                        
+                        //WL($"Dodebug done: {dst.Elapsed}");
                         
                         var ist = Stopwatch.StartNew();
+                        //it would be nice to take two lines.
                         SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
-                        WL($"Saving image. {ist.Elapsed}");
-                        SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
-                        WL($"Saving pathimage. {ist.Elapsed}");
+                        //WL($"Saving image. {ist.Elapsed}");
+                        //SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        //WL($"Saving pathimage. {ist.Elapsed}");
                         //Show(level);
 
                         //lc2hash[lc] = l.GetHash();
 
+                        DoDebug(level, false, true);
                         SaveLevelAsText(level, seed);
 
-                        if (true)
+                        if (false)
                         {
                             SaveArrowVersions(level, seed, levelstem);
                         }

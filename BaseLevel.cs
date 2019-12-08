@@ -11,7 +11,6 @@ namespace coil
 {
     public class BaseLevel
     {
-        public bool DoBoardValidation { get; set; }
         public LevelConfiguration LevelConfiguration { get; set; }
         public int Width { get; protected set; }
 
