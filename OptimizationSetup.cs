@@ -9,7 +9,7 @@
         //rather than increment indexes in order, go from 0..uint.max and fill the space between them.
         //this works but the speed improvement is unclear
         //seems clear that this is proven to work...
-        public bool UseSpaceFillingIndexes { get; set; } = true;
+        public bool UseSpaceFillingIndexes { get; set; } = false;
 
         /// <summary>
         /// Validate these with a tweakpicker which uses them!

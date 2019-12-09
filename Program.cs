@@ -12,16 +12,16 @@ namespace coil
     {
         static void Main(string[] args)
         {
-            var seed = 0;
-            var x = 80;
-            var y = 80;
+            var seed = 154;
+            var x = 50;
+            var y = 40;
             var count = 1;
             
-            var segPickerName = "NextR";
-            segPickerName = "Next";
-            segPickerName = "";
-            var tweakPickerName = "equal23";
-            tweakPickerName = "";
+            var segPickerName = "Longest";
+            //segPickerName = "Next";
+            //segPickerName = "BRand";
+            var tweakPickerName = "shortrnd";
+            //tweakPickerName = "";
             //CreateLevel(seed, x, y, false, segPickerName, tweakPickerName);
             CreateMultiple(seed, count, x, y, true, segPickerName, tweakPickerName);
 
@@ -75,7 +75,7 @@ namespace coil
 
             var runCount = 0;
             //var lc2hash = new Dictionary<LevelConfiguration, string>();
-            //var ws = new InitialWanderSetup(steplimit:1, startPoint:(1,1), gomax:true);
+            //var ws = new InitialWanderSetup(steplimit:20, startPoint:(1,1), gomax:true);
             var ws = new InitialWanderSetup();
             //not used
 
@@ -91,13 +91,14 @@ namespace coil
                     continue;
                 }
 
-                foreach (var el in new List<int?>() {3}) // null, 1, 100, 10000
+                foreach (var el in new List<int?>() {3, }) // null, 1, 100, 10000
                 {
                     var cs = new OptimizationSetup();
                     cs.GlobalTweakLim = el;
 
-                    foreach (var segPicker in SegPickers.GetSegPickers(seed))
+                    foreach (var segPicker in SegPickers.GetSegPickers())
                     {
+                        
                         if (!string.IsNullOrEmpty(segPickerName) && segPicker.Name != segPickerName) 
                         { 
                             continue;
@@ -116,8 +117,10 @@ namespace coil
                             level.RedoAllIndexesSpaceFillndexes();
                         }
 
+                        //bit awkward to do it here - it needs a better guarantee of finding the best seg.
+                        segPicker.Init(seed, level);
                         var st = Stopwatch.StartNew();
-                        level.RepeatedlyTweak(false, 1, st);
+                        level.RepeatedlyTweak(true, 1, st);
                         //counter.Show();
                         var rep = Report(level, st.Elapsed, true);
 
@@ -135,9 +138,14 @@ namespace coil
                         
                         var ist = Stopwatch.StartNew();
                         //it would be nice to take two lines.
+                        if (true)
+                        {
+                            var pointTexts = GetAveragePoints(level, 3000);
+                            SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}-arrows.png", subtitle: rep, quiet: true, pointTexts: pointTexts, arrows: true);
+                        }
                         SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
                         //WL($"Saving image. {ist.Elapsed}");
-                        //SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
                         //WL($"Saving pathimage. {ist.Elapsed}");
                         //Show(level);
 

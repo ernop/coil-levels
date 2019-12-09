@@ -20,7 +20,7 @@ namespace coil
 
         public string GetStr()
         {
-            return $"tw={TweakPicker.GetStr()} seg={SegPicker.GetName()} opt={OptimizationSetup.GetStr()}";
+            return $"{TweakPicker.GetStr()} s-{SegPicker.GetName()} o-{OptimizationSetup.GetStr()}";
         }
     }
 }

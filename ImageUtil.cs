@@ -101,7 +101,7 @@ namespace coil
                     if (arrows)
                     {
                         //arrow width scales with board height+width.
-                        int arrowWidth = (int)((level.Width + level.Height) * 0.005)+1;
+                        int arrowWidth = (int)((level.Width + level.Height) * 0.07)+1;
                         PointText? lastPoint = null;
                         foreach (var pt in pointTexts)
                         {
@@ -140,7 +140,6 @@ namespace coil
 
             image.Mutate(oo => oo.DrawLines(SixLabors.ImageSharp.Color.White, arrowWidth+3, s, e));
             image.Mutate(oo => oo.DrawLines(SixLabors.ImageSharp.Color.Violet, arrowWidth, s, e));
-            image.Save("abc.png");
         }
 
         public static void DrawTextAtPoint(Image<Rgba32> image, (int, int) point, string text, int effectiveScale) {

@@ -35,7 +35,7 @@ namespace coil
                 //    {
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.SegNode.Value.Dir==Dir.Right ? -1*tw.Len2 : tw.Len2+tw.Len3);
                 //        return ordered.First();
-                //    } , "dir-right-size"),
+                //    } , "dir-right-sz"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2<11 ? 100+tw.Len2+tw.Len3 : tw.Len2+tw.Len3);
@@ -97,13 +97,13 @@ namespace coil
                     } , "23lim30"),
                    new TweakPicker((List<Tweak> tweaks) =>
                     {
-                        return tweaks.Where(tw=>tw.Len2<=5 && tw.Len3 <=5)
+                        return tweaks
                             .OrderByDescending(tw=>tw.Len2+tw.Len3+globalRand.Next(5)).FirstOrDefault();
                     } , "shortrnd", null, 5, 5),
                    new TweakPicker((List<Tweak> tweaks) =>
                     {
 
-                        var subtweaks = tweaks.Where(tw=>tw.Len1<=5 && tw.Len2<=5 && tw.Len3 <=5);
+                        var subtweaks = tweaks.Where(tw=>tw.Len2<=5 && tw.Len3 <=5);
                         if (!subtweaks.Any())
                         {
                             return null;
@@ -120,7 +120,7 @@ namespace coil
                             }
                         }
                         return best;
-                    } , "shortrnd-opt", 5, 5, 5),
+                    } , "sz23-opt", 5, 5, 5),
 
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
@@ -163,38 +163,38 @@ namespace coil
                 //new TweakPicker((Tweak tw) => tw.Len1 + tw.Len3, "len13"),
                 //new TweakPicker((Tweak tw) => tw.Len1 + tw.Len2, name:"len12"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3, "len23"),
-                new TweakPicker((Tweak tw) => tw.Len2-tw.Len1, "size2-1"),
-                new TweakPicker((Tweak tw) => tw.Len2-tw.Len3, "size2-3"),
-                new TweakPicker((Tweak tw) => tw.Len3-tw.Len1, "size3-1"),
-                new TweakPicker((Tweak tw) => tw.Len3-tw.Len2, "size3-2"),
-                //new TweakPicker((Tweak tw) => tw.Len1-tw.Len2, "size1-2"),
-                new TweakPicker((Tweak tw) => tw.Len1-tw.Len2-tw.Len3, "size1-23"),
-                new TweakPicker((Tweak tw) => tw.Len2-tw.Len1-tw.Len3, "size2-13"),
+                new TweakPicker((Tweak tw) => tw.Len2-tw.Len1, "sz2-1"),
+                new TweakPicker((Tweak tw) => tw.Len2-tw.Len3, "sz2-3"),
+                new TweakPicker((Tweak tw) => tw.Len3-tw.Len1, "sz3-1"),
+                new TweakPicker((Tweak tw) => tw.Len3-tw.Len2, "sz3-2"),
+                //new TweakPicker((Tweak tw) => tw.Len1-tw.Len2, "sz1-2"),
+                new TweakPicker((Tweak tw) => tw.Len1-tw.Len2-tw.Len3, "sz1-23"),
+                new TweakPicker((Tweak tw) => tw.Len2-tw.Len1-tw.Len3, "sz2-13"),
 
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 - tw.Len1, "size23-1"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(2), "sizerand2"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(3), "sizerand3"),
+                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 - tw.Len1, "sz23-1"),
+                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(2), "sz23rnd2"),
+                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(3), "sz23rnd3"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(2, globalRand), "len23-half"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(3, globalRand), "len23-third"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(5, globalRand), "len23-10th"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(10, globalRand), "len23-10th"),
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(20, globalRand), "len23-20th"),
-                //new TweakPicker((Tweak tw) => tw.Right ? 1000+tw.Len2 + tw.Len3 : -1*(1000+tw.Len2 + tw.Len3), "turndir-right-size"),
-                //new TweakPicker((Tweak tw) => tw.Right ? -1*(1000 + tw.Len2 + tw.Len3) : 1000 + tw.Len2 + tw.Len3, "turndir-left-size"),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rand100lim5", null, 5, 5),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rand100lim20", null, 20, 20),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rand100"),
-                new TweakPicker((Tweak tw) => tw.Len2+tw.Len3+globalRand.Next(100), "len23rand100"),
-                new TweakPicker((Tweak tw) => globalRand.Next(99), "rand99"),
-                new TweakPicker((Tweak tw) => globalRand.Next(3), "rand3"),
+                //new TweakPicker((Tweak tw) => tw.Right ? 1000+tw.Len2 + tw.Len3 : -1*(1000+tw.Len2 + tw.Len3), "turndir-right-sz"),
+                //new TweakPicker((Tweak tw) => tw.Right ? -1*(1000 + tw.Len2 + tw.Len3) : 1000 + tw.Len2 + tw.Len3, "turndir-left-sz"),
+                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100lim5", null, 5, 5),
+                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100lim20", null, 20, 20),
+                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100"),
+                new TweakPicker((Tweak tw) => tw.Len2+tw.Len3+globalRand.Next(100), "len23rnd100"),
+                new TweakPicker((Tweak tw) => globalRand.Next(99), "rnd99"),
+                new TweakPicker((Tweak tw) => globalRand.Next(3), "rnd3"),
                 new TweakPicker((Tweak tw) => tw.Len1 + globalRand.Next(3), "len1rnd3"),
                 new TweakPicker((Tweak tw) => tw.Len1 +tw.Len2 + globalRand.Next(3), "len12rnd3"),
                 new TweakPicker((Tweak tw) => tw.Len2+ tw.Len3 + globalRand.Next(3), "len23rnd3"),
                 //new TweakPicker((Tweak tw) => (tw.SegNode.Value.Start.Item1 % 50<25 ? 10 : 0) + globalRand.Next(3), "partition-rand3"),
                 new TweakPicker((Tweak tw) => globalRand.Next(5), "rnd5"),
                 new TweakPicker((Tweak tw) => globalRand.Next(2), "rnd2"),
-                new TweakPicker((Tweak tw) => tw.Len2%2==0?tw.Len2+tw.Len3 : -1*(tw.Len2+tw.Len3), "even-size"),
-                new TweakPicker((Tweak tw) => tw.Len2%2==1?tw.Len2+tw.Len3 : -1 * (tw.Len2 + tw.Len3), "odd-size"),
+                new TweakPicker((Tweak tw) => tw.Len2%2==0?tw.Len2+tw.Len3 : -1*(tw.Len2+tw.Len3), "even"),
+                new TweakPicker((Tweak tw) => tw.Len2%2==1?tw.Len2+tw.Len3 : -1 * (tw.Len2 + tw.Len3), "odd"),
 
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
@@ -204,7 +204,7 @@ namespace coil
                             return ordered.Last();
                         }
                         return ordered.First();
-                    } , "firstorlast"),
+                    } , "1st-last"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
@@ -213,13 +213,13 @@ namespace coil
                             return ordered.Last();
                         }
                         return ordered.First();
-                    } , "firstlast"),
+                    } , "1stlast"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
                         var index = Math.Min(tweaks.Count-1, globalRand.Next(4));
                         return ordered.Skip(index).First();
-                    } , "len23firstfour-size"),
+                    } , "len23-1stfour-sz"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
@@ -231,7 +231,7 @@ namespace coil
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
                         var mid = ordered.Count()/3;
                         return ordered.Skip(mid).First();
-                    } , "len23third"),
+                    } , "len23-3rd"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
@@ -243,13 +243,13 @@ namespace coil
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
                 //        var mid = ordered.Count()/6;
                 //        return ordered.Skip(mid).First();
-                //    } , "order-sixth-size"),
+                //    } , "order-sixth-sz"),
                 //new TweakPicker((List<Tweak> tweaks) =>
                 //    {
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3+OneFraction(10, globalRand));
                 //        var mid = ordered.Count()/6;
                 //        return ordered.Skip(mid).First();
-                //    } , "order-sixth-rndtenth-size"),
+                //    } , "order-sixth-rndtenth-sz"),
                 //new TweakPicker((List<Tweak> tweaks) =>
                 //    {
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2-tw.Len1);
@@ -261,7 +261,7 @@ namespace coil
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
                 //        var mid = ordered.Count()/2;
                 //        return ordered.Skip(mid).First();
-                //    } , "order-quarter-size"),
+                //    } , "order-quarter-sz"),
             };
 
             return pickers.OrderBy(p => p.Name).ToList();

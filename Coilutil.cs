@@ -61,7 +61,7 @@ namespace coil
             return baseMap;
         }
 
-        public static void SaveEmpty(Level level, string fn, string subtitle = "", bool quiet = false)
+        public static void SaveEmpty(Level level, string fn, string subtitle = "", bool quiet = false, List<PointText> pointTexts = null, bool arrows = false)
         {
             if (fn.Contains(":"))
             {
@@ -69,6 +69,12 @@ namespace coil
             }
             var baseMap = GetBaseMapForEmpty(level);
 
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows:arrows);
+        }
+
+        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
+        {
+            var baseMap = GetBaseMapForPath(level);
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
         }
 
@@ -126,7 +132,7 @@ namespace coil
 
                 var pointTexts = GetAveragePoints(l, step);
 
-                SaveAverageOnPathWithArrows(l, arrowfn, null, pointTexts, quiet: false);
+                SaveAverageOnPathWithArrows(level: l, fn: arrowfn, baseMap: null, pointTexts: pointTexts, quiet: false);
                 //var tefn = $"{stem}/ae-{ii}-{step}-{lc.GetStr()}.png";
                 //SaveAverageOnEmpty(l, step, tefn, quiet: false);
                 //var arrowefn = $"{stem}/{lc.GetStr()}-arrow-empty-{ii}-{step}.png";
@@ -163,7 +169,6 @@ namespace coil
                 }
             }
         }
-
 
         public static void SaveAverageOnEmpty(BaseLevel level, int step, string fn,
             List<List<string>> baseMap, List<PointText> pointTexts,
@@ -259,11 +264,7 @@ namespace coil
             return baseMap;
         }
 
-        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
-        {
-            var baseMap = GetBaseMapForPath(level);
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
-        }
+        
 
 
         private static string GetDString(Dir dir)
@@ -533,10 +534,10 @@ namespace coil
             //problem - this prioritizes long paths.
             var divergence = GetDivergence(level);
 
-            return $"{level.Width-2}x{level.Height-2} {level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s {linebreak}" +
-                $"segs={level.Segs.Count} cov={perc.ToString("##0.0")}% " +
-                $"dec={decisionPercent.ToString("0.0")}% ct={decisionCount}{linebreak}"+
-                $"div={divergence}";
+            return $"{level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s {linebreak}" +
+                $"segs{level.Segs.Count} cov{perc.ToString("##0.0")}% " +
+                $"dec{decisionPercent.ToString("0.0")}% dct{decisionCount}{linebreak}"+
+                $"{level.Width - 2}x{level.Height - 2} div={divergence}";
         }
 
         //TODO it would be nice to have a sparkline of block size/pathsize/neighbor size

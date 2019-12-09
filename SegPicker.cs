@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
+using C5;
 using static coil.Util;
 
 namespace coil
@@ -20,142 +23,319 @@ namespace coil
     ///   at b a is previous, c is next. This is conceptually opposite for the normal rule of "back to front"
     /// </summary>
 
-    public class SegPicker
+    public abstract class SegPicker
     {
-        public string Name { get; }
-        public LinkedListNode<Seg> PreviousSeg { get; set; }
-        public LinkedListNode<Seg> NextSeg { get; set; }
-        public LinkedList<Seg> Segs { get; set; }
+        public string Name { get; set; }
         public System.Random Random { get; set; }
+        public Level Level { get; set; }
 
         public string GetName() { return Name; }
 
-        public Func<LinkedList<Seg>, LinkedListNode<Seg>> InitialPick;
-        private Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, bool, LinkedListNode<Seg>> InnerPicker;
-
-        public SegPicker(int seed,
-            string name,
-            
-            Func<LinkedList<Seg>, LinkedListNode<Seg>> initialPicker,
-            Func<Random, LinkedList<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, LinkedListNode<Seg>, bool, LinkedListNode<Seg>> picker) //the context for the pick
+        public SegPicker()
         {
-            Random = new System.Random(seed);
-            Name = name;
-            InitialPick = initialPicker;
-            InnerPicker = picker;
         }
 
-        public LinkedListNode<Seg> Pick(LinkedList<Seg> segs, LinkedListNode<Seg> prev, LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool justCreated)
+        public abstract void Init(int seed, Level level);
+
+        public void BaseInit(int seed, Level level)
         {
-            return InnerPicker.Invoke(Random, segs, prev, next, newseg, justCreated);
+            Random = new System.Random(seed);
+            Level = level;
+        }
+
+        public override string ToString()
+        {
+            return $"SegPicker:{Name}";
+        }
+
+        public abstract LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success);
+    }
+
+    public class NewSegPicker : SegPicker
+    {
+        public NewSegPicker() : base() {
+            Name = "New";
+        }
+
+        private bool Success = false;
+
+        public override void Init(int seed, Level level)
+        {
+            BaseInit(seed, level);
+        }
+
+        LinkedListNode<Seg> LastReturnedSeg { get; set; }
+
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success)
+        {
+            if (LastReturnedSeg == null)
+            {
+                LastReturnedSeg = Level.Segs.Last;
+                return Level.Segs.Last;
+            }
+            if (newSegs!=null)
+            {
+                Success = true;
+                var last = newSegs.Last();
+                LastReturnedSeg = last;
+                return last;
+            }
+
+            var val = LastReturnedSeg.Previous;
+            if (val == null)
+            {
+                //we got all the way back to the start.
+                if (Success)
+                {
+                    val = Level.Segs.Last;
+                    LastReturnedSeg = val;
+                    Success = false;
+                    return val;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            val = LastReturnedSeg.Previous;
+            LastReturnedSeg = val;
+            return val;
+        }
+    }
+
+    public class LongestSegPicker : SegPicker
+    {
+        public LongestSegPicker() {
+            Name = "Longest";
+        }
+
+        public override void Init(int seed, Level level)
+        {
+            BaseInit(seed, level);
+            RedoHeap();
+        }
+
+        public bool Success = false;
+
+        public C5.IntervalHeap<LinkedListNode<Seg>> Heap { get; set; }
+
+        LinkedListNode<Seg> LastReturnedSeg { get; set; }
+
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success)
+        {
+            //put in the new segs.
+            if (newSegs != null)
+            {
+                foreach (var newseg in newSegs)
+                {
+                    Heap.Add(newseg);
+                }
+            }
+            if (success)
+            {
+                Success = true;
+            }
+
+            if (Heap.Count == 0)
+            {
+                if (success)
+                {
+                    RedoHeap();
+                    Success = false;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            WL(Heap.AllowsDuplicates);
+            var el = Heap.DeleteMax();
+            WL($"Returning seg {el.Value.Index} of len {el.Value.Len}");
+            return el;
+        }
+
+        private void RedoHeap()
+        {
+            WL("Redoing heap.");
+            Heap = new IntervalHeap<LinkedListNode<Seg>>(new Comparer());
+            var el = Level.Segs.First;
+            while (el != null)
+            {
+                Heap.Add(el);
+                el = el.Next;
+            }
+
+            var m = Heap.FindMax();
+            var mm = Heap.FindMin();
+        }
+    }
+
+    public class Comparer : IComparer<LinkedListNode<Seg>>
+    {
+        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
+        {
+            return x.Value.Len.CompareTo(y.Value.Len);
         }
     }
 
     public static class SegPickers
     {
-        public static List<SegPicker> GetSegPickers(int seed)
+        public static List<SegPicker> GetSegPickers()
         {
-            var pickers = new List<SegPicker>()
-            {
-                new SegPicker(seed: seed,
-                    name:"Previous",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created)=>previous
-                ),
-                new SegPicker(seed: seed,
-                    name:"New",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    {
-                        if (created)
-                        {
-                            return newseg;
-                        }
-                        return previous;
-                    }
-                ),
-                new SegPicker(seed: seed,
-                    name:"Next",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    {
-                        //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
-                        //you'll naturally fall through to the next.
-                        if (created)
-                        {
-                            return next;
-                        }
-                        return previous;
-                    }
-                ),
-                 new SegPicker(seed: seed,
-                    name:"NextR",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    {
-                        //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
-                        //you'll naturally fall through to the next.
-                        if (created){
-                            if (rnd.Next(5) == 0)
-                            {
-                                return newseg;
-                            }
-                            else
-                            {
-                                return next;
-                            }
-                        }
-                        
-                        return previous;
-                    }
-                ),
-
-            new SegPicker(seed: seed,
-                    name:"NewR",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    { 
-                        if (newseg != null && rnd.Next(2)==0)
-                        {
-                            return newseg;
-                        }
-                        
-                        //theory: this is doing a bunch of useless work.
-                        return previous;
-                    }
-                ),
-                new SegPicker(seed: seed,
-                    name:"Bigger",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    {
-                        var ii = 0;
-                        var choices = new List<LinkedListNode<Seg>>();
-                        while (ii < 10 && previous != null)
-                        {
-                            choices.Add(previous);
-                            ii++;
-                        }
-                        if (!choices.Any())
-                        {
-                            return null;
-                        }
-                        return choices.OrderByDescending(el=>el.Value.Len).First();
-                    }
-                ),
-                new SegPicker(seed: seed,
-                    name:"PreviousR",
-                    initialPicker: (LinkedList<Seg> segs)=>segs.Last,
-                    picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
-                    {
-                        if (rnd.Next(3)==0){
-                            return previous;
-                        }
-                        return previous?.Previous;
-                    }
-                ),
-            };
-            return pickers.OrderBy(el => el.Name).ToList();
+            return new List<SegPicker>() { new LongestSegPicker(), new NewSegPicker() };
         }
     }
+
+    //public static class SegPickers
+    //{
+    //    public static List<SegPicker> GetSegPickers(int seed)
+    //    {
+    //        var pickers = new List<SegPicker>()
+    //        {
+    //            //randomly walk around the active area, generally moving forward.
+    //            //this is messed up somehow.
+    //            new SegPicker(seed: seed,
+    //                name:"BRand",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    if (newseg!=null)
+    //                    {
+    //                        return newseg;
+    //                    }
+    //                    if (previous == null)
+    //                    {
+    //                        return next;
+    //                    }
+
+    //                    var candidate=previous;
+    //                    if (rnd.Next(3) > 0) //going forward
+    //                    {
+    //                        var ct = rnd.Next(5);
+    //                        for (var ii = 0;ii<ct;ii++)
+    //                        {
+    //                            if (candidate.Next == null)
+    //                            {
+    //                                return null;
+    //                            }
+    //                            candidate=candidate.Next;
+    //                        }
+    //                        return candidate;
+    //                    }
+    //                    else{
+    //                        var ct = rnd.Next(2);
+    //                        for (var ii = 0; ii < ct; ii++)
+    //                        {
+    //                            if (candidate.Previous == null)
+    //                            {
+    //                                return candidate;
+    //                            }
+    //                            candidate=candidate.Previous;
+    //                        }
+    //                        return candidate;
+    //                    }
+    //                }
+    //            ),
+    //            new SegPicker(seed: seed,
+    //                name:"Prev",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created)=>previous
+    //            ),
+    //            new SegPicker(seed: seed,
+    //                name:"New",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    if (created)
+    //                    {
+    //                        return newseg;
+    //                    }
+    //                    return previous;
+    //                }
+    //            ),
+    //            new SegPicker(seed: seed,
+    //                name:"Next",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
+    //                    //you'll naturally fall through to the next.
+    //                    if (created)
+    //                    {
+    //                        return next;
+    //                    }
+    //                    return previous;
+    //                }
+    //            ),
+    //             new SegPicker(seed: seed,
+    //                name:"NextR",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    //if we modified a seg, do the next seg cause room might have opened up. This is aiming to get a more complete pass the first time.
+    //                    //you'll naturally fall through to the next.
+    //                    if (created){
+    //                        if (rnd.Next(5) == 0)
+    //                        {
+    //                            return newseg;
+    //                        }
+    //                        else
+    //                        {
+    //                            return next;
+    //                        }
+    //                    }
+
+    //                    return previous;
+    //                }
+    //            ),
+
+    //        new SegPicker(seed: seed,
+    //                name:"NewR",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                { 
+    //                    if (newseg != null && rnd.Next(2)==0)
+    //                    {
+    //                        return newseg;
+    //                    }
+
+    //                    //theory: this is doing a bunch of useless work.
+    //                    return previous;
+    //                }
+    //            ),
+    //            new SegPicker(seed: seed,
+    //                name:"Big",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    var ii = 0;
+    //                    var choices = new List<LinkedListNode<Seg>>();
+    //                    while (ii < 10 && previous != null)
+    //                    {
+    //                        choices.Add(previous);
+    //                        ii++;
+    //                    }
+    //                    if (!choices.Any())
+    //                    {
+    //                        return null;
+    //                    }
+    //                    return choices.OrderByDescending(el=>el.Value.Len).First();
+    //                }
+    //            ),
+    //            new SegPicker(seed: seed,
+    //                name:"PrevR",
+    //                initialPicker: (LinkedList<Seg> segs)=>segs.Last,
+    //                picker: (Random rnd, LinkedList<Seg> segs,  LinkedListNode<Seg> previous,  LinkedListNode<Seg> next, LinkedListNode<Seg> newseg, bool created) =>
+    //                {
+    //                    if (rnd.Next(3)==0){
+    //                        return previous;
+    //                    }
+    //                    return previous?.Previous;
+    //                }
+    //            ),
+    //        };
+    //        return pickers.OrderBy(el => el.Name).ToList();
+    //    }
 }
+

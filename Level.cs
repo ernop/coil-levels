@@ -45,82 +45,40 @@ namespace coil
         public void RepeatedlyTweak(bool saveState, int saveEvery, Stopwatch st)
         {
             //after doing the tweak we will call the segpicker with previous, new segs, next seg, success
-            
+
             //initial setup.
-            var current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
-            //WL($"Initial seg: {current.Value}");
+
+            //change to do this all in the picker itself - it should keep state
+            var current = LevelConfiguration.SegPicker.PickSeg(null, false);
             var tweakct = 0;
-            var loopct = 0;
-            var success = false;
-            var failct = 0;
-            var notweakct = 0;
-
-            while (true)
+            while (current != null)
             {
-                if (tweakct % 10000 == 0 && tweakct>0)
-                {
-                    WL($"loop={loopct} successes={tweakct} notweakct={notweakct} failct={failct}");
-                }
-                if (current == null)
-                {
-                    if (success)
-                    {
-                        current = LevelConfiguration.SegPicker.InitialPick.Invoke(Segs);
-                        //WL($"Reset to pick: {current?.Value}");
-                        if (current == null)
-                        {
-                            WL("XX");
-                        }
-                        loopct++;
-                        success = false;
-                    }
-                    else
-                    {
-                        //done. if the picker returns null without a success, end it.
-                        break;
-                    }
-                }
-                //WL($"Handling tweak with: {LevelConfiguration.SegPicker.GetName()} => {current?.Value}");
-                //setup, storing info to call next seg.
-                var previous = current.Previous;
-                
-                var next = current.Next;
+                var tweaks = new List<Tweak>() { };
 
-                var tweaks = new List<Tweak>() {};
-  
                 tweaks.AddRange(GetTweaks(current, true));
                 tweaks.AddRange(GetTweaks(current, false));
                 if (!tweaks.Any())
                 {
-                    current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
-                    //WL($"failed, advanced to: {current?.Value}");
-                    failct++;
+                    //Show(this);
+                    current = LevelConfiguration.SegPicker.PickSeg(null, false);
                     continue;
                 }
 
-                //Show(this);
-                //ShowSeg(this);
                 var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
                 if (tweak == null)
                 {
-                    current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, null, false);
-                    //WL($"failed, advanced to: {current?.Value}");
-                    notweakct++;
+                    current = LevelConfiguration.SegPicker.PickSeg(null, false);
                     continue;
                 }
 
-                var lastnewseg = ApplyTweak(tweak);
-                //Show(this);
-                //ShowSeg(this);
-                PossiblySaveDuringTweak(saveState, tweakct, saveEvery, loopct, current.Value);
+                var newSegs = ApplyTweak(tweak);
+                
+                PossiblySaveDuringTweak(saveState, tweakct, saveEvery, 0, current.Value);
                 tweakct++;
-                if (tweakct % 10000 == 0)
-                {
-                    WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{tweakct*1.0/failct*100.0}%");
-                }
-                success = true;
-                current = LevelConfiguration.SegPicker.Pick(Segs, previous, next, lastnewseg, true);
-                //WL($"success, advanced to: {current?.Value}");
+
+                //WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{(tweakct * 1.0 / failct * 100.0).ToString("##0.0")}%");
+                current = LevelConfiguration.SegPicker.PickSeg(newSegs, true);
+                WL($"success, advanced to: {current?.Value}");
             }
         }
 
@@ -471,7 +429,7 @@ namespace coil
         }
 
         //core logic.
-        private LinkedListNode<Seg> ApplyTweak(Tweak tweak)
+        private List<LinkedListNode<Seg>> ApplyTweak(Tweak tweak)
         { 
             var segnode = tweak.SegNode;
             var seg = segnode.Value;
@@ -492,7 +450,7 @@ namespace coil
                 var seg3node = Segs.AddAfter(segnode, seg3);
                 Segs.Remove(segnode);
                 //no index adjustments
-                return seg3node;
+                return new List<LinkedListNode<Seg>>() { seg3node };
             }
             else if (tweak.ShortTweak)
             {
@@ -526,7 +484,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg5node, 2);
                 }
-                return seg5node;
+                return new List<LinkedListNode<Seg>>() { seg3node, seg4node, seg5node };
             }
             else if (tweak.LongTweak)
             {
@@ -551,7 +509,7 @@ namespace coil
                 {
                     AdjustIndexAfter(seg3node, 2);
                 }
-                return seg3node;
+                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node };
             }
             else
             {
@@ -592,7 +550,7 @@ namespace coil
                     AdjustIndexAfter(seg5node, 4); 
                 }
 
-                return seg5node;
+                return new List<LinkedListNode<Seg>>() { seg1node, seg2node, seg3node, seg4node, seg5node };
             }
         }
 
