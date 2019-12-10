@@ -23,7 +23,7 @@ namespace coil
         public static Font BigFont = new Font(SystemFonts.Find("Comic Sans MS"), 36, FontStyle.Bold);
 
         public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false,
-            List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null)
+            List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null, List<(int,int)> highlights = null)
         {
             //juggle the path to determine what should be written in each square.
 
@@ -48,6 +48,13 @@ namespace coil
                 subtitleLineHeight = extra.Value / subtitleLineCount;
             }
             
+            if (highlights != null)
+            {
+                foreach (var hl in highlights)
+                {
+                    outstrings[hl.Item2][hl.Item1] = "hh";
+                }
+            }
             
             using (var result = new Image<Rgba32>(imageWidth, imageHeight))
             {
@@ -71,6 +78,7 @@ namespace coil
                     var location = new SixLabors.Primitives.PointF(0, 0);
                     var color = SixLabors.ImageSharp.Color.Black;
                     var font = new Font(SystemFonts.Find("Comic Sans MS"), (int)(extra*0.9/subtitleLineCount), FontStyle.Bold);
+                    //font = sparklineFont.AvailableStyles;
                     //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
 
                     var lines = subtitle.Split("\n");
@@ -165,6 +173,9 @@ namespace coil
             var keyfp = $"{stem}/tiles/rr.png";
 
             var d = new Dictionary<string, Image>();
+
+            //highlight
+            d["hh"] = Image.Load<Rgba32>($"{stem}/tiles/hh.png");
 
             d["rr"] = Image.Load<Rgba32>(keyfp);
             d["dd"] = d["rr"].Clone(oo => oo.Rotate(90));

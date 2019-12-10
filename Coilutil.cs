@@ -13,9 +13,7 @@ namespace coil
 {
     public static class Coilutil
     {
-
         private static Dictionary<string, Image> _Images = ImageUtil.GetImages();
-
 
         //for cmdline
         public static void Show(Level l)
@@ -69,18 +67,15 @@ namespace coil
             }
             var baseMap = GetBaseMapForEmpty(level);
 
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows:arrows);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: arrows);
         }
 
-        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false)
+        public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false, List<(int,int)> highlights = null)
         {
             var baseMap = GetBaseMapForPath(level);
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, highlights:highlights);
         }
 
-        /// <summary>
-        /// Savewithpath / empty but with big overlay arrows showing general regional progression
-        /// </summary>
         public static void SaveAverageOnPath(BaseLevel level, int step, string fn,
             List<List<string>> baseMap, List<PointText> pointTexts,
             string subtitle = "", bool quiet = false
@@ -100,9 +95,6 @@ namespace coil
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true, overrideScale: 1);
         }
 
-        /// <summary>
-        /// Savewithpath / empty but with big overlay arrows showing general regional progression
-        /// </summary>
         public static void SaveAverageOnEmptyWithArrows(BaseLevel level, int step, string fn,
             List<List<string>> baseMap, List<PointText> pointTexts,
             string subtitle = "", bool quiet = false
@@ -111,14 +103,12 @@ namespace coil
             ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: true);
         }
 
-        internal static void SaveArrowVersions(Level l, int ii, string stem)
+        internal static void SaveArrowVersions(Level l, int ii, string stem, int arrowStepMin)
         {
             var step = l.TotalLength();
-            //var baseEmptyMap = GetBaseMapForEmpty(l);
-            //var basePathMap = GetBaseMapForPath(l);
             var lc = l.LevelConfiguration;
             var ct = 0;
-            while (step > 50)
+            while (step > arrowStepMin)
             {
                 ct++;
                 if (ct > 9)
@@ -264,7 +254,7 @@ namespace coil
             return baseMap;
         }
 
-        
+
 
 
         private static string GetDString(Dir dir)
@@ -510,41 +500,6 @@ namespace coil
                 }
             }
             return (new HashSet<(int, int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
-        }
-
-        public static string Report(Level level, TimeSpan ts, bool multiLine=false)
-        {
-            var sqs = (level.Height - 2) * (level.Width - 2);
-            var sum = 1;
-            var decisions = GetDecisions(level);
-            var easyDecisions = decisions.Item1;
-            var hardDecisions = decisions.Item2;
-            var decisionCount = easyDecisions.Count + hardDecisions.Count;
-            foreach (var seg in level.Segs)
-            {
-                sum += seg.Len;
-            }
-            var perc = 100.0 * sum / sqs;
-            var decisionPercent = 100.0 * decisionCount / level.Segs.Count;
-            //TODO determine how many "decisions" have to be made. More decisions == better!
-
-            var linebreak = multiLine ? "\n" : "";
-
-            //Divergence = per seg, how distant other segs does it see?
-            //problem - this prioritizes long paths.
-            var divergence = GetDivergence(level);
-
-            return $"{level.LevelConfiguration.GetStr()} {ts.TotalSeconds.ToString("0.0")}s {linebreak}" +
-                $"segs{level.Segs.Count} cov{perc.ToString("##0.0")}% " +
-                $"dec{decisionPercent.ToString("0.0")}% dct{decisionCount}{linebreak}"+
-                $"{level.Width - 2}x{level.Height - 2} div={divergence}";
-        }
-
-        //TODO it would be nice to have a sparkline of block size/pathsize/neighbor size
-
-        public static float GetDivergence(Level level)
-        {
-            return 0;
         }
     }
 }

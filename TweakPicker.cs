@@ -19,7 +19,7 @@ namespace coil
 
         public TweakPicker(Func<Tweak, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
         {
-            Picker = (List<Tweak> tweaks) => tweaks.FirstOrDefault();
+            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt)).FirstOrDefault();
             Name = name;
             MaxLen1 = maxLen1;
             MaxLen2 = maxLen2;

@@ -6,67 +6,60 @@ using System.Diagnostics;
 using static coil.Util;
 using static coil.Debug;
 using static coil.Coilutil;
+using static coil.Reportutil;
 namespace coil
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
-            var seed = 154;
-            var x = 50;
-            var y = 40;
-            var count = 1;
-            
-            var segPickerName = "Longest";
-            //segPickerName = "Next";
-            //segPickerName = "BRand";
-            var tweakPickerName = "shortrnd";
-            //tweakPickerName = "";
-            //CreateLevel(seed, x, y, false, segPickerName, tweakPickerName);
-            CreateMultiple(seed, count, x, y, true, segPickerName, tweakPickerName);
+            var config = new LevelGenerationConfig();
+            config.seed = 0;
+            config.x = 60;
+            config.y = 45;
+            config.saveTweaks = true;
+            config.saveEvery = 1;
+            config.segPickerName = "Weighted";
+            config.segPickerName = "Longest";
+            config.tweakPickerName = "shortrnd";
+            config.tweakPickerName = "rnd99";
+            config.saveEmpty = true;
+            config.saveArrows = true;
+            config.arrowLengthMin = 50;
+            config.genLimits = new List<int?>() { null };
 
-            var minx = 3;
-            var miny = 2;
-            var xincrement = 1;
-            var yincrement = 1;
-            var maxx = 200;
-            var maxy = 200;
-            var countper = 2;
-            var mass = true;
-
-            //CreateLots(minx, miny, xincrement, yincrement, maxx, maxy, countper, mass);
+            CreateLevel(config);
         }
 
-        static void CreateLots(int minx, int miny, int xincrement, int yincrement, int maxx, int maxy, int countper, bool mass)
+        static void CreateLots(LevelGenerationConfig config, int minx, int miny, int maxx, int maxy, int xincrement, int yincrement, int countper)
         {
             var x = minx;
             var y = miny;
             var seed = 0;
             while (x < maxx && y < maxy) {
-                CreateMultiple(seed, countper, x, y, mass);
+                CreateMultiple(config, countper);
                 x += xincrement;
                 y += yincrement;
             }
         }
 
-        static void CreateMultiple(int seed, int count, int x, int y, bool mass, string segPickerName = null, string tweakPickerName=null) {
-            var max = seed + count;
-            while (seed < max)
+        static void CreateMultiple(LevelGenerationConfig config, int count) {
+            var max = config.seed + count;
+            while (config.seed < max)
             {
-                CreateLevel(seed, x, y, mass, segPickerName: segPickerName, tweakPickerName:tweakPickerName);
-                seed++;
+                
+                CreateLevel(config);
+                config.seed++;
             }
         }
 
-        static void CreateLevel(int seed, int x, int y, bool mass = false, string segPickerName = null, string tweakPickerName = null)
+        static void CreateLevel(LevelGenerationConfig config)
         {
             
             //target = "rand99";
             //re-validate the board at every step
-            var debug = false;
-
-            var stem = "../../..";
-            var levelstem = $"../../../output/{x}x{y}";
+            
+            var levelstem = $"../../../output/{config.x}x{config.y}";
 
             if (!System.IO.Directory.Exists(levelstem))
             {
@@ -75,8 +68,8 @@ namespace coil
 
             var runCount = 0;
             //var lc2hash = new Dictionary<LevelConfiguration, string>();
-            var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
-            //var ws = new InitialWanderSetup();
+            //var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
+            var ws = new InitialWanderSetup();
             //not used
 
             //problems with the whole validation thing: 
@@ -86,12 +79,12 @@ namespace coil
             var pickers = TweakPickers.GetPickers();
             foreach (var tweakPicker in pickers)
             {
-                if (!String.IsNullOrEmpty(tweakPickerName) && tweakPicker.Name!= tweakPickerName)
+                if (!String.IsNullOrEmpty(config.tweakPickerName) && tweakPicker.Name!= config.tweakPickerName)
                 {
                     continue;
                 }
 
-                foreach (var el in new List<int?>() {3, }) // null, 1, 100, 10000
+                foreach (var el in config.genLimits) // null, 1, 100, 10000
                 {
                     var cs = new OptimizationSetup();
                     cs.GlobalTweakLim = el;
@@ -99,16 +92,16 @@ namespace coil
                     foreach (var segPicker in SegPickers.GetSegPickers())
                     {
                         
-                        if (!string.IsNullOrEmpty(segPickerName) && segPicker.Name != segPickerName) 
+                        if (!string.IsNullOrEmpty(config.segPickerName) && segPicker.Name != config.segPickerName) 
                         { 
                             continue;
                         }
-                        var rnd = new System.Random(seed);
+                        var rnd = new System.Random(config.seed);
                         var lc = new LevelConfiguration(tweakPicker, segPicker, cs, ws);
                         runCount++;
                         var log = new Log(lc);
                         var counter = new Counter(lc);
-                        var level = new Level(lc, log, x, y, rnd, seed, counter);
+                        var level = new Level(lc, log, config.x, config.y, rnd, config.seed, counter);
 
                         level.InitialWander();
                         //Show(level);
@@ -118,16 +111,16 @@ namespace coil
                         }
 
                         //bit awkward to do it here - it needs a better guarantee of finding the best seg.
-                        segPicker.Init(seed, level);
+                        segPicker.Init(config.seed, level);
                         var st = Stopwatch.StartNew();
-                        level.RepeatedlyTweak(true, 1, st);
+                        var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
                         //counter.Show();
-                        var rep = Report(level, st.Elapsed, true);
+                        var rep = Report(level, st.Elapsed, multiLine:true, tweakStats);
 
-                        if (runCount == 1 && !mass)
+                        if (runCount == 1 && !config.mass)
                         {
                             //Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
-                            SaveWithPath(level, $"{levelstem}/p-{seed}.png");
+                            SaveWithPath(level, $"{levelstem}/p-{config.seed}.png");
                         }
                         //leave this in for one final sense check.
                         var dst = Stopwatch.StartNew();
@@ -138,25 +131,27 @@ namespace coil
                         
                         var ist = Stopwatch.StartNew();
                         //it would be nice to take two lines.
-                        if (true)
+                       
+                        if (config.saveEmpty)
                         {
-                            var pointTexts = GetAveragePoints(level, 3000);
-                            SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}-arrows.png", subtitle: rep, quiet: true, pointTexts: pointTexts, arrows: true);
+                            SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed}.png", subtitle: rep, quiet: true);
                         }
-                        SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{seed}.png", subtitle: rep, quiet: true);
-                        //WL($"Saving image. {ist.Elapsed}");
-                        SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{seed}.png", subtitle: rep, quiet: true);
+                        if (config.saveWithPath)
+                        {
+                            //WL($"Saving image. {ist.Elapsed}");
+                            SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{config.seed}.png", subtitle: rep, quiet: true);
+                        }
                         //WL($"Saving pathimage. {ist.Elapsed}");
                         //Show(level);
 
                         //lc2hash[lc] = l.GetHash();
 
                         DoDebug(level, false, true);
-                        SaveLevelAsText(level, seed);
+                        SaveLevelAsText(level, config.seed);
 
-                        if (false)
+                        if (config.saveArrows)
                         {
-                            SaveArrowVersions(level, seed, levelstem);
+                            SaveArrowVersions(level, config.seed, levelstem, config.arrowLengthMin);
                         }
                     }
                 }

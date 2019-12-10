@@ -11,7 +11,7 @@ using static coil.Coilutil;
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
-    public class Level : BaseLevel
+    public partial class Level : BaseLevel
     {
         public int Index;
         public TweakPicker TweakPicker;
@@ -42,14 +42,17 @@ namespace coil
             InitBoard();
         }
 
-        public void RepeatedlyTweak(bool saveState, int saveEvery, Stopwatch st)
+        public TweakStats RepeatedlyTweak(bool saveState, int saveEvery, Stopwatch st)
         {
             //after doing the tweak we will call the segpicker with previous, new segs, next seg, success
 
             //initial setup.
 
             //change to do this all in the picker itself - it should keep state
-            var current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
+
+            var stats = new TweakStats();
+
+            var current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
             var tweakct = 0;
             while (current != null)
             {
@@ -60,24 +63,23 @@ namespace coil
                 if (!tweaks.Any())
                 {
                     //Show(this);
-                    current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
+                    stats.NoTweaks++;
+                    current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
                     continue;
                 }
 
                 var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
                 if (tweak == null)
                 {
-                    current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
+                    stats.NoTweaksQualify++;
+                    current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
                     continue;
                 }
 
                 //seg is always destroyed. BUT, prev/next can also be modified.
                 //can I just pass that along and have it removed/added with new len?
                 var newSegs = ApplyTweak(tweak);
-                if (tweak.LongTweak || tweak.ShortTweak)
-                {
-                    var ae = 3;
-                }
+                stats.SuccessCt++;
                 var modifiedSegs = new List<LinkedListNode<Seg>>() { };
                 
                 //these should never be null since we don't allow longtweaks where next is null, or shorts to start.
@@ -90,21 +92,25 @@ namespace coil
                     modifiedSegs.Add(newSegs.First().Previous);
                 }
 
+                //var nei = Solverutil.GetNeighbors(newSegs.Last().Value);
+
                 PossiblySaveDuringTweak(saveState, tweakct, saveEvery, 0, current.Value);
                 tweakct++;
 
                 //WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{(tweakct * 1.0 / failct * 100.0).ToString("##0.0")}%");
-                current = LevelConfiguration.SegPicker.PickSeg(newSegs, modifiedSegs, true);
-                WL($"success, advanced to: {current?.Value}");
+                current = LevelConfiguration.SegPicker.PickSeg(newSegs, modifiedSegs, stats, true);
+                //WL($"success, advanced to: {current?.Value}");
             }
+
+            return stats;
         }
 
-        public void PossiblySaveDuringTweak(bool saveState, int tweakct, int saveEvery, int loopct, Seg seg)
+        public void PossiblySaveDuringTweak(bool saveState, int tweakct, int saveEvery, int loopct, Seg seg, List<(int,int)> neighbors = null)
         {
             if (saveState && tweakct % saveEvery == 0)
             {
                 var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-lc{LevelConfiguration.GetStr()}-i{Index}-l{loopct}-tw{tweakct}-{seg.Index}-{seg.Len}-p.png";
-                SaveWithPath(this, pathfn, subtitle:$"TweakCt:{tweakct}");
+                SaveWithPath(this, pathfn, subtitle:$"TweakCt:{tweakct}", highlights: neighbors);
 
                 //var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
                 //SaveEmpty(this, fn);

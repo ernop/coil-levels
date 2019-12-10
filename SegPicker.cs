@@ -48,7 +48,7 @@ namespace coil
             return $"SegPicker:{Name}";
         }
 
-        public abstract LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success);
+        public abstract LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, TweakStats stats, bool success);
     }
 
     public class NewSegPicker : SegPicker
@@ -66,7 +66,7 @@ namespace coil
 
         LinkedListNode<Seg> LastReturnedSeg { get; set; }
 
-        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success)
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, TweakStats stats, bool success)
         {
             if (LastReturnedSeg == null)
             {
@@ -103,10 +103,14 @@ namespace coil
         }
     }
 
-    public class LongestSegPicker : SegPicker
+    public class ConfigurableSegPicker : SegPicker
     {
-        public LongestSegPicker() {
-            Name = "Longest";
+        public IComparer<LinkedListNode<Seg>> Comparer;
+
+
+        public ConfigurableSegPicker(string name, IComparer<LinkedListNode<Seg>> comparer) {
+            Name = name;
+            Comparer = comparer;
         }
 
         public override void Init(int seed, Level level)
@@ -119,12 +123,14 @@ namespace coil
 
         public C5.IntervalHeap<LinkedListNode<Seg>> Heap { get; set; }
 
-        LinkedListNode<Seg> LastReturnedSeg { get; set; }
+        private LinkedListNode<Seg> LastReturnedSeg { get; set; }
+
+        private Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>> Handles;
 
         /// <summary>
         /// When a seg length changes, I need to know about it - SL tweaks can do this invisibly which is annoying.
         /// </summary>
-        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success)
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, TweakStats stat, bool success)
         {
             //put in the new segs.
             if (newSegs != null)
@@ -153,6 +159,7 @@ namespace coil
                 {
                     RedoHeap();
                     Success = false;
+                    stat.Loops++;
                 }
                 else
                 {
@@ -163,14 +170,14 @@ namespace coil
             //the item will still hang around in the handles dict.
             var el = Heap.DeleteMax();
             
-            WL($"Returning seg {el.Value.Index} of len {el.Value.Len}");
+            //WL($"Returning seg {el.Value.Index} of len {el.Value.Len}");
             return el;
         }
 
         private void RedoHeap()
         {
-            WL("Redoing heap.");
-            Heap = new IntervalHeap<LinkedListNode<Seg>>(new Comparer());
+            Heap = new IntervalHeap<LinkedListNode<Seg>>(Comparer);
+            Handles = new Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>>();
             var el = Level.Segs.First;
             while (el != null)
             {
@@ -188,11 +195,6 @@ namespace coil
             if (!handle.ToString().Contains("-1"))
             {
                 Heap.Delete(handle);
-                WL("delet");
-            }
-            else
-            {
-                WL("Skipped deleting.");
             }
         }
 
@@ -202,11 +204,9 @@ namespace coil
             Heap.Add(ref handle, seg);
             Handles[seg.Value] = handle;
         }
-
-        private Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>> Handles = new Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>>();
     }
 
-    public class Comparer : IComparer<LinkedListNode<Seg>>
+    public class LengthComparer : IComparer<LinkedListNode<Seg>>
     {
         public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
         {
@@ -214,11 +214,19 @@ namespace coil
         }
     }
 
+    public class WeightedComparer : IComparer<LinkedListNode<Seg>>
+    {
+        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
+        {
+            return (x.Value.Index+x.Value.Len).CompareTo(y.Value.Index+y.Value.Len);
+        }
+    }
+
     public static class SegPickers
     {
         public static List<SegPicker> GetSegPickers()
         {
-            return new List<SegPicker>() { new LongestSegPicker(), new NewSegPicker() };
+            return new List<SegPicker>() { new ConfigurableSegPicker("Longest", new LengthComparer()), new ConfigurableSegPicker("Weighted", new WeightedComparer()), new NewSegPicker() };
         }
     }
 
