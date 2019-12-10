@@ -48,7 +48,7 @@ namespace coil
             return $"SegPicker:{Name}";
         }
 
-        public abstract LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success);
+        public abstract LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success);
     }
 
     public class NewSegPicker : SegPicker
@@ -66,7 +66,7 @@ namespace coil
 
         LinkedListNode<Seg> LastReturnedSeg { get; set; }
 
-        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success)
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success)
         {
             if (LastReturnedSeg == null)
             {
@@ -121,14 +121,25 @@ namespace coil
 
         LinkedListNode<Seg> LastReturnedSeg { get; set; }
 
-        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, bool success)
+        /// <summary>
+        /// When a seg length changes, I need to know about it - SL tweaks can do this invisibly which is annoying.
+        /// </summary>
+        public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, bool success)
         {
             //put in the new segs.
             if (newSegs != null)
             {
-                foreach (var newseg in newSegs)
+                foreach (var newSeg in newSegs)
                 {
-                    Heap.Add(newseg);
+                    AddSafely(newSeg);
+                }
+            }
+            if (modifiedSegs != null)
+            {
+                foreach (var modseg in modifiedSegs)
+                {
+                    RemoveSafely(modseg);
+                    AddSafely(modseg);
                 }
             }
             if (success)
@@ -138,7 +149,7 @@ namespace coil
 
             if (Heap.Count == 0)
             {
-                if (success)
+                if (Success)
                 {
                     RedoHeap();
                     Success = false;
@@ -149,8 +160,9 @@ namespace coil
                 }
             }
 
-            WL(Heap.AllowsDuplicates);
+            //the item will still hang around in the handles dict.
             var el = Heap.DeleteMax();
+            
             WL($"Returning seg {el.Value.Index} of len {el.Value.Len}");
             return el;
         }
@@ -162,13 +174,36 @@ namespace coil
             var el = Level.Segs.First;
             while (el != null)
             {
-                Heap.Add(el);
+                AddSafely(el);
                 el = el.Next;
             }
-
-            var m = Heap.FindMax();
-            var mm = Heap.FindMin();
         }
+
+        private void RemoveSafely(LinkedListNode<Seg> seg)
+        {
+            var handle = Handles[seg.Value];
+            //can this be null, and if so, why?
+            //yes, since the heap is continuously being cut down, this seg may have already been removed, processed, and still be in the map 
+            //(if there was no successful replacemet of it with a tweak.))
+            if (!handle.ToString().Contains("-1"))
+            {
+                Heap.Delete(handle);
+                WL("delet");
+            }
+            else
+            {
+                WL("Skipped deleting.");
+            }
+        }
+
+        private void AddSafely(LinkedListNode<Seg> seg)
+        {
+            IPriorityQueueHandle<LinkedListNode<Seg>> handle = null;
+            Heap.Add(ref handle, seg);
+            Handles[seg.Value] = handle;
+        }
+
+        private Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>> Handles = new Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>>();
     }
 
     public class Comparer : IComparer<LinkedListNode<Seg>>

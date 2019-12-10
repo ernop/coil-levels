@@ -1,4 +1,16 @@
 todo now:
+1. finish new segpicker - they keep their own state and basically work as iterators, ending with null
+	figure out if this reduces error rates 
+	in general if a seg is short and blocked in, it's clearly non-tweakable. So I shouldn't waste time looking at it.
+		What actually takes up the time? Big empty segs?
+
+2. profiling more
+3. deviation - other meaningful stats.
+	average number of neighbors for a seg
+	average span of neighboring segs that a given seg touches - ones with lots of doubling back only generally touch nearby neighbors
+	"hard" decisions vs easy - sure there are decisions but if they immediately produce a single square deadend, they are easy.
+
+todo now:
 1. remove dependencies in comparing indexes - it should only compare > or <, not >+1
 	the main problem is from longtweaks, how GetReturns doesn't just check that it hits GetEnd of the seg.
 2. 30%+=>99% of time is devoted to adjustindexes. Figure out a way to make this more efficient.

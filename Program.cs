@@ -75,8 +75,8 @@ namespace coil
 
             var runCount = 0;
             //var lc2hash = new Dictionary<LevelConfiguration, string>();
-            //var ws = new InitialWanderSetup(steplimit:20, startPoint:(1,1), gomax:true);
-            var ws = new InitialWanderSetup();
+            var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
+            //var ws = new InitialWanderSetup();
             //not used
 
             //problems with the whole validation thing: 

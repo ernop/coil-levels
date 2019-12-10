@@ -49,7 +49,7 @@ namespace coil
             //initial setup.
 
             //change to do this all in the picker itself - it should keep state
-            var current = LevelConfiguration.SegPicker.PickSeg(null, false);
+            var current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
             var tweakct = 0;
             while (current != null)
             {
@@ -60,24 +60,41 @@ namespace coil
                 if (!tweaks.Any())
                 {
                     //Show(this);
-                    current = LevelConfiguration.SegPicker.PickSeg(null, false);
+                    current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
                     continue;
                 }
 
                 var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
                 if (tweak == null)
                 {
-                    current = LevelConfiguration.SegPicker.PickSeg(null, false);
+                    current = LevelConfiguration.SegPicker.PickSeg(null, null, false);
                     continue;
                 }
 
+                //seg is always destroyed. BUT, prev/next can also be modified.
+                //can I just pass that along and have it removed/added with new len?
                 var newSegs = ApplyTweak(tweak);
+                if (tweak.LongTweak || tweak.ShortTweak)
+                {
+                    var ae = 3;
+                }
+                var modifiedSegs = new List<LinkedListNode<Seg>>() { };
                 
+                //these should never be null since we don't allow longtweaks where next is null, or shorts to start.
+                if (tweak.LongTweak)
+                {
+                    modifiedSegs.Add(newSegs.Last().Next);
+                }
+                if (tweak.ShortTweak)
+                {
+                    modifiedSegs.Add(newSegs.First().Previous);
+                }
+
                 PossiblySaveDuringTweak(saveState, tweakct, saveEvery, 0, current.Value);
                 tweakct++;
 
                 //WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{(tweakct * 1.0 / failct * 100.0).ToString("##0.0")}%");
-                current = LevelConfiguration.SegPicker.PickSeg(newSegs, true);
+                current = LevelConfiguration.SegPicker.PickSeg(newSegs, modifiedSegs, true);
                 WL($"success, advanced to: {current?.Value}");
             }
         }
