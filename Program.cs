@@ -15,18 +15,19 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 35;
-            config.y = 35;
+            config.x = 40;
+            config.y = 30;
             config.saveTweaks = false;
             config.saveEvery = 1;
-            config.segPickerName = "Weighted";
             config.segPickerName = "Longest";
+            config.segPickerName = "";
             config.tweakPickerName = "shortrnd";
             config.tweakPickerName = "";
             config.saveEmpty = true;
+            config.saveWithPath = true;
             config.saveArrows = false;
             config.arrowLengthMin = 50;
-            config.genLimits = new List<int?>() { null };
+            config.genLimits = new List<int?>() { 1, null };
 
             CreateLevel(config);
         }

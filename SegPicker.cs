@@ -194,7 +194,19 @@ namespace coil
             //(if there was no successful replacemet of it with a tweak.))
             if (!handle.ToString().Contains("-1"))
             {
-                Heap.Delete(handle);
+                if (handle.ToString()=="[1]")
+                {
+                    var ae = 3;
+                }
+                try
+                {
+                    //can't delete the last item for some reason?
+                    Heap.Delete(handle);
+                }catch (Exception ex)
+                {
+                    
+                    var aee = 3;
+                }
             }
         }
 
