@@ -1,4 +1,5 @@
 todo now:
+0. hmm, UseSpaceFillingIndexes changes results.  for e.g. len2lim50rnd s-New o-nolim-empty-0.png.  why? definitely seems weird.
 1. finish new segpicker - they keep their own state and basically work as iterators, ending with null
 	figure out if this reduces error rates 
 	in general if a seg is short and blocked in, it's clearly non-tweakable. So I shouldn't waste time looking at it.

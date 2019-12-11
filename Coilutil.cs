@@ -118,10 +118,11 @@ namespace coil
                 step = step / 2;
                 //var tpfn = $"{stem}/ap-{ii}-{step}-{lc.GetStr()}.png";
                 //SaveAverageOnPath(l, step, tpfn, quiet:false);
-                var arrowfn = $"{stem}/{lc.GetStr()}-arrow-{ii}-{step}.png";
+                
 
                 var pointTexts = GetAveragePoints(l, step);
-
+                
+                var arrowfn = $"{stem}/{lc.GetStr()}-arrow-{ii}-{step}.png";
                 SaveAverageOnPathWithArrows(level: l, fn: arrowfn, baseMap: null, pointTexts: pointTexts, quiet: false);
                 //var tefn = $"{stem}/ae-{ii}-{step}-{lc.GetStr()}.png";
                 //SaveAverageOnEmpty(l, step, tefn, quiet: false);

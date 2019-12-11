@@ -278,20 +278,22 @@ namespace coil
                 }
             }
 
-            (int,int)? last = null;
-            foreach (var el in res)
+            if (false)
             {
-                if (last != null)
+                (int, int)? last = null;
+                foreach (var el in res)
                 {
-                    var d = GridDist(el, last.Value);
-                    if (d != 1)
+                    if (last != null)
                     {
-                        WL("A");
+                        var d = GridDist(el, last.Value);
+                        if (d != 1)
+                        {
+                            WL("A");
+                        }
                     }
+                    last = el;
                 }
-                last = el;
             }
-
             return res;
 
         }

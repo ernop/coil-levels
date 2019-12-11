@@ -109,7 +109,7 @@ namespace coil
                     if (arrows)
                     {
                         //arrow width scales with board height+width.
-                        int arrowWidth = (int)((level.Width + level.Height) * 0.07)+1;
+                        int arrowWidth = (int)((level.Width + level.Height) * 0.003)+1;
                         PointText? lastPoint = null;
                         foreach (var pt in pointTexts)
                         {
