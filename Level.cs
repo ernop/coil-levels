@@ -99,7 +99,6 @@ namespace coil
                 //WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{(tweakct * 1.0 / failct * 100.0).ToString("##0.0")}%");
                 current = LevelConfiguration.SegPicker.PickSeg(newSegs, modifiedSegs, stats, true);
                 //WL($"success, advanced to: {current?.Value}");
-                break;
             }
 
             return stats;

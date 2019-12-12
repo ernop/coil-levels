@@ -15,14 +15,14 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 14;
-            config.y = 10;
+            config.x = 300;
+            config.y = 200;
             config.saveTweaks = false;
             config.saveEvery = 1;
             config.segPickerName = "Longest";
-            //config.segPickerName = "";
+            config.segPickerName = "";
             config.tweakPickerName = "rnd99";
-            //config.tweakPickerName = "";
+            config.tweakPickerName = "";
             config.saveEmpty = false;
             config.saveWithPath = true;
             config.saveArrows = true;
@@ -65,8 +65,8 @@ namespace coil
             }
 
             var runcount = 0;
-            var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
-            //var ws = new InitialWanderSetup();
+            //var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
+            var ws = new InitialWanderSetup();
            
             foreach (var tweakPicker in TweakPickers.GetPickers(config.tweakPickerName))
             {
@@ -74,34 +74,29 @@ namespace coil
                 {
                     var os = new OptimizationSetup();
                     os.GlobalTweakLim = el;
-                    foreach (var b in new List<bool>() { true, true, true, false, false, false})
+
+                    foreach (var segPicker in SegPickers.GetSegPickers(config.segPickerName))
                     {
-                        os.UseSpaceFillingIndexes = b;
+                        runcount++;
 
-                        //somehow statefulness has leaked into segpickers!
-                        foreach (var segPicker in SegPickers.GetSegPickers(config.segPickerName))
-                        {
-                            runcount++;
+                        var lc = new LevelConfiguration(tweakPicker, segPicker, os, ws);
+                        var log = new Log(lc);
 
-                            var lc = new LevelConfiguration(tweakPicker, segPicker, os, ws);
-                            var log = new Log(lc);
+                        var rnd = new System.Random(config.seed);
+                        var level = new Level(lc, config.x, config.y, rnd, config.seed);
 
-                            var rnd = new System.Random(config.seed);
-                            var level = new Level(lc, config.x, config.y, rnd, config.seed);
+                        level.InitialWander(lc);
 
-                            level.InitialWander(lc);
+                        //bit awkward to do it here - it needs a better guarantee of finding the best seg.
+                        segPicker.Init(config.seed, level);
+                        tweakPicker.Init(config.seed);
+                        var st = Stopwatch.StartNew();
+                        var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
+                        var elapsed = st.Elapsed;
 
-                            //bit awkward to do it here - it needs a better guarantee of finding the best seg.
-                            segPicker.Init(config.seed, level);
-                            tweakPicker.Init(config.seed);
-                            var st = Stopwatch.StartNew();
-                            var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
-                            var elapsed = st.Elapsed;
-
-                            //before doing any outputting, validate the level.
-                            DoDebug(level, show: false, validateBoard: true);
-                            AfterLevelGenerated(level, config, levelstem, lc, tweakStats, elapsed, csv, log, runcount);
-                        }
+                        //before doing any outputting, validate the level.
+                        DoDebug(level, show: false, validateBoard: true);
+                        AfterLevelGenerated(level, config, levelstem, lc, tweakStats, elapsed, csv, log, runcount);
                     }
                 }
             }
