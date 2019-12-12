@@ -144,7 +144,7 @@ namespace coil
 
         public void InitialWander(LevelConfiguration lc)
         {
-            var start = (1,1);
+            (int,int) start;
             if (LevelConfiguration.InitialWanderSetup.StartPoint.HasValue)
             {
                 start = LevelConfiguration.InitialWanderSetup.StartPoint.Value;
@@ -196,13 +196,13 @@ namespace coil
             //this is necessary to spread them out.
             if (lc.OptimizationSetup.UseSpaceFillingIndexes)
             {
-                RedoAllIndexesSpaceFillndexes();
+                RedoAllIndexesSpaceFilled();
             }
         }
 
 
         //this will leave some spurious space at the beginning when doing a full redo
-        public void RedoAllIndexesSpaceFillndexes()
+        public void RedoAllIndexesSpaceFilled()
         {
             //var st = Stopwatch.StartNew();
             var l = new List<LinkedListNode<Seg>>();
@@ -231,7 +231,7 @@ namespace coil
             var gap = rangeend - rangestart;
             if (gap - 1 < todo.Count)
             {
-                RedoAllIndexesSpaceFillndexes();
+                RedoAllIndexesSpaceFilled();
                 return;
                 //need to reassign everything
             }
@@ -252,6 +252,7 @@ namespace coil
 
         public (int, int) GetRandomPoint()
         {
+            WL("GRPC");
             int x;
             int y;
             if (Width > 20 && Height > 20)

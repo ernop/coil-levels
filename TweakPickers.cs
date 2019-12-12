@@ -22,7 +22,6 @@ namespace coil
         //TODO I need segpickers too which would grab the longest segs / long*index order
         public static IEnumerable<TweakPicker> GetPickers(string name)
         {
-            var globalRand = new System.Random(0);
             var pickers = new List<TweakPicker>() {
                 //new TweakPicker((List<Tweak> tweaks) =>
                 //    {
@@ -78,22 +77,22 @@ namespace coil
                     {
                         return tweaks.OrderByDescending(tw=>tw.Len3<26 && tw.Len2<26 ? 1000+tw.Len2+tw.Len3 : tw.Len2+tw.Len3).First();
                     } , "23lim25"),
-                   new TweakPicker((List<Tweak> tweaks) =>
+                   new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
-                        return tweaks.OrderByDescending(tw=>tw.Len3<61 && tw.Len2<61 ? 1000+tw.Len2+tw.Len3+globalRand.Next(25) : tw.Len2+tw.Len3)
+                        return tweaks.OrderByDescending(tw=>tw.Len3<61 && tw.Len2<61 ? 1000+tw.Len2+tw.Len3+random.Next(25) : tw.Len2+tw.Len3)
                         .First();
                     } , "23lim60"),
-                   new TweakPicker((List<Tweak> tweaks) =>
+                   new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
-                        return tweaks.OrderByDescending(tw=>tw.Len3<31 && tw.Len2<31 ? 1000+tw.Len2+tw.Len3+globalRand.Next(25) : tw.Len2+tw.Len3)
+                        return tweaks.OrderByDescending(tw=>tw.Len3<31 && tw.Len2<31 ? 1000+tw.Len2+tw.Len3+random.Next(25) : tw.Len2+tw.Len3)
                         .First();
                     } , "23lim30"),
-                   new TweakPicker((List<Tweak> tweaks) =>
+                   new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
                         return tweaks
-                            .OrderByDescending(tw=>tw.Len2+tw.Len3+globalRand.Next(5)).FirstOrDefault();
+                            .OrderByDescending(tw=>tw.Len2+tw.Len3+random.Next(5)).FirstOrDefault();
                     } , "shortrnd", null, 5, 5),
-                   new TweakPicker((List<Tweak> tweaks) =>
+                   new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
 
                         var subtweaks = tweaks.Where(tw=>tw.Len2<=5 && tw.Len3 <=5);
@@ -102,10 +101,10 @@ namespace coil
                             return null;
                         }
                         var best = subtweaks.First();
-                        var score = best.Len2+best.Len3+globalRand.Next(5);
+                        var score = best.Len2+best.Len3+random.Next(5);
                         foreach (var tweak in subtweaks)
                         {
-                            var candidateScore = tweak.Len2+tweak.Len3+globalRand.Next(5);
+                            var candidateScore = tweak.Len2+tweak.Len3+random.Next(5);
                             if (candidateScore > score)
                             {
                                 best=tweak;
@@ -115,14 +114,14 @@ namespace coil
                         return best;
                     } , "sz23-opt", 5, 5, 5),
 
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
-                        return tweaks.OrderByDescending(tw=>tw.Len2<51 ? 1000+tw.Len2+tw.Len3+OneFraction(10, globalRand) : tw.Len2)
+                        return tweaks.OrderByDescending(tw=>tw.Len2<51 ? 1000+tw.Len2+tw.Len3+OneFraction(10, random) : tw.Len2)
                         .First();
                     } , "len2lim50rnd"),
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
-                        var ordered = tweaks.OrderByDescending(tw=>tw.Len2==tw.Len3 ? 1000+tw.Len2+tw.Len3+OneFraction(10, globalRand) : tw.Len2);
+                        var ordered = tweaks.OrderByDescending(tw=>tw.Len2==tw.Len3 ? 1000+tw.Len2+tw.Len3+OneFraction(10, random) : tw.Len2);
                         return ordered.First();
                     } , "equal23"),
                 new TweakPicker((List<Tweak> tweaks) =>
@@ -133,16 +132,16 @@ namespace coil
                             : tw.Len2+tw.Len3);
                         return ordered.First();
                     } , "equal23short", 5, 5, 5),
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
-                        var ordered = tweaks.OrderByDescending(tw=>tw.Len1==tw.SegNode.Value.Len-tw.Len1-tw.Len2? 1000+tw.Len2+tw.Len3+OneFraction(10, globalRand) : tw.Len2);
+                        var ordered = tweaks.OrderByDescending(tw=>tw.Len1==tw.SegNode.Value.Len-tw.Len1-tw.Len2? 1000+tw.Len2+tw.Len3+OneFraction(10, random) : tw.Len2);
                         return ordered.First();
                     } , "equalrem"),
                 //new TweakPicker((List<Tweak> tweaks) =>
                 //    {
-                //        if (globalRand.Next(10) == 0)
+                //        if (random.Next(10) == 0)
                 //        {
-                //            return tweaks[globalRand.Next(tweaks.Count)];
+                //            return tweaks[random.Next(tweaks.Count)];
                 //        }
                 //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2<51 ? 1000+tw.Len2+tw.Len3 : tw.Len2);
                 //        return ordered.First();
@@ -165,52 +164,52 @@ namespace coil
                 new TweakPicker((Tweak tw) => tw.Len2-tw.Len1-tw.Len3, "sz2-13"),
 
                 new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 - tw.Len1, "sz23-1"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(2), "sz23rnd2"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + globalRand.Next(3), "sz23rnd3"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(2, globalRand), "len23-half"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(3, globalRand), "len23-third"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(5, globalRand), "len23-10th"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(10, globalRand), "len23-10th"),
-                new TweakPicker((Tweak tw) => tw.Len2 + tw.Len3 + OneFraction(20, globalRand), "len23-20th"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + random.Next(2), "sz23rnd2"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + random.Next(3), "sz23rnd3"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(2, random), "len23-half"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(3, random), "len23-third"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(5, random), "len23-10th"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(10, random), "len23-10th"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(20, random), "len23-20th"),
                 //new TweakPicker((Tweak tw) => tw.Right ? 1000+tw.Len2 + tw.Len3 : -1*(1000+tw.Len2 + tw.Len3), "turndir-right-sz"),
                 //new TweakPicker((Tweak tw) => tw.Right ? -1*(1000 + tw.Len2 + tw.Len3) : 1000 + tw.Len2 + tw.Len3, "turndir-left-sz"),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100lim5", null, 5, 5),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100lim20", null, 20, 20),
-                new TweakPicker((Tweak tw) => globalRand.Next(100), "rnd100"),
-                new TweakPicker((Tweak tw) => tw.Len2+tw.Len3+globalRand.Next(100), "len23rnd100"),
-                new TweakPicker((Tweak tw) => globalRand.Next(99), "rnd99"),
-                new TweakPicker((Tweak tw) => globalRand.Next(3), "rnd3"),
-                new TweakPicker((Tweak tw) => tw.Len1 + globalRand.Next(3), "len1rnd3"),
-                new TweakPicker((Tweak tw) => tw.Len1 +tw.Len2 + globalRand.Next(3), "len12rnd3"),
-                new TweakPicker((Tweak tw) => tw.Len2+ tw.Len3 + globalRand.Next(3), "len23rnd3"),
-                //new TweakPicker((Tweak tw) => (tw.SegNode.Value.Start.Item1 % 50<25 ? 10 : 0) + globalRand.Next(3), "partition-rand3"),
-                new TweakPicker((Tweak tw) => globalRand.Next(5), "rnd5"),
-                new TweakPicker((Tweak tw) => globalRand.Next(2), "rnd2"),
+                new TweakPicker((Tweak tw, Random random) => random.Next(100), "rnd100lim5", null, 5, 5),
+                new TweakPicker((Tweak tw, Random random) => random.Next(100), "rnd100lim20", null, 20, 20),
+                new TweakPicker((Tweak tw, Random random) => random.Next(100), "rnd100"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2+tw.Len3+random.Next(100), "len23rnd100"),
+                new TweakPicker((Tweak tw, Random random) => random.Next(99), "rnd99"),
+                new TweakPicker((Tweak tw, Random random) => random.Next(3), "rnd3"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len1 + random.Next(3), "len1rnd3"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len1 +tw.Len2 + random.Next(3), "len12rnd3"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2+ tw.Len3 + random.Next(3), "len23rnd3"),
+                //new TweakPicker((Tweak tw) => (tw.SegNode.Value.Start.Item1 % 50<25 ? 10 : 0) + random.Next(3), "partition-rand3"),
+                new TweakPicker((Tweak tw, Random random) => random.Next(5), "rnd5"),
+                new TweakPicker((Tweak tw, Random random) => random.Next(2), "rnd2"),
                 new TweakPicker((Tweak tw) => tw.Len2%2==0?tw.Len2+tw.Len3 : -1*(tw.Len2+tw.Len3), "even"),
                 new TweakPicker((Tweak tw) => tw.Len2%2==1?tw.Len2+tw.Len3 : -1 * (tw.Len2 + tw.Len3), "odd"),
 
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
-                        if (globalRand.Next(10) == 0)
+                        if (random.Next(10) == 0)
                         {
                             return ordered.Last();
                         }
                         return ordered.First();
                     } , "1stlast10"),
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
-                        if (globalRand.Next(2) == 0)
+                        if (random.Next(2) == 0)
                         {
                             return ordered.Last();
                         }
                         return ordered.First();
                     } , "1stlast2"),
-                new TweakPicker((List<Tweak> tweaks) =>
+                new TweakPicker((List<Tweak> tweaks, Random random) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
-                        var index = Math.Min(tweaks.Count-1, globalRand.Next(4));
+                        var index = Math.Min(tweaks.Count-1, random.Next(4));
                         return ordered.Skip(index).First();
                     } , "len23-1stfour-sz"),
                 new TweakPicker((List<Tweak> tweaks) =>
@@ -239,7 +238,7 @@ namespace coil
                 //    } , "order-sixth-sz"),
                 //new TweakPicker((List<Tweak> tweaks) =>
                 //    {
-                //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3+OneFraction(10, globalRand));
+                //        var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3+OneFraction(10, random));
                 //        var mid = ordered.Count()/6;
                 //        return ordered.Skip(mid).First();
                 //    } , "order-sixth-rndtenth-sz"),

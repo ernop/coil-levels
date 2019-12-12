@@ -20,9 +20,9 @@ namespace coil
             config.saveTweaks = false;
             config.saveEvery = 1;
             config.segPickerName = "Longest";
-            config.segPickerName = "";
-            config.tweakPickerName = "rnd100";
-            config.tweakPickerName = "";
+            //config.segPickerName = "";
+            config.tweakPickerName = "rnd99";
+            //config.tweakPickerName = "";
             config.saveEmpty = false;
             config.saveWithPath = true;
             config.saveArrows = true;
@@ -36,7 +36,6 @@ namespace coil
         {
             var x = minx;
             var y = miny;
-            var seed = 0;
             while (x < maxx && y < maxy) {
                 CreateMultiple(config, countper);
                 x += xincrement;
@@ -65,47 +64,50 @@ namespace coil
                 System.IO.Directory.CreateDirectory($"{levelstem}");
             }
 
-            var runCount = 0;
-            //var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
-            var ws = new InitialWanderSetup();
+            var runcount = 0;
+            var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
+            //var ws = new InitialWanderSetup();
            
             foreach (var tweakPicker in TweakPickers.GetPickers(config.tweakPickerName))
             {
-                foreach (var el in config.genLimits) // null, 1, 100, 10000
+                foreach (var el in config.genLimits)
                 {
                     var os = new OptimizationSetup();
                     os.GlobalTweakLim = el;
-                    foreach (var b in new List<bool>() { true, false })
+                    foreach (var b in new List<bool>() { true, true, true, false, false, false})
                     {
                         os.UseSpaceFillingIndexes = b;
 
+                        //somehow statefulness has leaked into segpickers!
                         foreach (var segPicker in SegPickers.GetSegPickers(config.segPickerName))
                         {
-                            runCount++;
+                            runcount++;
 
-                            var rnd = new System.Random(config.seed);
                             var lc = new LevelConfiguration(tweakPicker, segPicker, os, ws);
                             var log = new Log(lc);
+
+                            var rnd = new System.Random(config.seed);
                             var level = new Level(lc, config.x, config.y, rnd, config.seed);
 
                             level.InitialWander(lc);
 
                             //bit awkward to do it here - it needs a better guarantee of finding the best seg.
                             segPicker.Init(config.seed, level);
+                            tweakPicker.Init(config.seed);
                             var st = Stopwatch.StartNew();
                             var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
                             var elapsed = st.Elapsed;
 
                             //before doing any outputting, validate the level.
                             DoDebug(level, show: false, validateBoard: true);
-                            AfterLevelGenerated(level, config, levelstem, lc, tweakStats, elapsed, csv, log);
+                            AfterLevelGenerated(level, config, levelstem, lc, tweakStats, elapsed, csv, log, runcount);
                         }
                     }
                 }
             }
         }
 
-        public static void AfterLevelGenerated(Level level, LevelGenerationConfig config, string levelstem, LevelConfiguration lc, TweakStats tweakStats, TimeSpan ts, CsvWriter csv, Log log)
+        public static void AfterLevelGenerated(Level level, LevelGenerationConfig config, string levelstem, LevelConfiguration lc, TweakStats tweakStats, TimeSpan ts, CsvWriter csv, Log log, int runcount)
         {
             var repdata = GetReport(level, ts, tweakStats);
             var rep = Report(repdata, multiline: true);
@@ -119,11 +121,11 @@ namespace coil
 
             if (config.saveEmpty)
             {
-                SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed}.png", subtitle: rep, quiet: true);
+                SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed} {runcount}.png", subtitle: rep, quiet: true);
             }
             if (config.saveWithPath)
             {
-                SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{config.seed}.png", subtitle: rep, quiet: true);
+                SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{config.seed} {runcount}.png", subtitle: rep, quiet: true);
             }
             if (config.saveArrows)
             {

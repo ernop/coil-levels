@@ -7,9 +7,33 @@ namespace coil
 {
     public class TweakPicker
     {
+        public TweakPicker(Func<List<Tweak>, System.Random, Tweak> picker, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
+        {
+            //wrap in the tweakpicker's random
+            Picker = (List<Tweak> tweaks) => picker(tweaks, Random);
+            Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
+        }
+
         public TweakPicker(Func<List<Tweak>, Tweak> picker, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
         {
             Picker = picker;
+            Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
+        }
+
+        public TweakPicker(Func<Tweak, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
+        {
+            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt)).FirstOrDefault();
+            Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
+        }
+
+        public TweakPicker(Func<Tweak, Random, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
+        {
+            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt, Random)).FirstOrDefault();
+            Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
+        }
+
+        private void Init(string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
+        {
             Name = name;
             MaxLen1 = maxLen1;
             MaxLen2 = maxLen2;
@@ -17,14 +41,11 @@ namespace coil
             TweakLim = tweaklim;
         }
 
-        public TweakPicker(Func<Tweak, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
+        public Random Random { get; set; }
+        
+        public void Init(int seed)
         {
-            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt)).FirstOrDefault();
-            Name = name;
-            MaxLen1 = maxLen1;
-            MaxLen2 = maxLen2;
-            MaxLen3 = maxLen3;
-            TweakLim = tweaklim;
+            Random = new System.Random(seed);
         }
 
         public override string ToString()
