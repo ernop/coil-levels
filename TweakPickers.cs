@@ -19,15 +19,8 @@ namespace coil
             return 0;
         }
 
-        //non stateful version.
-        public static TweakPicker GetNew(string name)
-        {
-            var pickers = GetPickers();
-            return pickers.First(p => p.Name == name);
-        }
-
         //TODO I need segpickers too which would grab the longest segs / long*index order
-        public static List<TweakPicker> GetPickers()
+        public static IEnumerable<TweakPicker> GetPickers(string name)
         {
             var globalRand = new System.Random(0);
             var pickers = new List<TweakPicker>() {
@@ -204,7 +197,7 @@ namespace coil
                             return ordered.Last();
                         }
                         return ordered.First();
-                    } , "1st-last"),
+                    } , "1stlast10"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
@@ -213,7 +206,7 @@ namespace coil
                             return ordered.Last();
                         }
                         return ordered.First();
-                    } , "1stlast"),
+                    } , "1stlast2"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2+tw.Len3);
@@ -264,7 +257,11 @@ namespace coil
                 //    } , "order-quarter-sz"),
             };
 
-            return pickers.OrderBy(p => p.Name).ToList();
+            if (string.IsNullOrEmpty(name))
+            {
+                return pickers.OrderBy(p => p.Name);
+            }
+            return pickers.Where(p => p.Name == name);
         }
     }
 }

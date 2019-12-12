@@ -142,7 +142,7 @@ namespace coil
             }
         }
 
-        public void InitialWander()
+        public void InitialWander(LevelConfiguration lc)
         {
             var start = (1,1);
             if (LevelConfiguration.InitialWanderSetup.StartPoint.HasValue)
@@ -192,7 +192,63 @@ namespace coil
                     break;
                 }
             }
+
+            //this is necessary to spread them out.
+            if (lc.OptimizationSetup.UseSpaceFillingIndexes)
+            {
+                RedoAllIndexesSpaceFillndexes();
+            }
         }
+
+
+        //this will leave some spurious space at the beginning when doing a full redo
+        public void RedoAllIndexesSpaceFillndexes()
+        {
+            //var st = Stopwatch.StartNew();
+            var l = new List<LinkedListNode<Seg>>();
+            var first = Segs.First;
+            while (first != null)
+            {
+                l.Add(first);
+                first = first.Next;
+            }
+            //var t1 = st.Elapsed;
+            //var st2 = Stopwatch.StartNew();
+            SpaceFillIndexes(l);
+            //WL($"Redoallindexes in {t1}, {st2.Elapsed}");
+        }
+
+        public void SpaceFillIndexes(List<LinkedListNode<Seg>> todo)
+        {
+            //figure out the range
+            //pick indexes for each one
+            //figure out if there is enough room - if not, redo all
+            var r0 = todo.First().Previous;
+            var r1 = todo.Last().Next;
+
+            uint rangestart = r0?.Value?.Index ?? 0;
+            uint rangeend = r1?.Value?.Index ?? uint.MaxValue;
+            var gap = rangeend - rangestart;
+            if (gap - 1 < todo.Count)
+            {
+                RedoAllIndexesSpaceFillndexes();
+                return;
+                //need to reassign everything
+            }
+
+            //plus one to leave space at the end too
+            uint chunksize = gap / ((uint)todo.Count + 1);
+            uint current = rangestart + chunksize;
+            //WL($"Previous to next: {rangestart} => {rangeend}");
+            foreach (var el in todo)
+            {
+                el.Value.Index = current;
+                //WL($"Assigned {current}");
+                current += chunksize;
+
+            }
+        }
+
 
         public (int, int) GetRandomPoint()
         {

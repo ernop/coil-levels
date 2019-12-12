@@ -15,6 +15,11 @@ namespace coil
         public int arrowLengthMin = 50;
         public bool saveEmpty = false;
         public bool saveWithPath = false;
+        
+        /// <summary>
+        /// write a log for this run.
+        /// </summary>
+        public bool saveCsv = false;
         public List<int?> genLimits = new List<int?>() { null, 1, 3, 100 };
     }
 }

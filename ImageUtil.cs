@@ -98,9 +98,6 @@ namespace coil
                         }
                         currentLine++;
                     }
-
-                    
-
                 }
 
                 if (pointTexts != null)

@@ -33,7 +33,7 @@
             //res += UseTweakLen2RuleInGetVerticals ? "t" : "f";
             //res += UseTweakLen2RuleInGetTweaks ? "t" : "f";
             //res += UseTweakLen3Rule ? "t" : "f";
-            //res += UseSpaceFillingIndexes ? "t" : "f";
+            res += UseSpaceFillingIndexes ? "t" : "f";
             res += GlobalTweakLim.HasValue ? $"lim{GlobalTweakLim}" : "nolim";
             return res;
         }

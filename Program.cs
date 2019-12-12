@@ -15,20 +15,20 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 140*2*2;
-            config.y = 80*2*2;
+            config.x = 14;
+            config.y = 10;
             config.saveTweaks = false;
             config.saveEvery = 1;
             config.segPickerName = "Longest";
             config.segPickerName = "";
             config.tweakPickerName = "rnd100";
             config.tweakPickerName = "";
-            config.saveEmpty = true;
+            config.saveEmpty = false;
             config.saveWithPath = true;
             config.saveArrows = true;
-            config.arrowLengthMin = 700;
+            config.arrowLengthMin = 400;
             config.genLimits = new List<int?>() { 3, };
-
+            config.saveCsv = true;
             CreateLevel(config);
         }
 
@@ -56,11 +56,9 @@ namespace coil
 
         static void CreateLevel(LevelGenerationConfig config)
         {
-            
-            //target = "rand99";
-            //re-validate the board at every step
-            
             var levelstem = $"../../../output/{config.x}x{config.y}";
+            var csvpath = levelstem + "/results.csv";
+            var csv = new CsvWriter(csvpath);
 
             if (!System.IO.Directory.Exists(levelstem))
             {
@@ -68,100 +66,69 @@ namespace coil
             }
 
             var runCount = 0;
-            //var lc2hash = new Dictionary<LevelConfiguration, string>();
             //var ws = new InitialWanderSetup(steplimit:2, startPoint:(1,1), gomax:true);
             var ws = new InitialWanderSetup();
-            //not used
-
-            //problems with the whole validation thing: 
-            //hmm, there should be no randomness in tweak generation.
-
-            //segpickers unused
-            var pickers = TweakPickers.GetPickers();
-            foreach (var tweakPicker in pickers)
+           
+            foreach (var tweakPicker in TweakPickers.GetPickers(config.tweakPickerName))
             {
-                if (!String.IsNullOrEmpty(config.tweakPickerName) && tweakPicker.Name!= config.tweakPickerName)
-                {
-                    continue;
-                }
-
                 foreach (var el in config.genLimits) // null, 1, 100, 10000
                 {
-                    var cs = new OptimizationSetup();
-                    cs.GlobalTweakLim = el;
-
-                    foreach (var segPicker in SegPickers.GetSegPickers())
+                    var os = new OptimizationSetup();
+                    os.GlobalTweakLim = el;
+                    foreach (var b in new List<bool>() { true, false })
                     {
-                        
-                        if (!string.IsNullOrEmpty(config.segPickerName) && segPicker.Name != config.segPickerName) 
-                        { 
-                            continue;
-                        }
-                        var rnd = new System.Random(config.seed);
-                        var lc = new LevelConfiguration(tweakPicker, segPicker, cs, ws);
-                        runCount++;
-                        var log = new Log(lc);
-                        var counter = new Counter(lc);
-                        var level = new Level(lc, log, config.x, config.y, rnd, config.seed, counter);
+                        os.UseSpaceFillingIndexes = b;
 
-                        level.InitialWander();
-                        //Show(level);
-                        if (lc.OptimizationSetup.UseSpaceFillingIndexes)
+                        foreach (var segPicker in SegPickers.GetSegPickers(config.segPickerName))
                         {
-                            level.RedoAllIndexesSpaceFillndexes();
-                        }
+                            runCount++;
 
-                        //bit awkward to do it here - it needs a better guarantee of finding the best seg.
-                        segPicker.Init(config.seed, level);
-                        var st = Stopwatch.StartNew();
-                        var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
-                        //counter.Show();
-                        var rep = Report(level, st.Elapsed, multiLine:true, tweakStats);
+                            var rnd = new System.Random(config.seed);
+                            var lc = new LevelConfiguration(tweakPicker, segPicker, os, ws);
+                            var log = new Log(lc);
+                            var level = new Level(lc, config.x, config.y, rnd, config.seed);
 
-                        if (runCount == 1 && !config.mass)
-                        {
-                            //Util.SaveEmpty(l, $"{stem}/e-{ii}.png");
-                            SaveWithPath(level, $"{levelstem}/p-{config.seed}.png");
-                        }
-                        //leave this in for one final sense check.
-                        var dst = Stopwatch.StartNew();
-                        log.Info(rep.Replace("\n", ""));
+                            level.InitialWander(lc);
 
-                        
-                        //WL($"Dodebug done: {dst.Elapsed}");
-                        
-                        var ist = Stopwatch.StartNew();
-                        //it would be nice to take two lines.
-                       
-                        if (config.saveEmpty)
-                        {
-                            SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed}.png", subtitle: rep, quiet: true);
-                        }
-                        if (config.saveWithPath)
-                        {
-                            //WL($"Saving image. {ist.Elapsed}");
-                            SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{config.seed}.png", subtitle: rep, quiet: true);
-                        }
-                        //WL($"Saving pathimage. {ist.Elapsed}");
-                        //Show(level);
+                            //bit awkward to do it here - it needs a better guarantee of finding the best seg.
+                            segPicker.Init(config.seed, level);
+                            var st = Stopwatch.StartNew();
+                            var tweakStats = level.RepeatedlyTweak(config.saveTweaks, config.saveEvery.Value, st);
+                            var elapsed = st.Elapsed;
 
-                        //lc2hash[lc] = l.GetHash();
-
-                        DoDebug(level, false, true);
-                        SaveLevelAsText(level, config.seed);
-
-                        if (config.saveArrows)
-                        {
-                            SaveArrowVersions(level, config.seed, levelstem, config.arrowLengthMin);
+                            //before doing any outputting, validate the level.
+                            DoDebug(level, show: false, validateBoard: true);
+                            AfterLevelGenerated(level, config, levelstem, lc, tweakStats, elapsed, csv, log);
                         }
                     }
                 }
             }
-            // TODO: compare hashes generated by all the cache usage combinations tested above and alert if different.
-            //foreach (var k in lc2hash.Keys)
-            //{
-            //    WL($"{k} = {lc2hash[k].Length} {lc2hash[k]}");
-            //}
+        }
+
+        public static void AfterLevelGenerated(Level level, LevelGenerationConfig config, string levelstem, LevelConfiguration lc, TweakStats tweakStats, TimeSpan ts, CsvWriter csv, Log log)
+        {
+            var repdata = GetReport(level, ts, tweakStats);
+            var rep = Report(repdata, multiline: true);
+
+            log.Info(Report(repdata, multiline: false));
+            SaveLevelAsText(level, config.seed);
+            if (config.saveCsv)
+            {
+                csv.Write(repdata);
+            }
+
+            if (config.saveEmpty)
+            {
+                SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed}.png", subtitle: rep, quiet: true);
+            }
+            if (config.saveWithPath)
+            {
+                SaveWithPath(level, $"{levelstem}/{lc.GetStr()}-path-{config.seed}.png", subtitle: rep, quiet: true);
+            }
+            if (config.saveArrows)
+            {
+                SaveArrowVersions(level, config.seed, levelstem, config.arrowLengthMin);
+            }
         }
     }
 }

@@ -28,9 +28,8 @@ namespace coil
         public Counter Counter { get; set; }
 
         //w/h are the "real" version
-        public Level(LevelConfiguration lc, Log log, int width, int height, Random rnd, int index, Counter c)
+        public Level(LevelConfiguration lc, int width, int height, Random rnd, int index)
         {
-            Counter = c;
             LevelConfiguration = lc;
             TweakPicker = lc.TweakPicker;
             Index = index;
@@ -698,53 +697,6 @@ namespace coil
                 default:
                     throw new Exception("Invalid tweakSection.");
             }
-        }
-
-        public void SpaceFillIndexes(List<LinkedListNode<Seg>> todo)
-        {
-            //figure out the range
-            //pick indexes for each one
-            //figure out if there is enough room - if not, redo all
-            var r0 = todo.First().Previous;
-            var r1 = todo.Last().Next;
-
-            uint rangestart = r0?.Value?.Index ?? 0;
-            uint rangeend = r1?.Value?.Index ?? uint.MaxValue;
-            var gap = rangeend - rangestart;
-            if (gap - 1 < todo.Count)
-            {
-                RedoAllIndexesSpaceFillndexes();
-                return;
-                //need to reassign everything
-            }
-
-            //plus one to leave space at the end too
-            uint chunksize = gap / ((uint)todo.Count+1);
-            uint current = rangestart + chunksize;
-            //WL($"Previous to next: {rangestart} => {rangeend}");
-            foreach (var el in todo)
-            {
-                el.Value.Index = current;
-                //WL($"Assigned {current}");
-                current += chunksize;
-                
-            }
-        }
-
-        //this will leave some spurious space at the beginning when doing a full redo
-        public void RedoAllIndexesSpaceFillndexes()
-        {
-            var st = Stopwatch.StartNew();
-            var l = new List<LinkedListNode<Seg>>();
-            var first = Segs.First;
-            while (first != null) { 
-                l.Add(first);
-                first = first.Next;
-            }
-            var t1 = st.Elapsed;
-            var st2 = Stopwatch.StartNew();
-            SpaceFillIndexes(l);
-            //WL($"Redoallindexes in {t1}, {st2.Elapsed}");
         }
 
         public void AdjustIndexAfter(LinkedListNode<Seg> seg, uint amount)

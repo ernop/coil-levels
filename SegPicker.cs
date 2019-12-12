@@ -236,9 +236,14 @@ namespace coil
 
     public static class SegPickers
     {
-        public static List<SegPicker> GetSegPickers()
+        public static IEnumerable<SegPicker> GetSegPickers(string name)
         {
-            return new List<SegPicker>() { new ConfigurableSegPicker("Longest", new LengthComparer()), new ConfigurableSegPicker("Weighted", new WeightedComparer()), new NewSegPicker() };
+            var pickers = new List<SegPicker>() { new ConfigurableSegPicker("Longest", new LengthComparer()), new ConfigurableSegPicker("Weighted", new WeightedComparer()), new NewSegPicker() };
+            if (string.IsNullOrEmpty(name))
+            {
+                return pickers;
+            }
+            return pickers.Where(p => p.Name == name);
         }
     }
 
