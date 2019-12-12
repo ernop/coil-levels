@@ -252,7 +252,6 @@ namespace coil
 
         public (int, int) GetRandomPoint()
         {
-            WL("GRPC");
             int x;
             int y;
             if (Width > 20 && Height > 20)

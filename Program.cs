@@ -15,8 +15,8 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 300;
-            config.y = 200;
+            config.x = 120;
+            config.y = 90;
             config.saveTweaks = false;
             config.saveEvery = 1;
             config.segPickerName = "Longest";
@@ -25,9 +25,9 @@ namespace coil
             config.tweakPickerName = "";
             config.saveEmpty = false;
             config.saveWithPath = true;
-            config.saveArrows = true;
+            config.saveArrows = false;
             config.arrowLengthMin = 400;
-            config.genLimits = new List<int?>() { 3, };
+            config.genLimits = new List<int?>() { 3, null, 1000, };
             config.saveCsv = true;
             CreateLevel(config);
         }

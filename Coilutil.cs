@@ -16,7 +16,7 @@ namespace coil
         private static Dictionary<string, Image> _Images = ImageUtil.GetImages();
 
         //for cmdline
-        public static void Show(Level l)
+        public static void Show(BaseLevel l)
         {
             WL("SHOW:");
             var om = GetOutputMap(l);
@@ -59,7 +59,7 @@ namespace coil
             return baseMap;
         }
 
-        public static void SaveEmpty(Level level, string fn, string subtitle = "", bool quiet = false, List<PointText> pointTexts = null, bool arrows = false)
+        public static void SaveEmpty(BaseLevel level, string fn, string subtitle = "", bool quiet = false, List<PointText> pointTexts = null, bool arrows = false)
         {
             if (fn.Contains(":"))
             {
@@ -249,6 +249,15 @@ namespace coil
                             }
                             baseMap[y][x] += "-hard";
                         }
+                        if (easyDecisions.Contains((x, y)))
+                        {
+                            if (baseMap[y][x].Length != 2)
+                            {
+                                WL("Bad basemap len");
+                            }
+                            baseMap[y][x] += "-easy";
+                        }
+                        //TODO adjust this for easy decisions
                     }
                 }
             }
@@ -319,7 +328,7 @@ namespace coil
             return new Tuple<List<List<string>>, List<List<string>>>(ins, outs);
         }
 
-        public static void ShowHit(Level l)
+        public static void ShowHit(BaseLevel l)
         {
             WL("HITS:");
             List<Seg> h = null;
@@ -483,6 +492,7 @@ namespace coil
 
             //those where one side isn't an obvious dead end.
             var hardDecisions = new List<(int, int)>();
+            var levelend = level.Segs.Last.Value.GetEnd();
             foreach (var seg in level.Segs)
             {
                 var end = seg.GetEnd();
@@ -490,17 +500,63 @@ namespace coil
                 var left = Add(end, ARot(seg.Dir));
 
                 //decision if left and right are empty, and the seg that fills them has index greater than current.
-                var rval = level.GetRowValue(right);
-                var lval = level.GetRowValue(left);
-                if (rval != null && lval != null
-                    && rval.Index > seg.Index && lval.Index > seg.Index)
+                //var rval = level.GetRowValue(right);
+                //var lval = level.GetRowValue(left);
+                //if (rval != null && lval != null
+                //    && rval.Index > seg.Index && lval.Index > seg.Index)
+                //{
+                //    //we know both sides are open when you reach this point.
+
+                //    hardDecisions.Add(end);
+                //}
+
+                //skip end points since they ARE allowed to be double-hard decisions (left and right both touch one empty square)
+                if (right==levelend || left == levelend)
                 {
-                    //we have a decision to make!
-                    //TODO hmm how to implement this with an untouched board?
-                    hardDecisions.Add(end);
+                    continue;
                 }
+
+                if (PointIsOpenAfterSeg(right, seg, level) && PointIsOpenAfterSeg(left, seg, level))
+                {
+                    //find three further neighbors.
+                    var rightneighbors = new List<(int, int)>() { Add(right, seg.Dir), Add(right, Rot(seg.Dir)), Add(right, Rot(Rot(seg.Dir)))};
+                    var leftneighbors = new List<(int, int)>() { Add(left, seg.Dir), Add(left, ARot(seg.Dir)), Add(left, ARot(ARot(seg.Dir)))};
+                    var rightopenneighbors = rightneighbors.Where(rn => PointIsOpenAfterSeg(rn, seg, level));
+                    var leftopenneighbors = leftneighbors.Where(ln => PointIsOpenAfterSeg(ln, seg, level));
+                    //Show(level);
+                    //ShowHit(level);
+                    
+                    var easy = false;
+                    if (rightopenneighbors.Count() == 1 || leftopenneighbors.Count() == 1)
+                    {
+                        easy = true;
+                    }
+                    if (rightopenneighbors.Count() == 1 && leftopenneighbors.Count() == 1)
+                    {
+                        throw new Exception("EX");
+                    }
+                    if (easy)
+                    {
+                        easyDecisions.Add(end);
+                    }
+                    else
+                    {
+                        hardDecisions.Add(end);
+                    }
+                }
+
             }
             return (new HashSet<(int, int)>(easyDecisions), new HashSet<(int, int)>(hardDecisions));
+        }
+
+        public static bool PointIsOpenAfterSeg((int,int) pt, Seg seg, BaseLevel level)
+        {
+            var val = level.GetRowValue(pt);
+            if (val!=null && val.Index > seg.Index)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

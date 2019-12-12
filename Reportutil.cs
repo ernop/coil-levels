@@ -13,7 +13,8 @@ namespace coil
             public int sqs;
             public int decisionCount;
             public double divergence;
-            public double decisionPercent;
+            public double easyDecisionPercent;
+            public double hardDecisionPercent;
             public double tweakSuccessPercent;
             public double coveragePercent;
             public string lcStr;
@@ -31,7 +32,7 @@ namespace coil
             }
             return $"{data.lcStr} {data.totalSeconds.ToString("0.0")}s {linebreak}" +
                 $"segs{data.segCount} cov{data.coveragePercent.ToString("##0.0")}% " +
-                $"dec{data.decisionPercent.ToString("0.0")}% {linebreak}" +
+                $"dec{data.easyDecisionPercent.ToString("0.0")}/{data.hardDecisionPercent.ToString("0.0")}% {linebreak}" +
                 $"{data.levelSize} div={data.divergence} {data.tweakSuccessPercent.ToString("##0.0")}%";
         }
 
@@ -63,8 +64,11 @@ namespace coil
             var coveragePercent = 100.0 * sum / sqs;
             res.coveragePercent = coveragePercent;
 
-            var decisionPercent = decisionCount * 1.0 / sqs * 100;
-            res.decisionPercent = decisionPercent;
+            var hardDecisionPercent = hardDecisions.Count * 1.0 / sqs * 100;
+            res.hardDecisionPercent = hardDecisionPercent;
+
+            var easyDecisionPercent = easyDecisions.Count * 1.0 / sqs * 100;
+            res.easyDecisionPercent = easyDecisionPercent;
 
             //Divergence = per seg, how distant other segs does it see?
             //problem - this prioritizes long paths.

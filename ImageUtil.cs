@@ -203,6 +203,18 @@ namespace coil
             d["dl-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-270));
 
             //"Decision easy" tiles
+            keyfp = $"{stem}/tiles/ru-easy.png";
+            d["ru-easy"] = Image.Load<Rgba32>(keyfp);
+            d["ul-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-90));
+            d["ld-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-180));
+            d["dr-easy"] = d["ru-easy"].Clone(oo => oo.Rotate(-270));
+
+            d["rd-easy"] = d["ru-easy"].Clone(oo => oo.Flip(FlipMode.Vertical));
+            d["ur-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-90));
+            d["lu-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-180));
+            d["dl-easy"] = d["rd-easy"].Clone(oo => oo.Rotate(-270));
+
+            //"Decision hard" tiles
             keyfp = $"{stem}/tiles/ru-hard.png";
             d["ru-hard"] = Image.Load<Rgba32>(keyfp);
             d["ul-hard"] = d["ru-hard"].Clone(oo => oo.Rotate(-90));
