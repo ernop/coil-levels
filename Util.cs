@@ -27,6 +27,10 @@ namespace coil
         /// <returns></returns>
         public static IEnumerable<int> Pivot(int min, int max)
         {
+            if (min > max)
+            {
+                yield break;
+            }
             var adder = 1;
             var now = (max + min) / 2;
             yield return now;

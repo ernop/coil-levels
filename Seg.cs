@@ -14,6 +14,7 @@ namespace coil
         //seems quite bad to manually maintain an index but this is way way faster than constantly doing IndexOf in the list.
         //but, that suggests I can just use a linkedList for Segs...
         public uint Index { get; set; }
+        public string History { get; set; } = "";
 
         public short FailCount { get; set; } = 0;
 

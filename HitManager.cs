@@ -26,6 +26,7 @@ namespace coil
         private bool Debug { get; set; }
         private Level Level { get; set; }
 
+        //5% of runtime
         public int GetHitIndex((int, int) pos)
         {
             return pos.Item2 * Level.Width + pos.Item1;
@@ -93,6 +94,23 @@ namespace coil
         public int GetCount((int,int) pos)
         {
             return Hits[GetHitIndex(pos)].Count;
+        }
+
+        /// <summary>
+        /// maybe keep a special dict of "earliest seg hitting" and hook it in with all the update/remove of the total Hits object?
+        /// i.e. do the comparison preemptively so you don't have to keep checking.
+        /// Or, optionally have this calculated clean/dirty
+        /// </summary>
+        internal bool CandidateIsHitbyLessThan((int, int) pos, uint index)
+        {
+            foreach (var otherSegsHittingThisPos in Hits[GetHitIndex(pos)])
+            {
+                if (otherSegsHittingThisPos.Index < index)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

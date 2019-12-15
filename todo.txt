@@ -1,3 +1,9 @@
+todo:
+0. profile more
+1. don't generate every possible tweak - stop before the end. segpicker should quit early after low success rate.
+2. #parallel image saving
+3. find a way not to keep revisiting nodes.
+
 todo now:
 0. hmm, UseSpaceFillingIndexes changes results.  for e.g. len2lim50rnd s-New o-nolim-empty-0.png.  why? definitely seems weird.
 1. finish new segpicker - they keep their own state and basically work as iterators, ending with null

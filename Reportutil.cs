@@ -36,6 +36,18 @@ namespace coil
                 $"{data.levelSize} div={data.divergence} {data.tweakSuccessPercent.ToString("##0.0")}%";
         }
 
+        public static double GetCoveragePercent(Level level, out int sqs)
+        {
+            sqs = (level.Height - 2) * (level.Width - 2);
+            var sum = 1;
+            foreach (var seg in level.Segs)
+            {
+                sum += seg.Len;
+            }
+            var coveragePercent = 100.0 * sum / sqs;
+            return coveragePercent;
+        }
+
         public static ReportData GetReport(Level level, TimeSpan ts, TweakStats tweakStats = null)
         {
             var res = new ReportData();
@@ -44,9 +56,8 @@ namespace coil
             res.segCount = level.Segs.Count;
             res.levelSize = $"{level.Width - 2}x{level.Height - 2}";
 
-            var sqs = (level.Height - 2) * (level.Width - 2);
-            res.sqs = sqs;
-            var sum = 1;
+            
+            
             var decisions = GetDecisions(level);
 
             //hard decisions not done yet. doable now.
@@ -56,12 +67,9 @@ namespace coil
             var decisionCount = easyDecisions.Count + hardDecisions.Count;
             res.decisionCount = decisionCount;
             
-            foreach (var seg in level.Segs)
-            {
-                sum += seg.Len;
-            }
-
-            var coveragePercent = 100.0 * sum / sqs;
+            var coveragePercent = GetCoveragePercent(level, out int sqs);
+            res.sqs = sqs;
+            
             res.coveragePercent = coveragePercent;
 
             var hardDecisionPercent = hardDecisions.Count * 1.0 / sqs * 100;

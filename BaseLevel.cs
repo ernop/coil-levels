@@ -12,9 +12,9 @@ namespace coil
     public class BaseLevel
     {
         public LevelConfiguration LevelConfiguration { get; set; }
-        public int Width { get; protected set; }
+        public int Width;
 
-        public int Height { get; protected set; }
+        public int Height;
 
         public Random Rnd { get; protected set; }
 
@@ -270,7 +270,7 @@ namespace coil
 
         public bool InBounds((int, int) candidate)
         {
-            if (candidate.Item1 == 0 || candidate.Item1 == Width - 1 || candidate.Item2 == 0 || candidate.Item2 == Height - 1)
+            if (candidate.Item1 == 0 || candidate.Item2 == 0 || candidate.Item1 == Width - 1 || candidate.Item2 == Height - 1)
             {
                 return false;
             }

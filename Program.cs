@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using static coil.Util;
 using static coil.Debug;
 using static coil.Coilutil;
 using static coil.Reportutil;
@@ -15,21 +13,22 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 120;
-            config.y = 90;
+            config.x = 1000;
+            config.y = 1000;
             config.saveTweaks = false;
             config.saveEvery = 1;
-            config.segPickerName = "Longest";
-            config.segPickerName = "";
+            config.segPickerName = "Weighted4";
+            //config.segPickerName = "";
             config.tweakPickerName = "rnd99";
-            config.tweakPickerName = "";
-            config.saveEmpty = false;
+            config.tweakPickerName = "odd";
+            config.saveEmpty = true;
             config.saveWithPath = true;
-            config.saveArrows = false;
-            config.arrowLengthMin = 400;
-            config.genLimits = new List<int?>() { 3, null, 1000, };
+            config.saveArrows = true;
+            config.arrowLengthMin = 50;
+            config.genLimits = new List<int?>() { 2, };
             config.saveCsv = true;
             CreateLevel(config);
+            //CreateMultiple(config, 30);
         }
 
         static void CreateLots(LevelGenerationConfig config, int minx, int miny, int maxx, int maxy, int xincrement, int yincrement, int countper)

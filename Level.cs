@@ -8,6 +8,8 @@ using static coil.Navigation;
 using static coil.Util;
 using static coil.Debug;
 using static coil.Coilutil;
+using static coil.Reportutil;
+
 namespace coil
 {
     //Levels are generated with an artifical solid boundary outside it, handled by putting minint in there.
@@ -15,17 +17,6 @@ namespace coil
     {
         public int Index;
         public TweakPicker TweakPicker;
-
-        /// <summary>
-        /// Compute a unique string representation of Segs for comparison
-        /// </summary>
-        public string GetHash()
-        {
-            var str = "";
-            return str;
-        }
-
-        public Counter Counter { get; set; }
 
         //w/h are the "real" version
         public Level(LevelConfiguration lc, int width, int height, Random rnd, int index)
@@ -53,27 +44,40 @@ namespace coil
 
             var current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
             var tweakct = 0;
+            var lastLoopCt = 0;
             while (current != null)
             {
                 var tweaks = new List<Tweak>() { };
 
                 tweaks.AddRange(GetTweaks(current, true));
                 tweaks.AddRange(GetTweaks(current, false));
+                //WL($"Generated {tweaks.Count} for {current.Value}: {current.Value.History}");
                 if (!tweaks.Any())
                 {
-                    //Show(this);
                     stats.NoTweaks++;
                     current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
+                    //WL("NOtweaks");
+                    if (current != null)
+                    {
+                        current.Value.History += " no";
+                    }
                     continue;
                 }
 
+                //TODO is it bad that when we loop, we re-add every seg even ones which clearly haven't had anything change in the neighborhood.
+                //most of the time the algo runs is recalculating things downstream of this decision
+
                 var tweak = LevelConfiguration.TweakPicker.Picker.Invoke(tweaks);
-                if (tweak == null)
-                {
-                    stats.NoTweaksQualify++;
-                    current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
-                    continue;
-                }
+                //if (tweak == null)
+                //{
+                //    //this should never happen now that I'm not using exclusionary tweakpickers.
+                //    stats.NoTweaksQualify++;
+                //    current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
+                //    WL("noqualifying");
+                //    current.Value.History += " noq";
+                //    continue;
+                //}
+                //WL($"\tGottweak {tweak}");
 
                 //seg is always destroyed. BUT, prev/next can also be modified.
                 //can I just pass that along and have it removed/added with new len?
@@ -93,23 +97,45 @@ namespace coil
 
                 //var nei = Solverutil.GetNeighbors(newSegs.Last().Value);
 
-                PossiblySaveDuringTweak(saveState, tweakct, saveEvery, 0, current.Value);
-                tweakct++;
+                var newLoop = false;
+                if (stats.loopct > lastLoopCt)
+                {
+                    lastLoopCt = stats.loopct;
+                    newLoop = true;
+                }
+                PossiblySaveDuringTweak(saveState, saveEvery, stats, newLoop: newLoop);
 
-                //WL($"tweaks={tweakct} loopct={loopct} {Report(this, st.Elapsed)} segSuccess:{(tweakct * 1.0 / failct * 100.0).ToString("##0.0")}%");
+                if (stats.SuccessCt != 0 && stats.SuccessCt % 10000 == 0)
+                {
+                    WL($"{stats.loopct} Segs={Segs.Count} Cov={GetCoveragePercent(this, out int _)} {st.Elapsed} tweakSuccess:{(stats.SuccessCt * 1.0 / (stats.NoTweaks+stats.NoTweaksQualify+stats.SuccessCt)* 100.0).ToString("##0.0")}%");
+                }
                 current = LevelConfiguration.SegPicker.PickSeg(newSegs, modifiedSegs, stats, true);
                 //WL($"success, advanced to: {current?.Value}");
+                
             }
 
             return stats;
         }
 
-        public void PossiblySaveDuringTweak(bool saveState, int tweakct, int saveEvery, int loopct, Seg seg, List<(int,int)> neighbors = null)
+        public void PossiblySaveDuringTweak(bool saveState, int saveEvery, TweakStats stats, List<(int,int)> neighbors = null, bool newLoop = false)
         {
-            if (saveState && tweakct % saveEvery == 0)
+            if ((saveState && stats.SuccessCt % saveEvery == 0) || newLoop)
             {
-                var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-lc{LevelConfiguration.GetStr()}-i{Index}-l{loopct}-tw{tweakct}-{seg.Index}-{seg.Len}-p.png";
-                SaveWithPath(this, pathfn, subtitle:$"TweakCt:{tweakct}", highlights: neighbors);
+                var loopText = "";
+                if (newLoop && false )
+                {
+                    //bit of a hack here - but i want to see details about progress per loop
+                    var repdata = GetReport(this, TimeSpan.FromSeconds(0), stats);
+                    var rep = Report(repdata, multiline: true);
+                    loopText = $"loop={stats.loopct} ";
+                    var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p-{loopText}.png";
+                    SaveWithPath(this, pathfn, subtitle: rep, quiet: true);
+                }
+                else
+                {
+                    var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p.png";
+                    SaveWithPath(this, pathfn, subtitle: $"{loopText}SegCt:{Segs.Count}", highlights: neighbors);
+                }
 
                 //var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
                 //SaveEmpty(this, fn);
@@ -164,7 +190,10 @@ namespace coil
                     {
                         break;
                     }
-                    if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
+
+                    //this takes up 40% of runtime.
+                    if (Hits.CandidateIsHitbyLessThan(candidate, seg.Index))
+                    //if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
                     {
                         break;
                     }
@@ -312,17 +341,31 @@ namespace coil
                     //var len3effectivemax = Math.Min(len3available, seg.Len);
 
                     //pick longest len3s first.
-                    var len3choices = new List<int>();
-                    for (var len3 = len3available; len3 >= lengthMinimum; len3--)
-                    {
-                        len3choices.Add(len3);
-                    }
-                    len3choices = len3choices.OrderBy(el => el > len3available * 2 / 3 ? el : el + len3available).ToList();
+                    //var len3choices = new List<int>();
+                    //for (var len3 = len3available; len3 >= lengthMinimum; len3--)
+                    //{
+                    //    len3choices.Add(len3);
+                    //}
+                    //len3choices = len3choices.OrderBy(el => el > len3available * 2 / 3 ? el : el + len3available).ToList();
 
                     //var ba;
 
                     //foreach (var len3 in Pivot(lengthMinimum, len3available))
-                    foreach (var len3 in len3choices)
+                    //TODO something bugged if you use pivot here.
+
+                    //var alternative = Pivot(lengthMinimum, len3available);
+                    //var alts = new List<int>();
+                    //foreach (var el in alternative)
+                    //{
+                    //    alts.Add(el);
+                    //}
+                    //if (alts.Count != len3choices.Count)
+                    //{
+                    //    var bb = 3;
+                    //}
+
+                    foreach (var len3 in Pivot(lengthMinimum, len3available))
+                    //foreach (var len3 in len3choices)
                     {
                         var len3endcandidate = len3 + len1;
 
@@ -415,7 +458,15 @@ namespace coil
                 if (LevelConfiguration.OptimizationSetup.UseSpaceFillingIndexes)
                 {
                     var previousSegIndex = segnode.Previous?.Value?.Index ?? 0;
-
+                    //specialcase zero
+                    if (previousSegIndex == 0)
+                    {
+                        if (Hits.Get(candidate).Any())
+                        {
+                            res--;
+                            break;
+                        }
+                    }
                     if (Hits.Get(candidate).Any(hc => hc.Index < previousSegIndex))
                     {
                         res--;

@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -10,6 +12,9 @@ using static coil.Util;
 using System.Numerics;
 using SixLabors.Primitives;
 using SixLabors.Shapes;
+
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace coil
 {
@@ -25,6 +30,7 @@ namespace coil
         public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false,
             List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null, List<(int,int)> highlights = null)
         {
+            var st = Stopwatch.StartNew();
             //juggle the path to determine what should be written in each square.
 
             var effectiveScale = overrideScale.HasValue ? overrideScale.Value : Scale;
@@ -56,20 +62,60 @@ namespace coil
                 }
             }
             
+            //what if i created it in strips?
+
+            
+
             using (var result = new Image<Rgba32>(imageWidth, imageHeight))
             {
                 if (outstrings != null)
                 {
-                    for (var yy = 0; yy < level.Height; yy++)
-                    {
-                        for (var xx = 0; xx < level.Width; xx++)
+                    if (false) {
+                        Parallel.For(0, level.Height, yy =>
+                        //for (var yy = 0;yy < level.Height;yy++)
                         {
-                            var target = new SixLabors.Primitives.Point(xx * effectiveScale, yy * effectiveScale);
-                            var key = outstrings[yy][xx];
+                        //for(var xx= 0;xx < level.Width;xx++)
+                        Parallel.For(0, level.Width, xx =>
+                            {
+                                var target = new SixLabors.Primitives.Point(xx * effectiveScale, yy * effectiveScale);
+                                var key = outstrings[yy][xx];
 
-                            result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
+                                result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
 
+                            });
+                        });
+                    }
+                    else
+                    {
+                        var strips = new ConcurrentDictionary<int,Image<Rgba32>>(); ;
+                        //this speeds things up a lot but there are still too many strips.
+                        Parallel.For(0, level.Height, yy =>
+                        {
+                            var strip = new Image<Rgba32>(imageWidth, Scale);
+
+                            for (var xx = 0; xx < level.Width; xx++)
+                            {
+                                var target = new Point(xx * effectiveScale, 0);
+                                var key = outstrings[yy][xx];
+
+                                strip.Mutate(oo => oo.DrawImage(images[key], target, 1f));
+                            }
+                            strips[yy]=strip;
+                        
+                        });
+                        WL($"Generated strips in {st.Elapsed}");
+                        //combine them all.
+                        var yy = 0;
+                        foreach (var key in strips.Keys)
+                        {
+                            var pt = new Point(0, yy);
+                            var s2 = strips[key];
+                            result.Mutate(oo => oo.DrawImage(s2, pt, 1f));
+                            yy += Scale;
                         }
+
+                        WL($"Combined at {st.Elapsed}");
+
                     }
                 }
                 if (writeSubtitle)
@@ -133,6 +179,7 @@ namespace coil
             {
                 Console.WriteLine($"Saved to: {fn}");
             }
+            WL($"Save took: {st.Elapsed}");
         }
 
         //adjust point to center of square.
