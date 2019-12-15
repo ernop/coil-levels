@@ -49,7 +49,10 @@ namespace coil
             foreach (var nei in neighbors)
             {
                 var neiseg = level.GetRowValue(nei);
-                res.Add(neiseg);
+                if (neiseg != null)
+                {
+                    res.Add(neiseg);
+                }
             }
             return res;
         }

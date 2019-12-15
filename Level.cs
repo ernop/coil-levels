@@ -122,14 +122,17 @@ namespace coil
             if ((saveState && stats.SuccessCt % saveEvery == 0) || newLoop)
             {
                 var loopText = "";
-                if (newLoop && false )
+                if (newLoop)
                 {
-                    //bit of a hack here - but i want to see details about progress per loop
-                    var repdata = GetReport(this, TimeSpan.FromSeconds(0), stats);
-                    var rep = Report(repdata, multiline: true);
-                    loopText = $"loop={stats.loopct} ";
-                    var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p-{loopText}.png";
-                    SaveWithPath(this, pathfn, subtitle: rep, quiet: true);
+                    if (false)
+                    {
+                        //bit of a hack here - but i want to see details about progress per loop
+                        var repdata = GetReport(this, TimeSpan.FromSeconds(0), stats);
+                        var rep = Report(repdata, multiline: true);
+                        loopText = $"loop={stats.loopct} ";
+                        var pathfn = $"../../../output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p-{loopText}.png";
+                        SaveWithPath(this, pathfn, subtitle: rep, quiet: true);
+                    }
                 }
                 else
                 {
@@ -192,7 +195,7 @@ namespace coil
                     }
 
                     //this takes up 40% of runtime.
-                    if (Hits.CandidateIsHitbyLessThan(candidate, seg.Index))
+                    if (Hits.CandidateIsHitByLessThan(candidate, seg.Index))
                     //if (Hits.Get(candidate).Any(hseg => hseg.Index < seg.Index))
                     {
                         break;
@@ -291,6 +294,7 @@ namespace coil
                     len3absolutemax = Math.Min(TweakPicker.MaxLen3.Value, len3absolutemax);
                 }
 
+                //it would be nice to prefer moving right here so we could take advantage of stvcache (which is basically useless now)
                 foreach (var len2 in Pivot(1,len2max))
                 {
                     //what is the structural problem that causes this bug?
@@ -364,6 +368,10 @@ namespace coil
                     //    var bb = 3;
                     //}
 
+                    //TODO it is rather bad that we pivot here. with low tweak generation this will often result in non-long tweak len3s.
+                    //it's also remarkable that if for a greater len2 we already kne wthe returnable at a given x coordinate, then our returnable
+                    //is clearly true
+                    //TODO it's also inefficient that we go all the way to len3available but only may use part of it.
                     foreach (var len3 in Pivot(lengthMinimum, len3available))
                     //foreach (var len3 in len3choices)
                     {

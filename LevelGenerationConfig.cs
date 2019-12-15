@@ -14,6 +14,8 @@ namespace coil
         public bool saveArrows = false;
         public int arrowLengthMin = 50;
         public bool saveEmpty = false;
+        //save a 100x100 square from the upper left corner
+        internal bool saveEmptyUpperCorner;
         public bool saveWithPath = false;
         
         /// <summary>
@@ -21,5 +23,7 @@ namespace coil
         /// </summary>
         public bool saveCsv = false;
         public List<int?> genLimits = new List<int?>() { null, 1, 3, 100 };
+
+        
     }
 }

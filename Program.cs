@@ -13,19 +13,20 @@ namespace coil
         {
             var config = new LevelGenerationConfig();
             config.seed = 0;
-            config.x = 1000;
-            config.y = 1000;
+            config.x = 5000;
+            config.y = 5000;
             config.saveTweaks = false;
             config.saveEvery = 1;
             config.segPickerName = "Weighted4";
             //config.segPickerName = "";
             config.tweakPickerName = "rnd99";
-            config.tweakPickerName = "odd";
-            config.saveEmpty = true;
-            config.saveWithPath = true;
-            config.saveArrows = true;
+            //config.tweakPickerName = "";
+            config.saveEmpty = false;
+            config.saveEmptyUpperCorner = true;
+            config.saveWithPath = false;
+            config.saveArrows = false;
             config.arrowLengthMin = 50;
-            config.genLimits = new List<int?>() { 2, };
+            config.genLimits = new List<int?>() { 20, };
             config.saveCsv = true;
             CreateLevel(config);
             //CreateMultiple(config, 30);
@@ -116,6 +117,10 @@ namespace coil
             if (config.saveEmpty)
             {
                 SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-empty-{config.seed} {runcount}.png", subtitle: rep, quiet: true);
+            }
+            if (config.saveEmptyUpperCorner)
+            {
+                SaveEmpty(level, $"{levelstem}/{lc.GetStr()}-corner-{config.seed} {runcount}.png", subtitle: rep, quiet: true, corner: true);
             }
             if (config.saveWithPath)
             {

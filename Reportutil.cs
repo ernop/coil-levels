@@ -2,6 +2,7 @@
 using System.Linq;
 using SparkNet;
 using static coil.Coilutil;
+using static coil.Solverutil;
 
 namespace coil
 {
@@ -21,6 +22,8 @@ namespace coil
             public double totalSeconds;
             public int segCount;
             public string levelSize;
+            public double avgNeighborCount;
+            public double avgSegLen;
         }
 
         public static string Report(ReportData data, bool multiline = false)
@@ -33,7 +36,8 @@ namespace coil
             return $"{data.lcStr} {data.totalSeconds.ToString("0.0")}s {linebreak}" +
                 $"segs{data.segCount} cov{data.coveragePercent.ToString("##0.0")}% " +
                 $"dec{data.easyDecisionPercent.ToString("0.0")}/{data.hardDecisionPercent.ToString("0.0")}% {linebreak}" +
-                $"{data.levelSize} div={data.divergence} {data.tweakSuccessPercent.ToString("##0.0")}%";
+                $"{data.levelSize} div={data.divergence} nei={data.avgNeighborCount.ToString("0.0")} asl{data.avgSegLen.ToString("0.0")} {linebreak}"+
+                $"{data.tweakSuccessPercent.ToString("##0.0")}%";
         }
 
         public static double GetCoveragePercent(Level level, out int sqs)
@@ -56,32 +60,28 @@ namespace coil
             res.segCount = level.Segs.Count;
             res.levelSize = $"{level.Width - 2}x{level.Height - 2}";
 
-            
-            
             var decisions = GetDecisions(level);
 
             //hard decisions not done yet. doable now.
             var easyDecisions = decisions.Item1;
             var hardDecisions = decisions.Item2;
             
-            var decisionCount = easyDecisions.Count + hardDecisions.Count;
-            res.decisionCount = decisionCount;
-            
-            var coveragePercent = GetCoveragePercent(level, out int sqs);
+            res.decisionCount = easyDecisions.Count + hardDecisions.Count;
+
+            res.coveragePercent = GetCoveragePercent(level, out int sqs);
             res.sqs = sqs;
-            
-            res.coveragePercent = coveragePercent;
 
-            var hardDecisionPercent = hardDecisions.Count * 1.0 / sqs * 100;
-            res.hardDecisionPercent = hardDecisionPercent;
+            res.hardDecisionPercent = hardDecisions.Count * 1.0 / sqs * 100;
 
-            var easyDecisionPercent = easyDecisions.Count * 1.0 / sqs * 100;
-            res.easyDecisionPercent = easyDecisionPercent;
+            res.easyDecisionPercent = easyDecisions.Count * 1.0 / sqs * 100;
 
             //Divergence = per seg, how distant other segs does it see?
             //problem - this prioritizes long paths.
-            var divergence = GetDivergence(level);
-            res.divergence = divergence;
+            res.divergence = GetDivergence(level);
+
+            res.avgNeighborCount = GetAvgNeighborCount(level);
+
+            res.avgSegLen = GetAvgSegLen(level);
 
             var tweakTrySum = (tweakStats.SuccessCt + tweakStats.NoTweaks + tweakStats.NoTweaksQualify);
             var tweakSuccessPercent = tweakStats.SuccessCt * 100.0 / tweakTrySum;
@@ -91,11 +91,41 @@ namespace coil
             return res;
         }
 
-        //TODO it would be nice to have a sparkline of block size/pathsize/neighbor size
-
+        /// <summary>
+        /// for ever
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
         public static double GetDivergence(Level level)
         {
             return 0;
+        }
+
+
+        /// <summary>
+        /// for ever
+        /// </summary>
+        /// <param name="level"></param>
+        /// <returns></returns>
+        public static double GetAvgNeighborCount(Level level)
+        {
+            var tot = 0;
+            foreach (var seg in level.Segs)
+            {
+                var neighbors = GetNeighboringSegs(level, seg);
+                tot += neighbors.Count;
+            }
+            return tot * 1.0 / level.Segs.Count;
+        }
+
+        public static double GetAvgSegLen(Level level)
+        {
+            var tot = 0;
+            foreach (var seg in level.Segs)
+            {
+                tot += seg.Len;
+            }
+            return tot * 1.0 / level.Segs.Count;
         }
     }
 }

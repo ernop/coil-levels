@@ -44,6 +44,7 @@ namespace coil
                     Hits[GetHitIndex((xx, yy))] = new List<Seg>();
                 }
             }
+            EverBeenHit = new bool[Level.Height * Level.Width];
         }
 
         public bool Contains((int,int) key)
@@ -72,7 +73,9 @@ namespace coil
 
         public void Add((int,int) pos, Seg seg)
         {
-            var l = Hits[GetHitIndex(pos)];
+            var idx = GetHitIndex(pos);
+            EverBeenHit[idx] = true;
+            var l = Hits[idx];
             if (Debug)
             {
                 var overlaps =l.Where(ss => ss.Index == seg.Index);
@@ -96,14 +99,41 @@ namespace coil
             return Hits[GetHitIndex(pos)].Count;
         }
 
+        private int CanCheckCt = 0;
+
+        /// <summary>
+        /// Has a pos EVER been hit.  if it's never been a hit at all, it's a quick filter for candidateIsHitByLessThan
+        /// Apparently makes nearly no difference.
+        /// </summary>
+        private bool[] EverBeenHit;
+
         /// <summary>
         /// maybe keep a special dict of "earliest seg hitting" and hook it in with all the update/remove of the total Hits object?
         /// i.e. do the comparison preemptively so you don't have to keep checking.
         /// Or, optionally have this calculated clean/dirty
         /// </summary>
-        internal bool CandidateIsHitbyLessThan((int, int) pos, uint index)
+        internal bool CandidateIsHitByLessThan((int, int) pos, uint index)
         {
-            foreach (var otherSegsHittingThisPos in Hits[GetHitIndex(pos)])
+            var idx = GetHitIndex(pos);
+
+            //Shortcut
+            if (!EverBeenHit[idx])
+            {
+                return false;
+            }
+            var choices = Hits[idx];
+            
+            //CanCheckCt++;
+            //if (CanCheckCt % 10000 == 0)
+            //{
+            //    WL(CanCheckCt);
+            //}
+            //WL($"choicesCt:{choices.Count}");
+            if (choices.Count == 0)
+            {
+                return false;
+            }
+            foreach (var otherSegsHittingThisPos in choices)
             {
                 if (otherSegsHittingThisPos.Index < index)
                 {

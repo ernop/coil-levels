@@ -28,16 +28,19 @@ namespace coil
         public static Font BigFont = new Font(SystemFonts.Find("Comic Sans MS"), 36, FontStyle.Bold);
 
         public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false,
-            List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null, List<(int,int)> highlights = null)
+            List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null, List<(int,int)> highlights = null, bool corner = false)
         {
             var st = Stopwatch.StartNew();
             //juggle the path to determine what should be written in each square.
 
             var effectiveScale = overrideScale.HasValue ? overrideScale.Value : Scale;
 
+            var usingHeight = corner ? Math.Min(level.Height, 55) : level.Height;
+            var usingWidth = corner ? Math.Min(level.Width, 80) : level.Width;
+
             //allows partial segments
-            var imageHeight = level.Height * effectiveScale;
-            var imageWidth = level.Width * effectiveScale;
+            var imageHeight = usingHeight * effectiveScale;
+            var imageWidth = usingWidth * effectiveScale;
             
             var writeSubtitle = false;
             int? extra = null;
@@ -48,7 +51,7 @@ namespace coil
             {
                 subtitleLineCount = subtitleLines.Length;
                 
-                extra = Math.Max(effectiveScale, (int)(1.1* subtitleLineCount * level.Height))+8;
+                extra = Math.Max(effectiveScale, (int)(1.1* subtitleLineCount * usingHeight))+8;
                 imageHeight += extra.Value;
                 writeSubtitle = true;
                 subtitleLineHeight = extra.Value / subtitleLineCount;
@@ -89,11 +92,11 @@ namespace coil
                     {
                         var strips = new ConcurrentDictionary<int,Image<Rgba32>>(); ;
                         //this speeds things up a lot but there are still too many strips.
-                        Parallel.For(0, level.Height, yy =>
+                        Parallel.For(0, usingHeight, yy =>
                         {
                             var strip = new Image<Rgba32>(imageWidth, Scale);
 
-                            for (var xx = 0; xx < level.Width; xx++)
+                            for (var xx = 0; xx < usingWidth; xx++)
                             {
                                 var target = new Point(xx * effectiveScale, 0);
                                 var key = outstrings[yy][xx];
@@ -103,7 +106,7 @@ namespace coil
                             strips[yy]=strip;
                         
                         });
-                        WL($"Generated strips in {st.Elapsed}");
+                        //WL($"Generated strips in {st.Elapsed}");
                         //combine them all.
                         var yy = 0;
                         foreach (var key in strips.Keys)
@@ -114,7 +117,7 @@ namespace coil
                             yy += Scale;
                         }
 
-                        WL($"Combined at {st.Elapsed}");
+                        //WL($"Combined at {st.Elapsed}");
 
                     }
                 }
@@ -152,7 +155,7 @@ namespace coil
                     if (arrows)
                     {
                         //arrow width scales with board height+width.
-                        int arrowWidth = (int)((level.Width + level.Height) * 0.003)+1;
+                        int arrowWidth = (int)((usingHeight + usingWidth) * 0.003)+1;
                         PointText? lastPoint = null;
                         foreach (var pt in pointTexts)
                         {
@@ -179,7 +182,7 @@ namespace coil
             {
                 Console.WriteLine($"Saved to: {fn}");
             }
-            WL($"Save took: {st.Elapsed}");
+            //WL($"Save took: {st.Elapsed}");
         }
 
         //adjust point to center of square.

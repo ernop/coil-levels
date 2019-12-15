@@ -59,7 +59,7 @@ namespace coil
             return baseMap;
         }
 
-        public static void SaveEmpty(BaseLevel level, string fn, string subtitle = "", bool quiet = false, List<PointText> pointTexts = null, bool arrows = false)
+        public static void SaveEmpty(BaseLevel level, string fn, string subtitle = "", bool quiet = false, List<PointText> pointTexts = null, bool arrows = false, bool corner = false)
         {
             if (fn.Contains(":"))
             {
@@ -67,7 +67,7 @@ namespace coil
             }
             var baseMap = GetBaseMapForEmpty(level);
 
-            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: arrows);
+            ImageUtil.Save(_Images, level, baseMap, fn, subtitle, quiet, pointTexts, arrows: arrows, corner: corner);
         }
 
         public static void SaveWithPath(BaseLevel level, string fn, string subtitle = "", bool quiet = false, List<(int,int)> highlights = null)

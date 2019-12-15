@@ -1,3 +1,10 @@
+state:
+1k square: ~23s
+2k square: 153s
+5k square
+
+#added corner cutout to stop wasting time generating images.  ideally there'd be a pane that would be read from the level...  trivial to implement. pixels are a very bad way to do this.
+
 todo:
 0. profile more
 1. don't generate every possible tweak - stop before the end. segpicker should quit early after low success rate.
