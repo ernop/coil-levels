@@ -167,7 +167,7 @@ namespace coil
 
             //bump into a full square, or the next segment, or the start of the next-next segment if next len is zero
 
-            //old system: comlpex comparisions to generate returns
+            //old system: complex comparisons to generate returns
             //new: hitsq is valid if it's full, earlier path, or we returned to end of current seg.
 
             //if (stpt == segEnd)
