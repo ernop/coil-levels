@@ -307,7 +307,7 @@ namespace coil
             };
             if (string.IsNullOrEmpty(name))
             {
-                return pickers;
+                return pickers.OrderBy(p => p.Name);
             }
             return pickers.Where(p => p.Name == name);
         }
