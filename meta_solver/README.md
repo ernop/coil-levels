@@ -3,6 +3,10 @@
 A self-improving optimization framework that uses multiple LLMs as "idea generators" 
 and rigorously tests ideas against sample problems.
 
+**Primary Target:** [Coilbench](https://github.com/adum/coilbench) - A pathfinding puzzle 
+benchmark where brute force would take 304 millennia. Only 4 humans have ever solved 
+all levels; best AI iteration reached level 73 of ~1200.
+
 ## Architecture
 
 ```
