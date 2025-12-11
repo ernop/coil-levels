@@ -1,0 +1,9 @@
+# Core dependencies (no external requirements for basic usage)
+
+# Optional: LLM API clients (install as needed)
+# anthropic>=0.18.0      # For Claude API
+# openai>=1.12.0         # For GPT API
+# google-generativeai>=0.4.0  # For Gemini API
+
+# Development/testing
+# pytest>=7.0.0
