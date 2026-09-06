@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using SparkNet;
 using static coil.Coilutil;
+using static coil.Navigation;
 using static coil.Solverutil;
 
 namespace coil
@@ -109,11 +109,44 @@ namespace coil
         /// <returns></returns>
         public static double GetAvgNeighborCount(Level level)
         {
-            var tot = 0;
+            //distinct segs owning a square adjacent to this seg. Allocation-free: a 5000x5000 level has ~9M segs.
+            long tot = 0;
+            var seen = new ulong[64];
             foreach (var seg in level.Segs)
             {
-                var neighbors = GetNeighboringSegs(level, seg);
-                tot += neighbors.Count;
+                var n = 0;
+                void Note((int, int) pt)
+                {
+                    var idx = level.GetRowIndex(pt);
+                    if (idx == 0)
+                    {
+                        return;
+                    }
+                    for (var i = 0; i < n; i++)
+                    {
+                        if (seen[i] == idx)
+                        {
+                            return;
+                        }
+                    }
+                    if (n == seen.Length)
+                    {
+                        Array.Resize(ref seen, seen.Length * 2);
+                    }
+                    seen[n++] = idx;
+                }
+                Note(Add(seg.Start, Rot(Rot(seg.Dir))));
+                var candidate = seg.Start;
+                var side1 = Rot(seg.Dir);
+                var side2 = ARot(seg.Dir);
+                for (var ii = 0; ii <= seg.Len; ii++)
+                {
+                    Note(Add(candidate, side1));
+                    Note(Add(candidate, side2));
+                    candidate = Add(candidate, seg.Dir);
+                }
+                Note(candidate);
+                tot += n;
             }
             return tot * 1.0 / level.Segs.Count;
         }

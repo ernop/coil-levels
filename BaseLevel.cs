@@ -22,15 +22,35 @@ namespace coil
         //pointing at a segment will include the xest segment covering it.
         //public Dictionary<(int, int), Seg> Rows { get; protected set; }
         public Seg[] Rows { get; set; }
+
+        /// <summary>
+        /// Per-square hot data, one cache line per square for the tweak-search walks: the owning seg's index
+        /// (0 = empty) and the smallest index among segs whose slide stops on this square (0 = none).
+        /// Rows holds the Seg objects themselves for everything that needs more than the index.
+        /// Segs must have their final index before ApplySeg writes them here.
+        /// </summary>
+        public struct Cell
+        {
+            public ulong Owner;
+            public ulong MinHit;
+        }
+
+        public Cell[] Cells { get; set; }
+
         public Seg GetRowValue((int,int) pos)
         {
             var index = pos.Item2*Width+pos.Item1;
             return Rows[index];
         }
+        public ulong GetRowIndex((int, int) pos)
+        {
+            return Cells[pos.Item2 * Width + pos.Item1].Owner;
+        }
         public void SetRowValue((int,int) pos, Seg seg)
         {
             var index = pos.Item2 * Width + pos.Item1;
             Rows[index] = seg;
+            Cells[index].Owner = seg?.Index ?? 0;
         }
 
         public HitManager Hits;
@@ -43,14 +63,7 @@ namespace coil
         {
 
             Rows = new Seg[Height * Width];
-            for (var yy = 0; yy < Height; yy++)
-            {
-                for (var xx = 0; xx < Width; xx++)
-                {
-                    //Rows[(xx, yy)] = null;
-                    SetRowValue((xx, yy), null);
-                }
-            }
+            Cells = new Cell[Height * Width];
         }
 
         // only used by initial random walk.
@@ -106,7 +119,7 @@ namespace coil
         //only used by initial random walk
         private void AddSeg(Seg seg)
         {
-            seg.Index = (uint)Segs.Count + 1;
+            seg.Index = (ulong)Segs.Count + 1;
 
             var candidate = seg.Start;
             var ii = 0;
@@ -201,51 +214,59 @@ namespace coil
         }
 
 
+        public int RedoAllCount { get; private set; }
+
         //this will leave some spurious space at the beginning when doing a full redo
         public void RedoAllIndexesSpaceFilled()
         {
-            //var st = Stopwatch.StartNew();
-            var l = new List<LinkedListNode<Seg>>();
+            RedoAllCount++;
+            var l = new List<LinkedListNode<Seg>>(Segs.Count);
             var first = Segs.First;
             while (first != null)
             {
                 l.Add(first);
                 first = first.Next;
             }
-            //var t1 = st.Elapsed;
-            //var st2 = Stopwatch.StartNew();
             SpaceFillIndexes(l);
-            //WL($"Redoallindexes in {t1}, {st2.Elapsed}");
+            RecomputeCachedIndexes();
         }
 
+        //Both index assignment strategies invalidate the per-square comparison caches.
+        protected void RecomputeCachedIndexes()
+        {
+            for (var i = 0; i < Rows.Length; i++)
+            {
+                Cells[i].Owner = Rows[i]?.Index ?? 0;
+            }
+            Hits.RecomputeMinIndexes();
+        }
+
+        /// <summary>
+        /// Give the segs in todo (consecutive in Segs) indexes evenly spread between their neighbors' indexes,
+        /// so ordering comparisons work without renumbering everything after them. Must run before the segs'
+        /// squares are written with SetRowValue.
+        /// </summary>
         public void SpaceFillIndexes(List<LinkedListNode<Seg>> todo)
         {
-            //figure out the range
-            //pick indexes for each one
-            //figure out if there is enough room - if not, redo all
-            var r0 = todo.First().Previous;
-            var r1 = todo.Last().Next;
+            var r0 = todo[0].Previous;
+            var r1 = todo[todo.Count - 1].Next;
 
-            uint rangestart = r0?.Value?.Index ?? 0;
-            uint rangeend = r1?.Value?.Index ?? uint.MaxValue;
+            ulong rangestart = r0?.Value?.Index ?? 0;
+            ulong rangeend = r1?.Value?.Index ?? ulong.MaxValue;
             var gap = rangeend - rangestart;
-            if (gap - 1 < todo.Count)
+            if (gap - 1 < (ulong)todo.Count)
             {
                 RedoAllIndexesSpaceFilled();
                 return;
-                //need to reassign everything
             }
 
             //plus one to leave space at the end too
-            uint chunksize = gap / ((uint)todo.Count + 1);
-            uint current = rangestart + chunksize;
-            //WL($"Previous to next: {rangestart} => {rangeend}");
+            ulong chunksize = gap / ((ulong)todo.Count + 1);
+            ulong current = rangestart + chunksize;
             foreach (var el in todo)
             {
                 el.Value.Index = current;
-                //WL($"Assigned {current}");
                 current += chunksize;
-
             }
         }
 
@@ -285,9 +306,9 @@ namespace coil
                 if (tweakct % saveEvery == 0)
                 {
                     Console.WriteLine($"Applied tweak: {tweak} {tweakct}");
-                    SaveWithPath(this, $"../../../tweaks/Tweak-{tweakct}.png");
+                    SaveWithPath(this, $"{Paths.Root}/tweaks/Tweak-{tweakct}.png");
 
-                    //SaveEmpty(this, $"../../../tweaks/Tweak-{tweakct}-empty.png");
+                    //SaveEmpty(this, $"{Paths.Root}/tweaks/Tweak-{tweakct}-empty.png");
                 }
             }
 

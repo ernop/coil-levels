@@ -25,36 +25,68 @@ namespace coil
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        public static IEnumerable<int> Pivot(int min, int max)
+        public static PivotRange Pivot(int min, int max)
         {
-            if (min > max)
-            {
-                yield break;
-            }
-            var adder = 1;
-            var now = (max + min) / 2;
-            yield return now;
-            while (true)
-            {
-                var success = false;
-                now += adder;
+            return new PivotRange(min, max);
+        }
 
-                if (now <= max)
+        /// <summary>
+        /// mid, mid+1, mid-1, mid+2, mid-2, ... clipped to [min,max]. A struct so foreach allocates nothing;
+        /// GetTweaks runs three of these per candidate seg.
+        /// </summary>
+        public readonly struct PivotRange
+        {
+            private readonly int Min;
+            private readonly int Max;
+            public PivotRange(int min, int max) { Min = min; Max = max; }
+            public Enumerator GetEnumerator() => new Enumerator(Min, Max);
+
+            public struct Enumerator
+            {
+                private readonly int Min;
+                private readonly int Max;
+                private readonly int Mid;
+                private int Step;
+                public int Current { get; private set; }
+
+                public Enumerator(int min, int max)
                 {
-                    yield return now;
-                    success = true;
+                    Min = min;
+                    Max = max;
+                    Mid = (max + min) / 2;
+                    Step = 0;
+                    Current = 0;
                 }
-                adder++;
-                now -= adder;
-                adder++;
-                if (now >= min)
+
+                public bool MoveNext()
                 {
-                    yield return now;
-                    success = true;
-                }
-                if (!success)
-                {
-                    break;
+                    //step k: k=0 -> mid; odd k -> mid + (k+1)/2; even k -> mid - k/2
+                    while (true)
+                    {
+                        var k = Step++;
+                        int v;
+                        if (k == 0)
+                        {
+                            v = Mid;
+                        }
+                        else if ((k & 1) == 1)
+                        {
+                            v = Mid + (k + 1) / 2;
+                        }
+                        else
+                        {
+                            v = Mid - k / 2;
+                        }
+                        if (v >= Min && v <= Max)
+                        {
+                            Current = v;
+                            return true;
+                        }
+                        if (Mid + (k + 1) / 2 > Max && Mid - (k + 1) / 2 < Min)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
         }
@@ -143,7 +175,7 @@ namespace coil
         //        var ii = 0;
         //        foreach (var testtweak in tweaks)
         //        {
-        //            var fn = $"../../../output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-{ii}.png";
+        //            var fn = $"{Paths.Root}/output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-{ii}.png";
         //            ApplySaveAndUndoTweak(testtweak, fn);
         //            ii++;
         //        }

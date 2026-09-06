@@ -98,7 +98,8 @@ namespace coil
                         var subtweaks = tweaks.Where(tw=>tw.Len2<=5 && tw.Len3 <=5);
                         if (!subtweaks.Any())
                         {
-                            return null;
+                            //GetTweaks already applies this picker's MaxLen2/MaxLen3 = 5, so every tweak qualifies.
+                            throw new InvalidOperationException("sz23-opt: no tweak within len2/len3 <= 5");
                         }
                         var best = subtweaks.First();
                         var score = best.Len2+best.Len3+random.Next(5);

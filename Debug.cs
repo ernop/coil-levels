@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using static coil.Navigation;
 using static coil.Util;
 using static coil.Coilutil;
@@ -9,199 +8,134 @@ namespace coil
 {
     public static class Debug
     {
-        //this should really check everything about the board - regen hits and replay everything.
-        public static void DoDebug(Level l, bool show=false, bool validateBoard = false)
+        /// <summary>
+        /// Rebuild Rows and Hits from the Segs list alone and compare with the level's incremental bookkeeping.
+        /// Any mismatch is a generator bug: throw, naming the check. (CoilFormat.Validate separately replays the
+        /// game rules on the exported board; this checks the generator's internal invariants.)
+        /// </summary>
+        public static void DoDebug(Level l, bool show = false, bool validateBoard = false)
         {
-            if (validateBoard)
+            if (!validateBoard)
             {
+                return;
+            }
+            if (show)
+            {
+                ShowSeg(l);
+                ShowHit(l);
+                Show(l);
+            }
+
+            ulong lastIndex = 0;
+            Seg lastSeg = null;
+            foreach (var seg in l.Segs)
+            {
+                if (seg.Len == 0)
+                {
+                    Fail(l, $"zero-length seg {seg}");
+                }
                 if (show)
                 {
-                    ShowSeg(l);
-                    ShowHit(l);
-                    Show(l);
+                    WL(seg.ToString());
                 }
-
-                //always validate segs.
-                uint lastIndex = 0;
-
-                foreach (var seg in l.Segs)
+                if (lastSeg != null)
                 {
-                    if (seg.Len == 0)
+                    if (seg.Index <= lastIndex)
                     {
-                        WL("Bada");
+                        Fail(l, $"seg indexes not increasing: {lastSeg} then {seg}");
                     }
-                    if (show)
+                    var lastH = HDirs.Contains(lastSeg.Dir);
+                    var thisH = HDirs.Contains(seg.Dir);
+                    if (lastH == thisH)
                     {
-                        WL(seg.ToString());
+                        Fail(l, $"consecutive segs not perpendicular: {lastSeg} then {seg}");
                     }
-                    if (lastIndex == 0)
+                    if (lastSeg.GetEnd() != seg.Start)
                     {
-                        lastIndex = seg.Index;
-                        continue;
+                        Fail(l, $"seg does not start where previous ended: {lastSeg} then {seg}");
                     }
-                    if (seg.Index < lastIndex)
-                    {
-                        //in preparation for well-spaced indexes, this should be > last rather than ==last+1
-                        WL("Badb");
-                    }
-                    lastIndex = seg.Index;
-
                 }
+                lastIndex = seg.Index;
+                lastSeg = seg;
+            }
 
-                Seg lastSeg = null;
-                foreach (var seg in l.Segs)
+            //replay: which seg owns each square, and which squares each seg's end bumps into.
+            var fakeRows = new Seg[l.Width * l.Height];
+            var fakeHitCount = new int[l.Width * l.Height];
+            var current = l.Segs.First.Value.Start;
+            Seg last = null;
+            foreach (var seg in l.Segs)
+            {
+                last = seg;
+                for (var step = 0; step < seg.Len; step++)
                 {
-                    if (lastSeg != null)
+                    var idx = current.Item2 * l.Width + current.Item1;
+                    if (fakeRows[idx] != null)
                     {
-                        if ((HDirs.Contains(lastSeg.Dir) && !VDirs.Contains(seg.Dir))
-                            || (VDirs.Contains(lastSeg.Dir) && !HDirs.Contains(seg.Dir)))
-                        {
-                            WL("Badc");
-                        }
+                        Fail(l, $"path revisits {current} in {seg}");
                     }
-                    lastSeg = seg;
+                    fakeRows[idx] = seg;
+                    current = Add(current, seg.Dir);
                 }
-          
-                //recalculate the entire board and segs.
-                var fakeRows = new Dictionary<(int, int), Seg>();
-                var fakeHits = new Dictionary<(int, int), List<Seg>>();
-                for (var yy = 0; yy < l.Height; yy++)
+                if (fakeRows[current.Item2 * l.Width + current.Item1] != null)
                 {
-                    for (var xx = 0; xx < l.Width; xx++)
-                    {
-                        fakeHits[(xx, yy)] = new List<Seg>();
-                        fakeRows[(xx, yy)] = null;
-                    }
+                    Fail(l, $"seg {seg} ends on an already-visited square {current}");
                 }
+                var hit = seg.GetHit();
+                fakeHitCount[hit.Item2 * l.Width + hit.Item1]++;
+            }
+            fakeRows[current.Item2 * l.Width + current.Item1] = last;
 
-                var current = l.Segs.First.Value.Start;
-                fakeRows[current] = l.Segs.First.Value;
-
-                Seg lastSeg2 = null;
-                foreach (var seg in l.Segs)
+            //each seg must be stopped by something: the square past its end is a wall or an earlier part of the path.
+            foreach (var seg in l.Segs)
+            {
+                var blocker = l.GetRowValue(seg.GetHit());
+                if (blocker != null && blocker.Index >= seg.Index)
                 {
-                    lastSeg2 = seg;
-                    //trace path
-                    var lstep = 0;
-                    while (lstep < seg.Len)
-                    {
-                        fakeRows[current] = seg;
-                        current = Add(current, seg.Dir);
-                        lstep++;
-                    }
-
-                    if (fakeRows[current] != null)
-                    {
-                        WL("Badd");
-                    }
-
-                    //track hits.
-                    var seghit = Add(seg.Start, seg.Dir, seg.Len + 1);
-                    if (!fakeHits.ContainsKey(seghit))
-                    {
-                        fakeHits[seghit] = new List<Seg>();
-                    }
-                    fakeHits[seghit].Add(seg);
+                    Fail(l, $"seg {seg} is not blocked: square past its end belongs to later {blocker}");
                 }
-                var end = Add(lastSeg2.Start, lastSeg2.Dir, lastSeg2.Len);
-                fakeRows[end] = lastSeg2;
+            }
 
-                //validate that every hit is in a null row!
-                //this is not currently true.
-                foreach (var seg in l.Segs)
-                {
-                    var candidate = seg.Start;
-                    var ii = 1;
-                    //you don't own your last square (unless at end, not accounted for)
-                    while (ii < seg.Len)
-                    {
-                        candidate = Add(candidate, seg.Dir);
-                        var rv = l.GetRowValue(candidate);
-                        if (rv.Index == seg.Index)
-                        {
-                            ii++;
-                            continue;
-                        }
-                        Show(l);
-                        ShowSeg(l);
-                        SaveWithPath(l, "../../../abc.png");
-                        WL("Bad - mismapped square");
-                        
-                    }
-
-                    var segend = seg.GetHit();
-                    var hit = l.GetRowValue(segend);
-                    if (hit == null)
-                    {
-                        continue;
-                    }
-                    if (hit.Index < seg.Index)
-                    {
-                        continue;
-                    }
-                    WL("Bade");
-                    Show(l);
-                    ShowSeg(l);
-                    SaveWithPath(l, "../../../abc.png");
-                    WL(l.LevelConfiguration.GetStr());
-                }
-
-                //check both ways!
-
+            for (var yy = 0; yy < l.Height; yy++)
+            {
                 for (var xx = 0; xx < l.Width; xx++)
                 {
-                    for (var yy = 0; yy < l.Height; yy++)
+                    var sq = (xx, yy);
+                    var idx = yy * l.Width + xx;
+                    var real = l.GetRowValue(sq);
+                    if ((real?.Index) != (fakeRows[idx]?.Index))
                     {
-                        var key = (xx, yy);
-
-                        var realHitvalue = l.Hits.Get(key);
-                        var fakeHitValue = new List<Seg>();
-                        if (fakeHits.ContainsKey(key))
+                        Fail(l, $"Rows mismatch at {sq}: level says {real?.ToString() ?? "empty"}, replay says {fakeRows[idx]?.ToString() ?? "empty"}");
+                    }
+                    if (l.Hits.GetCount(sq) != fakeHitCount[idx])
+                    {
+                        Fail(l, $"Hits mismatch at {sq}: level has {l.Hits.GetCount(sq)}, replay has {fakeHitCount[idx]}");
+                    }
+                    if (l.Cells[idx].Owner != (fakeRows[idx]?.Index ?? 0))
+                    {
+                        Fail(l, $"cached owner index mismatch at {sq}");
+                    }
+                    ulong minHit = 0;
+                    foreach (var hit in l.Hits.Get(sq))
+                    {
+                        if (minHit == 0 || hit.Index < minHit)
                         {
-                            fakeHitValue = fakeHits[key];
-                        }
-
-                        //just check count for now.
-                        if (realHitvalue.Count != fakeHitValue.Count)
-                        {
-                            WL("Badf");
+                            minHit = hit.Index;
                         }
                     }
-                }
-
-                foreach (var key in fakeHits.Keys)
-                {
-                    var realHitvalue = l.Hits.Get(key);
-                    var fakeHitValue = fakeHits[key];
-                    //just check count for now.
-                    if (realHitvalue.Count != fakeHitValue.Count)
+                    if (l.Cells[idx].MinHit != minHit)
                     {
-                        WL("Badg");
-                        var ae = 3;
+                        Fail(l, $"cached minimum hit index mismatch at {sq}");
                     }
                 }
-
-                for (var yy = 0; yy < l.Height;yy++)
-                {
-                    for (var xx = 0; xx < l.Width; xx++)
-                    {
-                        var sq = (xx, yy);
-                    
-                        if (l.GetRowValue(sq)?.Index != fakeRows[sq]?.Index)
-                        {
-                            WL("Badh");
-                            ShowSeg(l);
-                            Show(l);
-                            SaveWithPath(l, "../../../abc.png");
-                        }
-                        if (fakeRows[sq]?.Index != l.GetRowValue(sq)?.Index)
-                        {
-                            WL("Badi");
-                        }
-                    }
-                }
-                //validate fakehits and fakerows match rows!
             }
+        }
+
+        private static void Fail(Level l, string message)
+        {
+            var fn = Paths.In("abc.png");
+            SaveWithPath(l, fn, quiet: true);
+            throw new InvalidOperationException($"{message} [{l.LevelConfiguration.GetStr()}; board saved to {fn}]");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace coil
         public Log(LevelConfiguration lc)
         {
             LevelConfiguration = lc;
-            var logdir = "../../../logs";
+            var logdir = Paths.In("logs");
             if (!System.IO.Directory.Exists(logdir))
             {
                 System.IO.Directory.CreateDirectory(logdir);

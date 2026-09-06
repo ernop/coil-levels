@@ -1,146 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static coil.Debug;
-using static coil.Util;
 
 namespace coil
 {
+    /// <summary>
+    /// For every square, which segs "hit" it: a seg's hit square is the one past its end, the square that
+    /// stops the slide. A square may be hit by several segs. The generator's hot loops only ever ask
+    /// "is this square hit by a seg earlier than X?", so the minimum hitting index per square is kept in a
+    /// the level's Cell array (0 = never hit) and the per-square lists are only touched when hits are added or removed.
+    /// </summary>
     public class HitManager
     {
-        //pointing to the xest segment hitting it? (low/highest)        
-        //actually we need both. we need lowest for when we want to erase one - for example
-        //seg2 wants to erase a point which is logged as being hit by 4 - would consider it fine.
-        //but that would break 1.
-        //and we need a backup hit beause imagine if 2 and 10 hit a sq.
-        //and we replace 10 with a longtweak so it doesn't hit anymore. we still need to know 2 hit it!
+        private readonly List<Seg>[] Lists;
+        private readonly BaseLevel.Cell[] Cells;
+        private readonly int Width;
+        private static readonly List<Seg> Empty = new List<Seg>();
 
-        /// <summary>
-        /// TODO: test converting this to an array of lists.  Currently represents 50% of time when generating big levels.
-        /// </summary>
-        //private Dictionary<(int, int), List<Seg>> Hits { get; set; }
-
-        private List<Seg>[] Hits { get; set; }
-
-        private bool Debug { get; set; }
-        private Level Level { get; set; }
-
-        //5% of runtime
-        public int GetHitIndex((int, int) pos)
+        public HitManager(int width, int height, BaseLevel.Cell[] cells)
         {
-            return pos.Item2 * Level.Width + pos.Item1;
+            Width = width;
+            Lists = new List<Seg>[width * height];
+            Cells = cells;
         }
 
-        public HitManager(int width, int height, bool debug, Level level)
+        private int Idx((int, int) pos) => pos.Item2 * Width + pos.Item1;
+
+        public bool Contains((int, int) pos) => Cells[Idx(pos)].MinHit != 0;
+
+        public List<Seg> Get((int, int) pos) => Lists[Idx(pos)] ?? Empty;
+
+        public int GetCount((int, int) pos) => Lists[Idx(pos)]?.Count ?? 0;
+
+        public void Add((int, int) pos, Seg seg)
         {
-            Debug = debug;
-            Level = level;
-            Hits = new List<Seg>[Level.Height*Level.Width];
-            for (var yy = 0; yy < height; yy++)
+            var i = Idx(pos);
+            var l = Lists[i];
+            if (l == null)
             {
-                for (var xx = 0; xx < width; xx++)
-                {
-                    Hits[GetHitIndex((xx, yy))] = new List<Seg>();
-                }
+                l = new List<Seg>(2);
+                Lists[i] = l;
             }
-            EverBeenHit = new bool[Level.Height * Level.Width];
-        }
-
-        public bool Contains((int,int) key)
-        {
-            return Hits[GetHitIndex(key)].Any();
-        }
-
-        public List<Seg> Get((int,int) pos)
-        {
-            return Hits[GetHitIndex(pos)];
-        }
-
-        public void Remove((int,int) pos, Seg seg)
-        {
-            var l = Hits[GetHitIndex(pos)];
-            if (Debug)
+            else if (l.Contains(seg))
             {
-                if (!l.Contains(seg))
-                {
-                    WL("Bad!");
-                    var ae = 32;
-                }
+                throw new InvalidOperationException($"Hits.Add: {seg} already hits {pos}");
             }
-            l.Remove(seg);
-        }
-
-        public void Add((int,int) pos, Seg seg)
-        {
-            var idx = GetHitIndex(pos);
-            EverBeenHit[idx] = true;
-            var l = Hits[idx];
-            if (Debug)
-            {
-                var overlaps =l.Where(ss => ss.Index == seg.Index);
-                //you can temporarily have segs with the same index
-                foreach (var ol in overlaps)
-                {
-                    if (ol.Start == seg.Start)
-                    {
-                        DoDebug(Level, true);
-                        WL("Bad!");
-                        var ae = 43;
-                    }
-                }
-            }
-
             l.Add(seg);
+            ref var m = ref Cells[i].MinHit;
+            if (m == 0 || seg.Index < m)
+            {
+                m = seg.Index;
+            }
         }
 
-        public int GetCount((int,int) pos)
+        public void Remove((int, int) pos, Seg seg)
         {
-            return Hits[GetHitIndex(pos)].Count;
+            var i = Idx(pos);
+            var l = Lists[i];
+            if (l == null || !l.Remove(seg))
+            {
+                throw new InvalidOperationException($"Hits.Remove: {seg} does not hit {pos}");
+            }
+            Cells[i].MinHit = MinOf(l);
         }
 
-        private int CanCheckCt = 0;
-
-        /// <summary>
-        /// Has a pos EVER been hit.  if it's never been a hit at all, it's a quick filter for candidateIsHitByLessThan
-        /// Apparently makes nearly no difference.
-        /// </summary>
-        private bool[] EverBeenHit;
-
-        /// <summary>
-        /// maybe keep a special dict of "earliest seg hitting" and hook it in with all the update/remove of the total Hits object?
-        /// i.e. do the comparison preemptively so you don't have to keep checking.
-        /// Or, optionally have this calculated clean/dirty
-        /// </summary>
-        internal bool CandidateIsHitByLessThan((int, int) pos, uint index)
+        public bool CandidateIsHitByLessThan((int, int) pos, ulong index)
         {
-            var idx = GetHitIndex(pos);
+            var m = Cells[Idx(pos)].MinHit;
+            return m != 0 && m < index;
+        }
 
-            //Shortcut
-            if (!EverBeenHit[idx])
+        /// <summary>Call after seg indexes have been reassigned wholesale (RedoAllIndexesSpaceFilled).</summary>
+        public void RecomputeMinIndexes()
+        {
+            for (var i = 0; i < Lists.Length; i++)
             {
-                return false;
-            }
-            var choices = Hits[idx];
-            
-            //CanCheckCt++;
-            //if (CanCheckCt % 10000 == 0)
-            //{
-            //    WL(CanCheckCt);
-            //}
-            //WL($"choicesCt:{choices.Count}");
-            if (choices.Count == 0)
-            {
-                return false;
-            }
-            foreach (var otherSegsHittingThisPos in choices)
-            {
-                if (otherSegsHittingThisPos.Index < index)
+                var l = Lists[i];
+                if (l != null)
                 {
-                    return true;
+                    Cells[i].MinHit = MinOf(l);
                 }
             }
-            return false;
+        }
+
+        private static ulong MinOf(List<Seg> l)
+        {
+            ulong m = 0;
+            foreach (var s in l)
+            {
+                if (m == 0 || s.Index < m)
+                {
+                    m = s.Index;
+                }
+            }
+            return m;
         }
     }
 }

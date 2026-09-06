@@ -10,8 +10,7 @@ using SixLabors.Fonts;
 
 using static coil.Util;
 using System.Numerics;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
+using SixLabors.ImageSharp.Drawing.Processing;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,9 +22,41 @@ namespace coil
     {
         public const int Scale = 15;
 
-        public static Font Font = new Font(SystemFonts.Find("Comic Sans MS"), 17, FontStyle.Bold);
-        public static Font MedFont= new Font(SystemFonts.Find("Comic Sans MS"), 27, FontStyle.Regular);
-        public static Font BigFont = new Font(SystemFonts.Find("Comic Sans MS"), 36, FontStyle.Bold);
+        /// <summary>
+        /// Whole-board map at px pixels per cell: open cells white, walls black, nothing else. This is what a solver
+        /// sees. The tile renderer (<see cref="Save"/>) is 15 px per cell and cannot draw boards past a few hundred
+        /// cells a side; this writes pixels directly and handles 5000x5000 at 1 px.
+        /// </summary>
+        public static void SaveMap(BaseLevel level, string fn, int px)
+        {
+            var w = level.Width - 2;
+            var h = level.Height - 2;
+            using (var img = new Image<L8>(w * px, h * px))
+            {
+                var white = new L8(255);
+                var black = new L8(0);
+                img.ProcessPixelRows(accessor =>
+                {
+                    for (var y = 0; y < h * px; y++)
+                    {
+                        var row = accessor.GetRowSpan(y);
+                        var cellY = y / px + 1;
+                        for (var x = 0; x < w * px; x++)
+                        {
+                            row[x] = level.GetRowValue((x / px + 1, cellY)) == null ? black : white;
+                        }
+                    }
+                });
+                img.Save(fn);
+            }
+        }
+
+        //Comic Sans MS was the original; it is not installed on Linux. One name, no fallback list.
+        public const string FontFamilyName = "DejaVu Sans";
+
+        public static Font Font = new Font(SystemFonts.Get(FontFamilyName), 17, FontStyle.Bold);
+        public static Font MedFont= new Font(SystemFonts.Get(FontFamilyName), 27, FontStyle.Regular);
+        public static Font BigFont = new Font(SystemFonts.Get(FontFamilyName), 36, FontStyle.Bold);
 
         public static void Save(Dictionary<string, Image> images, BaseLevel level, List<List<string>> outstrings, string fn, string subtitle, bool quiet = false,
             List<PointText> pointTexts = null, bool arrows = false, int? overrideScale = null, List<(int,int)> highlights = null, bool corner = false)
@@ -80,7 +111,7 @@ namespace coil
                         //for(var xx= 0;xx < level.Width;xx++)
                         Parallel.For(0, level.Width, xx =>
                             {
-                                var target = new SixLabors.Primitives.Point(xx * effectiveScale, yy * effectiveScale);
+                                var target = new Point(xx * effectiveScale, yy * effectiveScale);
                                 var key = outstrings[yy][xx];
 
                                 result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
@@ -124,9 +155,9 @@ namespace coil
                 if (writeSubtitle)
                 {
                     //TODO make this bigger in proportion to the size of the image so it stays readable.
-                    var location = new SixLabors.Primitives.PointF(0, 0);
+                    var location = new PointF(0, 0);
                     var color = SixLabors.ImageSharp.Color.Black;
-                    var font = new Font(SystemFonts.Find("Comic Sans MS"), (int)(extra*0.9/subtitleLineCount), FontStyle.Bold);
+                    var font = new Font(SystemFonts.Get(FontFamilyName), (int)(extra*0.9/subtitleLineCount), FontStyle.Bold);
                     //font = sparklineFont.AvailableStyles;
                     //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
 
@@ -191,15 +222,13 @@ namespace coil
             var s = new PointF(start.Point.Item1 * effectiveScale + effectiveScale / 2, start.Point.Item2 * effectiveScale + effectiveScale / 2);
             var e = new PointF(end.Point.Item1* effectiveScale + effectiveScale / 2, end.Point.Item2 * effectiveScale + effectiveScale / 2);
             
-            var go = new GraphicsOptions(true, 1.0f);
-
-            image.Mutate(oo => oo.DrawLines(SixLabors.ImageSharp.Color.White, arrowWidth+3, s, e));
-            image.Mutate(oo => oo.DrawLines(SixLabors.ImageSharp.Color.Violet, arrowWidth, s, e));
+            image.Mutate(oo => oo.DrawLine(SixLabors.ImageSharp.Color.White, arrowWidth+3, s, e));
+            image.Mutate(oo => oo.DrawLine(SixLabors.ImageSharp.Color.Violet, arrowWidth, s, e));
         }
 
         public static void DrawTextAtPoint(Image<Rgba32> image, (int, int) point, string text, int effectiveScale) {
 
-            var location = new SixLabors.Primitives.PointF(0, 0);
+            var location = new PointF(0, 0);
             //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
             try {
                 var pointful = new PointF(point.Item1 * effectiveScale - 5, point.Item2 * effectiveScale - 5);
@@ -216,7 +245,7 @@ namespace coil
 
         public static Dictionary<string, Image> GetImages()
         {
-            var stem = "../../..";
+            var stem = Paths.Root;
             var keyfp = $"{stem}/tiles/rr.png";
 
             var d = new Dictionary<string, Image>();
@@ -291,7 +320,7 @@ namespace coil
             var extraKeys = new List<string>() { "b", "x", "h", "empty", "s", "e" };
             foreach (var key in extraKeys)
             {
-                keyfp = $"../../../tiles/{key}.png";
+                keyfp = $"{stem}/tiles/{key}.png";
                 d[key] = Image.Load<Rgba32>(keyfp);
 
                 if (key == "empty")

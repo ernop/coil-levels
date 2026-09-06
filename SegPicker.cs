@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-using C5;
 using static coil.Util;
 
 namespace coil
@@ -26,6 +25,7 @@ namespace coil
     public abstract class SegPicker
     {
         public string Name { get; set; }
+        public bool Quiet { get; set; }
         public System.Random Random { get; set; }
         public Level Level { get; set; }
 
@@ -103,14 +103,19 @@ namespace coil
         }
     }
 
+    /// <summary>
+    /// Picks the seg with the largest Key each time. Segs live in a min-heap on -Key; removal is lazy: a seg's
+    /// HeapStamp is bumped when it is removed or modified, and stale entries are skipped when popped.
+    /// One pass over the heap is a "loop"; after a loop with at least one successful tweak, every seg is re-queued.
+    /// </summary>
     public class ConfigurableSegPicker : SegPicker
     {
-        public IComparer<LinkedListNode<Seg>> Comparer;
+        public Func<Seg, double> Key;
 
-
-        public ConfigurableSegPicker(string name, IComparer<LinkedListNode<Seg>> comparer) {
+        public ConfigurableSegPicker(string name, Func<Seg, double> key)
+        {
             Name = name;
-            Comparer = comparer;
+            Key = key;
         }
 
         public override void Init(int seed, Level level)
@@ -124,31 +129,34 @@ namespace coil
 
         public bool Success = false;
 
-        public C5.IntervalHeap<LinkedListNode<Seg>> Heap { get; set; }
+        /// <summary>Stop after this many full passes; each pass after the first yields far less coverage per second.</summary>
+        public int MaxLoops { get; set; } = 3;
 
-        private LinkedListNode<Seg> LastReturnedSeg { get; set; }
+        private readonly struct Entry
+        {
+            public readonly LinkedListNode<Seg> Node;
+            public readonly int Stamp;
+            public Entry(LinkedListNode<Seg> node, int stamp) { Node = node; Stamp = stamp; }
+        }
 
-        private Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>> Handles;
+        private PriorityQueue<Entry, double> Heap;
 
-        /// <summary>
-        /// When a seg length changes, I need to know about it - SL tweaks can do this invisibly which is annoying.
-        /// </summary>
         public override LinkedListNode<Seg> PickSeg(List<LinkedListNode<Seg>> newSegs, List<LinkedListNode<Seg>> modifiedSegs, TweakStats stat, bool success)
         {
-            //put in the new segs.
             if (newSegs != null)
             {
                 foreach (var newSeg in newSegs)
                 {
-                    AddSafely(newSeg);
+                    Enqueue(newSeg);
                 }
             }
             if (modifiedSegs != null)
             {
                 foreach (var modseg in modifiedSegs)
                 {
-                    RemoveSafely(modseg);
-                    AddSafely(modseg);
+                    //re-key: the tweak changed this seg's length. Stamp bump makes the old entry stale.
+                    modseg.Value.HeapStamp++;
+                    Enqueue(modseg);
                 }
             }
             if (success)
@@ -161,148 +169,70 @@ namespace coil
                 LoopStats.NoTweaks++;
             }
 
-            if (Heap.Count == 0)
+            while (true)
             {
-                if (Success)
+                if (Heap.Count == 0)
                 {
-                    RedoHeap();
-                    Success = false;
-                    stat.loopct++;
-                    
-                    var lastLoopSuccessPercentage = LoopStats.SuccessCt * 1.0 / (LoopStats.SuccessCt + LoopStats.NoTweaksQualify + LoopStats.NoTweaks);
-                    WL($"lastLoopSuccessPercentage: {stat.loopct} {lastLoopSuccessPercentage}");
-                    //fail condition.
-                    if (stat.loopct > 2)
+                    if (!Success)
                     {
-                        //hardcore return early.
                         return null;
                     }
+                    Success = false;
+                    stat.loopct++;
+                    var lastLoopSuccessPercentage = LoopStats.SuccessCt * 1.0 / (LoopStats.SuccessCt + LoopStats.NoTweaksQualify + LoopStats.NoTweaks);
+                    if (!Quiet)
+                    {
+                        WL($"loop {stat.loopct} done: tweak success {lastLoopSuccessPercentage:0.0%}");
+                    }
+                    if (stat.loopct >= MaxLoops)
+                    {
+                        return null;
+                    }
+                    RedoHeap();
                 }
-                else
+                var el = Heap.Dequeue();
+                if (el.Stamp == el.Node.Value.HeapStamp && el.Node.List != null)
                 {
-                    return null;
+                    //popped: any later entry for this seg (there should be none) must not be honored.
+                    el.Node.Value.HeapStamp++;
+                    return el.Node;
                 }
             }
-
-            //the item will still hang around in the handles dict.
-            var el = Heap.DeleteMax();
-            
-            //WL($"Returning seg {el.Value.Index} of len {el.Value.Len}");
-            return el;
         }
 
         private void RedoHeap()
         {
-            Heap = new IntervalHeap<LinkedListNode<Seg>>(Comparer);
-            Handles = new Dictionary<Seg, IPriorityQueueHandle<LinkedListNode<Seg>>>();
+            Heap = new PriorityQueue<Entry, double>(Level.Segs.Count);
             var el = Level.Segs.First;
             while (el != null)
             {
-                AddSafely(el);
+                Enqueue(el);
                 el = el.Next;
             }
         }
 
-        private void RemoveSafely(LinkedListNode<Seg> seg)
+        private void Enqueue(LinkedListNode<Seg> node)
         {
-            var handle = Handles[seg.Value];
-            //can this be null, and if so, why?
-            //yes, since the heap is continuously being cut down, this seg may have already been removed, processed, and still be in the map 
-            //(if there was no successful replacemet of it with a tweak.))
-            if (!handle.ToString().Contains("-1"))
-            {
-                if (handle.ToString()=="[1]")
-                {
-                    var ae = 3;
-                }
-                try
-                {
-                    //can't delete the last item for some reason?
-                    Heap.Delete(handle);
-                }catch (Exception ex)
-                {
-                    
-                    var aee = 3;
-                }
-            }
-        }
-
-        private void AddSafely(LinkedListNode<Seg> seg)
-        {
-            IPriorityQueueHandle<LinkedListNode<Seg>> handle = null;
-            Heap.Add(ref handle, seg);
-            Handles[seg.Value] = handle;
-        }
-    }
-
-    public class FirstComparer : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return x.Value.Index.CompareTo(y.Value.Index);
-        }
-    }
-
-    public class LastComparer: IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return y.Value.Index.CompareTo(x.Value.Index);
-        }
-    }
-
-    public class LengthComparer : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return x.Value.Len.CompareTo(y.Value.Len);
-        }
-    }
-
-    public class WeightedComparer4 : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return (Math.Sqrt(Math.Sqrt(Math.Sqrt(x.Value.Index))) + x.Value.Len).CompareTo(Math.Sqrt(Math.Sqrt(Math.Sqrt(y.Value.Index))) + y.Value.Len);
-        }
-    }
-
-    public class WeightedComparer3 : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return (Math.Sqrt(Math.Sqrt(x.Value.Index)) + x.Value.Len).CompareTo(Math.Sqrt(Math.Sqrt(y.Value.Index)) + y.Value.Len);
-        }
-    }
-
-    public class WeightedComparer2 : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return (Math.Sqrt(x.Value.Index)+x.Value.Len).CompareTo(Math.Sqrt(y.Value.Index)+y.Value.Len);
-        }
-    }
-
-    public class WeightedComparer : IComparer<LinkedListNode<Seg>>
-    {
-        public int Compare([AllowNull] LinkedListNode<Seg> x, [AllowNull] LinkedListNode<Seg> y)
-        {
-            return (x.Value.Index + x.Value.Len).CompareTo(y.Value.Index + y.Value.Len);
+            Heap.Enqueue(new Entry(node, node.Value.HeapStamp), -Key(node.Value));
         }
     }
 
     public static class SegPickers
     {
+        private static double Order(Seg seg) => seg.Index / 4294967296.0;
+
         public static IEnumerable<SegPicker> GetSegPickers(string name)
         {
             var pickers = new List<SegPicker>() { 
-                new ConfigurableSegPicker("Longest", new LengthComparer()),
-                //new ConfigurableSegPicker("Weighted", new WeightedComparer()),
-                //new ConfigurableSegPicker("Weighted2", new WeightedComparer2()),
-                //new ConfigurableSegPicker("Weighted3", new WeightedComparer3()),
-                new ConfigurableSegPicker("Weighted4", new WeightedComparer4()),
-                //new ConfigurableSegPicker("First", new FirstComparer()),
-                //new ConfigurableSegPicker("Last", new LastComparer()),
+                new ConfigurableSegPicker("Longest", seg => seg.Len),
+                //Weighted*: later segs first, tempered by a root; Order() rescales the 64-bit index to the 32-bit
+                //range these formulas were tuned in, so Len keeps the same relative weight.
+                new ConfigurableSegPicker("Weighted", seg => Order(seg) + seg.Len),
+                new ConfigurableSegPicker("Weighted2", seg => Math.Sqrt(Order(seg)) + seg.Len),
+                new ConfigurableSegPicker("Weighted3", seg => Math.Sqrt(Math.Sqrt(Order(seg))) + seg.Len),
+                new ConfigurableSegPicker("Weighted4", seg => Math.Sqrt(Math.Sqrt(Math.Sqrt(Order(seg)))) + seg.Len),
+                new ConfigurableSegPicker("First", seg => -Order(seg)),
+                new ConfigurableSegPicker("Last", seg => Order(seg)),
                 //new NewSegPicker()
             };
             if (string.IsNullOrEmpty(name))

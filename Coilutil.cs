@@ -133,12 +133,12 @@ namespace coil
 
         public static void SaveLevelAsText(Level l, int seed)
         {
-            if (!System.IO.Directory.Exists("../../../levels"))
+            if (!System.IO.Directory.Exists(Paths.In("levels")))
             {
-                System.IO.Directory.CreateDirectory("../../../levels");
+                System.IO.Directory.CreateDirectory(Paths.In("levels"));
             }
-            var textfn = $"../../../levels/{l.Width - 2}x{l.Height - 2} seed={seed} lc={l.LevelConfiguration.GetStr()}.coil";
-            using (StreamWriter oo = File.AppendText(textfn))
+            var textfn = $"{Paths.Root}/levels/{l.Width - 2}x{l.Height - 2} seed={seed} lc={l.LevelConfiguration.GetStr()}.coil";
+            using (StreamWriter oo = File.CreateText(textfn))
             {
                 var line1 = $"{l.Width - 2}x{l.Height - 2} - {l.LevelConfiguration.GetStr()}";
                 oo.WriteLine(line1);
@@ -392,7 +392,7 @@ namespace coil
         {
             WL("SEG");
             var segindex = 1;
-            var indexes = new Dictionary<uint, int>();
+            var indexes = new Dictionary<ulong, int>();
             foreach (var seg in l.Segs)
             {
                 indexes[seg.Index] = segindex;
@@ -518,23 +518,17 @@ namespace coil
 
                 if (PointIsOpenAfterSeg(right, seg, level) && PointIsOpenAfterSeg(left, seg, level))
                 {
-                    //find three further neighbors.
-                    var rightneighbors = new List<(int, int)>() { Add(right, seg.Dir), Add(right, Rot(seg.Dir)), Add(right, Rot(Rot(seg.Dir)))};
-                    var leftneighbors = new List<(int, int)>() { Add(left, seg.Dir), Add(left, ARot(seg.Dir)), Add(left, ARot(ARot(seg.Dir)))};
-                    var rightopenneighbors = rightneighbors.Where(rn => PointIsOpenAfterSeg(rn, seg, level));
-                    var leftopenneighbors = leftneighbors.Where(ln => PointIsOpenAfterSeg(ln, seg, level));
-                    //Show(level);
-                    //ShowHit(level);
-                    
-                    var easy = false;
-                    if (rightopenneighbors.Count() == 1 || leftopenneighbors.Count() == 1)
-                    {
-                        easy = true;
-                    }
-                    if (rightopenneighbors.Count() == 1 && leftopenneighbors.Count() == 1)
-                    {
-                        throw new Exception("EX");
-                    }
+                    //how many of the three further neighbours of each side square are still open at this point.
+                    var rightOpen = (PointIsOpenAfterSeg(Add(right, seg.Dir), seg, level) ? 1 : 0)
+                        + (PointIsOpenAfterSeg(Add(right, Rot(seg.Dir)), seg, level) ? 1 : 0)
+                        + (PointIsOpenAfterSeg(Add(right, Rot(Rot(seg.Dir))), seg, level) ? 1 : 0);
+                    var leftOpen = (PointIsOpenAfterSeg(Add(left, seg.Dir), seg, level) ? 1 : 0)
+                        + (PointIsOpenAfterSeg(Add(left, ARot(seg.Dir)), seg, level) ? 1 : 0)
+                        + (PointIsOpenAfterSeg(Add(left, ARot(ARot(seg.Dir))), seg, level) ? 1 : 0);
+
+                    //a side square with exactly one open further neighbour is a corridor entrance: going that way
+                    //is the obvious dead end, so the decision is easy.
+                    var easy = rightOpen == 1 || leftOpen == 1;
                     if (easy)
                     {
                         easyDecisions.Add(end);
@@ -551,12 +545,8 @@ namespace coil
 
         public static bool PointIsOpenAfterSeg((int,int) pt, Seg seg, BaseLevel level)
         {
-            var val = level.GetRowValue(pt);
-            if (val!=null && val.Index > seg.Index)
-            {
-                return true;
-            }
-            return false;
+            var idx = level.GetRowIndex(pt);
+            return idx != 0 && idx > seg.Index;
         }
     }
 }

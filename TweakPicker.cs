@@ -22,14 +22,38 @@ namespace coil
 
         public TweakPicker(Func<Tweak, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
         {
-            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt)).FirstOrDefault();
+            Picker = (List<Tweak> tweaks) => ArgMax(tweaks, tt => scoringFunction(tt));
             Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
         }
 
         public TweakPicker(Func<Tweak, Random, int> scoringFunction, string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
         {
-            Picker = (List<Tweak> tweaks) => tweaks.OrderByDescending(tt => scoringFunction(tt, Random)).FirstOrDefault();
+            Picker = (List<Tweak> tweaks) => ArgMax(tweaks, tt => scoringFunction(tt, Random));
             Init(name, maxLen1, maxLen2, maxLen3, tweaklim);
+        }
+
+        /// <summary>
+        /// First element with the maximum score, scoring each element once in list order - the same element
+        /// (and the same sequence of Random calls) as OrderByDescending(score).First(), without the sort.
+        /// </summary>
+        public static Tweak ArgMax(List<Tweak> tweaks, Func<Tweak, int> score)
+        {
+            if (tweaks.Count == 0)
+            {
+                throw new ArgumentException("no tweaks to pick from");
+            }
+            var best = tweaks[0];
+            var bestScore = score(best);
+            for (var i = 1; i < tweaks.Count; i++)
+            {
+                var s = score(tweaks[i]);
+                if (s > bestScore)
+                {
+                    best = tweaks[i];
+                    bestScore = s;
+                }
+            }
+            return best;
         }
 
         private void Init(string name, int? maxLen1 = null, int? maxLen2 = null, int? maxLen3 = null, int? tweaklim = null)
