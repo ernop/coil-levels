@@ -135,3 +135,21 @@ written; a failure throws.
   run about 60 s, 3.6 GB allocated total.
 - **No fallbacks.** Unknown picker names, missing fonts, missing repo root,
   and failed validation all throw with the name of what failed.
+
+## Board style atlas (2026-09-06)
+
+Open [the HTML atlas](web/gallery-guide.html) for the measured picker/seed
+survey and selected large square boards. [Collection documentation](gallery/README.md)
+links the reproduction commands, exact metric definitions, selection record,
+and [measured findings](gallery/FINDINGS.md). The atlas compares geometry and
+seed variation; it does not use a single hardness score.
+
+`specimen <new-dir> <side> <seed> [gen options]` exports gzip board/solution
+pairs, a whole map, overview/detail images, and geometry JSON.
+`verify-collection <dir>` replays saved solutions, checks board hashes,
+recomputes geometry, and compares every full-map cell. Initial-walk options
+are `--wander-full`, `--wander-max N`, and `--wander-steps N`.
+
+`BoardCharacterization.cs` implements exact compact board-only geometry for
+large boards. It complements the Python proof prototype; room decomposition,
+proof metrics, and motif analysis are not included in this compact pass.

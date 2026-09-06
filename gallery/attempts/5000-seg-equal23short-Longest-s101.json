@@ -1,0 +1,6 @@
+{
+  "id": "5000-seg-equal23short-Longest-s101",
+  "status": "generation_budget_exceeded",
+  "budgetSeconds": 600,
+  "note": "Budget covers the entire specimen command, including generation, validation, and export. Completed specimens are replay-validated. A budget-exceeded attempt has no claimed board or geometry."
+}

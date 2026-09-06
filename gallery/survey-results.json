@@ -1,0 +1,4667 @@
+[
+  {
+    "id": "300-control-2lim10-keepends-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-keepends",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 101,
+    "seconds": 0.9621878949983511,
+    "output": "300-control-2lim10-keepends-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-keepends-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-keepends",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 202,
+    "seconds": 0.9668926899976213,
+    "output": "300-control-2lim10-keepends-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-keepends-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-keepends",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 303,
+    "seconds": 0.9504268570017302,
+    "output": "300-control-2lim10-keepends-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-lim5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-lim5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 101,
+    "seconds": 0.9983915179982432,
+    "output": "300-control-2lim10-lim5-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-2lim10-lim5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-lim5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 202,
+    "seconds": 0.9812140119975084,
+    "output": "300-control-2lim10-lim5-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-lim5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-lim5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 303,
+    "seconds": 0.9537116560022696,
+    "output": "300-control-2lim10-lim5-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-onepass-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-onepass",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 101,
+    "seconds": 0.8797091050000745,
+    "output": "300-control-2lim10-onepass-s101 complete in 0.8s\n"
+  },
+  {
+    "id": "300-control-2lim10-onepass-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-onepass",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 202,
+    "seconds": 0.8735255529973074,
+    "output": "300-control-2lim10-onepass-s202 complete in 0.8s\n"
+  },
+  {
+    "id": "300-control-2lim10-onepass-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-onepass",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 303,
+    "seconds": 0.8513052759954007,
+    "output": "300-control-2lim10-onepass-s303 complete in 0.8s\n"
+  },
+  {
+    "id": "300-control-2lim10-unlimited-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-unlimited",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 101,
+    "seconds": 10.117703067000548,
+    "output": "300-control-2lim10-unlimited-s101 complete in 10.1s\n"
+  },
+  {
+    "id": "300-control-2lim10-unlimited-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-unlimited",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 202,
+    "seconds": 9.941139677997853,
+    "output": "300-control-2lim10-unlimited-s202 complete in 9.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-unlimited-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-unlimited",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 303,
+    "seconds": 10.841430244996445,
+    "output": "300-control-2lim10-unlimited-s303 complete in 10.8s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 101,
+    "seconds": 0.9554166290035937,
+    "output": "300-control-2lim10-wander5-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 202,
+    "seconds": 0.9767881149964524,
+    "output": "300-control-2lim10-wander5-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander5",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 303,
+    "seconds": 0.969015059999947,
+    "output": "300-control-2lim10-wander5-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander8steps-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander8steps",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 101,
+    "seconds": 0.9360972840004251,
+    "output": "300-control-2lim10-wander8steps-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander8steps-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander8steps",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 202,
+    "seconds": 0.9397621600001003,
+    "output": "300-control-2lim10-wander8steps-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wander8steps-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wander8steps",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 303,
+    "seconds": 0.9428175100038061,
+    "output": "300-control-2lim10-wander8steps-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-2lim10-wanderfull-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wanderfull",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 101,
+    "seconds": 0.6826216720000957,
+    "output": "300-control-2lim10-wanderfull-s101 complete in 0.6s\n"
+  },
+  {
+    "id": "300-control-2lim10-wanderfull-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wanderfull",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 202,
+    "seconds": 0.4796531160027371,
+    "output": "300-control-2lim10-wanderfull-s202 complete in 0.4s\n"
+  },
+  {
+    "id": "300-control-2lim10-wanderfull-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-2lim10-wanderfull",
+      "family": "generation control",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 303,
+    "seconds": 0.45925807199819246,
+    "output": "300-control-2lim10-wanderfull-s303 complete in 0.4s\n"
+  },
+  {
+    "id": "300-control-last-keepends-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-keepends",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 101,
+    "seconds": 1.0683342080010334,
+    "output": "300-control-last-keepends-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-keepends-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-keepends",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 202,
+    "seconds": 1.0700885610058322,
+    "output": "300-control-last-keepends-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-keepends-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-keepends",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 303,
+    "seconds": 1.0844406739997794,
+    "output": "300-control-last-keepends-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-lim5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-lim5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 101,
+    "seconds": 1.0881133080038126,
+    "output": "300-control-last-lim5-s101 complete in 1.1s\n"
+  },
+  {
+    "id": "300-control-last-lim5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-lim5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 202,
+    "seconds": 1.1081094869950903,
+    "output": "300-control-last-lim5-s202 complete in 1.1s\n"
+  },
+  {
+    "id": "300-control-last-lim5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-lim5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 303,
+    "seconds": 1.132159547007177,
+    "output": "300-control-last-lim5-s303 complete in 1.1s\n"
+  },
+  {
+    "id": "300-control-last-onepass-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-onepass",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 101,
+    "seconds": 0.9867255299977842,
+    "output": "300-control-last-onepass-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-last-onepass-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-onepass",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 202,
+    "seconds": 0.9772595200047363,
+    "output": "300-control-last-onepass-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-last-onepass-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-onepass",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 303,
+    "seconds": 0.9543732300007832,
+    "output": "300-control-last-onepass-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-last-unlimited-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-unlimited",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 101,
+    "seconds": 5.7292541669958155,
+    "output": "300-control-last-unlimited-s101 complete in 5.7s\n"
+  },
+  {
+    "id": "300-control-last-unlimited-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-unlimited",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 202,
+    "seconds": 16.301134364999598,
+    "output": "300-control-last-unlimited-s202 complete in 16.2s\n"
+  },
+  {
+    "id": "300-control-last-unlimited-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-unlimited",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 303,
+    "seconds": 10.908548681996763,
+    "output": "300-control-last-unlimited-s303 complete in 10.8s\n"
+  },
+  {
+    "id": "300-control-last-wander5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 101,
+    "seconds": 1.0847597809988656,
+    "output": "300-control-last-wander5-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-wander5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 202,
+    "seconds": 1.1043834419979248,
+    "output": "300-control-last-wander5-s202 complete in 1.1s\n"
+  },
+  {
+    "id": "300-control-last-wander5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander5",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 303,
+    "seconds": 1.0693181090027792,
+    "output": "300-control-last-wander5-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-wander8steps-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander8steps",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 101,
+    "seconds": 1.0208467730044504,
+    "output": "300-control-last-wander8steps-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-wander8steps-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander8steps",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 202,
+    "seconds": 1.0289059460046701,
+    "output": "300-control-last-wander8steps-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-wander8steps-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wander8steps",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 303,
+    "seconds": 1.0071101150024333,
+    "output": "300-control-last-wander8steps-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-last-wanderfull-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wanderfull",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 101,
+    "seconds": 0.7406423560023541,
+    "output": "300-control-last-wanderfull-s101 complete in 0.7s\n"
+  },
+  {
+    "id": "300-control-last-wanderfull-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wanderfull",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 202,
+    "seconds": 0.5281296620014473,
+    "output": "300-control-last-wanderfull-s202 complete in 0.5s\n"
+  },
+  {
+    "id": "300-control-last-wanderfull-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-last-wanderfull",
+      "family": "generation control",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 303,
+    "seconds": 0.48141314899839927,
+    "output": "300-control-last-wanderfull-s303 complete in 0.4s\n"
+  },
+  {
+    "id": "300-control-rnd99-keepends-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-keepends",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 101,
+    "seconds": 1.0246132760003093,
+    "output": "300-control-rnd99-keepends-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-keepends-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-keepends",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 202,
+    "seconds": 0.9807458369978121,
+    "output": "300-control-rnd99-keepends-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-rnd99-keepends-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-keepends",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "keep-deadends": true
+    },
+    "seed": 303,
+    "seconds": 1.0385029329991085,
+    "output": "300-control-rnd99-keepends-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-lim5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-lim5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 101,
+    "seconds": 0.9502624289962114,
+    "output": "300-control-rnd99-lim5-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-rnd99-lim5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-lim5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 202,
+    "seconds": 0.9846162499961792,
+    "output": "300-control-rnd99-lim5-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-lim5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-lim5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "5"
+    },
+    "seed": 303,
+    "seconds": 0.9728716719982913,
+    "output": "300-control-rnd99-lim5-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-rnd99-onepass-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-onepass",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 101,
+    "seconds": 0.8868241060044966,
+    "output": "300-control-rnd99-onepass-s101 complete in 0.8s\n"
+  },
+  {
+    "id": "300-control-rnd99-onepass-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-onepass",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 202,
+    "seconds": 0.8536747039979673,
+    "output": "300-control-rnd99-onepass-s202 complete in 0.8s\n"
+  },
+  {
+    "id": "300-control-rnd99-onepass-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-onepass",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "loops": "1"
+    },
+    "seed": 303,
+    "seconds": 0.8984012349974364,
+    "output": "300-control-rnd99-onepass-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-control-rnd99-unlimited-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-unlimited",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 101,
+    "seconds": 1.469183139000961,
+    "output": "300-control-rnd99-unlimited-s101 complete in 1.4s\n"
+  },
+  {
+    "id": "300-control-rnd99-unlimited-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-unlimited",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 202,
+    "seconds": 1.6628411339988816,
+    "output": "300-control-rnd99-unlimited-s202 complete in 1.6s\n"
+  },
+  {
+    "id": "300-control-rnd99-unlimited-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-unlimited",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "none"
+    },
+    "seed": 303,
+    "seconds": 1.9434750270011136,
+    "output": "300-control-rnd99-unlimited-s303 complete in 1.9s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander5-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 101,
+    "seconds": 1.0540168450024794,
+    "output": "300-control-rnd99-wander5-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander5-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 202,
+    "seconds": 1.0476445859967498,
+    "output": "300-control-rnd99-wander5-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander5-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander5",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-max": "5"
+    },
+    "seed": 303,
+    "seconds": 1.0476004259980982,
+    "output": "300-control-rnd99-wander5-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander8steps-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander8steps",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 101,
+    "seconds": 1.0332970729941735,
+    "output": "300-control-rnd99-wander8steps-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander8steps-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander8steps",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 202,
+    "seconds": 1.0454556769982446,
+    "output": "300-control-rnd99-wander8steps-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wander8steps-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wander8steps",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-steps": "8"
+    },
+    "seed": 303,
+    "seconds": 1.0130245469990768,
+    "output": "300-control-rnd99-wander8steps-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-control-rnd99-wanderfull-s101",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wanderfull",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 101,
+    "seconds": 0.7386890449997736,
+    "output": "300-control-rnd99-wanderfull-s101 complete in 0.7s\n"
+  },
+  {
+    "id": "300-control-rnd99-wanderfull-s202",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wanderfull",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 202,
+    "seconds": 0.4924011939947377,
+    "output": "300-control-rnd99-wanderfull-s202 complete in 0.5s\n"
+  },
+  {
+    "id": "300-control-rnd99-wanderfull-s303",
+    "status": "complete",
+    "config": {
+      "id": "control-rnd99-wanderfull",
+      "family": "generation control",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20",
+      "wander-full": true
+    },
+    "seed": 303,
+    "seconds": 0.48002004199952353,
+    "output": "300-control-rnd99-wanderfull-s303 complete in 0.4s\n"
+  },
+  {
+    "id": "300-seg-2lim10-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-First",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9412235749987303,
+    "output": "300-seg-2lim10-First-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-First",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9314128789992537,
+    "output": "300-seg-2lim10-First-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-First",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9303456689958693,
+    "output": "300-seg-2lim10-First-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Last",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.8878632870037109,
+    "output": "300-seg-2lim10-Last-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Last",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9190698379970854,
+    "output": "300-seg-2lim10-Last-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Last",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9496767840028042,
+    "output": "300-seg-2lim10-Last-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Longest",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0144850240030792,
+    "output": "300-seg-2lim10-Longest-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Longest",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9200147590017878,
+    "output": "300-seg-2lim10-Longest-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Longest",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0116035219980404,
+    "output": "300-seg-2lim10-Longest-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9392686840001261,
+    "output": "300-seg-2lim10-Weighted-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.929232670001511,
+    "output": "300-seg-2lim10-Weighted-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9439486600022065,
+    "output": "300-seg-2lim10-Weighted-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted2",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9639938570035156,
+    "output": "300-seg-2lim10-Weighted2-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted2",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.943765981006436,
+    "output": "300-seg-2lim10-Weighted2-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted2",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9633693930009031,
+    "output": "300-seg-2lim10-Weighted2-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted3",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9954762060006033,
+    "output": "300-seg-2lim10-Weighted3-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted3",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9734215759963263,
+    "output": "300-seg-2lim10-Weighted3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-2lim10-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-2lim10-Weighted3",
+      "family": "segment interaction",
+      "picker": "2lim10",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9593961510036024,
+    "output": "300-seg-2lim10-Weighted3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-equal23short-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-First",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0194532360037556,
+    "output": "300-seg-equal23short-First-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-First",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0337391189968912,
+    "output": "300-seg-equal23short-First-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-First",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.046763223996095,
+    "output": "300-seg-equal23short-First-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Last",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0241742310026893,
+    "output": "300-seg-equal23short-Last-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Last",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0165778930022498,
+    "output": "300-seg-equal23short-Last-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Last",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9881425459971069,
+    "output": "300-seg-equal23short-Last-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Longest",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9532837599981576,
+    "output": "300-seg-equal23short-Longest-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Longest",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0271449920037412,
+    "output": "300-seg-equal23short-Longest-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Longest",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0227231750031933,
+    "output": "300-seg-equal23short-Longest-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0790668549961993,
+    "output": "300-seg-equal23short-Weighted-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.062478113999532,
+    "output": "300-seg-equal23short-Weighted-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0487361250052345,
+    "output": "300-seg-equal23short-Weighted-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted2",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9532890400005272,
+    "output": "300-seg-equal23short-Weighted2-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted2",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0490711029997328,
+    "output": "300-seg-equal23short-Weighted2-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted2",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0670852999974159,
+    "output": "300-seg-equal23short-Weighted2-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted3",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.059376463002991,
+    "output": "300-seg-equal23short-Weighted3-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted3",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0903398770024069,
+    "output": "300-seg-equal23short-Weighted3-s202 complete in 1.1s\n"
+  },
+  {
+    "id": "300-seg-equal23short-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-equal23short-Weighted3",
+      "family": "segment interaction",
+      "picker": "equal23short",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0579591170026106,
+    "output": "300-seg-equal23short-Weighted3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-first-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-First",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9329737340012798,
+    "output": "300-seg-first-First-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-First",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9615778709994629,
+    "output": "300-seg-first-First-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-First",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9552807500003837,
+    "output": "300-seg-first-First-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Last",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9675724629996694,
+    "output": "300-seg-first-Last-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Last",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9388306990003912,
+    "output": "300-seg-first-Last-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Last",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9545257179997861,
+    "output": "300-seg-first-Last-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Longest",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.960329991998151,
+    "output": "300-seg-first-Longest-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Longest",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9615803800043068,
+    "output": "300-seg-first-Longest-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Longest",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0008235540008172,
+    "output": "300-seg-first-Longest-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9792400020014611,
+    "output": "300-seg-first-Weighted-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.966535922998446,
+    "output": "300-seg-first-Weighted-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9654646330018295,
+    "output": "300-seg-first-Weighted-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted2",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.983826676994795,
+    "output": "300-seg-first-Weighted2-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted2",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.971828491994529,
+    "output": "300-seg-first-Weighted2-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted2",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9876864899997599,
+    "output": "300-seg-first-Weighted2-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted3",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9753344890050357,
+    "output": "300-seg-first-Weighted3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted3",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9679619090020424,
+    "output": "300-seg-first-Weighted3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-first-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-first-Weighted3",
+      "family": "segment interaction",
+      "picker": "first",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9737204339980963,
+    "output": "300-seg-first-Weighted3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-First",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9574467200000072,
+    "output": "300-seg-last-First-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-First",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9632267650013091,
+    "output": "300-seg-last-First-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-First",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9824034299963387,
+    "output": "300-seg-last-First-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Last",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.8939551280054729,
+    "output": "300-seg-last-Last-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Last",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.8989220610019402,
+    "output": "300-seg-last-Last-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Last",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.8966321320040151,
+    "output": "300-seg-last-Last-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Longest",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9685331040018355,
+    "output": "300-seg-last-Longest-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Longest",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9614229719954892,
+    "output": "300-seg-last-Longest-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Longest",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.009321973004262,
+    "output": "300-seg-last-Longest-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9438878000000841,
+    "output": "300-seg-last-Weighted-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9455342040018877,
+    "output": "300-seg-last-Weighted-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9611416150000878,
+    "output": "300-seg-last-Weighted-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted2",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9378807569955825,
+    "output": "300-seg-last-Weighted2-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted2",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9926654230002896,
+    "output": "300-seg-last-Weighted2-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted2",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9823095620013191,
+    "output": "300-seg-last-Weighted2-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted3",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9763645279963384,
+    "output": "300-seg-last-Weighted3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted3",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0253565899984096,
+    "output": "300-seg-last-Weighted3-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-last-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-last-Weighted3",
+      "family": "segment interaction",
+      "picker": "last",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9977615539974067,
+    "output": "300-seg-last-Weighted3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-rnd99-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-First",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9248382529985975,
+    "output": "300-seg-rnd99-First-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-First",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9367910170039977,
+    "output": "300-seg-rnd99-First-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-First",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9206352229957702,
+    "output": "300-seg-rnd99-First-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Last",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9389279980023275,
+    "output": "300-seg-rnd99-Last-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Last",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9353080720029538,
+    "output": "300-seg-rnd99-Last-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Last",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9247344839968719,
+    "output": "300-seg-rnd99-Last-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Longest",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0013240999978734,
+    "output": "300-seg-rnd99-Longest-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Longest",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9719296809998923,
+    "output": "300-seg-rnd99-Longest-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Longest",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9744795669976156,
+    "output": "300-seg-rnd99-Longest-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9409649379958864,
+    "output": "300-seg-rnd99-Weighted-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9709789100015769,
+    "output": "300-seg-rnd99-Weighted-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9597061480017146,
+    "output": "300-seg-rnd99-Weighted-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted2",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.942031157996098,
+    "output": "300-seg-rnd99-Weighted2-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted2",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9873873440010357,
+    "output": "300-seg-rnd99-Weighted2-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted2",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9877727189959842,
+    "output": "300-seg-rnd99-Weighted2-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted3",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0091907250025542,
+    "output": "300-seg-rnd99-Weighted3-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted3",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9717803829989862,
+    "output": "300-seg-rnd99-Weighted3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-rnd99-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-rnd99-Weighted3",
+      "family": "segment interaction",
+      "picker": "rnd99",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.004874946003838,
+    "output": "300-seg-rnd99-Weighted3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-First-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-First",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9295809769973857,
+    "output": "300-seg-sz2-3-First-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-First-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-First",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9400267169985455,
+    "output": "300-seg-sz2-3-First-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-First-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-First",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "First",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9608740869953181,
+    "output": "300-seg-sz2-3-First-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Last-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Last",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.8845313179990626,
+    "output": "300-seg-sz2-3-Last-s101 complete in 0.8s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Last-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Last",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.8982068570039701,
+    "output": "300-seg-sz2-3-Last-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Last-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Last",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Last",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9278983219992369,
+    "output": "300-seg-sz2-3-Last-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Longest-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Longest",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9883289639983559,
+    "output": "300-seg-sz2-3-Longest-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Longest-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Longest",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9620921550013009,
+    "output": "300-seg-sz2-3-Longest-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Longest-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Longest",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Longest",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9333746900010738,
+    "output": "300-seg-sz2-3-Longest-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9293390700040618,
+    "output": "300-seg-sz2-3-Weighted-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.8917935589997796,
+    "output": "300-seg-sz2-3-Weighted-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.8695298620004905,
+    "output": "300-seg-sz2-3-Weighted-s303 complete in 0.8s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted2-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted2",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.87920707900048,
+    "output": "300-seg-sz2-3-Weighted2-s101 complete in 0.8s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted2-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted2",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.900109928996244,
+    "output": "300-seg-sz2-3-Weighted2-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted2-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted2",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted2",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.8981972969995695,
+    "output": "300-seg-sz2-3-Weighted2-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted3-s101",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted3",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9126196389988763,
+    "output": "300-seg-sz2-3-Weighted3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted3-s202",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted3",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9342196930010687,
+    "output": "300-seg-sz2-3-Weighted3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-seg-sz2-3-Weighted3-s303",
+    "status": "complete",
+    "config": {
+      "id": "seg-sz2-3-Weighted3",
+      "family": "segment interaction",
+      "picker": "sz2-3",
+      "segpicker": "Weighted3",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9591456039997865,
+    "output": "300-seg-sz2-3-Weighted3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-1stlast10-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast10",
+      "family": "tweak survey",
+      "picker": "1stlast10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9402428550019977,
+    "output": "300-tweak-1stlast10-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-1stlast10-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast10",
+      "family": "tweak survey",
+      "picker": "1stlast10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9411314060052973,
+    "output": "300-tweak-1stlast10-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-1stlast10-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast10",
+      "family": "tweak survey",
+      "picker": "1stlast10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9393492739982321,
+    "output": "300-tweak-1stlast10-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-1stlast2-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast2",
+      "family": "tweak survey",
+      "picker": "1stlast2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9901998460045434,
+    "output": "300-tweak-1stlast2-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-1stlast2-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast2",
+      "family": "tweak survey",
+      "picker": "1stlast2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9991465610000887,
+    "output": "300-tweak-1stlast2-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-1stlast2-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-1stlast2",
+      "family": "tweak survey",
+      "picker": "1stlast2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.979343359998893,
+    "output": "300-tweak-1stlast2-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim10-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim10",
+      "family": "tweak survey",
+      "picker": "23lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9655725920019904,
+    "output": "300-tweak-23lim10-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim10-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim10",
+      "family": "tweak survey",
+      "picker": "23lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9565785880040494,
+    "output": "300-tweak-23lim10-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim10-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim10",
+      "family": "tweak survey",
+      "picker": "23lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9550533029978396,
+    "output": "300-tweak-23lim10-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim25-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim25",
+      "family": "tweak survey",
+      "picker": "23lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9663123749996885,
+    "output": "300-tweak-23lim25-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim25-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim25",
+      "family": "tweak survey",
+      "picker": "23lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9668709090037737,
+    "output": "300-tweak-23lim25-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim25-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim25",
+      "family": "tweak survey",
+      "picker": "23lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9745652560013696,
+    "output": "300-tweak-23lim25-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-23lim30-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim30",
+      "family": "tweak survey",
+      "picker": "23lim30",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.015042087994516,
+    "output": "300-tweak-23lim30-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-23lim30-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim30",
+      "family": "tweak survey",
+      "picker": "23lim30",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0111143960020854,
+    "output": "300-tweak-23lim30-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-23lim30-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim30",
+      "family": "tweak survey",
+      "picker": "23lim30",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0218532029975904,
+    "output": "300-tweak-23lim30-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-23lim60-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim60",
+      "family": "tweak survey",
+      "picker": "23lim60",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0252741500007687,
+    "output": "300-tweak-23lim60-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-23lim60-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim60",
+      "family": "tweak survey",
+      "picker": "23lim60",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9963340370013611,
+    "output": "300-tweak-23lim60-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-23lim60-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-23lim60",
+      "family": "tweak survey",
+      "picker": "23lim60",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0214180869952543,
+    "output": "300-tweak-23lim60-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim10-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim10",
+      "family": "tweak survey",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.977816354999959,
+    "output": "300-tweak-2lim10-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim10-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim10",
+      "family": "tweak survey",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9775217279966455,
+    "output": "300-tweak-2lim10-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim10-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim10",
+      "family": "tweak survey",
+      "picker": "2lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.968037289007043,
+    "output": "300-tweak-2lim10-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim100-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim100",
+      "family": "tweak survey",
+      "picker": "2lim100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9615486109978519,
+    "output": "300-tweak-2lim100-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim100-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim100",
+      "family": "tweak survey",
+      "picker": "2lim100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9638488889977452,
+    "output": "300-tweak-2lim100-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim100-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim100",
+      "family": "tweak survey",
+      "picker": "2lim100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9296331060031662,
+    "output": "300-tweak-2lim100-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim25-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim25",
+      "family": "tweak survey",
+      "picker": "2lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.008888776996173,
+    "output": "300-tweak-2lim25-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim25-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim25",
+      "family": "tweak survey",
+      "picker": "2lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.98398913499841,
+    "output": "300-tweak-2lim25-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim25-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim25",
+      "family": "tweak survey",
+      "picker": "2lim25",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0216029349976452,
+    "output": "300-tweak-2lim25-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim5-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim5",
+      "family": "tweak survey",
+      "picker": "2lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0315245610036072,
+    "output": "300-tweak-2lim5-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim5-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim5",
+      "family": "tweak survey",
+      "picker": "2lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0289466949980124,
+    "output": "300-tweak-2lim5-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim5-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim5",
+      "family": "tweak survey",
+      "picker": "2lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0250362919978215,
+    "output": "300-tweak-2lim5-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim50-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim50",
+      "family": "tweak survey",
+      "picker": "2lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.01176681999641,
+    "output": "300-tweak-2lim50-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-2lim50-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim50",
+      "family": "tweak survey",
+      "picker": "2lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9668606800041744,
+    "output": "300-tweak-2lim50-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-2lim50-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-2lim50",
+      "family": "tweak survey",
+      "picker": "2lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.960894787000143,
+    "output": "300-tweak-2lim50-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim10-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim10",
+      "family": "tweak survey",
+      "picker": "3lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9461339180052164,
+    "output": "300-tweak-3lim10-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim10-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim10",
+      "family": "tweak survey",
+      "picker": "3lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9540124029954313,
+    "output": "300-tweak-3lim10-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim10-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim10",
+      "family": "tweak survey",
+      "picker": "3lim10",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9532789599979878,
+    "output": "300-tweak-3lim10-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim50-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim50",
+      "family": "tweak survey",
+      "picker": "3lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9681888580016675,
+    "output": "300-tweak-3lim50-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim50-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim50",
+      "family": "tweak survey",
+      "picker": "3lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9713173869968159,
+    "output": "300-tweak-3lim50-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-3lim50-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-3lim50",
+      "family": "tweak survey",
+      "picker": "3lim50",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9708477719977964,
+    "output": "300-tweak-3lim50-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-equal23-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23",
+      "family": "tweak survey",
+      "picker": "equal23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0421857480032486,
+    "output": "300-tweak-equal23-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equal23-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23",
+      "family": "tweak survey",
+      "picker": "equal23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0242866699991282,
+    "output": "300-tweak-equal23-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equal23-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23",
+      "family": "tweak survey",
+      "picker": "equal23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0216055159980897,
+    "output": "300-tweak-equal23-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equal23short-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23short",
+      "family": "tweak survey",
+      "picker": "equal23short",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0175136940015364,
+    "output": "300-tweak-equal23short-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equal23short-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23short",
+      "family": "tweak survey",
+      "picker": "equal23short",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0406599220004864,
+    "output": "300-tweak-equal23short-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equal23short-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equal23short",
+      "family": "tweak survey",
+      "picker": "equal23short",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0522827110034996,
+    "output": "300-tweak-equal23short-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equalrem-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equalrem",
+      "family": "tweak survey",
+      "picker": "equalrem",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9995942059977097,
+    "output": "300-tweak-equalrem-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equalrem-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equalrem",
+      "family": "tweak survey",
+      "picker": "equalrem",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0069686960050603,
+    "output": "300-tweak-equalrem-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-equalrem-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-equalrem",
+      "family": "tweak survey",
+      "picker": "equalrem",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.009054736001417,
+    "output": "300-tweak-equalrem-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-even-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-even",
+      "family": "tweak survey",
+      "picker": "even",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9728464919971884,
+    "output": "300-tweak-even-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-even-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-even",
+      "family": "tweak survey",
+      "picker": "even",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.964283463996253,
+    "output": "300-tweak-even-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-even-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-even",
+      "family": "tweak survey",
+      "picker": "even",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9762527599959867,
+    "output": "300-tweak-even-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-first-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-first",
+      "family": "tweak survey",
+      "picker": "first",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9885436819968163,
+    "output": "300-tweak-first-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-first-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-first",
+      "family": "tweak survey",
+      "picker": "first",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9886270409988356,
+    "output": "300-tweak-first-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-first-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-first",
+      "family": "tweak survey",
+      "picker": "first",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0353444540014607,
+    "output": "300-tweak-first-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-last-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-last",
+      "family": "tweak survey",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9990540310027427,
+    "output": "300-tweak-last-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-last-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-last",
+      "family": "tweak survey",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0285835880058585,
+    "output": "300-tweak-last-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-last-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-last",
+      "family": "tweak survey",
+      "picker": "last",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0269809540041024,
+    "output": "300-tweak-last-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len1-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1",
+      "family": "tweak survey",
+      "picker": "len1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0238823640029295,
+    "output": "300-tweak-len1-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len1-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1",
+      "family": "tweak survey",
+      "picker": "len1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9789617939968593,
+    "output": "300-tweak-len1-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len1-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1",
+      "family": "tweak survey",
+      "picker": "len1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.024128960998496,
+    "output": "300-tweak-len1-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len12rnd3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len12rnd3",
+      "family": "tweak survey",
+      "picker": "len12rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9640644669998437,
+    "output": "300-tweak-len12rnd3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len12rnd3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len12rnd3",
+      "family": "tweak survey",
+      "picker": "len12rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9608734080029535,
+    "output": "300-tweak-len12rnd3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len12rnd3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len12rnd3",
+      "family": "tweak survey",
+      "picker": "len12rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9684464750025654,
+    "output": "300-tweak-len12rnd3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len1rnd3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1rnd3",
+      "family": "tweak survey",
+      "picker": "len1rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9895575519985869,
+    "output": "300-tweak-len1rnd3-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len1rnd3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1rnd3",
+      "family": "tweak survey",
+      "picker": "len1rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0269784839983913,
+    "output": "300-tweak-len1rnd3-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len1rnd3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len1rnd3",
+      "family": "tweak survey",
+      "picker": "len1rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0383244050026406,
+    "output": "300-tweak-len1rnd3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-10th-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-10th",
+      "family": "tweak survey",
+      "picker": "len23-10th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.974442476996046,
+    "output": "300-tweak-len23-10th-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-10th-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-10th",
+      "family": "tweak survey",
+      "picker": "len23-10th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9715306650032289,
+    "output": "300-tweak-len23-10th-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-10th-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-10th",
+      "family": "tweak survey",
+      "picker": "len23-10th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9884491920020082,
+    "output": "300-tweak-len23-10th-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-1stfour-sz-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-1stfour-sz",
+      "family": "tweak survey",
+      "picker": "len23-1stfour-sz",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9853922620022786,
+    "output": "300-tweak-len23-1stfour-sz-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-1stfour-sz-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-1stfour-sz",
+      "family": "tweak survey",
+      "picker": "len23-1stfour-sz",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.988254385003529,
+    "output": "300-tweak-len23-1stfour-sz-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-1stfour-sz-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-1stfour-sz",
+      "family": "tweak survey",
+      "picker": "len23-1stfour-sz",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9949438909970922,
+    "output": "300-tweak-len23-1stfour-sz-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-20th-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-20th",
+      "family": "tweak survey",
+      "picker": "len23-20th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9861486649970175,
+    "output": "300-tweak-len23-20th-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-20th-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-20th",
+      "family": "tweak survey",
+      "picker": "len23-20th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9903736849955749,
+    "output": "300-tweak-len23-20th-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-20th-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-20th",
+      "family": "tweak survey",
+      "picker": "len23-20th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9788607549999142,
+    "output": "300-tweak-len23-20th-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-3rd-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-3rd",
+      "family": "tweak survey",
+      "picker": "len23-3rd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0155785329989158,
+    "output": "300-tweak-len23-3rd-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-3rd-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-3rd",
+      "family": "tweak survey",
+      "picker": "len23-3rd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9967986729971017,
+    "output": "300-tweak-len23-3rd-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-3rd-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-3rd",
+      "family": "tweak survey",
+      "picker": "len23-3rd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0041910029976862,
+    "output": "300-tweak-len23-3rd-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-5th-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-5th",
+      "family": "tweak survey",
+      "picker": "len23-5th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0148185309953988,
+    "output": "300-tweak-len23-5th-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-5th-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-5th",
+      "family": "tweak survey",
+      "picker": "len23-5th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0072634230018593,
+    "output": "300-tweak-len23-5th-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-5th-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-5th",
+      "family": "tweak survey",
+      "picker": "len23-5th",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0110697059935774,
+    "output": "300-tweak-len23-5th-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-half-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-half",
+      "family": "tweak survey",
+      "picker": "len23-half",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9665873029953218,
+    "output": "300-tweak-len23-half-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-half-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-half",
+      "family": "tweak survey",
+      "picker": "len23-half",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9833080929965945,
+    "output": "300-tweak-len23-half-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23-half-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-half",
+      "family": "tweak survey",
+      "picker": "len23-half",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9743716579978354,
+    "output": "300-tweak-len23-half-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23",
+      "family": "tweak survey",
+      "picker": "len23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9828727259955485,
+    "output": "300-tweak-len23-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23",
+      "family": "tweak survey",
+      "picker": "len23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9747318740046467,
+    "output": "300-tweak-len23-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23",
+      "family": "tweak survey",
+      "picker": "len23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9764477280041319,
+    "output": "300-tweak-len23-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-third-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-third",
+      "family": "tweak survey",
+      "picker": "len23-third",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9512070099954144,
+    "output": "300-tweak-len23-third-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-third-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-third",
+      "family": "tweak survey",
+      "picker": "len23-third",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9840037460016902,
+    "output": "300-tweak-len23-third-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23-third-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23-third",
+      "family": "tweak survey",
+      "picker": "len23-third",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9734329860002617,
+    "output": "300-tweak-len23-third-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23mid-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23mid",
+      "family": "tweak survey",
+      "picker": "len23mid",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0286209280020557,
+    "output": "300-tweak-len23mid-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23mid-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23mid",
+      "family": "tweak survey",
+      "picker": "len23mid",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0497453060015687,
+    "output": "300-tweak-len23mid-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23mid-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23mid",
+      "family": "tweak survey",
+      "picker": "len23mid",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.02632609000284,
+    "output": "300-tweak-len23mid-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd100-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd100",
+      "family": "tweak survey",
+      "picker": "len23rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.014937280000595,
+    "output": "300-tweak-len23rnd100-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd100-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd100",
+      "family": "tweak survey",
+      "picker": "len23rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0341664250008762,
+    "output": "300-tweak-len23rnd100-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd100-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd100",
+      "family": "tweak survey",
+      "picker": "len23rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9986454250029055,
+    "output": "300-tweak-len23rnd100-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd3",
+      "family": "tweak survey",
+      "picker": "len23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9723030379973352,
+    "output": "300-tweak-len23rnd3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd3",
+      "family": "tweak survey",
+      "picker": "len23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9776292259994079,
+    "output": "300-tweak-len23rnd3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len23rnd3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len23rnd3",
+      "family": "tweak survey",
+      "picker": "len23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9707017830005498,
+    "output": "300-tweak-len23rnd3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-len2lim50rnd-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len2lim50rnd",
+      "family": "tweak survey",
+      "picker": "len2lim50rnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.231776512999204,
+    "output": "300-tweak-len2lim50rnd-s101 complete in 1.2s\n"
+  },
+  {
+    "id": "300-tweak-len2lim50rnd-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len2lim50rnd",
+      "family": "tweak survey",
+      "picker": "len2lim50rnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.2470959759957623,
+    "output": "300-tweak-len2lim50rnd-s202 complete in 1.2s\n"
+  },
+  {
+    "id": "300-tweak-len2lim50rnd-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-len2lim50rnd",
+      "family": "tweak survey",
+      "picker": "len2lim50rnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.2545292950017028,
+    "output": "300-tweak-len2lim50rnd-s303 complete in 1.2s\n"
+  },
+  {
+    "id": "300-tweak-odd-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-odd",
+      "family": "tweak survey",
+      "picker": "odd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9600802050044877,
+    "output": "300-tweak-odd-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-odd-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-odd",
+      "family": "tweak survey",
+      "picker": "odd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.989237605004746,
+    "output": "300-tweak-odd-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-odd-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-odd",
+      "family": "tweak survey",
+      "picker": "odd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0158672609977657,
+    "output": "300-tweak-odd-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100",
+      "family": "tweak survey",
+      "picker": "rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.003885045000061,
+    "output": "300-tweak-rnd100-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100",
+      "family": "tweak survey",
+      "picker": "rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.041514794997056,
+    "output": "300-tweak-rnd100-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100",
+      "family": "tweak survey",
+      "picker": "rnd100",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0244440179958474,
+    "output": "300-tweak-rnd100-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim20-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim20",
+      "family": "tweak survey",
+      "picker": "rnd100lim20",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0116974800039316,
+    "output": "300-tweak-rnd100lim20-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim20-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim20",
+      "family": "tweak survey",
+      "picker": "rnd100lim20",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0392278770013945,
+    "output": "300-tweak-rnd100lim20-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim20-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim20",
+      "family": "tweak survey",
+      "picker": "rnd100lim20",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0559329070019885,
+    "output": "300-tweak-rnd100lim20-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim5-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim5",
+      "family": "tweak survey",
+      "picker": "rnd100lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.1223987999983365,
+    "output": "300-tweak-rnd100lim5-s101 complete in 1.1s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim5-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim5",
+      "family": "tweak survey",
+      "picker": "rnd100lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0742059120020713,
+    "output": "300-tweak-rnd100lim5-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd100lim5-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd100lim5",
+      "family": "tweak survey",
+      "picker": "rnd100lim5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0881408480054233,
+    "output": "300-tweak-rnd100lim5-s303 complete in 1.1s\n"
+  },
+  {
+    "id": "300-tweak-rnd2-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd2",
+      "family": "tweak survey",
+      "picker": "rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0423527469974943,
+    "output": "300-tweak-rnd2-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd2-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd2",
+      "family": "tweak survey",
+      "picker": "rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0288881059968844,
+    "output": "300-tweak-rnd2-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd2-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd2",
+      "family": "tweak survey",
+      "picker": "rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0228068240030552,
+    "output": "300-tweak-rnd2-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd3",
+      "family": "tweak survey",
+      "picker": "rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.02406990199961,
+    "output": "300-tweak-rnd3-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd3",
+      "family": "tweak survey",
+      "picker": "rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9860262160000275,
+    "output": "300-tweak-rnd3-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd3",
+      "family": "tweak survey",
+      "picker": "rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0284958699994604,
+    "output": "300-tweak-rnd3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd5-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd5",
+      "family": "tweak survey",
+      "picker": "rnd5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9749566129976301,
+    "output": "300-tweak-rnd5-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-rnd5-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd5",
+      "family": "tweak survey",
+      "picker": "rnd5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9983776779990876,
+    "output": "300-tweak-rnd5-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd5-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd5",
+      "family": "tweak survey",
+      "picker": "rnd5",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0531875129963737,
+    "output": "300-tweak-rnd5-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd99-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd99",
+      "family": "tweak survey",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0323358620007639,
+    "output": "300-tweak-rnd99-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd99-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd99",
+      "family": "tweak survey",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.988341643998865,
+    "output": "300-tweak-rnd99-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-rnd99-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-rnd99",
+      "family": "tweak survey",
+      "picker": "rnd99",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9960583199936082,
+    "output": "300-tweak-rnd99-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-shortrnd-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-shortrnd",
+      "family": "tweak survey",
+      "picker": "shortrnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0101164959996822,
+    "output": "300-tweak-shortrnd-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-shortrnd-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-shortrnd",
+      "family": "tweak survey",
+      "picker": "shortrnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.057361482999113,
+    "output": "300-tweak-shortrnd-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-shortrnd-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-shortrnd",
+      "family": "tweak survey",
+      "picker": "shortrnd",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.066579364000063,
+    "output": "300-tweak-shortrnd-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz1-23-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz1-23",
+      "family": "tweak survey",
+      "picker": "sz1-23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0769743049968383,
+    "output": "300-tweak-sz1-23-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz1-23-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz1-23",
+      "family": "tweak survey",
+      "picker": "sz1-23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0735437879993697,
+    "output": "300-tweak-sz1-23-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz1-23-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz1-23",
+      "family": "tweak survey",
+      "picker": "sz1-23",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0865862029968412,
+    "output": "300-tweak-sz1-23-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz2-1-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-1",
+      "family": "tweak survey",
+      "picker": "sz2-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9800988940041861,
+    "output": "300-tweak-sz2-1-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-1-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-1",
+      "family": "tweak survey",
+      "picker": "sz2-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9603640220011584,
+    "output": "300-tweak-sz2-1-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-1-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-1",
+      "family": "tweak survey",
+      "picker": "sz2-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9837433279972174,
+    "output": "300-tweak-sz2-1-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-13-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-13",
+      "family": "tweak survey",
+      "picker": "sz2-13",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9207375120022334,
+    "output": "300-tweak-sz2-13-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-13-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-13",
+      "family": "tweak survey",
+      "picker": "sz2-13",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9354572299998836,
+    "output": "300-tweak-sz2-13-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-13-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-13",
+      "family": "tweak survey",
+      "picker": "sz2-13",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9230847389990231,
+    "output": "300-tweak-sz2-13-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-3",
+      "family": "tweak survey",
+      "picker": "sz2-3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9375337599994964,
+    "output": "300-tweak-sz2-3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-3",
+      "family": "tweak survey",
+      "picker": "sz2-3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9457066420000046,
+    "output": "300-tweak-sz2-3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz2-3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz2-3",
+      "family": "tweak survey",
+      "picker": "sz2-3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9398217889975058,
+    "output": "300-tweak-sz2-3-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23-1-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-1",
+      "family": "tweak survey",
+      "picker": "sz23-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9428147799990256,
+    "output": "300-tweak-sz23-1-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23-1-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-1",
+      "family": "tweak survey",
+      "picker": "sz23-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9754015279977466,
+    "output": "300-tweak-sz23-1-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23-1-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-1",
+      "family": "tweak survey",
+      "picker": "sz23-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9522513300034916,
+    "output": "300-tweak-sz23-1-s303 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23-opt-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-opt",
+      "family": "tweak survey",
+      "picker": "sz23-opt",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0064877200056799,
+    "output": "300-tweak-sz23-opt-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz23-opt-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-opt",
+      "family": "tweak survey",
+      "picker": "sz23-opt",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0251772420015186,
+    "output": "300-tweak-sz23-opt-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz23-opt-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23-opt",
+      "family": "tweak survey",
+      "picker": "sz23-opt",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0880895989976125,
+    "output": "300-tweak-sz23-opt-s303 complete in 1.1s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd2-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd2",
+      "family": "tweak survey",
+      "picker": "sz23rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.9941619089950109,
+    "output": "300-tweak-sz23rnd2-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd2-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd2",
+      "family": "tweak survey",
+      "picker": "sz23rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.980485038999177,
+    "output": "300-tweak-sz23rnd2-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd2-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd2",
+      "family": "tweak survey",
+      "picker": "sz23rnd2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.00085274400044,
+    "output": "300-tweak-sz23rnd2-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd3-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd3",
+      "family": "tweak survey",
+      "picker": "sz23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 0.974402348001604,
+    "output": "300-tweak-sz23rnd3-s101 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd3-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd3",
+      "family": "tweak survey",
+      "picker": "sz23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 0.9829301060017315,
+    "output": "300-tweak-sz23rnd3-s202 complete in 0.9s\n"
+  },
+  {
+    "id": "300-tweak-sz23rnd3-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz23rnd3",
+      "family": "tweak survey",
+      "picker": "sz23rnd3",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.993888210003206,
+    "output": "300-tweak-sz23rnd3-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz3-1-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-1",
+      "family": "tweak survey",
+      "picker": "sz3-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.0675870449995273,
+    "output": "300-tweak-sz3-1-s101 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz3-1-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-1",
+      "family": "tweak survey",
+      "picker": "sz3-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0447961129975738,
+    "output": "300-tweak-sz3-1-s202 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz3-1-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-1",
+      "family": "tweak survey",
+      "picker": "sz3-1",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 1.0770583949997672,
+    "output": "300-tweak-sz3-1-s303 complete in 1.0s\n"
+  },
+  {
+    "id": "300-tweak-sz3-2-s101",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-2",
+      "family": "tweak survey",
+      "picker": "sz3-2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 101,
+    "seconds": 1.1334537439979613,
+    "output": "300-tweak-sz3-2-s101 complete in 1.1s\n"
+  },
+  {
+    "id": "300-tweak-sz3-2-s202",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-2",
+      "family": "tweak survey",
+      "picker": "sz3-2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 202,
+    "seconds": 1.0901154090024647,
+    "output": "300-tweak-sz3-2-s202 complete in 1.1s\n"
+  },
+  {
+    "id": "300-tweak-sz3-2-s303",
+    "status": "complete",
+    "config": {
+      "id": "tweak-sz3-2",
+      "family": "tweak survey",
+      "picker": "sz3-2",
+      "segpicker": "Weighted4",
+      "lim": "20"
+    },
+    "seed": 303,
+    "seconds": 0.9996982949960511,
+    "output": "300-tweak-sz3-2-s303 complete in 1.0s\n"
+  }
+]

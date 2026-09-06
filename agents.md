@@ -25,3 +25,9 @@ commit license keys or generated `output/`, `logs/`, `tweaks/` (gitignored).
 Generated `levels/*.coil` and the `levels/hard/` picks are tracked on
 purpose; do not commit smoke-test levels (`gen` writes a `.coil` into
 `levels/` on every run).
+
+The [board style collection](gallery/README.md) and
+[HTML atlas](web/gallery-guide.html) contain a controlled picker/seed survey
+and selected large specimens. `specimen` exports validated gzip boards and
+geometry; `verify-collection` replays and verifies the saved collection.
+`gallery/` is deliberately versioned, unlike ordinary `output/` runs.

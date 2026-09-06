@@ -8,6 +8,7 @@ static class RegressionTests
 {
     static void Main()
     {
+        CharacterizationTests.Run();
         SolutionLimits();
         HardnessOrdering();
         IndexCaches();

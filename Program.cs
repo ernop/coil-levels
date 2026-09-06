@@ -26,6 +26,10 @@ namespace coil
         generate seedCount levels, score each for solver hardness, keep the N hardest (default 10) as
         output/hardest/<w>x<h>/rankNN-seedS.board/.solution plus a summary. Defaults: --picker last --lim none,
         --score exact up to 34x34 (full-tree reference-solver effort, budget 20M nodes) else proxy. See HARDNESS.md.
+  verify-collection <gallery-directory>
+        replay saved gzip solutions, check hashes, recompute geometry and compare every map cell.
+  specimen <dir> <side> <seed> [gen options]
+        export validated gzip board/solution, maps, and exact geometry stats; directory must be new.
   gallery <dir> <count> <minSide> <maxSide> [--seed S] [--threads N] [gen options]
         generate count square levels with sides spaced geometrically from minSide to maxSide (seed S+i), write a
         whole-board png per level (open white, wall black; 2 px/cell up to 1500 a side, 1 px above) and manifest.csv
@@ -47,6 +51,8 @@ No subcommand: `<width> <height> [seed]` behaves as gen.";
                 case "stats": return Stats(args.Skip(1).ToArray());
                 case "bench": return Bench(args.Skip(1).ToArray());
                 case "hardest": return Hardest(args.Skip(1).ToArray());
+                case "verify-collection": return VerifyCollection(args.Skip(1).ToArray());
+                case "specimen": return Specimen(args.Skip(1).ToArray());
                 case "gallery": return Gallery(args.Skip(1).ToArray());
                 case "pickers":
                     WL("tweak pickers: " + string.Join(" ", TweakPickers.GetPickers(null).Select(p => p.Name).Distinct()));
@@ -100,7 +106,12 @@ No subcommand: `<width> <height> [seed]` behaves as gen.";
             {
                 csp.MaxLoops = int.Parse(loops);
             }
-            return new LevelConfiguration(tweakPicker, segPicker, os, new InitialWanderSetup());
+            var wander = new InitialWanderSetup();
+            if (opts.TryGetValue("wander-max", out var wanderMax)) wander.MaxLen = int.Parse(wanderMax);
+            if (opts.TryGetValue("wander-steps", out var wanderSteps)) wander.StepLimit = int.Parse(wanderSteps);
+            wander.GoMax = opts.ContainsKey("wander-full");
+            if (wander.MaxLen < 2 || wander.StepLimit < 1) throw new ArgumentException("wander-max must be >=2; wander-steps >=1");
+            return new LevelConfiguration(tweakPicker, segPicker, os, wander);
         }
 
         /// <summary>Generate one level: wander, tweak to exhaustion (MaxLoops passes), validate. Deterministic in seed.</summary>

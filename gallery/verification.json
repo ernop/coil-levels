@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-06",
+  "status": "passed",
+  "specimenCount": 424,
+  "batches": {
+    "survey": 330,
+    "initialAndSelectedThrough2000": 82,
+    "large5000And10000": 12
+  },
+  "checks": [
+    "Persisted gzip board and solution replay under CoilFormat.Validate",
+    "Board SHA-256 matches metadata",
+    "Exact full-board characterization recomputed and compared",
+    "Every full-resolution map pixel matches its board cell",
+    "Preview and detail dimensions match the documented format",
+    "All 424 planned specimens present with exactly six expected assets each"
+  ],
+  "sourceSha256": {
+    "BoardCharacterization.cs": "e810906b12f38a4e848983a821549a407a80a806378b891bc22314631ad95f07",
+    "Specimen.cs": "665071b6f7467570ad1ca7fb3aac9c8272e9da77f852d4be5de47dbe138d65c7",
+    "VerifyCollection.cs": "526d07ac37b08dcedb8e77e53ec5fdb5192325f3ade81051e058e2215b7de9e3",
+    "CoilFormat.cs": "69f75e12b3add95740c55068518da7cc3687a7ea1db7a7cc9a5dc6cd2741d4dc"
+  },
+  "largeSpecimens": [
+    {
+      "id": "10000-control-rnd99-wanderfull-s303",
+      "boardSha256": "08eae8f6ed91cd76d6cfbb6442bcbcf65986560e6ee9400cf86a6f9bb59b44df",
+      "seconds": 12.67,
+      "passed": true
+    },
+    {
+      "id": "10000-tweak-rnd99-s101",
+      "boardSha256": "5856d0853932e714b65c8f96ceef79cd1fb2491d8f5baeaf3454db2ac80ea9c1",
+      "seconds": 8.6,
+      "passed": true
+    },
+    {
+      "id": "5000-control-rnd99-wanderfull-s101",
+      "boardSha256": "0ecac2604db082b942218c62c19a1982bef4e46a9c3d8f0291f71a9c68fa2680",
+      "seconds": 2.66,
+      "passed": true
+    },
+    {
+      "id": "5000-seg-first-Longest-s101",
+      "boardSha256": "8ab59ae95c9dc87debc8b1ab329823a66e90ac5b057450cba3ee302d7ac49749",
+      "seconds": 2.51,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-len1-s101",
+      "boardSha256": "110e264d538a7a8e1aae2fe9819f66d54ade064901fb3c0c1cd9242a913f35ff",
+      "seconds": 2.44,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-len23-s101",
+      "boardSha256": "f630c4490b055bb73238962a2a9a40a723ad7bd61cb53177381aa3a719d06992",
+      "seconds": 2.4,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-rnd99-s101",
+      "boardSha256": "92a1fc0c81bc9ff715b89cbb1ef96e23575b146c950a0223c193c5e0312cfd43",
+      "seconds": 2.45,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-sz1-23-s101",
+      "boardSha256": "ad771f4b5fd25f45ddcf12dedd9a0c1baea2ac9e91e81d40d62c1865c11d7ff2",
+      "seconds": 2.5,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-sz23rnd2-s101",
+      "boardSha256": "df73c7f6f154b51676ea52cec1082d2d29966b27925affb6f3c7cab521ac2102",
+      "seconds": 2.4,
+      "passed": true
+    },
+    {
+      "id": "5000-tweak-sz3-2-s101",
+      "boardSha256": "91f5d06edb0af1da3160c97d539ac564fbf9e344a4bcf968a5b6ea27886a3fb0",
+      "seconds": 2.42,
+      "passed": true
+    },
+    {
+      "id": "10000-control-rnd99-wanderfull-s101",
+      "boardSha256": "f898efc45aa2ee54bb73f43e053cebac6abd18cf27c771cfda09915394069295",
+      "seconds": 9.9,
+      "passed": true
+    },
+    {
+      "id": "10000-tweak-len23-s101",
+      "boardSha256": "1f66eb1143c4acde77cbc10f4dfb46038dcaca21afd50acc1acf34120e242ded",
+      "seconds": 8.21,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,1130 @@
+{
+  "schemaVersion": 1,
+  "side": 500,
+  "seed": 202,
+  "options": {
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  "generationSeconds": 0.6818735,
+  "boardSha256": "2d09fbd3893a0042b4472405350254646c6722aea46bb0a932bb399cfd0863dd",
+  "validation": "Debug.DoDebug \u002B CoilFormat.Validate; persisted gzip pair replayed",
+  "stats": {
+    "width": 500,
+    "height": 500,
+    "openCells": 164927,
+    "openFraction": 0.659708,
+    "degreeCounts": [
+      0,
+      0,
+      57673,
+      91426,
+      15828
+    ],
+    "isolatedWallFraction": 0.10562693216414139,
+    "interfacePerOpen": 1.2537183117379205,
+    "axisBias": -0.0020665171238320647,
+    "horizontalRuns": {
+      "count": 51927,
+      "mean": 3.176131877443334,
+      "max": 30,
+      "histogram": {
+        "1": 12450,
+        "2": 9091,
+        "3": 11820,
+        "4": 7755,
+        "5": 4689,
+        "6": 2783,
+        "7": 1472,
+        "8": 814,
+        "9": 453,
+        "10": 260,
+        "11": 149,
+        "12": 97,
+        "13": 42,
+        "14": 23,
+        "15": 9,
+        "16": 7,
+        "17": 3,
+        "18": 3,
+        "19": 2,
+        "21": 2,
+        "23": 2,
+        "30": 1
+      }
+    },
+    "verticalRuns": {
+      "count": 51459,
+      "mean": 3.205017586816689,
+      "max": 25,
+      "histogram": {
+        "1": 12229,
+        "2": 8695,
+        "3": 12024,
+        "4": 7672,
+        "5": 4635,
+        "6": 2701,
+        "7": 1512,
+        "8": 833,
+        "9": 516,
+        "10": 273,
+        "11": 155,
+        "12": 104,
+        "13": 51,
+        "14": 26,
+        "15": 9,
+        "16": 9,
+        "17": 6,
+        "18": 1,
+        "19": 3,
+        "20": 1,
+        "21": 2,
+        "22": 1,
+        "25": 1
+      }
+    },
+    "largestOpenSquare": [
+      421,
+      182,
+      5
+    ],
+    "largestWallSquare": [
+      187,
+      385,
+      4
+    ],
+    "openSquareCounts": {
+      "1": 164927,
+      "2": 43154,
+      "3": 5043,
+      "4": 171,
+      "5": 1
+    },
+    "wallSquareCounts": {
+      "1": 85073,
+      "2": 6588,
+      "3": 260,
+      "4": 2
+    },
+    "edgeLayers": [
+      {
+        "distance": 0,
+        "openFraction": 0.6773547094188377
+      },
+      {
+        "distance": 1,
+        "openFraction": 0.6408450704225352
+      },
+      {
+        "distance": 2,
+        "openFraction": 0.6661616161616162
+      },
+      {
+        "distance": 3,
+        "openFraction": 0.6592292089249493
+      },
+      {
+        "distance": 4,
+        "openFraction": 0.6608961303462322
+      },
+      {
+        "distance": 5,
+        "openFraction": 0.647239263803681
+      },
+      {
+        "distance": 6,
+        "openFraction": 0.6724845995893224
+      },
+      {
+        "distance": 7,
+        "openFraction": 0.661340206185567
+      },
+      {
+        "distance": 8,
+        "openFraction": 0.6423395445134575
+      },
+      {
+        "distance": 9,
+        "openFraction": 0.6616424116424117
+      },
+      {
+        "distance": 10,
+        "openFraction": 0.6602296450939458
+      },
+      {
+        "distance": 11,
+        "openFraction": 0.660901467505241
+      },
+      {
+        "distance": 12,
+        "openFraction": 0.6468421052631579
+      },
+      {
+        "distance": 13,
+        "openFraction": 0.6638477801268499
+      },
+      {
+        "distance": 14,
+        "openFraction": 0.6480891719745223
+      },
+      {
+        "distance": 15,
+        "openFraction": 0.6593816631130064
+      },
+      {
+        "distance": 16,
+        "openFraction": 0.658458244111349
+      },
+      {
+        "distance": 17,
+        "openFraction": 0.6586021505376344
+      },
+      {
+        "distance": 18,
+        "openFraction": 0.6403887688984882
+      },
+      {
+        "distance": 19,
+        "openFraction": 0.6691973969631236
+      },
+      {
+        "distance": 20,
+        "openFraction": 0.644880174291939
+      },
+      {
+        "distance": 21,
+        "openFraction": 0.6657549234135668
+      },
+      {
+        "distance": 22,
+        "openFraction": 0.6681318681318681
+      },
+      {
+        "distance": 23,
+        "openFraction": 0.6804635761589404
+      },
+      {
+        "distance": 24,
+        "openFraction": 0.6441241685144125
+      },
+      {
+        "distance": 25,
+        "openFraction": 0.6520044543429844
+      },
+      {
+        "distance": 26,
+        "openFraction": 0.6795302013422819
+      },
+      {
+        "distance": 27,
+        "openFraction": 0.6511235955056179
+      },
+      {
+        "distance": 28,
+        "openFraction": 0.6518058690744921
+      },
+      {
+        "distance": 29,
+        "openFraction": 0.6689342403628118
+      },
+      {
+        "distance": 30,
+        "openFraction": 0.6600227790432802
+      },
+      {
+        "distance": 31,
+        "openFraction": 0.6647597254004577
+      },
+      {
+        "distance": 32,
+        "openFraction": 0.6626436781609195
+      },
+      {
+        "distance": 33,
+        "openFraction": 0.6657043879907621
+      },
+      {
+        "distance": 34,
+        "openFraction": 0.6548723897911833
+      },
+      {
+        "distance": 35,
+        "openFraction": 0.671911421911422
+      },
+      {
+        "distance": 36,
+        "openFraction": 0.667447306791569
+      },
+      {
+        "distance": 37,
+        "openFraction": 0.6611764705882353
+      },
+      {
+        "distance": 38,
+        "openFraction": 0.6643026004728132
+      },
+      {
+        "distance": 39,
+        "openFraction": 0.6680522565320665
+      },
+      {
+        "distance": 40,
+        "openFraction": 0.6521479713603818
+      },
+      {
+        "distance": 41,
+        "openFraction": 0.6624700239808153
+      },
+      {
+        "distance": 42,
+        "openFraction": 0.6439759036144578
+      },
+      {
+        "distance": 43,
+        "openFraction": 0.6664648910411622
+      },
+      {
+        "distance": 44,
+        "openFraction": 0.6545012165450121
+      },
+      {
+        "distance": 45,
+        "openFraction": 0.6595354523227384
+      },
+      {
+        "distance": 46,
+        "openFraction": 0.6781326781326781
+      },
+      {
+        "distance": 47,
+        "openFraction": 0.6679012345679012
+      },
+      {
+        "distance": 48,
+        "openFraction": 0.6495037220843672
+      },
+      {
+        "distance": 49,
+        "openFraction": 0.6521197007481296
+      },
+      {
+        "distance": 50,
+        "openFraction": 0.6716791979949874
+      },
+      {
+        "distance": 51,
+        "openFraction": 0.6511335012594458
+      },
+      {
+        "distance": 52,
+        "openFraction": 0.6759493670886076
+      },
+      {
+        "distance": 53,
+        "openFraction": 0.6539440203562341
+      },
+      {
+        "distance": 54,
+        "openFraction": 0.6841432225063938
+      },
+      {
+        "distance": 55,
+        "openFraction": 0.6561696658097687
+      },
+      {
+        "distance": 56,
+        "openFraction": 0.6440568475452196
+      },
+      {
+        "distance": 57,
+        "openFraction": 0.6623376623376623
+      },
+      {
+        "distance": 58,
+        "openFraction": 0.6383812010443864
+      },
+      {
+        "distance": 59,
+        "openFraction": 0.678477690288714
+      },
+      {
+        "distance": 60,
+        "openFraction": 0.6319261213720316
+      },
+      {
+        "distance": 61,
+        "openFraction": 0.6591511936339522
+      },
+      {
+        "distance": 62,
+        "openFraction": 0.6546666666666666
+      },
+      {
+        "distance": 63,
+        "openFraction": 0.6628686327077749
+      },
+      {
+        "distance": 64,
+        "openFraction": 0.6415094339622641
+      },
+      {
+        "distance": 65,
+        "openFraction": 0.6734417344173442
+      },
+      {
+        "distance": 66,
+        "openFraction": 0.6580381471389646
+      },
+      {
+        "distance": 67,
+        "openFraction": 0.6575342465753424
+      },
+      {
+        "distance": 68,
+        "openFraction": 0.6556473829201102
+      },
+      {
+        "distance": 69,
+        "openFraction": 0.6641274238227147
+      },
+      {
+        "distance": 70,
+        "openFraction": 0.6601671309192201
+      },
+      {
+        "distance": 71,
+        "openFraction": 0.6687675070028011
+      },
+      {
+        "distance": 72,
+        "openFraction": 0.6697183098591549
+      },
+      {
+        "distance": 73,
+        "openFraction": 0.6473087818696884
+      },
+      {
+        "distance": 74,
+        "openFraction": 0.6495726495726496
+      },
+      {
+        "distance": 75,
+        "openFraction": 0.6640401146131805
+      },
+      {
+        "distance": 76,
+        "openFraction": 0.6476945244956772
+      },
+      {
+        "distance": 77,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 78,
+        "openFraction": 0.642128279883382
+      },
+      {
+        "distance": 79,
+        "openFraction": 0.6605571847507331
+      },
+      {
+        "distance": 80,
+        "openFraction": 0.6637168141592921
+      },
+      {
+        "distance": 81,
+        "openFraction": 0.6550445103857567
+      },
+      {
+        "distance": 82,
+        "openFraction": 0.6634328358208955
+      },
+      {
+        "distance": 83,
+        "openFraction": 0.6569069069069069
+      },
+      {
+        "distance": 84,
+        "openFraction": 0.6805135951661632
+      },
+      {
+        "distance": 85,
+        "openFraction": 0.6527355623100304
+      },
+      {
+        "distance": 86,
+        "openFraction": 0.6513761467889908
+      },
+      {
+        "distance": 87,
+        "openFraction": 0.6553846153846153
+      },
+      {
+        "distance": 88,
+        "openFraction": 0.6749226006191951
+      },
+      {
+        "distance": 89,
+        "openFraction": 0.6565420560747663
+      },
+      {
+        "distance": 90,
+        "openFraction": 0.6324451410658307
+      },
+      {
+        "distance": 91,
+        "openFraction": 0.6821766561514195
+      },
+      {
+        "distance": 92,
+        "openFraction": 0.6373015873015873
+      },
+      {
+        "distance": 93,
+        "openFraction": 0.6813099041533547
+      },
+      {
+        "distance": 94,
+        "openFraction": 0.659967845659164
+      },
+      {
+        "distance": 95,
+        "openFraction": 0.6545307443365695
+      },
+      {
+        "distance": 96,
+        "openFraction": 0.6742671009771987
+      },
+      {
+        "distance": 97,
+        "openFraction": 0.6655737704918033
+      },
+      {
+        "distance": 98,
+        "openFraction": 0.6625412541254125
+      },
+      {
+        "distance": 99,
+        "openFraction": 0.6661129568106312
+      },
+      {
+        "distance": 100,
+        "openFraction": 0.6705685618729097
+      },
+      {
+        "distance": 101,
+        "openFraction": 0.648989898989899
+      },
+      {
+        "distance": 102,
+        "openFraction": 0.6813559322033899
+      },
+      {
+        "distance": 103,
+        "openFraction": 0.6868600682593856
+      },
+      {
+        "distance": 104,
+        "openFraction": 0.6520618556701031
+      },
+      {
+        "distance": 105,
+        "openFraction": 0.6773356401384083
+      },
+      {
+        "distance": 106,
+        "openFraction": 0.6637630662020906
+      },
+      {
+        "distance": 107,
+        "openFraction": 0.6421052631578947
+      },
+      {
+        "distance": 108,
+        "openFraction": 0.6828621908127208
+      },
+      {
+        "distance": 109,
+        "openFraction": 0.650355871886121
+      },
+      {
+        "distance": 110,
+        "openFraction": 0.6397849462365591
+      },
+      {
+        "distance": 111,
+        "openFraction": 0.6534296028880866
+      },
+      {
+        "distance": 112,
+        "openFraction": 0.6627272727272727
+      },
+      {
+        "distance": 113,
+        "openFraction": 0.6474358974358975
+      },
+      {
+        "distance": 114,
+        "openFraction": 0.6559040590405905
+      },
+      {
+        "distance": 115,
+        "openFraction": 0.6877323420074349
+      },
+      {
+        "distance": 116,
+        "openFraction": 0.6563670411985019
+      },
+      {
+        "distance": 117,
+        "openFraction": 0.6660377358490566
+      },
+      {
+        "distance": 118,
+        "openFraction": 0.6520912547528517
+      },
+      {
+        "distance": 119,
+        "openFraction": 0.6637931034482759
+      },
+      {
+        "distance": 120,
+        "openFraction": 0.6843629343629344
+      },
+      {
+        "distance": 121,
+        "openFraction": 0.6819066147859922
+      },
+      {
+        "distance": 122,
+        "openFraction": 0.6529411764705882
+      },
+      {
+        "distance": 123,
+        "openFraction": 0.6403162055335968
+      },
+      {
+        "distance": 124,
+        "openFraction": 0.6543824701195219
+      },
+      {
+        "distance": 125,
+        "openFraction": 0.6465863453815262
+      },
+      {
+        "distance": 126,
+        "openFraction": 0.638663967611336
+      },
+      {
+        "distance": 127,
+        "openFraction": 0.6673469387755102
+      },
+      {
+        "distance": 128,
+        "openFraction": 0.6594650205761317
+      },
+      {
+        "distance": 129,
+        "openFraction": 0.6390041493775933
+      },
+      {
+        "distance": 130,
+        "openFraction": 0.6380753138075314
+      },
+      {
+        "distance": 131,
+        "openFraction": 0.6687763713080169
+      },
+      {
+        "distance": 132,
+        "openFraction": 0.6404255319148936
+      },
+      {
+        "distance": 133,
+        "openFraction": 0.677038626609442
+      },
+      {
+        "distance": 134,
+        "openFraction": 0.685064935064935
+      },
+      {
+        "distance": 135,
+        "openFraction": 0.6462882096069869
+      },
+      {
+        "distance": 136,
+        "openFraction": 0.6674008810572687
+      },
+      {
+        "distance": 137,
+        "openFraction": 0.6677777777777778
+      },
+      {
+        "distance": 138,
+        "openFraction": 0.6468609865470852
+      },
+      {
+        "distance": 139,
+        "openFraction": 0.6572398190045249
+      },
+      {
+        "distance": 140,
+        "openFraction": 0.6267123287671232
+      },
+      {
+        "distance": 141,
+        "openFraction": 0.6785714285714286
+      },
+      {
+        "distance": 142,
+        "openFraction": 0.6651162790697674
+      },
+      {
+        "distance": 143,
+        "openFraction": 0.6690140845070423
+      },
+      {
+        "distance": 144,
+        "openFraction": 0.6563981042654028
+      },
+      {
+        "distance": 145,
+        "openFraction": 0.6722488038277512
+      },
+      {
+        "distance": 146,
+        "openFraction": 0.6594202898550725
+      },
+      {
+        "distance": 147,
+        "openFraction": 0.6585365853658537
+      },
+      {
+        "distance": 148,
+        "openFraction": 0.6366995073891626
+      },
+      {
+        "distance": 149,
+        "openFraction": 0.6592039800995025
+      },
+      {
+        "distance": 150,
+        "openFraction": 0.664572864321608
+      },
+      {
+        "distance": 151,
+        "openFraction": 0.6446700507614214
+      },
+      {
+        "distance": 152,
+        "openFraction": 0.6717948717948717
+      },
+      {
+        "distance": 153,
+        "openFraction": 0.6528497409326425
+      },
+      {
+        "distance": 154,
+        "openFraction": 0.6884816753926701
+      },
+      {
+        "distance": 155,
+        "openFraction": 0.6891534391534392
+      },
+      {
+        "distance": 156,
+        "openFraction": 0.6617647058823529
+      },
+      {
+        "distance": 157,
+        "openFraction": 0.6837837837837838
+      },
+      {
+        "distance": 158,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 159,
+        "openFraction": 0.643646408839779
+      },
+      {
+        "distance": 160,
+        "openFraction": 0.659217877094972
+      },
+      {
+        "distance": 161,
+        "openFraction": 0.6610169491525424
+      },
+      {
+        "distance": 162,
+        "openFraction": 0.7
+      },
+      {
+        "distance": 163,
+        "openFraction": 0.6719653179190751
+      },
+      {
+        "distance": 164,
+        "openFraction": 0.6242690058479532
+      },
+      {
+        "distance": 165,
+        "openFraction": 0.6050295857988166
+      },
+      {
+        "distance": 166,
+        "openFraction": 0.6586826347305389
+      },
+      {
+        "distance": 167,
+        "openFraction": 0.6681818181818182
+      },
+      {
+        "distance": 168,
+        "openFraction": 0.6226993865030674
+      },
+      {
+        "distance": 169,
+        "openFraction": 0.6739130434782609
+      },
+      {
+        "distance": 170,
+        "openFraction": 0.6210691823899371
+      },
+      {
+        "distance": 171,
+        "openFraction": 0.6719745222929936
+      },
+      {
+        "distance": 172,
+        "openFraction": 0.6290322580645161
+      },
+      {
+        "distance": 173,
+        "openFraction": 0.6928104575163399
+      },
+      {
+        "distance": 174,
+        "openFraction": 0.640728476821192
+      },
+      {
+        "distance": 175,
+        "openFraction": 0.6510067114093959
+      },
+      {
+        "distance": 176,
+        "openFraction": 0.6479591836734694
+      },
+      {
+        "distance": 177,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 178,
+        "openFraction": 0.6590909090909091
+      },
+      {
+        "distance": 179,
+        "openFraction": 0.6684397163120568
+      },
+      {
+        "distance": 180,
+        "openFraction": 0.6744604316546763
+      },
+      {
+        "distance": 181,
+        "openFraction": 0.6715328467153284
+      },
+      {
+        "distance": 182,
+        "openFraction": 0.662962962962963
+      },
+      {
+        "distance": 183,
+        "openFraction": 0.6390977443609023
+      },
+      {
+        "distance": 184,
+        "openFraction": 0.6679389312977099
+      },
+      {
+        "distance": 185,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 186,
+        "openFraction": 0.6614173228346457
+      },
+      {
+        "distance": 187,
+        "openFraction": 0.64
+      },
+      {
+        "distance": 188,
+        "openFraction": 0.6808943089430894
+      },
+      {
+        "distance": 189,
+        "openFraction": 0.6652892561983471
+      },
+      {
+        "distance": 190,
+        "openFraction": 0.6218487394957983
+      },
+      {
+        "distance": 191,
+        "openFraction": 0.6623931623931624
+      },
+      {
+        "distance": 192,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 193,
+        "openFraction": 0.6637168141592921
+      },
+      {
+        "distance": 194,
+        "openFraction": 0.6779279279279279
+      },
+      {
+        "distance": 195,
+        "openFraction": 0.6399082568807339
+      },
+      {
+        "distance": 196,
+        "openFraction": 0.6448598130841121
+      },
+      {
+        "distance": 197,
+        "openFraction": 0.6523809523809524
+      },
+      {
+        "distance": 198,
+        "openFraction": 0.6237864077669902
+      },
+      {
+        "distance": 199,
+        "openFraction": 0.6905940594059405
+      },
+      {
+        "distance": 200,
+        "openFraction": 0.6515151515151515
+      },
+      {
+        "distance": 201,
+        "openFraction": 0.6623711340206185
+      },
+      {
+        "distance": 202,
+        "openFraction": 0.6368421052631579
+      },
+      {
+        "distance": 203,
+        "openFraction": 0.6397849462365591
+      },
+      {
+        "distance": 204,
+        "openFraction": 0.6648351648351648
+      },
+      {
+        "distance": 205,
+        "openFraction": 0.6825842696629213
+      },
+      {
+        "distance": 206,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 207,
+        "openFraction": 0.6970588235294117
+      },
+      {
+        "distance": 208,
+        "openFraction": 0.6475903614457831
+      },
+      {
+        "distance": 209,
+        "openFraction": 0.6635802469135802
+      },
+      {
+        "distance": 210,
+        "openFraction": 0.6645569620253164
+      },
+      {
+        "distance": 211,
+        "openFraction": 0.6006493506493507
+      },
+      {
+        "distance": 212,
+        "openFraction": 0.6766666666666666
+      },
+      {
+        "distance": 213,
+        "openFraction": 0.6815068493150684
+      },
+      {
+        "distance": 214,
+        "openFraction": 0.6866197183098591
+      },
+      {
+        "distance": 215,
+        "openFraction": 0.677536231884058
+      },
+      {
+        "distance": 216,
+        "openFraction": 0.6828358208955224
+      },
+      {
+        "distance": 217,
+        "openFraction": 0.6846153846153846
+      },
+      {
+        "distance": 218,
+        "openFraction": 0.7103174603174603
+      },
+      {
+        "distance": 219,
+        "openFraction": 0.6598360655737705
+      },
+      {
+        "distance": 220,
+        "openFraction": 0.673728813559322
+      },
+      {
+        "distance": 221,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 222,
+        "openFraction": 0.6545454545454545
+      },
+      {
+        "distance": 223,
+        "openFraction": 0.6698113207547169
+      },
+      {
+        "distance": 224,
+        "openFraction": 0.6323529411764706
+      },
+      {
+        "distance": 225,
+        "openFraction": 0.7142857142857143
+      },
+      {
+        "distance": 226,
+        "openFraction": 0.6276595744680851
+      },
+      {
+        "distance": 227,
+        "openFraction": 0.6722222222222223
+      },
+      {
+        "distance": 228,
+        "openFraction": 0.6395348837209303
+      },
+      {
+        "distance": 229,
+        "openFraction": 0.6585365853658537
+      },
+      {
+        "distance": 230,
+        "openFraction": 0.6858974358974359
+      },
+      {
+        "distance": 231,
+        "openFraction": 0.6418918918918919
+      },
+      {
+        "distance": 232,
+        "openFraction": 0.6642857142857143
+      },
+      {
+        "distance": 233,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 234,
+        "openFraction": 0.6532258064516129
+      },
+      {
+        "distance": 235,
+        "openFraction": 0.7068965517241379
+      },
+      {
+        "distance": 236,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 237,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 238,
+        "openFraction": 0.6956521739130435
+      },
+      {
+        "distance": 239,
+        "openFraction": 0.6547619047619048
+      },
+      {
+        "distance": 240,
+        "openFraction": 0.631578947368421
+      },
+      {
+        "distance": 241,
+        "openFraction": 0.6323529411764706
+      },
+      {
+        "distance": 242,
+        "openFraction": 0.7166666666666667
+      },
+      {
+        "distance": 243,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 244,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 245,
+        "openFraction": 0.6388888888888888
+      },
+      {
+        "distance": 246,
+        "openFraction": 0.6785714285714286
+      },
+      {
+        "distance": 247,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 248,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 249,
+        "openFraction": 0.25
+      }
+    ],
+    "tileDensity": {
+      "side": 32,
+      "columns": 16,
+      "rows": 16,
+      "min": 0.6203125,
+      "max": 0.71484375,
+      "variance": 0.00022443651722278422
+    },
+    "symmetry": {
+      "mirrorX": -0.0014550331094839379,
+      "mirrorY": -0.0009917677263179415,
+      "rotate180": -0.005802600551503478,
+      "rawMirrorX": 0.55036,
+      "rawMirrorY": 0.550568,
+      "rawRotate180": 0.548408
+    },
+    "scope": "Exact full-board geometry. Density variance uses nonoverlapping 32-cell tiles, including partial edge tiles equally. No room or proof analysis."
+  }
+}

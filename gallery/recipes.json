@@ -1,0 +1,10 @@
+[
+  {"id":"random","name":"Random tweaks","picker":"rnd99","segpicker":"Weighted4","lim":"20","description":"Original random tweak recipe with a 20-candidate limit."},
+  {"id":"large-tweaks","name":"Largest enumerated tweaks","picker":"last","segpicker":"Weighted4","lim":"none","description":"Last enumerated tweak, with no candidate limit; tends toward denser open space in prior small-board experiments."},
+  {"id":"first-tweaks","name":"First enumerated tweaks","picker":"first","segpicker":"Weighted4","lim":"none","description":"Opposite end of the tweak enumeration from the large-tweak recipe."},
+  {"id":"early-segments","name":"Early path segments","picker":"2lim10","segpicker":"First","lim":"none","description":"Length-2 preference applied to earlier path segments."},
+  {"id":"late-segments","name":"Late path segments","picker":"2lim10","segpicker":"Last","lim":"none","description":"The same tweak preference applied to later path segments."},
+  {"id":"long-segments","name":"Longest segments first","picker":"2lim10","segpicker":"Longest","lim":"none","description":"Prioritizes long straight path segments for reshaping."},
+  {"id":"short-tweaks","name":"Late pivot preference","picker":"len1","segpicker":"Weighted4","lim":"20","description":"Maximizes Len1 (the pivot offset), within a 20-candidate limit; this does not mean shortest tweaks."},
+  {"id":"one-pass","name":"One pass, endpoints kept","picker":"rnd3","segpicker":"Weighted4","lim":"none","loops":"1","keep-deadends":true,"description":"One segment-picker pass and no endpoint trimming; contrasts with exhaustive multi-pass recipes."}
+]

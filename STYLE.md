@@ -204,3 +204,16 @@ controls. Solver runtime is not the target variable.
   describes the distance-transform and morphology vocabulary. This prototype
   implements square/Chebyshev clearance itself and does not depend on that
   package. Its chamber cores should not be interpreted as complete rooms.
+
+## Large-board geometry and style survey (2026-09-06)
+
+[The collection](gallery/README.md) applies a compact C# geometry pass to a
+330-board controlled survey and a selected scale series through 10000 square.
+[Measured findings](gallery/FINDINGS.md) retain within-recipe seed ranges and
+matched-seed method changes. [The HTML atlas](web/gallery-guide.html) exposes
+scatter comparisons, distributions, fixed-scale crops, and same-recipe seeds.
+
+This is a geometry implementation, not a port of the room/proof engine. Its
+32-cell nonoverlapping tile variance is intentionally distinct from v1's
+overlapping small-window variance. The full square spectra, run histograms,
+and edge-layer profiles remain available in each specimen's JSON.

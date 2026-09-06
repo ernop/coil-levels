@@ -1,0 +1,858 @@
+{
+  "extraCoverageDecision": "After ordering-cost limits, add three further Weighted4/lim20 survey representatives by farthest-point mean geometry coverage from the five practical anchors. Avoid the two Len1-capped pickers in this additional scale probe. Retain their small-board survey results.",
+  "excludedAtScale": [
+    "5000-seg-2lim10-Last-s101",
+    "5000-seg-equal23short-Longest-s101",
+    "5000-seg-first-Last-s101",
+    "5000-seg-last-First-s202"
+  ],
+  "scalingAttempts": [
+    {
+      "id": "5000-seg-2lim10-Last-s101",
+      "status": "generation_budget_exceeded",
+      "budgetSeconds": 1200,
+      "note": "Budget covers the entire specimen command, including generation, validation, and export. Completed specimens are replay-validated. A budget-exceeded attempt has no claimed board or geometry."
+    },
+    {
+      "id": "5000-seg-equal23short-Longest-s101",
+      "status": "generation_budget_exceeded",
+      "budgetSeconds": 600,
+      "note": "Budget covers the entire specimen command, including generation, validation, and export. Completed specimens are replay-validated. A budget-exceeded attempt has no claimed board or geometry."
+    },
+    {
+      "id": "5000-seg-first-Last-s101",
+      "status": "generation_budget_exceeded",
+      "budgetSeconds": 600,
+      "note": "Budget covers the entire specimen command, including generation, validation, and export. Completed specimens are replay-validated. A budget-exceeded attempt has no claimed board or geometry."
+    },
+    {
+      "id": "5000-seg-last-First-s202",
+      "status": "generation_budget_exceeded",
+      "budgetSeconds": 1200,
+      "note": "Budget covers the entire specimen command, including generation, validation, and export. Completed specimens are replay-validated. A budget-exceeded attempt has no claimed board or geometry."
+    }
+  ],
+  "tenThousandSelected": [
+    {
+      "config": {
+        "id": "tweak-rnd99",
+        "family": "tweak survey",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6593148148148148,
+        "isolatedWallFraction": 0.1091875307074474,
+        "interfacePerOpen": 1.2626872514183785,
+        "axisBias": 0.000841998755467456,
+        "runMean": 3.1679010094773425,
+        "log1pRunMax": 3.1661741064898714,
+        "densityVariance": 0.0002810257075745382,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 4.333333333333333,
+        "edgeContrast": 0.02491038027994556
+      }
+    },
+    {
+      "config": {
+        "id": "control-rnd99-wanderfull",
+        "family": "generation control",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20",
+        "wander-full": true
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.9348592592592593,
+        "isolatedWallFraction": 0.1042360361676968,
+        "interfacePerOpen": 0.19274154166905946,
+        "axisBias": 0.00010750207953254013,
+        "runMean": 56.04083483646253,
+        "log1pRunMax": 5.707110264748875,
+        "densityVariance": 0.011502298874325207,
+        "wallSquare": 3,
+        "openSquare": 235,
+        "edgeContrast": -0.0371446550229159
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-len23",
+        "family": "tweak survey",
+        "picker": "len23",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.713562962962963,
+        "isolatedWallFraction": 0.14161100068240257,
+        "interfacePerOpen": 1.0297980283335284,
+        "axisBias": 0.00014104269083669088,
+        "runMean": 3.8843886317228735,
+        "log1pRunMax": 3.4937412938615817,
+        "densityVariance": 0.00022371779665534872,
+        "wallSquare": 3,
+        "openSquare": 6,
+        "edgeContrast": 0.010517304595565435
+      }
+    }
+  ],
+  "additionalFiveThousand": [
+    {
+      "config": {
+        "id": "tweak-len23",
+        "family": "tweak survey",
+        "picker": "len23",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.713562962962963,
+        "isolatedWallFraction": 0.14161100068240257,
+        "interfacePerOpen": 1.0297980283335284,
+        "axisBias": 0.00014104269083669088,
+        "runMean": 3.8843886317228735,
+        "log1pRunMax": 3.4937412938615817,
+        "densityVariance": 0.00022371779665534872,
+        "wallSquare": 3,
+        "openSquare": 6,
+        "edgeContrast": 0.010517304595565435
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-sz23rnd2",
+        "family": "tweak survey",
+        "picker": "sz23rnd2",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7035185185185185,
+        "isolatedWallFraction": 0.13181989149087034,
+        "interfacePerOpen": 1.0802035681666533,
+        "axisBias": -3.8287363737326284e-05,
+        "runMean": 3.703059961292029,
+        "log1pRunMax": 3.429311097806739,
+        "densityVariance": 0.00023447359461843234,
+        "wallSquare": 4,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": 0.009970890623064518
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-len1",
+        "family": "tweak survey",
+        "picker": "len1",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6506851851851853,
+        "isolatedWallFraction": 0.11260585021257062,
+        "interfacePerOpen": 1.3083677248254477,
+        "axisBias": 4.6499349374589206e-05,
+        "runMean": 3.057308522155456,
+        "log1pRunMax": 3.3158348126509676,
+        "densityVariance": 0.00024409781915170171,
+        "wallSquare": 3,
+        "openSquare": 4,
+        "edgeContrast": -0.06958150625541933
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-sz3-2",
+        "family": "tweak survey",
+        "picker": "sz3-2",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6637888888888889,
+        "isolatedWallFraction": 0.16127460388843184,
+        "interfacePerOpen": 1.291821724981123,
+        "axisBias": -0.0006913326544900672,
+        "runMean": 3.0965039871260718,
+        "log1pRunMax": 3.0692790805860213,
+        "densityVariance": 0.00022332808176676433,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 4,
+        "edgeContrast": 0.05750431066518017
+      }
+    }
+  ],
+  "tenThousandDecision": "The ordering-heavy 5000-square probes each exceeded eight minutes. len23/Weighted4/lim20 produced 71.464% open area at 5000 in 104.4 seconds total (51.6 seconds generation), so use it as the dense 10000 representative. Include both full-walk seeds 101 and 303 to preserve the within-method contrast: four 10000 boards across three configurations.",
+  "largestSelected": [
+    {
+      "config": {
+        "id": "tweak-rnd99",
+        "family": "tweak survey",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6593148148148148,
+        "isolatedWallFraction": 0.1091875307074474,
+        "interfacePerOpen": 1.2626872514183785,
+        "axisBias": 0.000841998755467456,
+        "runMean": 3.1679010094773425,
+        "log1pRunMax": 3.1661741064898714,
+        "densityVariance": 0.0002810257075745382,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 4.333333333333333,
+        "edgeContrast": 0.02491038027994556
+      }
+    },
+    {
+      "config": {
+        "id": "control-rnd99-wanderfull",
+        "family": "generation control",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20",
+        "wander-full": true
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.9348592592592593,
+        "isolatedWallFraction": 0.1042360361676968,
+        "interfacePerOpen": 0.19274154166905946,
+        "axisBias": 0.00010750207953254013,
+        "runMean": 56.04083483646253,
+        "log1pRunMax": 5.707110264748875,
+        "densityVariance": 0.011502298874325207,
+        "wallSquare": 3,
+        "openSquare": 235,
+        "edgeContrast": -0.0371446550229159
+      }
+    },
+    {
+      "config": {
+        "id": "seg-last-First",
+        "family": "segment interaction",
+        "picker": "last",
+        "segpicker": "First",
+        "lim": "20"
+      },
+      "seeds": [
+        202,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7292407407407407,
+        "isolatedWallFraction": 0.18450637394413913,
+        "interfacePerOpen": 1.0008682494771337,
+        "axisBias": -0.01431121736594592,
+        "runMean": 4.005244763707413,
+        "log1pRunMax": 5.6437042959437305,
+        "densityVariance": 0.0006509093449439531,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 6.333333333333333,
+        "edgeContrast": 0.18157308311656137
+      }
+    },
+    {
+      "config": {
+        "id": "seg-2lim10-Last",
+        "family": "segment interaction",
+        "picker": "2lim10",
+        "segpicker": "Last",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        202
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7553666666666666,
+        "isolatedWallFraction": 0.18661539746787223,
+        "interfacePerOpen": 0.878328771503663,
+        "axisBias": -0.002709691868477624,
+        "runMean": 4.555101800495466,
+        "log1pRunMax": 4.734025170475095,
+        "densityVariance": 0.000490357134077284,
+        "wallSquare": 4,
+        "openSquare": 6,
+        "edgeContrast": 0.04507926421404688
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-sz1-23",
+        "family": "tweak survey",
+        "picker": "sz1-23",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6413962962962964,
+        "isolatedWallFraction": 0.17075563445514708,
+        "interfacePerOpen": 1.366257367202327,
+        "axisBias": -0.00012181532252123402,
+        "runMean": 2.9277351577490367,
+        "log1pRunMax": 3.7693218613632156,
+        "densityVariance": 0.00045346711947594166,
+        "wallSquare": 4.666666666666667,
+        "openSquare": 4,
+        "edgeContrast": 0.011056323547627903
+      }
+    },
+    {
+      "config": {
+        "id": "seg-equal23short-Longest",
+        "family": "segment interaction",
+        "picker": "equal23short",
+        "segpicker": "Longest",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        202
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6530518518518519,
+        "isolatedWallFraction": 0.08808300253021561,
+        "interfacePerOpen": 1.3209216873612948,
+        "axisBias": 0.004470397594789742,
+        "runMean": 3.0285642365367518,
+        "log1pRunMax": 3.0104045686929157,
+        "densityVariance": 0.00039233991246164575,
+        "wallSquare": 3.6666666666666665,
+        "openSquare": 4,
+        "edgeContrast": -0.02094482844048066
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Last",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Last",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7017,
+        "isolatedWallFraction": 0.13915992067337724,
+        "interfacePerOpen": 1.0978385350288047,
+        "axisBias": -0.001117677632578627,
+        "runMean": 3.643887147922021,
+        "log1pRunMax": 5.017265217252485,
+        "densityVariance": 0.00047314511876047385,
+        "wallSquare": 3.6666666666666665,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": -0.04980479375696767
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Longest",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Longest",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6350074074074074,
+        "isolatedWallFraction": 0.09586436882622659,
+        "interfacePerOpen": 1.3542863302872348,
+        "axisBias": 0.0003724978303773338,
+        "runMean": 2.9538038132969855,
+        "log1pRunMax": 3.1104394328430285,
+        "densityVariance": 0.0002719977991080579,
+        "wallSquare": 4.333333333333333,
+        "openSquare": 5,
+        "edgeContrast": -0.06895389570172177
+      }
+    }
+  ],
+  "largestScalingDecision": "equal23short/First took 241.7 seconds to export 2000-square seed101. Retain the 2000 specimens; at 5000 use the same tweak picker with Longest segment ordering, a separately measured survey configuration. The 10000 series has its own cost-informed selection.",
+  "scaleSelected": [
+    {
+      "config": {
+        "id": "tweak-rnd99",
+        "family": "tweak survey",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6593148148148148,
+        "isolatedWallFraction": 0.1091875307074474,
+        "interfacePerOpen": 1.2626872514183785,
+        "axisBias": 0.000841998755467456,
+        "runMean": 3.1679010094773425,
+        "log1pRunMax": 3.1661741064898714,
+        "densityVariance": 0.0002810257075745382,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 4.333333333333333,
+        "edgeContrast": 0.02491038027994556
+      }
+    },
+    {
+      "config": {
+        "id": "control-rnd99-wanderfull",
+        "family": "generation control",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20",
+        "wander-full": true
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.9348592592592593,
+        "isolatedWallFraction": 0.1042360361676968,
+        "interfacePerOpen": 0.19274154166905946,
+        "axisBias": 0.00010750207953254013,
+        "runMean": 56.04083483646253,
+        "log1pRunMax": 5.707110264748875,
+        "densityVariance": 0.011502298874325207,
+        "wallSquare": 3,
+        "openSquare": 235,
+        "edgeContrast": -0.0371446550229159
+      }
+    },
+    {
+      "config": {
+        "id": "seg-last-First",
+        "family": "segment interaction",
+        "picker": "last",
+        "segpicker": "First",
+        "lim": "20"
+      },
+      "seeds": [
+        202,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7292407407407407,
+        "isolatedWallFraction": 0.18450637394413913,
+        "interfacePerOpen": 1.0008682494771337,
+        "axisBias": -0.01431121736594592,
+        "runMean": 4.005244763707413,
+        "log1pRunMax": 5.6437042959437305,
+        "densityVariance": 0.0006509093449439531,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 6.333333333333333,
+        "edgeContrast": 0.18157308311656137
+      }
+    },
+    {
+      "config": {
+        "id": "seg-2lim10-Last",
+        "family": "segment interaction",
+        "picker": "2lim10",
+        "segpicker": "Last",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        202
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7553666666666666,
+        "isolatedWallFraction": 0.18661539746787223,
+        "interfacePerOpen": 0.878328771503663,
+        "axisBias": -0.002709691868477624,
+        "runMean": 4.555101800495466,
+        "log1pRunMax": 4.734025170475095,
+        "densityVariance": 0.000490357134077284,
+        "wallSquare": 4,
+        "openSquare": 6,
+        "edgeContrast": 0.04507926421404688
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-sz1-23",
+        "family": "tweak survey",
+        "picker": "sz1-23",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6413962962962964,
+        "isolatedWallFraction": 0.17075563445514708,
+        "interfacePerOpen": 1.366257367202327,
+        "axisBias": -0.00012181532252123402,
+        "runMean": 2.9277351577490367,
+        "log1pRunMax": 3.7693218613632156,
+        "densityVariance": 0.00045346711947594166,
+        "wallSquare": 4.666666666666667,
+        "openSquare": 4,
+        "edgeContrast": 0.011056323547627903
+      }
+    },
+    {
+      "config": {
+        "id": "seg-equal23short-First",
+        "family": "segment interaction",
+        "picker": "equal23short",
+        "segpicker": "First",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7042481481481482,
+        "isolatedWallFraction": 0.13168135210036422,
+        "interfacePerOpen": 1.1044070390244605,
+        "axisBias": -0.0008737769353000417,
+        "runMean": 3.622099507407439,
+        "log1pRunMax": 5.460604614867918,
+        "densityVariance": 0.00042599052382104194,
+        "wallSquare": 3,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": 0.1689402576489533
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Last",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Last",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7017,
+        "isolatedWallFraction": 0.13915992067337724,
+        "interfacePerOpen": 1.0978385350288047,
+        "axisBias": -0.001117677632578627,
+        "runMean": 3.643887147922021,
+        "log1pRunMax": 5.017265217252485,
+        "densityVariance": 0.00047314511876047385,
+        "wallSquare": 3.6666666666666665,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": -0.04980479375696767
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Longest",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Longest",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6350074074074074,
+        "isolatedWallFraction": 0.09586436882622659,
+        "interfacePerOpen": 1.3542863302872348,
+        "axisBias": 0.0003724978303773338,
+        "runMean": 2.9538038132969855,
+        "log1pRunMax": 3.1104394328430285,
+        "densityVariance": 0.0002719977991080579,
+        "wallSquare": 4.333333333333333,
+        "openSquare": 5,
+        "edgeContrast": -0.06895389570172177
+      }
+    }
+  ],
+  "scalingDecision": "Unlimited last picker retained at 300/500. The 500-square exports took 51.6 and 122.2 seconds; the 1000-square seed101 attempt was stopped before export after several minutes. For 1000 and above, substitute the farthest measured finite-candidate configuration from the seven retained representatives. No board claimed for the stopped attempt.",
+  "method": "Two anchors (rnd99 baseline and full initial slides), then greedy farthest-point coverage of configuration mean vectors. Maximum run length uses log1p; each feature is then scaled by its observed configuration-mean range. Eight configurations; most separated pair of observed seeds per configuration. This is a descriptive coverage heuristic, not a hardness score or proof of independent controls.",
+  "features": [
+    "openFraction",
+    "isolatedWallFraction",
+    "interfacePerOpen",
+    "axisBias",
+    "runMean",
+    "log1pRunMax",
+    "densityVariance",
+    "wallSquare",
+    "openSquare",
+    "edgeContrast"
+  ],
+  "minimum": [
+    0.6350074074074074,
+    0.07317924759466174,
+    0.1682450568672771,
+    -0.01431121736594592,
+    2.9277351577490367,
+    3.0104045686929157,
+    0.0002016843972382722,
+    2.6666666666666665,
+    4,
+    -0.06958150625541933
+  ],
+  "maximum": [
+    0.945274074074074,
+    0.23573656418082117,
+    1.366257367202327,
+    0.004470397594789742,
+    61.0153381984778,
+    5.707110264748875,
+    0.011502298874325207,
+    4.666666666666667,
+    238.66666666666666,
+    0.22308992939427721
+  ],
+  "selected": [
+    {
+      "config": {
+        "id": "tweak-rnd99",
+        "family": "tweak survey",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6593148148148148,
+        "isolatedWallFraction": 0.1091875307074474,
+        "interfacePerOpen": 1.2626872514183785,
+        "axisBias": 0.000841998755467456,
+        "runMean": 3.1679010094773425,
+        "log1pRunMax": 3.1661741064898714,
+        "densityVariance": 0.0002810257075745382,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 4.333333333333333,
+        "edgeContrast": 0.02491038027994556
+      }
+    },
+    {
+      "config": {
+        "id": "control-rnd99-wanderfull",
+        "family": "generation control",
+        "picker": "rnd99",
+        "segpicker": "Weighted4",
+        "lim": "20",
+        "wander-full": true
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.9348592592592593,
+        "isolatedWallFraction": 0.1042360361676968,
+        "interfacePerOpen": 0.19274154166905946,
+        "axisBias": 0.00010750207953254013,
+        "runMean": 56.04083483646253,
+        "log1pRunMax": 5.707110264748875,
+        "densityVariance": 0.011502298874325207,
+        "wallSquare": 3,
+        "openSquare": 235,
+        "edgeContrast": -0.0371446550229159
+      }
+    },
+    {
+      "config": {
+        "id": "seg-last-First",
+        "family": "segment interaction",
+        "picker": "last",
+        "segpicker": "First",
+        "lim": "20"
+      },
+      "seeds": [
+        202,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7292407407407407,
+        "isolatedWallFraction": 0.18450637394413913,
+        "interfacePerOpen": 1.0008682494771337,
+        "axisBias": -0.01431121736594592,
+        "runMean": 4.005244763707413,
+        "log1pRunMax": 5.6437042959437305,
+        "densityVariance": 0.0006509093449439531,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 6.333333333333333,
+        "edgeContrast": 0.18157308311656137
+      }
+    },
+    {
+      "config": {
+        "id": "control-last-unlimited",
+        "family": "generation control",
+        "picker": "last",
+        "segpicker": "Weighted4",
+        "lim": "none"
+      },
+      "seeds": [
+        101,
+        202
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7130222222222222,
+        "isolatedWallFraction": 0.23274243697620398,
+        "interfacePerOpen": 1.0987820377380504,
+        "axisBias": 0.0019336479284308033,
+        "runMean": 3.646244922962519,
+        "log1pRunMax": 5.233103744452025,
+        "densityVariance": 0.0013345723964549873,
+        "wallSquare": 3.3333333333333335,
+        "openSquare": 24,
+        "edgeContrast": 0.049798290598290586
+      }
+    },
+    {
+      "config": {
+        "id": "tweak-sz1-23",
+        "family": "tweak survey",
+        "picker": "sz1-23",
+        "segpicker": "Weighted4",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6413962962962964,
+        "isolatedWallFraction": 0.17075563445514708,
+        "interfacePerOpen": 1.366257367202327,
+        "axisBias": -0.00012181532252123402,
+        "runMean": 2.9277351577490367,
+        "log1pRunMax": 3.7693218613632156,
+        "densityVariance": 0.00045346711947594166,
+        "wallSquare": 4.666666666666667,
+        "openSquare": 4,
+        "edgeContrast": 0.011056323547627903
+      }
+    },
+    {
+      "config": {
+        "id": "seg-equal23short-First",
+        "family": "segment interaction",
+        "picker": "equal23short",
+        "segpicker": "First",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7042481481481482,
+        "isolatedWallFraction": 0.13168135210036422,
+        "interfacePerOpen": 1.1044070390244605,
+        "axisBias": -0.0008737769353000417,
+        "runMean": 3.622099507407439,
+        "log1pRunMax": 5.460604614867918,
+        "densityVariance": 0.00042599052382104194,
+        "wallSquare": 3,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": 0.1689402576489533
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Last",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Last",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.7017,
+        "isolatedWallFraction": 0.13915992067337724,
+        "interfacePerOpen": 1.0978385350288047,
+        "axisBias": -0.001117677632578627,
+        "runMean": 3.643887147922021,
+        "log1pRunMax": 5.017265217252485,
+        "densityVariance": 0.00047314511876047385,
+        "wallSquare": 3.6666666666666665,
+        "openSquare": 5.333333333333333,
+        "edgeContrast": -0.04980479375696767
+      }
+    },
+    {
+      "config": {
+        "id": "seg-first-Longest",
+        "family": "segment interaction",
+        "picker": "first",
+        "segpicker": "Longest",
+        "lim": "20"
+      },
+      "seeds": [
+        101,
+        303
+      ],
+      "meanFeatures": {
+        "openFraction": 0.6350074074074074,
+        "isolatedWallFraction": 0.09586436882622659,
+        "interfacePerOpen": 1.3542863302872348,
+        "axisBias": 0.0003724978303773338,
+        "runMean": 2.9538038132969855,
+        "log1pRunMax": 3.1104394328430285,
+        "densityVariance": 0.0002719977991080579,
+        "wallSquare": 4.333333333333333,
+        "openSquare": 5,
+        "edgeContrast": -0.06895389570172177
+      }
+    }
+  ]
+}

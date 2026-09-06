@@ -1,0 +1,787 @@
+[
+  {
+    "id": "tweak-1stlast10",
+    "family": "tweak survey",
+    "picker": "1stlast10",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-1stlast2",
+    "family": "tweak survey",
+    "picker": "1stlast2",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-23lim10",
+    "family": "tweak survey",
+    "picker": "23lim10",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-23lim25",
+    "family": "tweak survey",
+    "picker": "23lim25",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-23lim30",
+    "family": "tweak survey",
+    "picker": "23lim30",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-23lim60",
+    "family": "tweak survey",
+    "picker": "23lim60",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-2lim10",
+    "family": "tweak survey",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-2lim100",
+    "family": "tweak survey",
+    "picker": "2lim100",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-2lim25",
+    "family": "tweak survey",
+    "picker": "2lim25",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-2lim5",
+    "family": "tweak survey",
+    "picker": "2lim5",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-2lim50",
+    "family": "tweak survey",
+    "picker": "2lim50",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-3lim10",
+    "family": "tweak survey",
+    "picker": "3lim10",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-3lim50",
+    "family": "tweak survey",
+    "picker": "3lim50",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-equal23",
+    "family": "tweak survey",
+    "picker": "equal23",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-equal23short",
+    "family": "tweak survey",
+    "picker": "equal23short",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-equalrem",
+    "family": "tweak survey",
+    "picker": "equalrem",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-even",
+    "family": "tweak survey",
+    "picker": "even",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-first",
+    "family": "tweak survey",
+    "picker": "first",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-last",
+    "family": "tweak survey",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len1",
+    "family": "tweak survey",
+    "picker": "len1",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len12rnd3",
+    "family": "tweak survey",
+    "picker": "len12rnd3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len1rnd3",
+    "family": "tweak survey",
+    "picker": "len1rnd3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23",
+    "family": "tweak survey",
+    "picker": "len23",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-10th",
+    "family": "tweak survey",
+    "picker": "len23-10th",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-1stfour-sz",
+    "family": "tweak survey",
+    "picker": "len23-1stfour-sz",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-20th",
+    "family": "tweak survey",
+    "picker": "len23-20th",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-3rd",
+    "family": "tweak survey",
+    "picker": "len23-3rd",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-5th",
+    "family": "tweak survey",
+    "picker": "len23-5th",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-half",
+    "family": "tweak survey",
+    "picker": "len23-half",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23-third",
+    "family": "tweak survey",
+    "picker": "len23-third",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23mid",
+    "family": "tweak survey",
+    "picker": "len23mid",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23rnd100",
+    "family": "tweak survey",
+    "picker": "len23rnd100",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len23rnd3",
+    "family": "tweak survey",
+    "picker": "len23rnd3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-len2lim50rnd",
+    "family": "tweak survey",
+    "picker": "len2lim50rnd",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-odd",
+    "family": "tweak survey",
+    "picker": "odd",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd100",
+    "family": "tweak survey",
+    "picker": "rnd100",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd100lim20",
+    "family": "tweak survey",
+    "picker": "rnd100lim20",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd100lim5",
+    "family": "tweak survey",
+    "picker": "rnd100lim5",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd2",
+    "family": "tweak survey",
+    "picker": "rnd2",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd3",
+    "family": "tweak survey",
+    "picker": "rnd3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd5",
+    "family": "tweak survey",
+    "picker": "rnd5",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-rnd99",
+    "family": "tweak survey",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-shortrnd",
+    "family": "tweak survey",
+    "picker": "shortrnd",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz1-23",
+    "family": "tweak survey",
+    "picker": "sz1-23",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz2-1",
+    "family": "tweak survey",
+    "picker": "sz2-1",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz2-13",
+    "family": "tweak survey",
+    "picker": "sz2-13",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz2-3",
+    "family": "tweak survey",
+    "picker": "sz2-3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz23-1",
+    "family": "tweak survey",
+    "picker": "sz23-1",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz23-opt",
+    "family": "tweak survey",
+    "picker": "sz23-opt",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz23rnd2",
+    "family": "tweak survey",
+    "picker": "sz23rnd2",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz23rnd3",
+    "family": "tweak survey",
+    "picker": "sz23rnd3",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz3-1",
+    "family": "tweak survey",
+    "picker": "sz3-1",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "tweak-sz3-2",
+    "family": "tweak survey",
+    "picker": "sz3-2",
+    "segpicker": "Weighted4",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-First",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-Last",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-Longest",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-Weighted",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-Weighted2",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-rnd99-Weighted3",
+    "family": "segment interaction",
+    "picker": "rnd99",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-First",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-Last",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-Longest",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-Weighted",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-Weighted2",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-last-Weighted3",
+    "family": "segment interaction",
+    "picker": "last",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-First",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-Last",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-Longest",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-Weighted",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-Weighted2",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-first-Weighted3",
+    "family": "segment interaction",
+    "picker": "first",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-First",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-Last",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-Longest",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-Weighted",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-Weighted2",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-2lim10-Weighted3",
+    "family": "segment interaction",
+    "picker": "2lim10",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-First",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-Last",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-Longest",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-Weighted",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-Weighted2",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-equal23short-Weighted3",
+    "family": "segment interaction",
+    "picker": "equal23short",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-First",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "First",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-Last",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "Last",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-Longest",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "Longest",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-Weighted",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "Weighted",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-Weighted2",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "Weighted2",
+    "lim": "20"
+  },
+  {
+    "id": "seg-sz2-3-Weighted3",
+    "family": "segment interaction",
+    "picker": "sz2-3",
+    "segpicker": "Weighted3",
+    "lim": "20"
+  },
+  {
+    "id": "control-rnd99-unlimited",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "none"
+  },
+  {
+    "id": "control-rnd99-lim5",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "5"
+  },
+  {
+    "id": "control-rnd99-onepass",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "loops": "1"
+  },
+  {
+    "id": "control-rnd99-keepends",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "keep-deadends": true
+  },
+  {
+    "id": "control-rnd99-wander5",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-max": "5"
+  },
+  {
+    "id": "control-rnd99-wanderfull",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": true
+  },
+  {
+    "id": "control-rnd99-wander8steps",
+    "family": "generation control",
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-steps": "8"
+  },
+  {
+    "id": "control-last-unlimited",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "none"
+  },
+  {
+    "id": "control-last-lim5",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "5"
+  },
+  {
+    "id": "control-last-onepass",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "loops": "1"
+  },
+  {
+    "id": "control-last-keepends",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "keep-deadends": true
+  },
+  {
+    "id": "control-last-wander5",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-max": "5"
+  },
+  {
+    "id": "control-last-wanderfull",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": true
+  },
+  {
+    "id": "control-last-wander8steps",
+    "family": "generation control",
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-steps": "8"
+  },
+  {
+    "id": "control-2lim10-unlimited",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "none"
+  },
+  {
+    "id": "control-2lim10-lim5",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "5"
+  },
+  {
+    "id": "control-2lim10-onepass",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "loops": "1"
+  },
+  {
+    "id": "control-2lim10-keepends",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "keep-deadends": true
+  },
+  {
+    "id": "control-2lim10-wander5",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-max": "5"
+  },
+  {
+    "id": "control-2lim10-wanderfull",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": true
+  },
+  {
+    "id": "control-2lim10-wander8steps",
+    "family": "generation control",
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-steps": "8"
+  }
+]
