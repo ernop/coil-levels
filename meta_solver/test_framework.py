@@ -9,13 +9,14 @@ import sys
 import os
 
 # Add current directory to path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from core import (
+from meta_solver.core import (
     Problem, Solution, TestCase, EvalResult, Difficulty,
     History, Comparator, PromptBuilder, Idea, Attempt
 )
-from solver import MetaSolver, MetaSolverConfig, IdeaExtractor
+from meta_solver.solver import MetaSolver, MetaSolverConfig, IdeaExtractor
 
 
 class SimpleTestProblem(Problem):
@@ -253,7 +254,7 @@ def test_simple_solving():
     """Test a simple solving scenario with mock LLM."""
     print("Testing simple solving scenario...")
     
-    from core import LLMInterface
+    from meta_solver.core import LLMInterface
     
     class MockLLM(LLMInterface):
         def __init__(self):

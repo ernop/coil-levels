@@ -39,8 +39,8 @@ function filtered(){
  return catalog.boards.filter(b=>(el('size').value==='all'||b.side===Number(el('size').value))&&(el('phase').value==='all'||b.phase===el('phase').value)&&`${b.recipe.id} ${JSON.stringify(b.options)}`.toLowerCase().includes(search))
  .sort((a,b)=>(value(b,el('sort').value)??-Infinity)-(value(a,el('sort').value)??-Infinity)||a.id.localeCompare(b.id));
 }
-function links(b){return `<div class="links"><a href="${b.path}/map.png" target="_blank" rel="noopener">Full map</a><a href="${b.path}/level.board.gz" download>Board .gz</a><a href="${b.path}/level.solution.gz" download>Solution .gz</a><a href="${b.path}/stats.json">All stats</a></div>`;}
-function card(b){return `<article class="card ${b.id===selectedId?'selected-card':''}"><img src="${b.path}/${el('view').value}.png" loading="lazy" alt="${esc(short(b))}; ${el('view').value==='detail'?'central 128-cell detail':'full board overview'}"><h3>${b.side.toLocaleString()} × ${b.side.toLocaleString()}</h3><p>${esc(b.recipe.id)} · seed ${b.seed}</p><p>Open ${fmt(value(b,'open'),'open')}% · mean run ${fmt(value(b,'runs'),'runs')} cells<br>Density variance ${fmt(value(b,'variance'),'variance')}</p>${links(b)}<button data-board="${esc(b.id)}">Inspect distributions</button></article>`;}
+function links(b){return `<div class="links"><a href="${b.path}/map.png?v=${b.boardSha256}" target="_blank" rel="noopener">Full map</a><a href="${b.path}/level.board.gz?v=${b.boardSha256}" download>Board .gz</a><a href="${b.path}/level.solution.gz?v=${b.boardSha256}" download>Solution .gz</a><a href="${b.path}/stats.json?v=${b.boardSha256}">All stats</a></div>`;}
+function card(b){return `<article class="card ${b.id===selectedId?'selected-card':''}"><img src="${b.path}/${el('view').value}.png?v=${b.boardSha256}-crop2" loading="lazy" alt="${esc(short(b))}; ${el('view').value==='detail'?'central 128-cell detail':'full board overview'}"><h3>${b.side.toLocaleString()} × ${b.side.toLocaleString()}</h3><p>${esc(b.recipe.id)} · seed ${b.seed}</p><p>Open ${fmt(value(b,'open'),'open')}% · mean run ${fmt(value(b,'runs'),'runs')} cells<br>Density variance ${fmt(value(b,'variance'),'variance')}</p>${links(b)}<button data-board="${esc(b.id)}">Inspect distributions</button></article>`;}
 function bindCards(root){root.querySelectorAll('[data-board]').forEach(button=>button.addEventListener('click',()=>select(button.dataset.board,true)));}
 function renderCards(){
  const rows=filtered();
@@ -88,7 +88,7 @@ function edgeChart(b){
 function select(id,scroll){selectedId=id;renderSelected();renderScatter(filtered());el('cards').querySelectorAll('.card').forEach(c=>c.classList.toggle('selected-card',c.querySelector('[data-board]').dataset.board===id));if(scroll)el('selected').scrollIntoView({behavior:'instant',block:'start'});}
 function renderSelected(){
  const b=catalog.boards.find(b=>b.id===selectedId);if(!b)throw new Error('Selected board not found');
- el('selected').innerHTML=`<h3>${esc(short(b))}</h3><div class="selected-layout"><div><img src="${b.path}/detail.png" alt="Central 128 by 128 crop"><p class="muted">Central 128×128 crop · white open / black wall</p>${links(b)}<p><code>${esc(JSON.stringify(b.options))}</code></p><p class="muted">Generation ${b.generationSeconds.toFixed(2)} s (machine/load dependent). Validated before export and replayed after gzip persistence.</p></div><div><div class="stats">${Object.keys(metrics).map(k=>`<div><span>${metrics[k].label}</span><strong>${fmt(value(b,k),k)}</strong></div>`).join('')}</div>${distributionChart(b)}${edgeChart(b)}</div></div>`;
+ el('selected').innerHTML=`<h3>${esc(short(b))}</h3><div class="selected-layout"><div><img src="${b.path}/detail.png?v=${b.boardSha256}-crop2" alt="Central 128 by 128 crop"><p class="muted">Central 128×128 crop · white open / black wall</p>${links(b)}<p><code>${esc(JSON.stringify(b.options))}</code></p><p class="muted">Generation ${b.generationSeconds.toFixed(2)} s (machine/load dependent). Validated before export and replayed after gzip persistence.</p></div><div><div class="stats">${Object.keys(metrics).map(k=>`<div><span>${metrics[k].label}</span><strong>${fmt(value(b,k),k)}</strong></div>`).join('')}</div>${distributionChart(b)}${edgeChart(b)}</div></div>`;
 }
 function renderRanges(){
  const k=el('range-metric').value;
@@ -98,7 +98,7 @@ function renderRanges(){
  el('ranges').querySelectorAll('[data-recipe]').forEach(button=>button.addEventListener('click',()=>{el('recipe').value=button.dataset.recipe;renderSeeds();el('seed-comparison').scrollIntoView({behavior:'instant',block:'center'});}));renderSeeds();
 }
 function renderSeeds(){
- const k=el('range-metric').value,bs=groups.get(el('recipe').value);el('seed-comparison').innerHTML=bs.map(b=>`<article><img src="${b.path}/preview.png" width="100%" alt="Whole-board preview ${esc(short(b))}"><h3>Seed ${b.seed}</h3><p>${metrics[k].label}: <strong>${fmt(value(b,k),k)}</strong></p>${links(b)}</article>`).join('');
+ const k=el('range-metric').value,bs=groups.get(el('recipe').value);el('seed-comparison').innerHTML=bs.map(b=>`<article><img src="${b.path}/preview.png?v=${b.boardSha256}" width="100%" alt="Whole-board preview ${esc(short(b))}"><h3>Seed ${b.seed}</h3><p>${metrics[k].label}: <strong>${fmt(value(b,k),k)}</strong></p>${links(b)}</article>`).join('');
 }
 const surveyBoards=catalog.boards.filter(b=>b.phase==='survey');
 const openValues=surveyBoards.map(b=>value(b,'open'));

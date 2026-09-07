@@ -18,6 +18,8 @@ namespace coil
         Path ends that are one-exit pockets are trimmed unless --keep-deadends. --path also saves the solution png.
   solve <file.board> [--budget NODES] [--all MAX]
         run the reference solver on a coilbench board; prints effort. --all counts solutions up to MAX.
+  evaluate [--budget NODES] [--timeout-ms MS] [--max-cells N] [--depth-limit N] [--directions URDL] [--starts natural|reverse|low-degree|high-degree] [--pruning on|off]
+        read one coilbench board on stdin; emit a JSON search result and replay-validated solution.
   stats <file.board>...
         structural stats of boards (open %, degree histogram, isolated walls).
   bench <width> <height> <seedFrom> <seedCount> [--picker NAME] [--segpicker NAME] [--lim N] [--loops N] [--keep-deadends] [--budget NODES] [--all]
@@ -26,8 +28,10 @@ namespace coil
         generate seedCount levels, score each for solver hardness, keep the N hardest (default 10) as
         output/hardest/<w>x<h>/rankNN-seedS.board/.solution plus a summary. Defaults: --picker last --lim none,
         --score exact up to 34x34 (full-tree reference-solver effort, budget 20M nodes) else proxy. See HARDNESS.md.
+  refresh-details <gallery-directory>
+        rebuild detail PNGs from full maps with visible crop labels and coordinates.
   verify-collection <gallery-directory>
-        replay saved gzip solutions, check hashes, recompute geometry and compare every map cell.
+        replay saved gzip solutions, check hashes, recompute geometry, compare map/crop cells, and check visible crop captions.
   specimen <dir> <side> <seed> [gen options]
         export validated gzip board/solution, maps, and exact geometry stats; directory must be new.
   gallery <dir> <count> <minSide> <maxSide> [--seed S] [--threads N] [gen options]
@@ -48,9 +52,11 @@ No subcommand: `<width> <height> [seed]` behaves as gen.";
             {
                 case "gen": return Gen(args.Skip(1).ToArray());
                 case "solve": return Solve(args.Skip(1).ToArray());
+                case "evaluate": return Evaluate(args.Skip(1).ToArray());
                 case "stats": return Stats(args.Skip(1).ToArray());
                 case "bench": return Bench(args.Skip(1).ToArray());
                 case "hardest": return Hardest(args.Skip(1).ToArray());
+                case "refresh-details": return RefreshDetails(args.Skip(1).ToArray());
                 case "verify-collection": return VerifyCollection(args.Skip(1).ToArray());
                 case "specimen": return Specimen(args.Skip(1).ToArray());
                 case "gallery": return Gallery(args.Skip(1).ToArray());
@@ -149,6 +155,7 @@ No subcommand: `<width> <height> [seed]` behaves as gen.";
             //before doing any outputting, validate the level against the segs, then against the game rules.
             DoDebug(level, show: false, validateBoard: true);
             CoilFormat.Validate(CoilFormat.BoardString(level), CoilFormat.SolutionString(level));
+            GenerationQuality.Validate(level);
             if (!quiet)
             {
                 WL($"phase validate   {phase.Elapsed.TotalSeconds,7:0.000}s");

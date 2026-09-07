@@ -1,3 +1,7 @@
+# Historical framework summary
+
+The real Coil bridge is now implemented. See [README.md](README.md) for current commands, supported controls, actual evaluation results, and limitations. The design sketch below predates that implementation.
+
 # Meta-Solver Implementation Summary
 
 ## What We Built
@@ -21,7 +25,7 @@ meta_solver/
 └── examples/
     ├── knapsack_example.py    # Proof-of-concept with Knapsack problem
     ├── number_partition.py    # Another example with Number Partition
-    └── coil_integration.py    # Stub for integrating with coil solver
+    └── coil_integration.py    # Real C# evaluation bridge (see README)
 ```
 
 ## Test Results
@@ -140,7 +144,7 @@ Default comparator:
 
 ## Applying to Coil Problem
 
-To fully integrate with the coil solver:
+Historical integration sketch (superseded by `coil_bridge.py`):
 
 ### 1. Create C# Runner Interface
 

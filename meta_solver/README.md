@@ -1,101 +1,118 @@
-# Meta-Solver Framework
+# Real Coil evaluation and meta-solver
 
-A self-improving optimization framework that uses multiple LLMs as "idea generators" 
-and rigorously tests ideas against sample problems.
+The Coil bridge runs the repository's C# reference solver. It reads actual
+boards, enforces fixed evaluation limits, and independently replays reported
+solutions in Python. It does not simulate results or read saved answer files.
 
-**Primary Target:** [Coilbench](https://github.com/adum/coilbench) - A pathfinding puzzle 
-benchmark where brute force would take 304 millennia. Only 4 humans have ever solved 
-all levels; best AI iteration reached level 73 of ~1200.
+## Run without an LLM or API keys
 
-## Architecture
+From the repository root:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        OUTER LOOP                                │
-│  ┌─────────────┐    ┌──────────────┐    ┌─────────────────┐    │
-│  │   Problem   │───▶│   Context    │───▶│  LLM Ensemble   │    │
-│  │ Definition  │    │   Builder    │    │ (Opus,Gemini,..)│    │
-│  └─────────────┘    └──────────────┘    └────────┬────────┘    │
-│         │                                         │             │
-│         │                                         ▼             │
-│         │           ┌──────────────┐    ┌─────────────────┐    │
-│         │           │   History    │◀───│  Idea Parser    │    │
-│         │           │  (failures,  │    │  & Extractor    │    │
-│         │           │   attempts)  │    └────────┬────────┘    │
-│         │           └──────────────┘             │             │
-│         │                  │                     ▼             │
-│         │                  │           ┌─────────────────┐     │
-│         │                  │           │  Pre-Critique   │     │
-│         │                  │           │  (cheap filter) │     │
-│         │                  │           └────────┬────────┘     │
-│         │                  │                    │              │
-│         ▼                  ▼                    ▼              │
-│  ┌─────────────────────────────────────────────────────┐      │
-│  │                   EVALUATION ENGINE                   │      │
-│  │  ┌─────────┐  ┌───────────┐  ┌─────────────────┐    │      │
-│  │  │ Easy    │─▶│  Medium   │─▶│  Hard Samples   │    │      │
-│  │  │ Samples │  │  Samples  │  │  (if promoted)  │    │      │
-│  │  └─────────┘  └───────────┘  └─────────────────┘    │      │
-│  └──────────────────────────┬──────────────────────────┘      │
-│                              │                                  │
-│                              ▼                                  │
-│  ┌──────────────────────────────────────────────────────┐     │
-│  │                  COMPARATOR                           │     │
-│  │  • Statistical significance testing                   │     │
-│  │  • Multi-metric evaluation                           │     │
-│  │  • Regression detection                              │     │
-│  └──────────────────────────┬───────────────────────────┘     │
-│                              │                                  │
-│                              ▼                                  │
-│  ┌──────────────────────────────────────────────────────┐     │
-│  │                 INCORPORATION                         │     │
-│  │  • Merge improvements into main solution             │     │
-│  │  • Update history with results                       │     │
-│  │  • Checkpoint successful configurations              │     │
-│  └──────────────────────────────────────────────────────┘     │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+```sh
+dotnet build -c Release
+python3 -m meta_solver.examples.coil_integration --budget 100000 --timeout 3 --compare --output output/meta-solver/reference-comparison.json
+python3 -m unittest meta_solver.test_coil_bridge -v
+python3 -m meta_solver.test_framework
 ```
 
-## Key Components
+The default dataset is `levels/hard/`. Pass another directory as the positional
+argument. Discovery is recursive and supports `.board`, `.board.gz`, and
+rectangular `.coil` files. Malformed input fails with its path. Boards above
+`--max-cells` (default 10,000 cells, not side length) are explicitly listed as
+skipped; an empty usable dataset is an error. The 500-square gallery therefore
+belongs in the geometry tools, rather than the default bounded DFS benchmark.
 
-1. **Problem Interface**: Abstract definition of your problem
-2. **Solution Interface**: How solutions are represented and executed
-3. **LLM Ensemble**: Multiple models for diverse idea generation
-4. **Pre-Critique**: Cheap filtering before expensive tests
-5. **Evaluator**: Runs solutions against stratified test cases
-6. **Comparator**: Determines if improvements are statistically significant
-7. **History Manager**: Tracks what's been tried and why it failed/succeeded
+The command prints a JSON report; `--output` also saves it. `--compare` tries
+three additional direction/start orderings against the same boards and limits.
+A comparison can reject every candidate; no improvement is fabricated.
 
-## Usage
+## Contract and validity
+
+`dotnet .../coil-levels-csharp.dll evaluate` accepts one coilbench board on
+stdin and emits one JSON object. Successful execution exits zero even when a
+search is unsolved; invalid arguments/input exit two with `status: error`.
+Statuses distinguish `solved`, `unsolvable` (exhausted search), `node_budget`,
+`time_limit`, and `depth_limit`. The Python process deadline additionally
+reports `process_timeout` with unavailable search telemetry. Crashes, invalid
+JSON, inconsistent metadata, and invalid solutions raise bridge errors and
+cannot be scored as ordinary puzzle failures.
+
+Search results contain the board SHA-256, dimensions, node and branch counts,
+maximum visited-cell count, elapsed search time, limit flags, and the first
+solution. Every success must pass `CoilFormat.Validate` and independent Python
+slide replay. A legal start may be any open cell, including an interior cell.
+
+The evaluator fixes node, time, cell, and depth limits. The depth cap prevents
+recursive DFS from overflowing the process stack and does not claim that a
+bounded-out board is unsolvable. Defaults: 100,000 nodes, 5 seconds, 10,000
+cells, and 2,048 slides. A Python deadline adds one second for process startup
+and result transfer. `elapsedSeconds` measures search; `wallSeconds` includes
+the process and validation overhead.
+
+Candidate controls are real search settings:
+
+```json
+{"directions":"DRUL","starts":"low-degree","pruning":true}
+```
+
+- `directions`: any permutation of `URDL`.
+- `starts`: `natural`, `reverse`, `low-degree`, or `high-degree`.
+- `pruning`: enable or disable the reference feasibility check.
+
+They change search effort without changing legal moves. Budget changes,
+unknown settings, vague prose without a concrete JSON configuration, and
+no-op modifications are rejected. Generator tweak/segment pickers are not
+solver controls. Arbitrary code generation/application is outside this
+configuration evaluator.
+
+A validated solve scores `0.5 + 0.5 / (1 + nodes / 1000)`; all unsolved outcomes
+score zero. The fixed node scale avoids wall-clock noise or changing the
+budget denominator to inflate a score. The comparator matches board IDs,
+rejects empty/duplicate/mismatched results and non-finite scores, protects
+previously solved cases, and applies its documented score tolerance. This is
+a deterministic acceptance rule, not a statistical significance test.
+
+## Use with the generic meta-solver
 
 ```python
-from meta_solver import MetaSolver, Problem
+from meta_solver import MetaSolver, MetaSolverConfig
+from meta_solver.examples.coil_integration import CoilProblem, CoilSolution
 
-# Define your problem
-class MyPuzzle(Problem):
-    def describe(self) -> str:
-        return "..."
-    
-    def get_test_cases(self, difficulty: str) -> list:
-        return [...]
-    
-    def evaluate(self, solution, test_case) -> float:
-        return score
-
-# Run the meta-solver
-solver = MetaSolver(
-    problem=MyPuzzle(),
-    llm_ensemble=['opus', 'gemini', 'gpt4'],
-    max_iterations=100
-)
-best_solution = solver.run()
+problem = CoilProblem("levels/hard")
+solver = MetaSolver(problem, CoilSolution(), llm_ensemble=[],
+                    config=MetaSolverConfig(max_iterations=0))
+baseline = solver.run()
 ```
 
-## Design Principles
+Zero iterations performs real baseline evaluation. Supply implementations of
+`LLMInterface` to propose JSON configuration changes for further iterations.
+No external model calls are required by the bridge or regression suite.
 
-1. **Ideas are cheap, testing is expensive**: Generate many ideas, filter aggressively
-2. **Failures are data**: Track and learn from what didn't work
-3. **Diversity matters**: Different LLMs think differently
-4. **Small wins compound**: Accept incremental improvements
-5. **Regression protection**: Never accept a change that hurts existing cases
+`coil_meta_solver.py` retains the Coil-specific idea-memory and tier interface
+and now calls the same bridge. Default nonempty tiers are strata by open-cell
+count, not measured difficulty classes. Explicit tiers may impose pass-rate
+thresholds. Baselines must cover every configured case; regressions are checked
+in every tier. Idea success, measured failure analysis, and checkpoints now
+reflect actual runs. Its checkpoints are written atomically under
+`output/meta-solver/`, which is ignored by Git. Concrete JSON configurations
+are deduplicated by their contents; a keyword hash no longer collapses distinct
+parameter settings.
+
+## Validation and observed comparison
+
+Regression checks include successful and impossible boards, interior starts,
+node/depth/time limits, process failures, malformed results, wrong hashes,
+false solution claims, input formats, candidate mutation, and both evaluation
+flows. Native tests exhaust all 512 binary 3×3 boards across 16 search
+configurations against an independent tiny-board enumerator.
+
+The initial real run at 100,000 nodes and 3 seconds solved 2/12 saved hard
+boards with default ordering; reversed starts solved 1/12 and triggered
+regression rejection. Low-degree starts improved the sample score by about
+0.0089, below the default 0.01 acceptance threshold. These observations are
+bounded measurements, not claims that the other boards are impossible.
+
+The older `COIL_DESIGN.md` and `DESIGN_DISCUSSION.md` are design notes. Wider
+room separators, compositional proofs, motif spectra, and learned candidate
+strategies remain separate research work; the functioning bridge does not
+claim to implement those algorithms.

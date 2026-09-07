@@ -1,0 +1,19 @@
+{
+  "id": "300-control-last-wanderfull-s202",
+  "side": 300,
+  "beforeSha256": "1c30a30da92507628c31bb10952bd8461cb42112354c7007deb1e1d24f0111ff",
+  "afterSha256": "f8fa724d8cce06bfcead686d2093a0e65f9fe508ac602c611d7262410bb98c71",
+  "beforeOpenFraction": 0.9710666666666666,
+  "afterOpenFraction": 0.6833444444444444,
+  "beforeOpenSquare": 267,
+  "afterOpenSquare": 5,
+  "seconds": 1.63,
+  "validation": "Persisted pair replayed; geometry, hashes, and map cells verified",
+  "options": {
+    "picker": "last",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": "true",
+    "wander-steps": "8"
+  }
+}

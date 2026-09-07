@@ -64,7 +64,8 @@
         "picker": "rnd99",
         "segpicker": "Weighted4",
         "lim": "20",
-        "wander-full": true
+        "wander-full": true,
+        "wander-steps": "8"
       },
       "seeds": [
         101,
@@ -240,7 +241,8 @@
         "picker": "rnd99",
         "segpicker": "Weighted4",
         "lim": "20",
-        "wander-full": true
+        "wander-full": true,
+        "wander-steps": "8"
       },
       "seeds": [
         101,
@@ -444,7 +446,8 @@
         "picker": "rnd99",
         "segpicker": "Weighted4",
         "lim": "20",
-        "wander-full": true
+        "wander-full": true,
+        "wander-steps": "8"
       },
       "seeds": [
         101,
@@ -685,7 +688,8 @@
         "picker": "rnd99",
         "segpicker": "Weighted4",
         "lim": "20",
-        "wander-full": true
+        "wander-full": true,
+        "wander-steps": "8"
       },
       "seeds": [
         101,
@@ -854,5 +858,6 @@
         "edgeContrast": -0.06895389570172177
       }
     }
-  ]
+  ],
+  "repairPolicy": "Representative choices and meanFeatures describe the original survey. Full-slide specimens were regenerated with eight initial segments under bounded-initial-walk-v1; current geometry is in each stats.json, and before/after values are in repairs/. Choices are frozen unless --reselect is explicitly requested."
 }

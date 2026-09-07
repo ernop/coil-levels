@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace coil
@@ -36,6 +37,16 @@ namespace coil
         public string FirstSolution;
         public long ForcedMoves;
         public long BranchNodes;
+        public string DirectionOrder = "URDL";
+        public string StartOrder = "natural";
+        public bool UseFeasibility = true;
+        public int TimeLimitMilliseconds = int.MaxValue;
+        public int DepthLimit = 2048;
+        public bool TimedOut;
+        public bool DepthExceeded;
+        public int BestVisited;
+        private readonly Stopwatch SearchClock = new Stopwatch();
+        private int[] Directions;
 
         private static readonly int[] DX = { 0, 1, 0, -1 };
         private static readonly int[] DY = { -1, 0, 1, 0 };
@@ -100,6 +111,14 @@ namespace coil
             {
                 throw new ArgumentOutOfRangeException(nameof(MaxSolutions), "solution limit must be positive");
             }
+            if (NodeBudget < 0 || TimeLimitMilliseconds < 1 || DepthLimit < 1 || DepthLimit > 2048)
+                throw new ArgumentException("Invalid search limits (depth must be 1..2048)");
+            if (DirectionOrder == null || new string(DirectionOrder.OrderBy(c => c).ToArray()) != "DLRU")
+                throw new ArgumentException("DirectionOrder must be a permutation of URDL");
+            if (!new[] { "natural", "reverse", "low-degree", "high-degree" }.Contains(StartOrder))
+                throw new ArgumentException("Unknown StartOrder");
+            Directions = DirectionOrder.Select(c => Array.IndexOf(DC, c)).ToArray();
+            SearchClock.Restart();
             var deadEnds = DeadEnds();
             DeadEndsInBoard = deadEnds.Count;
             if (deadEnds.Count > 2)
@@ -126,6 +145,10 @@ namespace coil
                 }
             }
             CandidateStarts = starts.Count;
+            if (StartOrder == "reverse") starts.Reverse();
+            if (StartOrder == "low-degree") starts = starts.OrderBy(i => Degree[i]).ThenBy(i => i).ToList();
+            if (StartOrder == "high-degree") starts = starts.OrderByDescending(i => Degree[i]).ThenBy(i => i).ToList();
+            BestVisited = Open > 0 ? 1 : 0;
             if (Open == 1)
             {
                 SolutionsFound = 1;
@@ -135,6 +158,7 @@ namespace coil
 
             foreach (var s in starts)
             {
+                if (Stopped()) break;
                 StartsTried++;
                 Visit(s);
                 Path.Clear();
@@ -144,12 +168,18 @@ namespace coil
                 {
                     return true;
                 }
-                if (BudgetExceeded)
+                if (BudgetExceeded || TimedOut || DepthExceeded)
                 {
                     return SolutionsFound > 0;
                 }
             }
             return SolutionsFound > 0;
+        }
+
+        private bool Stopped()
+        {
+            if (SearchClock.ElapsedMilliseconds >= TimeLimitMilliseconds) TimedOut = true;
+            return TimedOut || DepthExceeded || BudgetExceeded;
         }
 
         private void Visit(int i)
@@ -265,6 +295,7 @@ namespace coil
             }
             while (sp > 0)
             {
+                if ((reached & 1023) == 0 && Stopped()) return false;
                 var c = FloodStack[--sp];
                 reached++;
                 var deg = Degree[c];
@@ -316,6 +347,8 @@ namespace coil
                 }
                 return true;
             }
+            if (Stopped()) return false;
+            if (Path.Length >= DepthLimit) { DepthExceeded = true; return false; }
             if (Nodes >= NodeBudget)
             {
                 BudgetExceeded = true;
@@ -351,20 +384,23 @@ namespace coil
             }
 
             var anyFound = false;
-            for (var d = 0; d < 4; d++)
+            foreach (var d in Directions)
             {
                 if (legal == 1 && d != lastDir)
                 {
                     continue;
                 }
+                if (Stopped()) break;
+                if (Nodes >= NodeBudget) { BudgetExceeded = true; break; }
                 var n = Slide(pos, d, out var end);
                 if (n == 0)
                 {
                     continue;
                 }
                 Nodes++;
+                BestVisited = Math.Max(BestVisited, Open - remaining + n);
                 Path.Append(DC[d]);
-                if (Feasible(end, remaining - n))
+                if (!UseFeasibility || Feasible(end, remaining - n))
                 {
                     if (Dfs(end, remaining - n, start))
                     {

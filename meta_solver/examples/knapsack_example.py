@@ -18,9 +18,10 @@ import sys
 import os
 
 # Add parent to path
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from core import (
+from meta_solver.core import (
     Problem, Solution, LLMInterface, TestCase, EvalResult, Difficulty
 )
 
@@ -573,7 +574,7 @@ def demo():
     ]
     
     # Run with minimal configuration for demo
-    from solver import MetaSolver, MetaSolverConfig
+    from meta_solver.solver import MetaSolver, MetaSolverConfig
     
     config = MetaSolverConfig(
         max_iterations=3,

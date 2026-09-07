@@ -10,16 +10,10 @@ from dataclasses import dataclass, field
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-try:
-    from .core import (
-        Problem, Solution, LLMInterface, History, Comparator,
-        PromptBuilder, Idea, Attempt, EvalResult, TestCase, Difficulty
-    )
-except ImportError:
-    from core import (
-        Problem, Solution, LLMInterface, History, Comparator,
-        PromptBuilder, Idea, Attempt, EvalResult, TestCase, Difficulty
-    )
+from .core import (
+    Problem, Solution, LLMInterface, History, Comparator,
+    PromptBuilder, Idea, Attempt, EvalResult, TestCase, Difficulty
+)
 
 
 @dataclass
@@ -176,6 +170,8 @@ class MetaSolver:
         # Initial baseline evaluation
         self._log("Establishing baseline...")
         baseline_results = self.evaluator.full_eval(self.current_solution)
+        if not baseline_results:
+            raise ValueError("No evaluation cases; refusing to establish an empty baseline")
         self.current_score = sum(r.score for r in baseline_results) / len(baseline_results)
         self._log(f"Baseline score: {self.current_score:.4f}")
         
@@ -209,7 +205,7 @@ class MetaSolver:
                     improvement_found = True
                     self._log(f"✓ ACCEPTED! Improvement: {attempt.improvement_over_baseline:.4f}")
                     self.current_score = attempt.aggregate_score
-                    baseline_results = self.evaluator.full_eval(self.current_solution)
+                    baseline_results = attempt.results
                 else:
                     self._log(f"✗ Rejected: {attempt.rejection_reason}")
             
@@ -308,7 +304,7 @@ class MetaSolver:
             easy_results = self.evaluator.eval_difficulty(candidate, Difficulty.EASY)
             easy_score = sum(r.score for r in easy_results) / max(len(easy_results), 1)
             
-            if easy_score < self.config.min_easy_score:
+            if easy_results and easy_score < self.config.min_easy_score:
                 return Attempt(
                     idea_id=idea.id,
                     implementation=modification,
@@ -321,7 +317,7 @@ class MetaSolver:
         
         # Full evaluation
         candidate_results = self.evaluator.full_eval(candidate)
-        aggregate_score = sum(r.score for r in candidate_results) / len(candidate_results)
+        aggregate_score = sum(r.score for r in candidate_results) / len(candidate_results) if candidate_results else 0.0
         
         # Compare against baseline
         accepted, reason, improvement = self.comparator.compare(

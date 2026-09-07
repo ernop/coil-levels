@@ -1,98 +1,1738 @@
 {
+  "schemaVersion": 2,
   "date": "2026-09-06",
   "status": "passed",
   "specimenCount": 424,
   "batches": {
-    "survey": 330,
-    "initialAndSelectedThrough2000": 82,
-    "large5000And10000": 12
+    "boards": 94,
+    "survey": 330
+  },
+  "countsBySide": {
+    "300": 346,
+    "500": 32,
+    "1000": 18,
+    "2000": 16,
+    "5000": 8,
+    "10000": 4
   },
   "checks": [
     "Persisted gzip board and solution replay under CoilFormat.Validate",
     "Board SHA-256 matches metadata",
     "Exact full-board characterization recomputed and compared",
     "Every full-resolution map pixel matches its board cell",
+    "Every central crop cell matches the corresponding full-map cell at exactly 3 pixels per cell",
+    "All detail PNGs have a baked-in frame and visible caption regions",
     "Preview and detail dimensions match the documented format",
-    "All 424 planned specimens present with exactly six expected assets each"
+    "All 424 planned specimens present with exactly six expected assets each",
+    "All saved boards meet the largest-open-square quality bound",
+    "Historical unmarked crop rejected by updated verifier"
   ],
+  "repairedSpecimens": 18,
   "sourceSha256": {
     "BoardCharacterization.cs": "e810906b12f38a4e848983a821549a407a80a806378b891bc22314631ad95f07",
-    "Specimen.cs": "665071b6f7467570ad1ca7fb3aac9c8272e9da77f852d4be5de47dbe138d65c7",
-    "VerifyCollection.cs": "526d07ac37b08dcedb8e77e53ec5fdb5192325f3ade81051e058e2215b7de9e3",
-    "CoilFormat.cs": "69f75e12b3add95740c55068518da7cc3687a7ea1db7a7cc9a5dc6cd2741d4dc"
+    "Specimen.cs": "b9dd2429d5af0dc7561f37703fb23882a28f931f6b1bd9f91b6fc7b97239eeb1",
+    "VerifyCollection.cs": "3b6bf54f7ad07c88548b7d358cbe4f9625527c90dd844e1ce57c5b7577a2334e",
+    "CoilFormat.cs": "7d5371f3e176dc89231c63e45f798868f9cbac21eeb9612cc30fd02330d8435a",
+    "GenerationQuality.cs": "185bec34a58fac0c0b94a37559f8658d45d601565743ef63de6b378060ec3d8d",
+    "BaseLevel.cs": "263716818a9d7bbaedfc381d2f59797d07cd3d56810ad26171a75108af1ba353",
+    "ImageUtil.cs": "eecbc58c715cc343e5067b1962fa69464f14329432bb0ae302162e7f3084257c"
   },
-  "largeSpecimens": [
+  "specimens": [
     {
-      "id": "10000-control-rnd99-wanderfull-s303",
-      "boardSha256": "08eae8f6ed91cd76d6cfbb6442bcbcf65986560e6ee9400cf86a6f9bb59b44df",
-      "seconds": 12.67,
-      "passed": true
+      "id": "1000-control-rnd99-wanderfull-s101",
+      "boardSha256": "7cd7b27ba730202bc99213e4b2f7b0e0b41c835127005f265c9fc3de48a9b3be"
     },
     {
-      "id": "10000-tweak-rnd99-s101",
-      "boardSha256": "5856d0853932e714b65c8f96ceef79cd1fb2491d8f5baeaf3454db2ac80ea9c1",
-      "seconds": 8.6,
-      "passed": true
+      "id": "1000-control-rnd99-wanderfull-s303",
+      "boardSha256": "1ccd707448fd490114d809b7ab7f2db580ace0da6e39fbf5b9dd305b4904e472"
     },
     {
-      "id": "5000-control-rnd99-wanderfull-s101",
-      "boardSha256": "0ecac2604db082b942218c62c19a1982bef4e46a9c3d8f0291f71a9c68fa2680",
-      "seconds": 2.66,
-      "passed": true
+      "id": "1000-random-s101",
+      "boardSha256": "d34f685669b64cb7695b0a22cde2129ef444bd5f002d5422fac8398b12b90cd3"
     },
     {
-      "id": "5000-seg-first-Longest-s101",
-      "boardSha256": "8ab59ae95c9dc87debc8b1ab329823a66e90ac5b057450cba3ee302d7ac49749",
-      "seconds": 2.51,
-      "passed": true
+      "id": "1000-random-s202",
+      "boardSha256": "2c7bea76ffd5ba12db2c9299fea6f3161543e35cf935ec56575fc39084c3e676"
     },
     {
-      "id": "5000-tweak-len1-s101",
-      "boardSha256": "110e264d538a7a8e1aae2fe9819f66d54ade064901fb3c0c1cd9242a913f35ff",
-      "seconds": 2.44,
-      "passed": true
+      "id": "1000-seg-2lim10-Last-s101",
+      "boardSha256": "3898e5645b2429a7e4dc28b59b08f4e51f11b29cdaaf13daf327ad21cea0b9f8"
     },
     {
-      "id": "5000-tweak-len23-s101",
-      "boardSha256": "f630c4490b055bb73238962a2a9a40a723ad7bd61cb53177381aa3a719d06992",
-      "seconds": 2.4,
-      "passed": true
+      "id": "1000-seg-2lim10-Last-s202",
+      "boardSha256": "febe44ddf23dd475d6283900f73c1bb15e1b1b675f06d177542d37a2e23d98a6"
     },
     {
-      "id": "5000-tweak-rnd99-s101",
-      "boardSha256": "92a1fc0c81bc9ff715b89cbb1ef96e23575b146c950a0223c193c5e0312cfd43",
-      "seconds": 2.45,
-      "passed": true
+      "id": "1000-seg-equal23short-First-s101",
+      "boardSha256": "4f46720f98f6bb6e4a4ac2d064e9705e1d000c3389a682a1dd7e5c661f34df80"
     },
     {
-      "id": "5000-tweak-sz1-23-s101",
-      "boardSha256": "ad771f4b5fd25f45ddcf12dedd9a0c1baea2ac9e91e81d40d62c1865c11d7ff2",
-      "seconds": 2.5,
-      "passed": true
+      "id": "1000-seg-equal23short-First-s303",
+      "boardSha256": "378a00803e8d9b6e33fdbac00945c78effdbfaac23b3089618c523db720d6621"
     },
     {
-      "id": "5000-tweak-sz23rnd2-s101",
-      "boardSha256": "df73c7f6f154b51676ea52cec1082d2d29966b27925affb6f3c7cab521ac2102",
-      "seconds": 2.4,
-      "passed": true
+      "id": "1000-seg-first-Last-s101",
+      "boardSha256": "5c9ab8dc171d3b030bf8bbd64797f2d68c7fdf3b89d76b017258a0e17324086d"
     },
     {
-      "id": "5000-tweak-sz3-2-s101",
-      "boardSha256": "91f5d06edb0af1da3160c97d539ac564fbf9e344a4bcf968a5b6ea27886a3fb0",
-      "seconds": 2.42,
-      "passed": true
+      "id": "1000-seg-first-Last-s303",
+      "boardSha256": "6b91988e01424755f27f9350ce1a18f2ec5dee892c98764638980c2978148b4b"
+    },
+    {
+      "id": "1000-seg-first-Longest-s101",
+      "boardSha256": "3b2a829afdfb460f3eefb8143f4cc5a4c5eac2209c8ae9b3f9ee6f2f69b1d032"
+    },
+    {
+      "id": "1000-seg-first-Longest-s303",
+      "boardSha256": "10682f1b801d26616010e6d634ffd6f4656b784694d65a36d64edc1d93bbc423"
+    },
+    {
+      "id": "1000-seg-last-First-s202",
+      "boardSha256": "e96ac2cfecf0f903ded241b3da954798c9beaf76fc2d0d980f30aeb67c64c5b4"
+    },
+    {
+      "id": "1000-seg-last-First-s303",
+      "boardSha256": "0551075c5937bc6252419e56cfa9bcb50f479cb905b1c642679621fa9559f039"
+    },
+    {
+      "id": "1000-tweak-rnd99-s101",
+      "boardSha256": "d34f685669b64cb7695b0a22cde2129ef444bd5f002d5422fac8398b12b90cd3"
+    },
+    {
+      "id": "1000-tweak-rnd99-s303",
+      "boardSha256": "68aee809297e10fb8e3a7655e140ed1bef79da503966d0961e9f2bda8d6ab75f"
+    },
+    {
+      "id": "1000-tweak-sz1-23-s101",
+      "boardSha256": "c5066612e65060debde5ef26136e57cce1589b61202fa36d90a6505e9b22e434"
+    },
+    {
+      "id": "1000-tweak-sz1-23-s303",
+      "boardSha256": "8775b67b7f5dbcd1bff8bb8b974e4049b2be7dbd4cbc7de5032baa9b88d792bf"
     },
     {
       "id": "10000-control-rnd99-wanderfull-s101",
-      "boardSha256": "f898efc45aa2ee54bb73f43e053cebac6abd18cf27c771cfda09915394069295",
-      "seconds": 9.9,
-      "passed": true
+      "boardSha256": "e940978c504916392168c4e5a1d7f130d12782b79fdb9b2800e5306209e79ff9"
+    },
+    {
+      "id": "10000-control-rnd99-wanderfull-s303",
+      "boardSha256": "1e775f1e2926e47584e365227565e777339686ff1fcd352508df5310c648fafa"
     },
     {
       "id": "10000-tweak-len23-s101",
-      "boardSha256": "1f66eb1143c4acde77cbc10f4dfb46038dcaca21afd50acc1acf34120e242ded",
-      "seconds": 8.21,
-      "passed": true
+      "boardSha256": "1f66eb1143c4acde77cbc10f4dfb46038dcaca21afd50acc1acf34120e242ded"
+    },
+    {
+      "id": "10000-tweak-rnd99-s101",
+      "boardSha256": "5856d0853932e714b65c8f96ceef79cd1fb2491d8f5baeaf3454db2ac80ea9c1"
+    },
+    {
+      "id": "2000-control-rnd99-wanderfull-s101",
+      "boardSha256": "3a307228cbf38dae4580f3156cd326800f28aa77425347931c0d018f3be23149"
+    },
+    {
+      "id": "2000-control-rnd99-wanderfull-s303",
+      "boardSha256": "1bcebc3e3fff54a1da046e22bd327331794039a133cc9b7af8474d46b80499b7"
+    },
+    {
+      "id": "2000-seg-2lim10-Last-s101",
+      "boardSha256": "365a8285725fe51e893084d301ecf40b5e61b6d9f3bdebaef666f3347e977e47"
+    },
+    {
+      "id": "2000-seg-2lim10-Last-s202",
+      "boardSha256": "92062e27a8216ccfb71ec7f83d8bfef3a56a88c39e5f3ddb2585c55ce23ca827"
+    },
+    {
+      "id": "2000-seg-equal23short-First-s101",
+      "boardSha256": "7bdaf49fc585662002fee54d558bc10a24e769604e8aacd6b58f901c083058f7"
+    },
+    {
+      "id": "2000-seg-equal23short-First-s303",
+      "boardSha256": "e55442951f6b9fd15df5acec40e7579a17c85eb888a10961003c5890880cc803"
+    },
+    {
+      "id": "2000-seg-first-Last-s101",
+      "boardSha256": "8872b7f9eedefe6207f36156a272a40155083bd4fb6ead06187834ff0944e216"
+    },
+    {
+      "id": "2000-seg-first-Last-s303",
+      "boardSha256": "20ca0ecaec8d8cdb23413914b6c3bd4cb6f1f6b937f1e0d550decd84daa57c4e"
+    },
+    {
+      "id": "2000-seg-first-Longest-s101",
+      "boardSha256": "f67b63ab3722a0eb2833fb4d4e8bfa7e021854c69d5a37fd59fd525ecc79112e"
+    },
+    {
+      "id": "2000-seg-first-Longest-s303",
+      "boardSha256": "6d81ec3bbbf4e677958fe0e2ac3400a1cf8e1509f22676dfbfa16045be6fc783"
+    },
+    {
+      "id": "2000-seg-last-First-s202",
+      "boardSha256": "f511434ec7a17d7b9df50de6c3b2e1c2fb9baee0089341bc46d6adccbf2b469a"
+    },
+    {
+      "id": "2000-seg-last-First-s303",
+      "boardSha256": "243d1d685e72d8b4c7876dd5d635674f8465a6c1846487e680673b07e93abda8"
+    },
+    {
+      "id": "2000-tweak-rnd99-s101",
+      "boardSha256": "88d904bb03818a0daa47539313d7852c6c54770f30f6712ea35e349063c6ac56"
+    },
+    {
+      "id": "2000-tweak-rnd99-s303",
+      "boardSha256": "50c6c00632c8ec88bfc1908aa0c086de19e47e7ac574bdf3220b439aec4b7b35"
+    },
+    {
+      "id": "2000-tweak-sz1-23-s101",
+      "boardSha256": "9e888d9e26b711f39ddf58a73cbb0e93230fffe13e21717e33fea5f614cac4f8"
+    },
+    {
+      "id": "2000-tweak-sz1-23-s303",
+      "boardSha256": "d6d1daf4580b476beec169087f8f4415bb07f079a2672cf4ba90d822c8de1536"
+    },
+    {
+      "id": "300-early-segments-s101",
+      "boardSha256": "b7cb54a9dbf5f79dba5f87fccb866dbc3225e8e2e0ef5c7c842004dbd5b12b8f"
+    },
+    {
+      "id": "300-early-segments-s202",
+      "boardSha256": "d6b44f5cd4ea6438ca11dfb5a09916d90c8dc8822d04187795334c24aa20928c"
+    },
+    {
+      "id": "300-first-tweaks-s101",
+      "boardSha256": "628f58c85b79ef3612ca6e532a6fc4340fe95fa845a2cc930ac5c53fe315d61b"
+    },
+    {
+      "id": "300-first-tweaks-s202",
+      "boardSha256": "763d29e6c4e67a097375c2f8444bd16d5e19a80acd3702dc89b29eb985ea1e21"
+    },
+    {
+      "id": "300-large-tweaks-s101",
+      "boardSha256": "65fd7788fe10d4ab12d65de090d900626576e64bc880111888d6e82c5a50b50c"
+    },
+    {
+      "id": "300-large-tweaks-s202",
+      "boardSha256": "81953fd65a1e1c23e8c3ea7a814d7dd571337a8725389fd3532774bb03934177"
+    },
+    {
+      "id": "300-late-segments-s101",
+      "boardSha256": "e5982079bd666e3cc943f780613a7d8d2d34adc58a59d83607de378d41adf810"
+    },
+    {
+      "id": "300-late-segments-s202",
+      "boardSha256": "9d812ceaf56fbd2c3be12f778b5d851c86f0a2f52320e088f3f25d6cc3f4f7bf"
+    },
+    {
+      "id": "300-long-segments-s101",
+      "boardSha256": "2ec9b97dc7413c4799047b08034e9793daf394b84cd5a7dd2637325f77b93546"
+    },
+    {
+      "id": "300-long-segments-s202",
+      "boardSha256": "9edae16dee809e8cb4b94fe896c644b1ea87a9ef7263c8fdae45c5b84fab8690"
+    },
+    {
+      "id": "300-one-pass-s101",
+      "boardSha256": "0099468d11ba7cd05d126b0ce87fc08ab206e34bd71f015ed4c8793821d5284a"
+    },
+    {
+      "id": "300-one-pass-s202",
+      "boardSha256": "67ab96305b7fcde1a38ecd3d378bf3ddf0431d969dbc293dc30f9b2793b357a9"
+    },
+    {
+      "id": "300-random-s101",
+      "boardSha256": "cb91af9cf2a5049ae44d76b63f593476a571994364f225326942c580a076e51b"
+    },
+    {
+      "id": "300-random-s202",
+      "boardSha256": "27666a60e2ee3251cec85fd2610f5e56ba1716406132ef5cbd388e3ae50dc152"
+    },
+    {
+      "id": "300-short-tweaks-s101",
+      "boardSha256": "69369553a4b23ce0f3430fe999b6877ac32a5ab626bf5777057dee6f15f9e4c1"
+    },
+    {
+      "id": "300-short-tweaks-s202",
+      "boardSha256": "4d94e419e937e03f78b011a312ba9cd4a9cd467dc9fb2eb8e2d0c1459145bf1a"
+    },
+    {
+      "id": "500-control-last-unlimited-s101",
+      "boardSha256": "d341323f362241b5f980b28781dd606a770f8066416ec7d9687d1dea3612b1d3"
+    },
+    {
+      "id": "500-control-last-unlimited-s202",
+      "boardSha256": "03249db3927d22c98a7cb49dca0075de361650c604cf5a7f6c0b0dad65caec80"
+    },
+    {
+      "id": "500-control-rnd99-wanderfull-s101",
+      "boardSha256": "f87572728efc27702972ae4ac832bd3aeda67b9e6f7730c95d5a465f11ef5e35"
+    },
+    {
+      "id": "500-control-rnd99-wanderfull-s303",
+      "boardSha256": "1f3dae230b01bd9341484175372dfd1132bf25206a8854d7190553fd4536a347"
+    },
+    {
+      "id": "500-early-segments-s101",
+      "boardSha256": "fd3bd7d0fcbc4d39455a41121ceae3e5a0a987bf7e3632b6d3a877c95a0ce0d0"
+    },
+    {
+      "id": "500-early-segments-s202",
+      "boardSha256": "74db1554aafe555e12260ed67911b33da4bbf3b7329d7778806ee2feca2035c4"
+    },
+    {
+      "id": "500-first-tweaks-s101",
+      "boardSha256": "e5e0ed63c66a9199f615be68f83e16aba27eb7210020471c02b49361f16b984b"
+    },
+    {
+      "id": "500-first-tweaks-s202",
+      "boardSha256": "a6ec4716bbe8f339f4b4abbcb2afff6ebb2ecd43f7595873e38d70449bad741b"
+    },
+    {
+      "id": "500-large-tweaks-s101",
+      "boardSha256": "d341323f362241b5f980b28781dd606a770f8066416ec7d9687d1dea3612b1d3"
+    },
+    {
+      "id": "500-large-tweaks-s202",
+      "boardSha256": "03249db3927d22c98a7cb49dca0075de361650c604cf5a7f6c0b0dad65caec80"
+    },
+    {
+      "id": "500-late-segments-s101",
+      "boardSha256": "b10132a3d9366bba6e1bcfdfdb03ffd2e748f2c1a3ab1f5d6097d6e9bb286e30"
+    },
+    {
+      "id": "500-late-segments-s202",
+      "boardSha256": "f5ae4098869e33acc87f7c4b4817142b4bb18d535632823b13ddfad98e90ccee"
+    },
+    {
+      "id": "500-long-segments-s101",
+      "boardSha256": "ebcfc641ae0819d152f99010e58676a11b0e535c260d13483b63cdc9f854a588"
+    },
+    {
+      "id": "500-long-segments-s202",
+      "boardSha256": "d493a83ce32e0cc93d829d6fe25f4ba42ae02671b250174b866e9ac72a6f3130"
+    },
+    {
+      "id": "500-one-pass-s101",
+      "boardSha256": "be9534deccc248a2735c7841ae68d14642392e2b09df86284913848c2a54a247"
+    },
+    {
+      "id": "500-one-pass-s202",
+      "boardSha256": "d856464f350ef70d237ad540282f07d1afb68253d7709022aa50720b03744c33"
+    },
+    {
+      "id": "500-random-s101",
+      "boardSha256": "e1159eb33a9c0084c45cf283f0a7fecd2e8924dff2699b76919c673399b0c9cb"
+    },
+    {
+      "id": "500-random-s202",
+      "boardSha256": "2d09fbd3893a0042b4472405350254646c6722aea46bb0a932bb399cfd0863dd"
+    },
+    {
+      "id": "500-seg-equal23short-First-s101",
+      "boardSha256": "485a9e7522ee375c5829c0631e5eeee88a045347775032bb71bbdfb52622c2ab"
+    },
+    {
+      "id": "500-seg-equal23short-First-s303",
+      "boardSha256": "1d8dec1a02b3530de48279588fa1c3d33185537233bff3868a290ea115bd82b1"
+    },
+    {
+      "id": "500-seg-first-Last-s101",
+      "boardSha256": "0b147322ac35e4a3e303015fafcb36dee37351e229bccde25377115de5ad169c"
+    },
+    {
+      "id": "500-seg-first-Last-s303",
+      "boardSha256": "308531d4d588550f280383e85859d21ed1912b736e92befb83ef7bd54c677eb2"
+    },
+    {
+      "id": "500-seg-first-Longest-s101",
+      "boardSha256": "6bbf432cc856d2f182b14a7ce1f27d758f1969b5578ef4862d886e579a09df5f"
+    },
+    {
+      "id": "500-seg-first-Longest-s303",
+      "boardSha256": "49f77cc4d52c943174a4b29c1911c2beeada03f674f5e200df86244b350663fc"
+    },
+    {
+      "id": "500-seg-last-First-s202",
+      "boardSha256": "74f7ba3cf4ee0fdaaf48c242b67d8329b27c70baf6b76f065840a4371db92d0b"
+    },
+    {
+      "id": "500-seg-last-First-s303",
+      "boardSha256": "f341c7b7ac6cc8b98cd67c551842c9faddc40ec68534500a584b95744a14e77c"
+    },
+    {
+      "id": "500-short-tweaks-s101",
+      "boardSha256": "915318c617a926e2df1805e62d2b6b081aedb62fdbe36ec53fecf97ae14a4455"
+    },
+    {
+      "id": "500-short-tweaks-s202",
+      "boardSha256": "a880a165bd0ef37657ff3bd9e90a02737265b1b7701ddc242ecf55d7818616af"
+    },
+    {
+      "id": "500-tweak-rnd99-s101",
+      "boardSha256": "e1159eb33a9c0084c45cf283f0a7fecd2e8924dff2699b76919c673399b0c9cb"
+    },
+    {
+      "id": "500-tweak-rnd99-s303",
+      "boardSha256": "d3c9aaf9309c9399ecdf3ff20335bd9c736d05fb93b446f51b6bdacf47901730"
+    },
+    {
+      "id": "500-tweak-sz1-23-s101",
+      "boardSha256": "08e3acffc60cd83dcf99fbeb2f72fb98236d1342afcfd176deea48555d4c847a"
+    },
+    {
+      "id": "500-tweak-sz1-23-s303",
+      "boardSha256": "9da08960d0790308f20bdad7daeb38d4ae0ae86720f79c9930b6da7ecc853e27"
+    },
+    {
+      "id": "5000-control-rnd99-wanderfull-s101",
+      "boardSha256": "285f24ca848e5e7fea32e0f228fd5b4de448618fa8f2311bf0f12caa1a828bdb"
+    },
+    {
+      "id": "5000-seg-first-Longest-s101",
+      "boardSha256": "8ab59ae95c9dc87debc8b1ab329823a66e90ac5b057450cba3ee302d7ac49749"
+    },
+    {
+      "id": "5000-tweak-len1-s101",
+      "boardSha256": "110e264d538a7a8e1aae2fe9819f66d54ade064901fb3c0c1cd9242a913f35ff"
+    },
+    {
+      "id": "5000-tweak-len23-s101",
+      "boardSha256": "f630c4490b055bb73238962a2a9a40a723ad7bd61cb53177381aa3a719d06992"
+    },
+    {
+      "id": "5000-tweak-rnd99-s101",
+      "boardSha256": "92a1fc0c81bc9ff715b89cbb1ef96e23575b146c950a0223c193c5e0312cfd43"
+    },
+    {
+      "id": "5000-tweak-sz1-23-s101",
+      "boardSha256": "ad771f4b5fd25f45ddcf12dedd9a0c1baea2ac9e91e81d40d62c1865c11d7ff2"
+    },
+    {
+      "id": "5000-tweak-sz23rnd2-s101",
+      "boardSha256": "df73c7f6f154b51676ea52cec1082d2d29966b27925affb6f3c7cab521ac2102"
+    },
+    {
+      "id": "5000-tweak-sz3-2-s101",
+      "boardSha256": "91f5d06edb0af1da3160c97d539ac564fbf9e344a4bcf968a5b6ea27886a3fb0"
+    },
+    {
+      "id": "300-control-2lim10-keepends-s101",
+      "boardSha256": "8a04ec1ef9b902e4c4020a83092bc650ec5af213171853dbdfac163865236764"
+    },
+    {
+      "id": "300-control-2lim10-keepends-s202",
+      "boardSha256": "beb97279694b346b90eb2037693922f0f78e0ce68d901c3b7861c820ee29323c"
+    },
+    {
+      "id": "300-control-2lim10-keepends-s303",
+      "boardSha256": "03dc176e5e777de361376b8aebfab18befafa3b6b5962ea577dda5a1318b9a24"
+    },
+    {
+      "id": "300-control-2lim10-lim5-s101",
+      "boardSha256": "70ac2fa2cfa645aeba4b9c359a153c95bc6c50962fc7d77137bfa606cb065b9d"
+    },
+    {
+      "id": "300-control-2lim10-lim5-s202",
+      "boardSha256": "695d49cf138b55fac3785d5577f2b633d9f2fb87047e0fbf3026aa60e0140e3f"
+    },
+    {
+      "id": "300-control-2lim10-lim5-s303",
+      "boardSha256": "fbded91d1eb20312d24c42f1b8c62ca0297313772c22af146c2e594c1e095f63"
+    },
+    {
+      "id": "300-control-2lim10-onepass-s101",
+      "boardSha256": "a4fd5cd412edae1f6999518a7adfe10d3b4c5ddf6e303597f9a1326440275771"
+    },
+    {
+      "id": "300-control-2lim10-onepass-s202",
+      "boardSha256": "62b44a87f1a0dbd4ae353c46d6461107d847be57752f2b4170505f29352a0b18"
+    },
+    {
+      "id": "300-control-2lim10-onepass-s303",
+      "boardSha256": "5349cb2fb455dc4dc47282f83a6ad901d5d5f7593dcc41e0017bb53baeb3dad5"
+    },
+    {
+      "id": "300-control-2lim10-unlimited-s101",
+      "boardSha256": "340c9e733cdcb19351c7dfabf8468c06c948dd949c0200d2d948127999172fbc"
+    },
+    {
+      "id": "300-control-2lim10-unlimited-s202",
+      "boardSha256": "b303ffefe9d80f47d94ad92873b3ad7b40297f6cfdf79175dd969d52c00bf2b6"
+    },
+    {
+      "id": "300-control-2lim10-unlimited-s303",
+      "boardSha256": "6a93a382b5b7dc933dec70f5e4c29b2c82a0d8cdc25064a145c0264f3e8a098e"
+    },
+    {
+      "id": "300-control-2lim10-wander5-s101",
+      "boardSha256": "5bb2f8db5e67c0e1e83ebfdca6c3555f367a68ab4bb1d9dd823ffcf74095daa3"
+    },
+    {
+      "id": "300-control-2lim10-wander5-s202",
+      "boardSha256": "5f3aa1201453137b52b9dfee9622b94fb1284f73b38e0af5d48d720969154a3f"
+    },
+    {
+      "id": "300-control-2lim10-wander5-s303",
+      "boardSha256": "6a5947bc6c6cd0a2dfb09f7f85303e147216700041f79cb9c8bcdbf01d493f8a"
+    },
+    {
+      "id": "300-control-2lim10-wander8steps-s101",
+      "boardSha256": "d1f740c09911ef545019f30a38be008420b6a0d3500db0d645bd7c2e67b88bea"
+    },
+    {
+      "id": "300-control-2lim10-wander8steps-s202",
+      "boardSha256": "fa3aa7b6a08f30c10df8c48b42159bfe935c968a0f615d65705d92b223d16043"
+    },
+    {
+      "id": "300-control-2lim10-wander8steps-s303",
+      "boardSha256": "97b3e8e665ab8409a4c85c2b3da347870e1b875a8ff6bb74f071c73f9c741cef"
+    },
+    {
+      "id": "300-control-2lim10-wanderfull-s101",
+      "boardSha256": "dded021c6388e7ff91a161db4db088780db080cadc5ef27341a62495ac1a6e99"
+    },
+    {
+      "id": "300-control-2lim10-wanderfull-s202",
+      "boardSha256": "d2a740a26888edc1f8ee815c3ca722c9bbf04d0406093e4a54442ae50651eedb"
+    },
+    {
+      "id": "300-control-2lim10-wanderfull-s303",
+      "boardSha256": "14eb39103729f97ae98bd4d97affd79e7e70abd0545a982467d23dfd0361d45e"
+    },
+    {
+      "id": "300-control-last-keepends-s101",
+      "boardSha256": "8bb96296028ccbf10afcfeed0f0d864603890fb2afd209bf1ffe60024a85dbff"
+    },
+    {
+      "id": "300-control-last-keepends-s202",
+      "boardSha256": "a5a9e5a29ba6ab303000d699eed2cf076ae1f2b364906711d9b9fd077909cfc1"
+    },
+    {
+      "id": "300-control-last-keepends-s303",
+      "boardSha256": "12304042fdee465795d09946b7c024138466b1672634a5fd19cad56b61d9d272"
+    },
+    {
+      "id": "300-control-last-lim5-s101",
+      "boardSha256": "0d8c214f47c93830df74015816b80c8e2f0a3cdfddc1b038df7197feeda3c7fd"
+    },
+    {
+      "id": "300-control-last-lim5-s202",
+      "boardSha256": "13949e461836b40512a056994754c602d8db19bc03de73e3f61e558752ef20a9"
+    },
+    {
+      "id": "300-control-last-lim5-s303",
+      "boardSha256": "5b6561d37ed6b09ab44a0753f4cf095485f09c66feb408a9c33383d188211495"
+    },
+    {
+      "id": "300-control-last-onepass-s101",
+      "boardSha256": "b5ab1e348e1e39ff88d0232da1693731f3d54493ef1c26316e4a6393930bfb21"
+    },
+    {
+      "id": "300-control-last-onepass-s202",
+      "boardSha256": "1bf7bb82ffa948edc849ce68968f74cba663d61a346f8a704516dd7715b60d30"
+    },
+    {
+      "id": "300-control-last-onepass-s303",
+      "boardSha256": "91023e792c0f592c3e96a4c37af95a1f348310d66cdd785035f0ceb8ad903d98"
+    },
+    {
+      "id": "300-control-last-unlimited-s101",
+      "boardSha256": "65fd7788fe10d4ab12d65de090d900626576e64bc880111888d6e82c5a50b50c"
+    },
+    {
+      "id": "300-control-last-unlimited-s202",
+      "boardSha256": "81953fd65a1e1c23e8c3ea7a814d7dd571337a8725389fd3532774bb03934177"
+    },
+    {
+      "id": "300-control-last-unlimited-s303",
+      "boardSha256": "c4a9aea8c4c46abab25cdb42920bfb0cc9e0b6559e540159c2db0375c3002f45"
+    },
+    {
+      "id": "300-control-last-wander5-s101",
+      "boardSha256": "1cc5a39ea979f07cc02dbcdfd531078c63b7a212e07ddb3d535215be9fa0cbd4"
+    },
+    {
+      "id": "300-control-last-wander5-s202",
+      "boardSha256": "72260465774aac8fcf2d8c4aba9bc11a41b12cd89021f650a139ea5f6d56c41e"
+    },
+    {
+      "id": "300-control-last-wander5-s303",
+      "boardSha256": "9745e5f2658cc48691d66d3a5226fdfba9567f3f1c6ffb8e36e03d216d4fcb90"
+    },
+    {
+      "id": "300-control-last-wander8steps-s101",
+      "boardSha256": "84d6f9cf0c2b6d618f107fbe1d5a19c3915505a9a5df1850b1ba45e7bcdb227c"
+    },
+    {
+      "id": "300-control-last-wander8steps-s202",
+      "boardSha256": "0ba47c49e80bd190bef84d845e46ad9bb93c63b292efb49d322b7504614c19a8"
+    },
+    {
+      "id": "300-control-last-wander8steps-s303",
+      "boardSha256": "40b95ab720105a996e9cd9cd76b3a32edee682a7dda9c6097e6e929dfa61a063"
+    },
+    {
+      "id": "300-control-last-wanderfull-s101",
+      "boardSha256": "63760c6e4552e60cd72b87092a569ba2db7fd43a8a059bba64b051a9faeced44"
+    },
+    {
+      "id": "300-control-last-wanderfull-s202",
+      "boardSha256": "f8fa724d8cce06bfcead686d2093a0e65f9fe508ac602c611d7262410bb98c71"
+    },
+    {
+      "id": "300-control-last-wanderfull-s303",
+      "boardSha256": "b53bcca28bee038ffb966f460ec0b9e5d00f3a4e425d63d74e67db8783c68d6d"
+    },
+    {
+      "id": "300-control-rnd99-keepends-s101",
+      "boardSha256": "cb91af9cf2a5049ae44d76b63f593476a571994364f225326942c580a076e51b"
+    },
+    {
+      "id": "300-control-rnd99-keepends-s202",
+      "boardSha256": "27666a60e2ee3251cec85fd2610f5e56ba1716406132ef5cbd388e3ae50dc152"
+    },
+    {
+      "id": "300-control-rnd99-keepends-s303",
+      "boardSha256": "832897501da357d465e516ecb1226e21c4d6fb3cb2395438e1779b67986b431a"
+    },
+    {
+      "id": "300-control-rnd99-lim5-s101",
+      "boardSha256": "9d2a62b3d954cbe7d06509ac6fbfa495ff6cd2df36a195b6a1da85345e328adc"
+    },
+    {
+      "id": "300-control-rnd99-lim5-s202",
+      "boardSha256": "4e16a44442088593d98294a62b7e8306d2b98107c79383a9733f6cea23cd2f6c"
+    },
+    {
+      "id": "300-control-rnd99-lim5-s303",
+      "boardSha256": "6636af580724f7a6e02eca692af3a0ba582bdb0cac4d57f1822cefe1baaf0044"
+    },
+    {
+      "id": "300-control-rnd99-onepass-s101",
+      "boardSha256": "3035ec51acfe0477175eb66ad07c7bb10169513255d0611b1851ad1163e94b5a"
+    },
+    {
+      "id": "300-control-rnd99-onepass-s202",
+      "boardSha256": "e71158d4a97d660172670754098f8953eec8c283ebd9605d6ac79e2e7e546cf5"
+    },
+    {
+      "id": "300-control-rnd99-onepass-s303",
+      "boardSha256": "26723bf1e6eea0e06d34b09f671afc150ad37524a00e3158d78944f70d66a037"
+    },
+    {
+      "id": "300-control-rnd99-unlimited-s101",
+      "boardSha256": "72093a569e6f3e269f49211546c02d4f4b9003f3dda78777fe4fcf63dd9be730"
+    },
+    {
+      "id": "300-control-rnd99-unlimited-s202",
+      "boardSha256": "d47856be42dd9448f8f3245808d7b95d7d819e3fdbad8cace454f5ec2a4a3dfa"
+    },
+    {
+      "id": "300-control-rnd99-unlimited-s303",
+      "boardSha256": "1d42e7c1a75d399f6f33fdc5d9d0546bfdf7e5e1f40a06ff6756e618f59cf639"
+    },
+    {
+      "id": "300-control-rnd99-wander5-s101",
+      "boardSha256": "7b6b8afd2ac244276f7b30d3d828402f416285d6174e428bf3404c3f4692d683"
+    },
+    {
+      "id": "300-control-rnd99-wander5-s202",
+      "boardSha256": "7d93b72997f007755c1718d0a9919919e582a220270099e3e5bd31ce7c96a8f9"
+    },
+    {
+      "id": "300-control-rnd99-wander5-s303",
+      "boardSha256": "282917b1512376ba2e4638fe66f697a7e6be425e15fc7aebb971c7363ed449f9"
+    },
+    {
+      "id": "300-control-rnd99-wander8steps-s101",
+      "boardSha256": "3d802d4394818513d871530e599ad06b11b4416595b9aec3c2e3a58955af096c"
+    },
+    {
+      "id": "300-control-rnd99-wander8steps-s202",
+      "boardSha256": "fabcf31861eab95797432bed13937de48985dc8428bbbdd9d195ae6da56eb060"
+    },
+    {
+      "id": "300-control-rnd99-wander8steps-s303",
+      "boardSha256": "bbce6720febaae832b26c6b7e78f66bd0268312788f6bd119721b945af667f56"
+    },
+    {
+      "id": "300-control-rnd99-wanderfull-s101",
+      "boardSha256": "f068460ec92a636fe88aeaf8e7b0963557e734b15d6d7c0937c1e0e26958b660"
+    },
+    {
+      "id": "300-control-rnd99-wanderfull-s202",
+      "boardSha256": "b8a5237b1c28590fc00e313e9b08239f716795fbe4ed0d749689349fa4e13ef4"
+    },
+    {
+      "id": "300-control-rnd99-wanderfull-s303",
+      "boardSha256": "98e4070795819b31fd7ae82e94f2bb16bed4344a3474e8c183d32d8daf33cb1d"
+    },
+    {
+      "id": "300-seg-2lim10-First-s101",
+      "boardSha256": "ef860bb0d19d304a4b436d468d321773fe7729ce22ba2d4dd80f8011a3dffebf"
+    },
+    {
+      "id": "300-seg-2lim10-First-s202",
+      "boardSha256": "65a61cba2b03fed9c2baf3503d338a659cb9576f27de6cff86c779b54ae8fcf8"
+    },
+    {
+      "id": "300-seg-2lim10-First-s303",
+      "boardSha256": "ff3e6464cbad2d275cd4d4af80952dc30a4a3e9b04c783defdf012831bf0c50f"
+    },
+    {
+      "id": "300-seg-2lim10-Last-s101",
+      "boardSha256": "8577f59dc3a77db7ae7b34dbc12f24db2c579e20b1be63e33a293d9e3d160fa7"
+    },
+    {
+      "id": "300-seg-2lim10-Last-s202",
+      "boardSha256": "a05000452e374cbc808fb8041ab9e1618a7a8f93c5eff68026531c0d842ff688"
+    },
+    {
+      "id": "300-seg-2lim10-Last-s303",
+      "boardSha256": "c38eca372d2cafeacb5afc9ec80d9fe56e91dc5ff05a83107dfe6580c40ff39b"
+    },
+    {
+      "id": "300-seg-2lim10-Longest-s101",
+      "boardSha256": "cbcf901c2e55664af3b97d44e08ca06bbdf10cffc8492ec2a1079d1aa54f1b27"
+    },
+    {
+      "id": "300-seg-2lim10-Longest-s202",
+      "boardSha256": "e6ab834799ab98a2668bb4d0744d728ce9a8b91e63e6833c72a5af746cf3c149"
+    },
+    {
+      "id": "300-seg-2lim10-Longest-s303",
+      "boardSha256": "1e46d2bf75651ff8c439f3ccd0fb8c33830c6ace5c63fb3dd52846bff5f3db01"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted-s101",
+      "boardSha256": "d53d420b174dc66f5390f1b492f10692746970612446cab61a695ae07ccfe823"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted-s202",
+      "boardSha256": "688d02b2e0f8448e82f6f2a4a78be7d149f7a8400deeb377bc25f95eec2c8071"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted-s303",
+      "boardSha256": "d8a47425a88d4988c8169b1a33493efa223eab812ef02515263ffdfb7758e888"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted2-s101",
+      "boardSha256": "797ff74368b2a61d91930ded66a7eae440b2b7abc46b3786c4fae7ca83f810b8"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted2-s202",
+      "boardSha256": "569c46a5a072ae247c966465b6396763bca533e2277898be00926bf98838ff69"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted2-s303",
+      "boardSha256": "cd05921e5ee93bf3f8c17ea4ac754104216009ffb2a785203336976eafebb6bc"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted3-s101",
+      "boardSha256": "5698173dc2880c63fb6397918f395e307ca5a845adf2cb0f150f653c5e1b0b76"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted3-s202",
+      "boardSha256": "219d1259f656f11711ec77908f09f3e612a5a20ba1743949892902526e577f4e"
+    },
+    {
+      "id": "300-seg-2lim10-Weighted3-s303",
+      "boardSha256": "ca8468c7cf981d6acf97c6776134a5bf3d4652fb2aa7453208fde2cd79806f34"
+    },
+    {
+      "id": "300-seg-equal23short-First-s101",
+      "boardSha256": "8aee294f39afbe4d50a109ea265232c5a936cd5b37ad9c6a282d91a3e9e4c0fa"
+    },
+    {
+      "id": "300-seg-equal23short-First-s202",
+      "boardSha256": "8a8815b5017ff3949ad6195e16312bdcf9d94edb8fbbc822652b4694020a73a7"
+    },
+    {
+      "id": "300-seg-equal23short-First-s303",
+      "boardSha256": "7d073f67a9f33c70f9ec7d24275e81ac48201e2a895a760047292c674636d871"
+    },
+    {
+      "id": "300-seg-equal23short-Last-s101",
+      "boardSha256": "6123d40a3911d2de70efd54dd85f0ef21e02beacf37137582a8656cd2fb31124"
+    },
+    {
+      "id": "300-seg-equal23short-Last-s202",
+      "boardSha256": "2fca67b534072fba80298df6e2b4dbf49c95045a956f83636f7df6d1ee9d8716"
+    },
+    {
+      "id": "300-seg-equal23short-Last-s303",
+      "boardSha256": "110d532c506517a1610226d03549e8c386d6cad45ceaaab56cea93c7af7a46f5"
+    },
+    {
+      "id": "300-seg-equal23short-Longest-s101",
+      "boardSha256": "21dd28948878820b9eebfd0053c53f34d9bbc0150385b44aaec4478169ec55a3"
+    },
+    {
+      "id": "300-seg-equal23short-Longest-s202",
+      "boardSha256": "56cbaab2683ccdcfe7fd62f878dfbd9a22f0893a6b6b2117c2b74d8cdb1c399c"
+    },
+    {
+      "id": "300-seg-equal23short-Longest-s303",
+      "boardSha256": "7adc34864e99f1d19117cb9a28bf9e1b8cac8eb413188c2991de9df74efcab87"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted-s101",
+      "boardSha256": "ac1c871e783d6eb796956b74368eb6e665b982afaab673b27730e74a880883ae"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted-s202",
+      "boardSha256": "f1ad0c612fe1e95a4c6ab5ea500a50a9c014b90df527195f2fe93fac98aaf67d"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted-s303",
+      "boardSha256": "1bbb07e97d499770aa99d59280d579a72489825084c0480047151e60bd894f0d"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted2-s101",
+      "boardSha256": "976a82a8080271f307e2fe6de25f6c8fabbbdf5e3337ffad2278ad781ab4f494"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted2-s202",
+      "boardSha256": "602c53411b249e28346a222b97540ebc52be14ea43ec0e82717eb7ec1ea7fdff"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted2-s303",
+      "boardSha256": "35dcf0b2c3080df873de0e93e0f68dfd0ee713322f4c65085551aade92b6b51c"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted3-s101",
+      "boardSha256": "5e051d87f306e9565f5576eee65340bbdc734d4baf515afa97a43fcc4d80d616"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted3-s202",
+      "boardSha256": "49381e87a407f04d3f51f9c574a28094487524a9f1a60054e12af5cdea02a36c"
+    },
+    {
+      "id": "300-seg-equal23short-Weighted3-s303",
+      "boardSha256": "31e9c2c3988ab38fb80569d5b77220aab6e70466ded1260c33b713119b513e1c"
+    },
+    {
+      "id": "300-seg-first-First-s101",
+      "boardSha256": "3f350fe6f8df8f248e54427b4f42321bf01cc80442e66529399bd27cb37ed708"
+    },
+    {
+      "id": "300-seg-first-First-s202",
+      "boardSha256": "9adf2af789d745f54d3c52e28ded86a258150bea7c55954911537cfa1795270e"
+    },
+    {
+      "id": "300-seg-first-First-s303",
+      "boardSha256": "326cb9c535750d59dd5565ca4883e3b5be98d1956d245768739377437746b7ce"
+    },
+    {
+      "id": "300-seg-first-Last-s101",
+      "boardSha256": "28325d8382b8825cef2cbf7b43f2254afe9489c303b4ffac5d3d3c3eb8f9336b"
+    },
+    {
+      "id": "300-seg-first-Last-s202",
+      "boardSha256": "3d98ca235a474d495740f24c949db2480c744790ed5e5198a718fb450f4b5b50"
+    },
+    {
+      "id": "300-seg-first-Last-s303",
+      "boardSha256": "84af7fcc50772f6630552342611b4720f10717c2d76376bf9bc00b60ef82caf4"
+    },
+    {
+      "id": "300-seg-first-Longest-s101",
+      "boardSha256": "ffde4a051810cca0a675c59052b558664d74a06167c1d6debf83a6da8a502e35"
+    },
+    {
+      "id": "300-seg-first-Longest-s202",
+      "boardSha256": "7b52c048247fdd77402ea627b6b841e66c967c5920b5dfc415c8bde62f1c3d6f"
+    },
+    {
+      "id": "300-seg-first-Longest-s303",
+      "boardSha256": "64d56703ab0b7b50bc4aabffc15a7a9c1d5c149354094a455ef239927c39ff45"
+    },
+    {
+      "id": "300-seg-first-Weighted-s101",
+      "boardSha256": "64a26ff5c0aa691c5d0aa32c3a3a02779129acde471f2e37d6c852145967e3f1"
+    },
+    {
+      "id": "300-seg-first-Weighted-s202",
+      "boardSha256": "3cfdb62a5fc52ae6256f59d01fcfe945de43a6203d1d03d14a1f0c427c0d4512"
+    },
+    {
+      "id": "300-seg-first-Weighted-s303",
+      "boardSha256": "e20881d13f8ece4e33350252f5500ff6f1c576ea05db2ff4eb7c66acbe297f79"
+    },
+    {
+      "id": "300-seg-first-Weighted2-s101",
+      "boardSha256": "876132e88cf4022d11e68bc1bb62518e1e366a5a8ff2f56ec896a7b6d0b991cf"
+    },
+    {
+      "id": "300-seg-first-Weighted2-s202",
+      "boardSha256": "63ce1ec784c4da2da346e37d05ac066fba7785b0297acbf4162ba02d42b1c00f"
+    },
+    {
+      "id": "300-seg-first-Weighted2-s303",
+      "boardSha256": "b073c7bf5112aff8877e15944cce72602a2e5b7d3b21a5fc74b28f03da6e4c65"
+    },
+    {
+      "id": "300-seg-first-Weighted3-s101",
+      "boardSha256": "6a97d089b9f2af3e45b897314826c3d59f7d14d8aa28954bee7e61869b730347"
+    },
+    {
+      "id": "300-seg-first-Weighted3-s202",
+      "boardSha256": "4dbc539ec5366152b10a827233c25cdf1d558ab80ae7a52468742994f10b13ab"
+    },
+    {
+      "id": "300-seg-first-Weighted3-s303",
+      "boardSha256": "07ad6eb944c18ecf51cd01954b1fe2cce345523e1b8e30ceeb605fdf900b5803"
+    },
+    {
+      "id": "300-seg-last-First-s101",
+      "boardSha256": "332e6a76e62661f7743bf54c81bc8d72140d41d1c49b6d829cfb39a64cc3f373"
+    },
+    {
+      "id": "300-seg-last-First-s202",
+      "boardSha256": "b0c5b7fc0c865c43376edcbf35e8c2b2934442625739c1d8b2b012be249cfdc9"
+    },
+    {
+      "id": "300-seg-last-First-s303",
+      "boardSha256": "b3f83c8d0b19cfbeb001c3e498caf9128fff2a88aab059eae1c30b3e16992cda"
+    },
+    {
+      "id": "300-seg-last-Last-s101",
+      "boardSha256": "8e40449744e72b1515c94ca9337351bcfe1c58e86a39773e62e0f0db21d3d50a"
+    },
+    {
+      "id": "300-seg-last-Last-s202",
+      "boardSha256": "1b3fc745cff4406eea0ad525c6641aa61269efb6f7525e054ae33e19eeb1a526"
+    },
+    {
+      "id": "300-seg-last-Last-s303",
+      "boardSha256": "4ec3f6fbff0a6aafcf39767d6302042fc55ca67bd9c480f403d58e62e4348923"
+    },
+    {
+      "id": "300-seg-last-Longest-s101",
+      "boardSha256": "d5e3279af667916ce327e3d26a0b6c2b4872108df314390b9483fb22df55ad49"
+    },
+    {
+      "id": "300-seg-last-Longest-s202",
+      "boardSha256": "3ef4c63d8473bf904ff1bdc48b26b32357b6eb95de7ff847fb41d041026f9d65"
+    },
+    {
+      "id": "300-seg-last-Longest-s303",
+      "boardSha256": "23ddb86854aaec6ce3b19a5353997880d6dd1c57b2927a2074185ba3269a6d66"
+    },
+    {
+      "id": "300-seg-last-Weighted-s101",
+      "boardSha256": "3793c78351236c1dfb0e76235967c28353361f9fdae24869858cf341f9dbbef0"
+    },
+    {
+      "id": "300-seg-last-Weighted-s202",
+      "boardSha256": "1e5a2ca5a2bdf5858add8c321066ca26b8b6c85d533622f93d91bc8527dce8cc"
+    },
+    {
+      "id": "300-seg-last-Weighted-s303",
+      "boardSha256": "df5de5547c920552004c6864b8edbce3924a91235891bd75a42e67d81970288b"
+    },
+    {
+      "id": "300-seg-last-Weighted2-s101",
+      "boardSha256": "7bdb95026e7d8f618aeb41694bbfd0b857c09c123137fe0e5f501c4b232083ff"
+    },
+    {
+      "id": "300-seg-last-Weighted2-s202",
+      "boardSha256": "0bbab14661bb36485f6e9cf38b24e959247025953354740fb753bacf41fbba73"
+    },
+    {
+      "id": "300-seg-last-Weighted2-s303",
+      "boardSha256": "adeab230a8d56d9581e2ffce633c6664a35a17985ecb71e57364a1c34ea0fc27"
+    },
+    {
+      "id": "300-seg-last-Weighted3-s101",
+      "boardSha256": "3d4e6962a195a8290dda827e507993736515fc161669044d75009042970949fc"
+    },
+    {
+      "id": "300-seg-last-Weighted3-s202",
+      "boardSha256": "2563c9a5e7d852ee3c4834fdb419253be0b896a6f0985ec3cb2c441c79d0acaa"
+    },
+    {
+      "id": "300-seg-last-Weighted3-s303",
+      "boardSha256": "de6142d224b8d1d3176d05e4d7f668c04ffdac5eb17e8c0b5d37ae7f6b627719"
+    },
+    {
+      "id": "300-seg-rnd99-First-s101",
+      "boardSha256": "c2cd127fc5270305920832522569b7639021a84192ac97efaa81c59064f7a383"
+    },
+    {
+      "id": "300-seg-rnd99-First-s202",
+      "boardSha256": "49d5c1c01a7d1902bc83996e66cf9328b3e448514906d5bed80a1a2605ca50bf"
+    },
+    {
+      "id": "300-seg-rnd99-First-s303",
+      "boardSha256": "78cb207af35163923c103417ae895e535d560610faac89425b3b4e8b799f3fce"
+    },
+    {
+      "id": "300-seg-rnd99-Last-s101",
+      "boardSha256": "d057f6bd801cefd02c1682438344f2424f6357650448ffcb9a2b6d43d14fd43c"
+    },
+    {
+      "id": "300-seg-rnd99-Last-s202",
+      "boardSha256": "7a440df8e1d8955987f8f85f88e24fd112fbdca831b1b11e60a296fc87113424"
+    },
+    {
+      "id": "300-seg-rnd99-Last-s303",
+      "boardSha256": "18d511b0ff28c285979fad0dd1a0e6de3e1870e09520a4a8c78d7a2698502914"
+    },
+    {
+      "id": "300-seg-rnd99-Longest-s101",
+      "boardSha256": "e124b8b4f7382fbd2fca5b35c77d094536f33806826619c364a80b45c882ba64"
+    },
+    {
+      "id": "300-seg-rnd99-Longest-s202",
+      "boardSha256": "9db5667820500f3560fab474329bd0efb91d79f409a853d7b5a9e6a89502f7d9"
+    },
+    {
+      "id": "300-seg-rnd99-Longest-s303",
+      "boardSha256": "27f2dcdd1e327c83e5a4642fb244376b5e32aecf5c78c1f96e02a8ae9135a367"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted-s101",
+      "boardSha256": "defc6ce3b6b91bc24302556d6bb528460336e36531d02192612a57119c64ae2f"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted-s202",
+      "boardSha256": "369ad61048645dbda3009651c0bcc706b8d08c3283a84b156bc15a0625e395db"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted-s303",
+      "boardSha256": "eb6695dd588e7db8764e798799da8847d3e35341f99927833ced2b79f4bc2b21"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted2-s101",
+      "boardSha256": "cb6aea6be391c694a2a9f13924a7ff1f12abfd576ee542fd32f1821fd02be3d1"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted2-s202",
+      "boardSha256": "4ec96ec03548ca91a65f4cf9a6ac0a3778400bfeeab446010bafeab6d360d9af"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted2-s303",
+      "boardSha256": "f7b135982a17f7ac7c258e4fb6e7c325a64bc9824f3be5e371134f569b4c85d2"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted3-s101",
+      "boardSha256": "9b2caf6febfa96562cc0de3cfa93235c0fd36bf35cfaa86bd2620c6cf93bb454"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted3-s202",
+      "boardSha256": "93a8811b49794ee6e639895d579ee0221323013857380c5cd17696a4cc3a5259"
+    },
+    {
+      "id": "300-seg-rnd99-Weighted3-s303",
+      "boardSha256": "4f76ac0388f43e1dae417961d1f3e703ed88c55200415af9af6797d7fbd6560e"
+    },
+    {
+      "id": "300-seg-sz2-3-First-s101",
+      "boardSha256": "588c03003b7ca5ba44fffb0f9da0b17374b87a96639f22868a2f16df4944b5d6"
+    },
+    {
+      "id": "300-seg-sz2-3-First-s202",
+      "boardSha256": "1c30edc7ee8e760c6b58f2d68ffb703748d5fc37b4fde1ef100d751aefb537c2"
+    },
+    {
+      "id": "300-seg-sz2-3-First-s303",
+      "boardSha256": "b61a7bd213b557d98ca9afe20a59388158ac2f338047d78f18c0226054ba61ab"
+    },
+    {
+      "id": "300-seg-sz2-3-Last-s101",
+      "boardSha256": "51609824640f8fabacb19af47895631f7d9235a5291d48b784768e4a6b592f2f"
+    },
+    {
+      "id": "300-seg-sz2-3-Last-s202",
+      "boardSha256": "8c25d08edd2e2e8335d8c429f9034d8d9fc8f64aeed050977ddedc780abcfcaa"
+    },
+    {
+      "id": "300-seg-sz2-3-Last-s303",
+      "boardSha256": "e33f626177fc1712f2bea1be113fdb2cb740fd8ec8377874d26a6f516fa72aed"
+    },
+    {
+      "id": "300-seg-sz2-3-Longest-s101",
+      "boardSha256": "b35727c73483784ed3975e2d416a957e39ccf794b46cc991d21e14fe825268ba"
+    },
+    {
+      "id": "300-seg-sz2-3-Longest-s202",
+      "boardSha256": "e191aa930fa7e602e0be47f43a15dcd13b997aa63011e1c828d33a5c5634a5db"
+    },
+    {
+      "id": "300-seg-sz2-3-Longest-s303",
+      "boardSha256": "77d4e1d2687d87d3d61b142763fd64986f077b92fbf5a66bac633f9c0bb64160"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted-s101",
+      "boardSha256": "3b34f2724898dc05b04f1b0a23b3fb60738be493aaf779f62c7f76293b41d90d"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted-s202",
+      "boardSha256": "8aed464818c7a78528ae26f672c6f6c016edb6357653e840809b668f22e78e18"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted-s303",
+      "boardSha256": "68ecde79899f946126f8c110eb7c39c765ea76ccbe9e5128394ef392c5b03a18"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted2-s101",
+      "boardSha256": "5709067d9aad7b369faceb01c64d1b66d2510972ada60811e611df184c7b9a82"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted2-s202",
+      "boardSha256": "120849ac5d97451ebfaccad21d75d640a098760092b197cbdfb9388e6f99cf40"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted2-s303",
+      "boardSha256": "df903cfa43f1d1fb91b24ea5acb5c90430c6b49bbc312166ebd7af570718af95"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted3-s101",
+      "boardSha256": "7c11af59e4e97ade17219a067314acd2e7070261a73ef7b639bf534385bdf2a9"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted3-s202",
+      "boardSha256": "09613d091e54c173bbf8217a296c99697ad3854613f02429dfa7b5dfd01013ef"
+    },
+    {
+      "id": "300-seg-sz2-3-Weighted3-s303",
+      "boardSha256": "3cc17c36614d31a9c16d0605d008d6c82301d2e0261590a5f6e2e77c3a8d2a07"
+    },
+    {
+      "id": "300-tweak-1stlast10-s101",
+      "boardSha256": "85ea71c78d8e9f77bc68c37c98415d2181002dbd91745f4a1f3a3c6c4ec26a98"
+    },
+    {
+      "id": "300-tweak-1stlast10-s202",
+      "boardSha256": "ff76ca2532b59a1dc13b336add22254f5858003a444206f9b3bc721f36ed2e2c"
+    },
+    {
+      "id": "300-tweak-1stlast10-s303",
+      "boardSha256": "0af79a9fbc9392f9af4fbc240b0e738cb5b5d241597946f89c2a354aafd6d2aa"
+    },
+    {
+      "id": "300-tweak-1stlast2-s101",
+      "boardSha256": "a6fe93b4e4cd53f9ff031a3e3114ef2dd6a6be726766602bff447bfbd58f5594"
+    },
+    {
+      "id": "300-tweak-1stlast2-s202",
+      "boardSha256": "ed790becccc60d6a9c7cb000d01d73b1ada8cff293ac30a832b02848122632c6"
+    },
+    {
+      "id": "300-tweak-1stlast2-s303",
+      "boardSha256": "89a096c27b49e4d1187e983d53418b6959b1fd4d4b34ef9f460e9680097ea133"
+    },
+    {
+      "id": "300-tweak-23lim10-s101",
+      "boardSha256": "ee2266f06bf9cf4c54501cb75f71cd75ec8441962c18fb184e8b0f6471d1a196"
+    },
+    {
+      "id": "300-tweak-23lim10-s202",
+      "boardSha256": "dc11b6ce214649955037f8e491a97ac84c4cd8640df5f50b93c84c5e18536d49"
+    },
+    {
+      "id": "300-tweak-23lim10-s303",
+      "boardSha256": "c7cb9216496b3661a60fe3a10b0db1905be9f14ef96a00c18144900eae3267ff"
+    },
+    {
+      "id": "300-tweak-23lim25-s101",
+      "boardSha256": "3e0ae51643e80764c2311a0ddbf55777d821082d4f9ebe4e1d4d07f6bd7483af"
+    },
+    {
+      "id": "300-tweak-23lim25-s202",
+      "boardSha256": "803b536370c5ee654ea0e3873c217c69524612793e9a2fb1faaebcd6569407f8"
+    },
+    {
+      "id": "300-tweak-23lim25-s303",
+      "boardSha256": "a956e5d39f02137effe2f557c98fb4d008f27b25156447298914b6f759560e8f"
+    },
+    {
+      "id": "300-tweak-23lim30-s101",
+      "boardSha256": "2758ba72877d6c59d9c592b5561f75a237bbf62887734fabf4b632a000ef762f"
+    },
+    {
+      "id": "300-tweak-23lim30-s202",
+      "boardSha256": "065152e3adc59639f9d2f6e1651657780f18e61580d78bf1da12ba46aeb84d7f"
+    },
+    {
+      "id": "300-tweak-23lim30-s303",
+      "boardSha256": "827460c0d77906a26a16479b815f0ec9fe47cfe434f3a3db8ac017a77f37705c"
+    },
+    {
+      "id": "300-tweak-23lim60-s101",
+      "boardSha256": "72f74482dcfe43a11a9ee2406d7363af67fb33d2b4614d8a5fb57abf3d1784c3"
+    },
+    {
+      "id": "300-tweak-23lim60-s202",
+      "boardSha256": "5725f6a52e803360cfe85c8bb85deb6edbb8904e145db87fad30ebd93de27368"
+    },
+    {
+      "id": "300-tweak-23lim60-s303",
+      "boardSha256": "275027458d659c8289d3574bb1009377258235a4c09f10d0483e2dc671cefcff"
+    },
+    {
+      "id": "300-tweak-2lim10-s101",
+      "boardSha256": "8a04ec1ef9b902e4c4020a83092bc650ec5af213171853dbdfac163865236764"
+    },
+    {
+      "id": "300-tweak-2lim10-s202",
+      "boardSha256": "beb97279694b346b90eb2037693922f0f78e0ce68d901c3b7861c820ee29323c"
+    },
+    {
+      "id": "300-tweak-2lim10-s303",
+      "boardSha256": "18ff29004c5d9b1f441cdb57196da7faa0c8491f44e150422b1faf8a472d71d4"
+    },
+    {
+      "id": "300-tweak-2lim100-s101",
+      "boardSha256": "1d923209a0df7c7bde9e74e08c885e7d8809aa6100091fba3cb550cdbdd0ca95"
+    },
+    {
+      "id": "300-tweak-2lim100-s202",
+      "boardSha256": "d54192bc4ff37d265bdf1dee5709de18633f1d63e9845c66d4679f1d937b54b1"
+    },
+    {
+      "id": "300-tweak-2lim100-s303",
+      "boardSha256": "5753c67598331a157d44afc5910963f9c27dbd49e79cbd1227e456fdee793fc3"
+    },
+    {
+      "id": "300-tweak-2lim25-s101",
+      "boardSha256": "42ad6710f97834674d81b9dc77ba86fc36ae25ccd1a026878597607eb05e2aba"
+    },
+    {
+      "id": "300-tweak-2lim25-s202",
+      "boardSha256": "6a93c7772fc25cd7d1982f7939874fafdda5a73509bbb695a680b4480a28d538"
+    },
+    {
+      "id": "300-tweak-2lim25-s303",
+      "boardSha256": "5f2ef33d471669d6d84fe1fc89e21c2232c2d821860d193989a6f1d4dbd968ca"
+    },
+    {
+      "id": "300-tweak-2lim5-s101",
+      "boardSha256": "435524640375a7e35a8f7f72544aad66fc9b4b8754120e14d862bd828a1985ba"
+    },
+    {
+      "id": "300-tweak-2lim5-s202",
+      "boardSha256": "440987e2031eb6ba411108629a0530b1ef86ffdf1c80e0b3565590fb9ac7f0a8"
+    },
+    {
+      "id": "300-tweak-2lim5-s303",
+      "boardSha256": "cef37a231830757409ac2a47ab7179999992130d14e82c739b8e7a065e1f1246"
+    },
+    {
+      "id": "300-tweak-2lim50-s101",
+      "boardSha256": "0cae200a1c188ed6e6d921f38b7c4e823425d0e5046624d2e253f8a5cacc88f1"
+    },
+    {
+      "id": "300-tweak-2lim50-s202",
+      "boardSha256": "1056ed151fb58bc72ba66cdefb9f9c10e20af65af69f9a17a62711577365d171"
+    },
+    {
+      "id": "300-tweak-2lim50-s303",
+      "boardSha256": "a962e74fbabf6899e7263427ce6970331434674fef438c4dce3bcc2e3194ada5"
+    },
+    {
+      "id": "300-tweak-3lim10-s101",
+      "boardSha256": "943ba5eaa7692d08f8772bb836c253a55d4f450b17ee11768a3eb0df708f3d77"
+    },
+    {
+      "id": "300-tweak-3lim10-s202",
+      "boardSha256": "e15e9c3b0e29f2c9f68a23cbb34d6f14d3bb2a340a9bc56c1eb8a231dddf5e0b"
+    },
+    {
+      "id": "300-tweak-3lim10-s303",
+      "boardSha256": "a830c92930ed28790b56eb6bb1048f4695f754a9d37bcb0fbd0740f9bd4e6d19"
+    },
+    {
+      "id": "300-tweak-3lim50-s101",
+      "boardSha256": "d65bd60a1b84c34088a926fd4dddabacb62621b9c1bd61fcf6e78396fd5e1b2d"
+    },
+    {
+      "id": "300-tweak-3lim50-s202",
+      "boardSha256": "c6433d4649b24abe7cb65d7229d15e6fc12127adc7ab3c44fb0cf8a5c4d3b8d9"
+    },
+    {
+      "id": "300-tweak-3lim50-s303",
+      "boardSha256": "b449f0b7a60b80b846f1a54d955563b09547f30f5bcd87bdcd167551aa433fea"
+    },
+    {
+      "id": "300-tweak-equal23-s101",
+      "boardSha256": "be3073a559c6927bdf2cae0298621f8eb1bf15ae0acad2564693e996c09fd7b4"
+    },
+    {
+      "id": "300-tweak-equal23-s202",
+      "boardSha256": "88136447616bc8e267b76e116b7a0dfef170e3fd46d65142df7c738edc4a21ba"
+    },
+    {
+      "id": "300-tweak-equal23-s303",
+      "boardSha256": "d450aa7e5bfe36b4c91ec9609e0e5fa0412e6a1e39c5e1c38418aaca54afa659"
+    },
+    {
+      "id": "300-tweak-equal23short-s101",
+      "boardSha256": "c43ff7c783131805113dcd411dfb58457f26d1926ee24a36d262a7bbd43e5bfe"
+    },
+    {
+      "id": "300-tweak-equal23short-s202",
+      "boardSha256": "e0c33296578a05e544df74b65ce732c280622b6d71ef13c511e65cc59088861e"
+    },
+    {
+      "id": "300-tweak-equal23short-s303",
+      "boardSha256": "44b3c13cc9456c835d5ca5fe3d5f69630328e1366c580105fc6f1bcedf73288f"
+    },
+    {
+      "id": "300-tweak-equalrem-s101",
+      "boardSha256": "cd1460c5531a6b4ed38c318d49ae0b4197df917928fe993ae6e7ad5bab7ed02f"
+    },
+    {
+      "id": "300-tweak-equalrem-s202",
+      "boardSha256": "671054b913604fd7cde4041e0d23eb09047a50aa33d9d119d9a83921195e4b98"
+    },
+    {
+      "id": "300-tweak-equalrem-s303",
+      "boardSha256": "d6439d71cbdc638c3d2278aee88ef45a36d1b1adfc9fa692a1684913edcac459"
+    },
+    {
+      "id": "300-tweak-even-s101",
+      "boardSha256": "1a13a561c8cea58a1739c8b43181e3557f049b38ecb3388792130ac76386e133"
+    },
+    {
+      "id": "300-tweak-even-s202",
+      "boardSha256": "7e78ecffa34b7be30a4b38b1c4e684cb99290c9f5c92891655e14dae854b41f0"
+    },
+    {
+      "id": "300-tweak-even-s303",
+      "boardSha256": "11fdce510397a38fcfa21a4ea9a4fe29d05f1b4aed70b3ce42466444724c2119"
+    },
+    {
+      "id": "300-tweak-first-s101",
+      "boardSha256": "628f58c85b79ef3612ca6e532a6fc4340fe95fa845a2cc930ac5c53fe315d61b"
+    },
+    {
+      "id": "300-tweak-first-s202",
+      "boardSha256": "763d29e6c4e67a097375c2f8444bd16d5e19a80acd3702dc89b29eb985ea1e21"
+    },
+    {
+      "id": "300-tweak-first-s303",
+      "boardSha256": "8f66078891e4a9d904fc7689595800c3225f757b5609caf5ee692a0bcbfa0590"
+    },
+    {
+      "id": "300-tweak-last-s101",
+      "boardSha256": "8bb96296028ccbf10afcfeed0f0d864603890fb2afd209bf1ffe60024a85dbff"
+    },
+    {
+      "id": "300-tweak-last-s202",
+      "boardSha256": "a5a9e5a29ba6ab303000d699eed2cf076ae1f2b364906711d9b9fd077909cfc1"
+    },
+    {
+      "id": "300-tweak-last-s303",
+      "boardSha256": "8355e6746ec4e8fe4348401e2918fb0a3b48c90b5cbc558b76188aa4dfe8e347"
+    },
+    {
+      "id": "300-tweak-len1-s101",
+      "boardSha256": "69369553a4b23ce0f3430fe999b6877ac32a5ab626bf5777057dee6f15f9e4c1"
+    },
+    {
+      "id": "300-tweak-len1-s202",
+      "boardSha256": "4d94e419e937e03f78b011a312ba9cd4a9cd467dc9fb2eb8e2d0c1459145bf1a"
+    },
+    {
+      "id": "300-tweak-len1-s303",
+      "boardSha256": "0cc86f19a6f1306101ef6913b5a2779e8ce667154be7ada1ecb0f5511b199c1d"
+    },
+    {
+      "id": "300-tweak-len12rnd3-s101",
+      "boardSha256": "4a4fa17a8a595cd4985bb6ba883135799753aed1034e118dc793c9b70c5c3065"
+    },
+    {
+      "id": "300-tweak-len12rnd3-s202",
+      "boardSha256": "3629d762a72ed668076350116ae27e402ac5a4df5d9879993d568e5923b49a64"
+    },
+    {
+      "id": "300-tweak-len12rnd3-s303",
+      "boardSha256": "0acde7383cf4d4dd28563b2b49c1606446abc5118ffcd61f412aadfbe93a9052"
+    },
+    {
+      "id": "300-tweak-len1rnd3-s101",
+      "boardSha256": "37418361955dde5360297a8a9faa728d58dc6afdedb47a4202e69cc3bfc1b313"
+    },
+    {
+      "id": "300-tweak-len1rnd3-s202",
+      "boardSha256": "527fbda822242a068ac9f85c3127a56433262ecfde7c7ef0c9c9d2a802b97320"
+    },
+    {
+      "id": "300-tweak-len1rnd3-s303",
+      "boardSha256": "6c05b630496b90b0726c656acf56fed815bb3990b483e34f0f2c15e29aae6995"
+    },
+    {
+      "id": "300-tweak-len23-10th-s101",
+      "boardSha256": "cc5bfdf55de4ccffb7f283cfea692d6ddb0e3af9ca53c773b125c0b612cbf054"
+    },
+    {
+      "id": "300-tweak-len23-10th-s202",
+      "boardSha256": "53bb2ef2a6d4a906cf4ee73cfe455b5f82bffaaa384e602edb60fbaa0609805a"
+    },
+    {
+      "id": "300-tweak-len23-10th-s303",
+      "boardSha256": "927e612bbbce9d6fd6109885475b95c02c19dce4a4ff8beec2ec322a0380398e"
+    },
+    {
+      "id": "300-tweak-len23-1stfour-sz-s101",
+      "boardSha256": "2d6cd79c557316a96e4959cb7986c09f471718341006124d9cad7711484d14c4"
+    },
+    {
+      "id": "300-tweak-len23-1stfour-sz-s202",
+      "boardSha256": "d696c1fccb0829796aae42927e80e6b6e7530c2500c09f0d8aac543932ed74dc"
+    },
+    {
+      "id": "300-tweak-len23-1stfour-sz-s303",
+      "boardSha256": "0c9847fc7dbb8faef8b8ef1d2157b119efd594e71f1bc0a9546e1596c7965185"
+    },
+    {
+      "id": "300-tweak-len23-20th-s101",
+      "boardSha256": "c3a45389741dd052d527f9c2caf54841b698b6bf5ef7885b36a40fc56ad96d91"
+    },
+    {
+      "id": "300-tweak-len23-20th-s202",
+      "boardSha256": "9ea341a4e56130b11a8a488edb3991100b4fc1985a96136a756e302a3c898075"
+    },
+    {
+      "id": "300-tweak-len23-20th-s303",
+      "boardSha256": "fab4f801c2213cb32da71ae4bf1f8f2b85976503d0b0d781b5d118b183e33573"
+    },
+    {
+      "id": "300-tweak-len23-3rd-s101",
+      "boardSha256": "ecaf8a8d746dd60c918eaa54386373362ba2b9e1995d3cc70ed06534eb0b10d3"
+    },
+    {
+      "id": "300-tweak-len23-3rd-s202",
+      "boardSha256": "c79ef8692fe46363d9e9767421abc30bf1cf06d2f76d4a07643080fbb6b915e6"
+    },
+    {
+      "id": "300-tweak-len23-3rd-s303",
+      "boardSha256": "7fb750a0667c51f3328f4eaa1538202963cf77afd3b1b44be7f92b118b79c70e"
+    },
+    {
+      "id": "300-tweak-len23-5th-s101",
+      "boardSha256": "f2238b699c0483ca40c80646f7d2d011e5041b4fef66aacdb989410bed144506"
+    },
+    {
+      "id": "300-tweak-len23-5th-s202",
+      "boardSha256": "15d2542c5def35ebb919aedd14e4329a8e28eb1b40324347247c61940adec178"
+    },
+    {
+      "id": "300-tweak-len23-5th-s303",
+      "boardSha256": "d45d1a3c3a4e9e7a7b23d67414ddd8b80cba5ae7538cdfd4982f38aaf6508521"
+    },
+    {
+      "id": "300-tweak-len23-half-s101",
+      "boardSha256": "78b02a2c12a52794d31b8d5c8059fb7b37d8b79cc44fb725764d5ebe74817b62"
+    },
+    {
+      "id": "300-tweak-len23-half-s202",
+      "boardSha256": "61ba5b26a6a45e7b4ba4a291cfaf4fafa7906b1cb0a95f46e8ddd4ba993b6967"
+    },
+    {
+      "id": "300-tweak-len23-half-s303",
+      "boardSha256": "e7e9e62b37f1aff329792158d552bb029dc482cbcc8419854445667d2f8d4d37"
+    },
+    {
+      "id": "300-tweak-len23-s101",
+      "boardSha256": "d65bd60a1b84c34088a926fd4dddabacb62621b9c1bd61fcf6e78396fd5e1b2d"
+    },
+    {
+      "id": "300-tweak-len23-s202",
+      "boardSha256": "877fdc896b9c26ed70bdad30a8dfaaff8084e9f086faadf79cfa2746bd5e0825"
+    },
+    {
+      "id": "300-tweak-len23-s303",
+      "boardSha256": "e6ea9da508fe30e29ceac64e4ed66cf68a6ab0d4d0f0ac4f0c66262ac93d7727"
+    },
+    {
+      "id": "300-tweak-len23-third-s101",
+      "boardSha256": "2d41941ec37e1b4f8d465b17c7f370cd13a51330cede46de93bbc724687da802"
+    },
+    {
+      "id": "300-tweak-len23-third-s202",
+      "boardSha256": "48f3adde7bb2188496f64b2e7ac782e9be54924f082c5f873b027a333dcd75df"
+    },
+    {
+      "id": "300-tweak-len23-third-s303",
+      "boardSha256": "782c8c1095ee893572de8370e64d4eba05d1e4d3073d746140f2d9abda9a9c43"
+    },
+    {
+      "id": "300-tweak-len23mid-s101",
+      "boardSha256": "6218158c34b116fac60d2b66f1700b3720a1d071d592d98c74fc5090c37e60ef"
+    },
+    {
+      "id": "300-tweak-len23mid-s202",
+      "boardSha256": "29b2ffc26a03d3cf918971360a2909ecd35b378caf716be9cc6b0f374fef87bb"
+    },
+    {
+      "id": "300-tweak-len23mid-s303",
+      "boardSha256": "621f41d2ab1d5158e822a93467d56c885478785ac37d18d25567cf96b9e9cb32"
+    },
+    {
+      "id": "300-tweak-len23rnd100-s101",
+      "boardSha256": "a01343dc253fc42765025d5472b87000d3445fa5057a422a5cb8bc79f8c5758d"
+    },
+    {
+      "id": "300-tweak-len23rnd100-s202",
+      "boardSha256": "ac365875fdfb9b005053f2d82a91434ced3edef37be655b7accad9ba67c7d0b9"
+    },
+    {
+      "id": "300-tweak-len23rnd100-s303",
+      "boardSha256": "267f9937cbc5ccbb37c46459657c32700f1581aa26a972469d0a318e390909b3"
+    },
+    {
+      "id": "300-tweak-len23rnd3-s101",
+      "boardSha256": "eac6640eae7017ac829f518dca6f1dbfae869a58f217ecd6983e1bdae5deafcd"
+    },
+    {
+      "id": "300-tweak-len23rnd3-s202",
+      "boardSha256": "15ee6e2108858f237f64fafd680c24f3040c9c0941999cb599f785b140e86dfc"
+    },
+    {
+      "id": "300-tweak-len23rnd3-s303",
+      "boardSha256": "7d0d6b714c8bbfb45d0a82d05cc94e73e2446ce9dacb00dd3e04bc5b7c61a2df"
+    },
+    {
+      "id": "300-tweak-len2lim50rnd-s101",
+      "boardSha256": "22ad3a3ae338d6f351ffee276e60ff426b81449d29c9078f87f4f856a726a3bc"
+    },
+    {
+      "id": "300-tweak-len2lim50rnd-s202",
+      "boardSha256": "6b38f7b1f61c7b0839e471d2a23d50fee91d09df37c3b6650b33db39fd2b0efe"
+    },
+    {
+      "id": "300-tweak-len2lim50rnd-s303",
+      "boardSha256": "034dd82127cbd1a93dd759e6da5e09fed3624a3f5e5b57ddbd50530fc985eced"
+    },
+    {
+      "id": "300-tweak-odd-s101",
+      "boardSha256": "a00bc13ff3e8543b596e3af6bfca84004a22e676ee6c92daee26f1a8a0b96735"
+    },
+    {
+      "id": "300-tweak-odd-s202",
+      "boardSha256": "d8174ba6959a25112049a0d323cfa436ccfe9bcf73eb197174fc506076383677"
+    },
+    {
+      "id": "300-tweak-odd-s303",
+      "boardSha256": "acae30cfcfb78df088cad7c27b6db30ccdfcc7dc05634488b347e7fa7dbfa7da"
+    },
+    {
+      "id": "300-tweak-rnd100-s101",
+      "boardSha256": "aaaced9bc04b749155d33279b832804be6fd546b3a7b30193d97ebfdb19f35a3"
+    },
+    {
+      "id": "300-tweak-rnd100-s202",
+      "boardSha256": "0ca8e374daef16143b12afdff41939331f59af0049f58462ea6bed56e88b2c2e"
+    },
+    {
+      "id": "300-tweak-rnd100-s303",
+      "boardSha256": "e34746ddc6a78ce0f27dc8a7abb1beb5f76892fc490ab4985c6655b687a7e7e3"
+    },
+    {
+      "id": "300-tweak-rnd100lim20-s101",
+      "boardSha256": "6cdb0ded3e80000c2b28c713edb4e064010febdfdfdc11c2f73f99103383eab5"
+    },
+    {
+      "id": "300-tweak-rnd100lim20-s202",
+      "boardSha256": "593b207294fd4c7383f707b2fbdef1d59a831a187694950207c0292bb950bbe9"
+    },
+    {
+      "id": "300-tweak-rnd100lim20-s303",
+      "boardSha256": "e6ac94097bb2058a2bffa5c2434b1161f54792f93a9464f1db1c7f0c8ae92651"
+    },
+    {
+      "id": "300-tweak-rnd100lim5-s101",
+      "boardSha256": "9957bdc78bcd04e2fa29eba649447674b0aba19549d52a16066d633bdf963187"
+    },
+    {
+      "id": "300-tweak-rnd100lim5-s202",
+      "boardSha256": "a64a46929615e2791f982e5428a1ca11fcb959e769ae9a08a7161560d2e1f09a"
+    },
+    {
+      "id": "300-tweak-rnd100lim5-s303",
+      "boardSha256": "b571c73c6e3cd63d0e38c7dead3633a48129a50520ac134b72726bd40526df48"
+    },
+    {
+      "id": "300-tweak-rnd2-s101",
+      "boardSha256": "2e405bea7e7e423797051db1663ffcdce8e25a60098fee6a1e6e76a5433c47c0"
+    },
+    {
+      "id": "300-tweak-rnd2-s202",
+      "boardSha256": "c3adeae140a5f79035147d5da09ee81690d5713bd076918c8a3b72055ee19855"
+    },
+    {
+      "id": "300-tweak-rnd2-s303",
+      "boardSha256": "4b7843fb0e41dd94f71e75834e01e4ff1f10da5c407382c353172bfaf68a4ebb"
+    },
+    {
+      "id": "300-tweak-rnd3-s101",
+      "boardSha256": "3fd66ab386606cc27ed04a3eb8b421e587a2d663290a27d888ef3505ef499325"
+    },
+    {
+      "id": "300-tweak-rnd3-s202",
+      "boardSha256": "58cd8af5ac056f5cb194592289c2e56c1826a4882488616fdcfef62f93ef74e2"
+    },
+    {
+      "id": "300-tweak-rnd3-s303",
+      "boardSha256": "caafcd6c427e0604b42399f873eac64a912b1e222689a822b2d6264e48e00956"
+    },
+    {
+      "id": "300-tweak-rnd5-s101",
+      "boardSha256": "9409e5342001da03905c5ee6756528784b72bf4c4858b50cb010457b45302f02"
+    },
+    {
+      "id": "300-tweak-rnd5-s202",
+      "boardSha256": "5a1dcb6fa003f4d7c8dacfe7d9522571372c79b0051c9e65a32d20a9fc6dc35f"
+    },
+    {
+      "id": "300-tweak-rnd5-s303",
+      "boardSha256": "a1bc967f1892a0fad30c14eaf702a48e93b00b0719f28df6dee0e819a2466d46"
+    },
+    {
+      "id": "300-tweak-rnd99-s101",
+      "boardSha256": "cb91af9cf2a5049ae44d76b63f593476a571994364f225326942c580a076e51b"
+    },
+    {
+      "id": "300-tweak-rnd99-s202",
+      "boardSha256": "27666a60e2ee3251cec85fd2610f5e56ba1716406132ef5cbd388e3ae50dc152"
+    },
+    {
+      "id": "300-tweak-rnd99-s303",
+      "boardSha256": "f384f5ce39602e65e544ec92d051f2189ea17cbc30df20eace05dcea10a2ea90"
+    },
+    {
+      "id": "300-tweak-shortrnd-s101",
+      "boardSha256": "77d1a3ee2d0992136136ec59c3933ff9524acdf21b96626c4a9eab63d6bc17f3"
+    },
+    {
+      "id": "300-tweak-shortrnd-s202",
+      "boardSha256": "af3b76202ecc2db005ee72639b9f73fcf627cc79132e6e01f01a22276ffaee8e"
+    },
+    {
+      "id": "300-tweak-shortrnd-s303",
+      "boardSha256": "052b38444025839560764477ccb431ef2dbd504fb2bc9423f765d534350abd00"
+    },
+    {
+      "id": "300-tweak-sz1-23-s101",
+      "boardSha256": "eb6e5d36afc9e44c0646420ef8fa61155072ad07dfac28273ba9d57645f3dd19"
+    },
+    {
+      "id": "300-tweak-sz1-23-s202",
+      "boardSha256": "1c90fa4b8fb766ad68692af494b1b57e0840c59b2a594ff5c46ab8e45db16ac4"
+    },
+    {
+      "id": "300-tweak-sz1-23-s303",
+      "boardSha256": "c4540ff036ad7fc0f2ffe949c4116fd73efc3493361f8726f35ea962fc29ac2f"
+    },
+    {
+      "id": "300-tweak-sz2-1-s101",
+      "boardSha256": "65b5fd4b76335e7b31ea2a8c2094b902bc28d06a1eca8bdc97d71f06b3a507ba"
+    },
+    {
+      "id": "300-tweak-sz2-1-s202",
+      "boardSha256": "d45d9f452fe9671b9858acdd013ea15b9b2b52ef3992e1b51e23c933d164706c"
+    },
+    {
+      "id": "300-tweak-sz2-1-s303",
+      "boardSha256": "cd51f68962ab6fd1296ebf0cca3251fb9be2c47737b6630894b006094690045a"
+    },
+    {
+      "id": "300-tweak-sz2-13-s101",
+      "boardSha256": "d249474fd06f796859b3ce04c2be90f410f879d02a8c58f96ef3b23f5c876163"
+    },
+    {
+      "id": "300-tweak-sz2-13-s202",
+      "boardSha256": "788f451bf704f132ed22e7949aa4b6c9b59a353376aee16d8d013ca31ca9c9a9"
+    },
+    {
+      "id": "300-tweak-sz2-13-s303",
+      "boardSha256": "5060fcb1d6adb68380e84abf677184085e984b23825da01de958c2c930f9fa09"
+    },
+    {
+      "id": "300-tweak-sz2-3-s101",
+      "boardSha256": "02b6373b184f74ed224d6349011e2abe8093ce69bd68a8d729fc76407aa9c0b4"
+    },
+    {
+      "id": "300-tweak-sz2-3-s202",
+      "boardSha256": "1b2947ddfd4d2bfd7ceb7ea839166004ab824b280bf87a9889ccbcbbe200c522"
+    },
+    {
+      "id": "300-tweak-sz2-3-s303",
+      "boardSha256": "d100e80bd1289b3a82c050b5b43082f8782aff34a5e35dba7ab56b5c13221b1d"
+    },
+    {
+      "id": "300-tweak-sz23-1-s101",
+      "boardSha256": "759f964f9d6615d844d30ef7dc680dd91f5d582a9f07a5f8db78918adbb75191"
+    },
+    {
+      "id": "300-tweak-sz23-1-s202",
+      "boardSha256": "3b46fbdff3022c42612843dc9edb652397dcdcda7348c003d5ce6f526aefefb0"
+    },
+    {
+      "id": "300-tweak-sz23-1-s303",
+      "boardSha256": "a572e1707a71bd526ca4913b602551f655119c49c292071295721fe331ba35cc"
+    },
+    {
+      "id": "300-tweak-sz23-opt-s101",
+      "boardSha256": "4a1199b43c1f822db791f39b2843bc4f78dcd0179e08eb0eaf15318e2a5a2d5a"
+    },
+    {
+      "id": "300-tweak-sz23-opt-s202",
+      "boardSha256": "016c1abfdcfed27f17ab8e58e7cc37a186ecd157da067541b248b5abb80abab5"
+    },
+    {
+      "id": "300-tweak-sz23-opt-s303",
+      "boardSha256": "a071ed66f93f91c253dff6b8dbf8774d75f71311d38704b0daa5258f090102e0"
+    },
+    {
+      "id": "300-tweak-sz23rnd2-s101",
+      "boardSha256": "d14a7e51c4e7a0a7c4d08957aa6480b08c7efc2f4f075b288c1571dcf3e3d50f"
+    },
+    {
+      "id": "300-tweak-sz23rnd2-s202",
+      "boardSha256": "50b8d996b2a7b9f8ceeebdb0f68af12eca8e5c5309c0b396973649868e16cc85"
+    },
+    {
+      "id": "300-tweak-sz23rnd2-s303",
+      "boardSha256": "72ce7a3414cb5d60fbfaa5b2784fc7fa068dc51ba772ba82b773eba7b13f53a0"
+    },
+    {
+      "id": "300-tweak-sz23rnd3-s101",
+      "boardSha256": "eac6640eae7017ac829f518dca6f1dbfae869a58f217ecd6983e1bdae5deafcd"
+    },
+    {
+      "id": "300-tweak-sz23rnd3-s202",
+      "boardSha256": "15ee6e2108858f237f64fafd680c24f3040c9c0941999cb599f785b140e86dfc"
+    },
+    {
+      "id": "300-tweak-sz23rnd3-s303",
+      "boardSha256": "7d0d6b714c8bbfb45d0a82d05cc94e73e2446ce9dacb00dd3e04bc5b7c61a2df"
+    },
+    {
+      "id": "300-tweak-sz3-1-s101",
+      "boardSha256": "53e31ee33be887a0922a6463669f7a353cdc584fe80d084b25941c269bea6357"
+    },
+    {
+      "id": "300-tweak-sz3-1-s202",
+      "boardSha256": "bd9d42436e2d3da23ec20b74a63907f48e80fecb3e1ccc1e92197c90dd0f3dea"
+    },
+    {
+      "id": "300-tweak-sz3-1-s303",
+      "boardSha256": "2c13d67b45a8010343cbd40ea7a62e47b87c2ac1660b8547d21ecff928b3852c"
+    },
+    {
+      "id": "300-tweak-sz3-2-s101",
+      "boardSha256": "8f40374f33e96ab5dfec4fe20ac7ef6b0c265ac4eff112572c3989837cb82cb0"
+    },
+    {
+      "id": "300-tweak-sz3-2-s202",
+      "boardSha256": "19a1cce7518b5f170461046149416c03cfb8cb6d199bcc858e782177ab1ede69"
+    },
+    {
+      "id": "300-tweak-sz3-2-s303",
+      "boardSha256": "8a342dfc9ed49ebad5029d335e8aea0129e8d45e7e36ca39ca83c86e042d40d7"
     }
   ]
 }

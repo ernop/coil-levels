@@ -10,7 +10,7 @@ def main():
     configs=json.loads((ROOT/'gallery/survey-configs.json').read_text())
     keys={c['id']:c for c in configs}
     boards=[]
-    for p in sorted((ROOT/'gallery').glob('*/*/stats.json')):
+    for p in sorted(p for phase in ('boards', 'survey') for p in (ROOT/'gallery'/phase).glob('*/stats.json')):
         d=json.loads(p.read_text());name=p.parent.name
         cid=name[len(str(d['side']))+1:].rsplit('-s',1)[0]
         recipe=keys.get(cid)

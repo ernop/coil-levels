@@ -455,7 +455,7 @@ Solve once, apply to symmetric variants
 - [x] Multi-tier evaluation structure
 
 ### Phase 2: Integration (Next)
-- [ ] Connect to actual coilbench solver
+- [x] Connect to the C# reference solver through the validated bridge; see [README.md](README.md)
 - [ ] Implement subprocess runner
 - [ ] Set up level categorization (easy/medium/hard/canary)
 - [ ] Establish baseline measurements

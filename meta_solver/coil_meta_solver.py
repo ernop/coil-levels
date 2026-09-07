@@ -1,37 +1,7 @@
-"""
-Coil Meta-Solver: A Self-Improving System for the Coil Puzzle
+"""Coil-specific configuration exploration with real bounded C# evaluation.
 
-This addresses the specific challenges of iteratively improving a coil solver:
-
-1. AVOIDING REPETITIVE LOOPS
-   - Semantic clustering of ideas (not just text matching)
-   - Exploration budget per direction
-   - Forced diversity after repeated failures
-   - "Novelty search" mode when stuck
-
-2. KNOWING WHAT TO TRY
-   - Structured problem taxonomy
-   - Investigation prompts based on failure analysis
-   - Pattern extraction from failing levels
-   - Learning from the 47 people who passed level 300
-
-3. DETECTING BAD CHANGES
-   - Multi-tier evaluation (fast → medium → slow)
-   - Canary levels (known-sensitive tests)
-   - Solution ensemble (keep multiple approaches)
-   - Regression fingerprinting
-
-4. HELPING IDEAS AGENTS
-   - Structured failure analysis
-   - "Why does level X fail?" investigations
-   - Concrete examples of what to look at
-   - Access to timing breakdowns
-
-5. WAYS FORWARD
-   - Better heuristics (dead-end detection, forced moves)
-   - Better search (beam search, MCTS, constraint propagation)
-   - Problem transformation (symmetry, decomposition)
-   - Learning from solutions
+Idea providers propose explicit JSON search settings. The shared bridge checks
+actual saved boards and independently validates every claimed solution.
 """
 
 import os
@@ -41,11 +11,14 @@ import time
 import hashlib
 import subprocess
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import Any, Optional, Callable
 from enum import Enum, auto
 from collections import defaultdict
 from pathlib import Path
+from meta_solver.coil_bridge import CoilBridge, SearchConfig, load_board, search_score
+from meta_solver.examples.coil_integration import CoilProblem, CoilSolution
+from meta_solver.core import Comparator, EvalResult, Difficulty
 
 # ============================================================================
 # PROBLEM TAXONOMY: What kinds of improvements are possible?
@@ -173,7 +146,7 @@ class FailureAnalysis:
         
         return {
             'avg_wall_density': sum(f.wall_density for f in self.failures) / len(self.failures),
-            'avg_coverage_at_fail': sum(f.coverage for f in self.failures) / len(self.failures),
+            'avg_coverage_at_fail': (sum(f.coverage for f in self.failures if f.coverage is not None) / len([f for f in self.failures if f.coverage is not None])) if any(f.coverage is not None for f in self.failures) else None,
             'common_patterns': self.get_common_patterns(),
         }
     
@@ -187,7 +160,8 @@ class FailureAnalysis:
         
         for f in recent:
             lines.append(f"- **Level {f.level_id}** ({f.dimensions[0]}x{f.dimensions[1]})")
-            lines.append(f"  Coverage: {f.coverage:.1%}, Time: {f.time_spent:.2f}s")
+            coverage = f"{f.coverage:.1%}" if f.coverage is not None else "unavailable"
+            lines.append(f"  Coverage: {coverage}, Time: {f.time_spent:.2f}s")
             if f.failure_pattern:
                 lines.append(f"  Pattern: {f.failure_pattern}")
             lines.append("")
@@ -223,25 +197,17 @@ class Idea:
     
     @staticmethod
     def compute_semantic_hash(text: str) -> str:
-        """Compute a semantic fingerprint for deduplication."""
-        # Extract key technical terms
-        keywords = set()
-        patterns = [
-            r'\b(backtrack|prune|heuristic|dead.?end|branch|bound)\b',
-            r'\b(cache|memo|hash|lookup)\b',
-            r'\b(parallel|concurrent|thread)\b',
-            r'\b(greedy|beam|monte.?carlo|random)\b',
-            r'\b(symmetry|decompos|preprocess)\b',
-            r'\b(segment|path|cell|direction)\b',
-        ]
-        text_lower = text.lower()
-        for pattern in patterns:
-            matches = re.findall(pattern, text_lower)
-            keywords.update(matches)
-        
-        # Sort and hash
-        sorted_keywords = sorted(keywords)
-        return hashlib.md5("_".join(sorted_keywords).encode()).hexdigest()[:8]
+        """Fingerprint concrete JSON controls or normalized text; this is lexical, not semantic."""
+        snippets = re.findall(r'\{[^{}]*\}', text)
+        if len(snippets) == 1:
+            try:
+                normalized = json.dumps(json.loads(snippets[0]), sort_keys=True)
+                return hashlib.sha256(normalized.encode()).hexdigest()[:16]
+            except json.JSONDecodeError:
+                pass
+        normalized = re.sub(r'\s+', ' ', text.lower()).strip()
+        return hashlib.sha256(normalized.encode()).hexdigest()[:16]
+
 
 
 class IdeaMemory:
@@ -261,6 +227,9 @@ class IdeaMemory:
         if idea.semantic_hash in self.semantic_hashes:
             return False
         
+        if re.search(r'\{[^{}]*\}', idea.raw_text):
+            return True  # Distinct concrete parameter configurations must remain testable.
+
         # Check similarity within category
         category_ideas = self.category_ideas[idea.category]
         for existing in category_ideas[-10:]:  # Check recent ideas in same category
@@ -307,111 +276,66 @@ class EvaluationTier:
 
 
 class MultiTierEvaluator:
-    """
-    Evaluation strategy:
-    1. QUICK: 5 small levels, 5s each - fast rejection
-    2. MEDIUM: 10 medium levels, 30s each - reasonable validation
-    3. THOROUGH: 20 hard levels, 60s each - full validation
-    4. CANARY: 5 known-sensitive levels - regression detection
-    """
+    """Evaluate real boards in nonempty size strata or explicitly configured tiers."""
     
-    def __init__(self, solver_path: str, levels_dir: str):
+    def __init__(self, solver_path: str, levels_dir: str, *, node_budget: int = 100000,
+                 tiers: list[EvaluationTier] | None = None):
         self.solver_path = solver_path
         self.levels_dir = Path(levels_dir)
-        
-        # Define tiers
-        self.tiers = [
-            EvaluationTier("quick", self._get_levels(1, 20), 5.0, 0.9, 0.1),
-            EvaluationTier("medium", self._get_levels(21, 50), 30.0, 0.8, 0.3),
-            EvaluationTier("thorough", self._get_levels(51, 80), 60.0, 0.7, 0.4),
-            EvaluationTier("canary", self._get_canary_levels(), 60.0, 1.0, 0.2),
-        ]
-        
-        # Track baseline performance
-        self.baseline_results: dict[str, dict] = {}
-    
-    def _get_levels(self, start: int, end: int) -> list[str]:
-        """Get level paths in a range."""
-        return [str(self.levels_dir / str(i)) for i in range(start, end + 1)
-                if (self.levels_dir / str(i)).exists()]
-    
-    def _get_canary_levels(self) -> list[str]:
-        """Levels that are known to be sensitive to regressions."""
-        # These would be hand-picked based on experience
-        canaries = [47, 50, 55, 60, 63]  # Example: levels where changes often break things
-        return [str(self.levels_dir / str(i)) for i in canaries
-                if (self.levels_dir / str(i)).exists()]
-    
+        self.node_budget = node_budget
+        self.problem = CoilProblem(levels_dir, bridge=CoilBridge(solver_path, node_budget=node_budget))
+        if tiers is None:
+            self.tiers = [EvaluationTier(d.value, [c.metadata['path'] for c in self.problem.get_test_cases(d)],
+                                         timeout, 0.0, 1.0)
+                          for d, timeout in zip(Difficulty, (5.0, 10.0, 15.0))
+                          if self.problem.get_test_cases(d)]
+        else:
+            self.tiers = tiers
+        if not self.tiers or any(not t.levels or t.weight <= 0 or not 0 <= t.min_pass_rate <= 1 for t in self.tiers):
+            raise ValueError('Evaluation tiers must be nonempty with positive weights and valid pass rates')
+        if len({t.name for t in self.tiers}) != len(self.tiers):
+            raise ValueError('Duplicate tier names')
+        paths = [str(Path(path).resolve()) for t in self.tiers for path in t.levels]
+        if len(paths) != len(set(paths)):
+            raise ValueError('A board cannot appear twice in the evaluation tiers')
+        self.baseline_results = {}
+
     def set_baseline(self, results: dict[str, dict]):
-        """Set baseline results for regression detection."""
-        self.baseline_results = results
-    
-    def evaluate(self, solver_config: dict, 
-                 stop_on_regression: bool = True) -> tuple[float, dict]:
-        """
-        Run multi-tier evaluation.
-        Returns (final_score, detailed_results).
-        """
+        expected = {path for t in self.tiers for path in t.levels}
+        if set(results) != expected:
+            raise ValueError('Baseline must cover every configured level exactly once')
+        self.baseline_results = results.copy()
+
+    def evaluate(self, solver_config: dict, stop_on_regression: bool = True,
+                 stop_on_failure: bool = True) -> tuple[float, dict]:
+        SearchConfig.from_dict(solver_config)
         all_results = {}
-        tier_scores = []
-        
+        weighted_score = 0.0
+        weight = sum(t.weight for t in self.tiers)
         for tier in self.tiers:
-            tier_results = self._evaluate_tier(tier, solver_config)
-            all_results[tier.name] = tier_results
-            
-            # Check pass rate
-            passed = sum(1 for r in tier_results.values() if r['passed'])
-            pass_rate = passed / len(tier_results) if tier_results else 0
-            
-            # Check for regressions
-            if stop_on_regression and tier.name == "canary":
-                regressions = self._detect_regressions(tier_results)
-                if regressions:
-                    return 0.0, {
-                        'rejected': True,
-                        'reason': f'Regression on canary levels: {regressions}',
-                        'results': all_results
-                    }
-            
-            # Check minimum pass rate
-            if pass_rate < tier.min_pass_rate:
-                return pass_rate * tier.weight, {
-                    'rejected': True,
-                    'reason': f'Failed {tier.name} tier: {pass_rate:.1%} < {tier.min_pass_rate:.1%}',
-                    'results': all_results
-                }
-            
-            tier_scores.append(pass_rate * tier.weight)
-        
-        final_score = sum(tier_scores)
-        return final_score, {'rejected': False, 'results': all_results}
-    
+            results = self._evaluate_tier(tier, solver_config)
+            all_results[tier.name] = results
+            passed = sum(r['passed'] for r in results.values()) / len(results)
+            weighted_score += sum(search_score(r) for r in results.values()) / len(results) * tier.weight
+            regressions = self._detect_regressions(results) if stop_on_regression else []
+            if regressions or (stop_on_failure and passed < tier.min_pass_rate):
+                return weighted_score / weight, {'rejected': True,
+                    'reason': f'Regression on {regressions}' if regressions else f'Failed {tier.name} pass threshold',
+                    'results': all_results}
+        return weighted_score / weight, {'rejected': False, 'results': all_results}
+
     def _evaluate_tier(self, tier: EvaluationTier, config: dict) -> dict[str, dict]:
-        """Evaluate on a single tier."""
-        results = {}
-        for level_path in tier.levels:
-            result = self._run_solver(level_path, config, tier.timeout_per_level)
-            results[level_path] = result
-        return results
-    
+        return {path: self._run_solver(path, config, tier.timeout_per_level) for path in tier.levels}
+
     def _run_solver(self, level_path: str, config: dict, timeout: float) -> dict:
-        """Run solver on a single level."""
-        # STUB: In real implementation, would run the actual solver
-        # subprocess.run([self.solver_path, level_path, json.dumps(config)], timeout=timeout)
-        return {
-            'passed': True,  # Placeholder
-            'time': 0.0,
-            'coverage': 1.0,
-        }
-    
+        bridge = CoilBridge(self.solver_path, node_budget=self.node_budget, timeout=timeout)
+        board = load_board(level_path, bridge.max_cells)
+        result = bridge.evaluate(board, SearchConfig.from_dict(config))
+        return result | {'passed': result['solved'], 'time': result['wallSeconds']}
+
     def _detect_regressions(self, results: dict[str, dict]) -> list[str]:
-        """Detect regressions compared to baseline."""
-        regressions = []
-        for level, result in results.items():
-            baseline = self.baseline_results.get(level, {})
-            if baseline.get('passed', False) and not result.get('passed', False):
-                regressions.append(level)
-        return regressions
+        return [path for path, result in results.items()
+                if self.baseline_results.get(path, {}).get('passed', False) and not result['passed']]
 
 
 # ============================================================================
@@ -664,9 +588,8 @@ class SolutionEnsemble:
     
     def select_for_level(self, level_characteristics: dict) -> SolverVariant:
         """Select best variant for a specific level."""
-        # Simple: pick highest scorer
-        # TODO: Match level characteristics to variant strengths
-        return max(self.variants, key=lambda v: v.score) if self.variants else None
+        tags = set(level_characteristics.get('tags', []))
+        return max(self.variants, key=lambda v: (len(tags & set(v.strengths)) - len(tags & set(v.weaknesses)), v.score)) if self.variants else None
 
 
 # ============================================================================
@@ -706,6 +629,9 @@ class CoilMetaSolver:
         self.iteration = 0
         self.best_level_reached = 0
         self.stuck_count = 0
+        self.current_config = {}
+        self.last_results = {}
+        self.current_score = 0.0
         
     def run(self, max_iterations: int = 100) -> SolverVariant:
         """Run the meta-solving loop."""
@@ -714,6 +640,9 @@ class CoilMetaSolver:
         print("Coil Meta-Solver Starting")
         print("="*60)
         
+        if max_iterations > 0 and not self.llms:
+            raise ValueError('Supply an idea provider, or use the evaluation CLI without an LLM')
+        self._establish_baseline()
         while self.iteration < max_iterations:
             self.iteration += 1
             print(f"\n--- Iteration {self.iteration} ---")
@@ -778,7 +707,7 @@ class CoilMetaSolver:
             self.exploration_budget,
             self.failure_analysis,
             self.idea_memory
-        )
+        ) + "\n" + self.evaluator.problem.describe()
         
         for llm in self.llms:
             try:
@@ -801,7 +730,7 @@ class CoilMetaSolver:
                 self.failure_analysis,
                 self.idea_memory,
                 focus_category=category
-            )
+            ) + "\n" + self.evaluator.problem.describe()
             
             for llm in self.llms[:1]:  # Just use first LLM
                 try:
@@ -821,7 +750,7 @@ class CoilMetaSolver:
         sections = re.split(r'\n(?=\d+\.|##|###|\*\*\d)', response)
         
         for section in sections:
-            if len(section.strip()) < 100:
+            if not section.strip():
                 continue
             
             # Extract name
@@ -851,7 +780,7 @@ class CoilMetaSolver:
         text_lower = text.lower()
         
         # Simple keyword matching
-        if any(w in text_lower for w in ['dead.?end', 'stuck', 'trap']):
+        if re.search(r'dead[ -]?end|stuck|trap', text_lower):
             if 'detect' in text_lower:
                 return ImprovementCategory.DEADEND_DETECTION
             elif 'avoid' in text_lower:
@@ -883,36 +812,64 @@ class CoilMetaSolver:
         # Default
         return ImprovementCategory.SEARCH_HEURISTIC
     
+    @staticmethod
+    def _flatten(details: dict) -> dict:
+        return {path: result for tier in details['results'].values() for path, result in tier.items()}
+
+    def _establish_baseline(self):
+        if self.evaluator.baseline_results:
+            return
+        self.current_score, details = self.evaluator.evaluate(self.current_config, stop_on_regression=False, stop_on_failure=False)
+        self.last_results = self._flatten(details)
+        self.evaluator.set_baseline(self.last_results)
+        self.solution_ensemble.add_variant(SolverVariant('baseline', self.current_config.copy(), self.current_score, [], []))
+        self._update_failure_analysis()
+
     def _evaluate_idea(self, idea: Idea) -> dict:
-        """Evaluate an idea through multi-tier testing."""
+        self._establish_baseline()
         idea.attempted = True
-        
-        # STUB: In real implementation, would:
-        # 1. Generate code change from idea
-        # 2. Apply change to solver
-        # 3. Run multi-tier evaluation
-        # 4. Compare to baseline
-        
-        # For now, return mock result
-        return {
-            'success': False,
-            'reason': 'Stub implementation',
-            'score': 0.0,
-            'score_delta': 0.0,
-            'config': {}
-        }
-    
+        idea.success = False
+        candidate = CoilSolution(self.current_config)
+        if not candidate.apply_modification({'raw_text': idea.raw_text}):
+            return {'success': False, 'reason': 'No supported, changed JSON search configuration', 'score': self.current_score,
+                    'score_delta': 0.0, 'config': self.current_config.copy()}
+        config = asdict(candidate.config)
+        score, details = self.evaluator.evaluate(config)
+        self.last_results = self._flatten(details)
+        def evaluations(results):
+            return [EvalResult(path, search_score(r), r['time'], r['passed'], r) for path, r in results.items()]
+        accepted, reason, delta = Comparator().compare(evaluations(self.evaluator.baseline_results), evaluations(self.last_results))
+        accepted = accepted and not details['rejected']
+        if accepted:
+            self.current_config = config
+            self.current_score = score
+            self.evaluator.set_baseline(self.last_results)
+        idea.success, idea.score_delta = accepted, delta
+        self._update_failure_analysis()
+        return {'success': accepted, 'reason': details.get('reason', reason), 'score': score,
+                'score_delta': delta, 'config': config,
+                'strengths': [path for path, r in self.last_results.items() if r['passed']],
+                'weaknesses': [path for path, r in self.last_results.items() if not r['passed']]}
+
     def _update_failure_analysis(self):
-        """Update failure analysis from recent runs."""
-        # STUB: Would analyze actual solver failures
-        pass
-    
+        self.failure_analysis = FailureAnalysis()
+        for path, result in self.last_results.items():
+            if result['passed']:
+                continue
+            board = load_board(path)
+            self.failure_analysis.add_failure(LevelFailure(path, (board.width, board.height),
+                1 - board.open_cells / len(board.cells), result['time'], result.get('bestVisited'), board.open_cells,
+                result.get('coverage'), failure_pattern=result['status']))
+
     def _checkpoint(self):
-        """Save checkpoint of current state."""
-        print(f"\nCheckpoint at iteration {self.iteration}")
-        print(f"  Ideas tried: {len(self.idea_memory.ideas)}")
-        print(f"  Novel ideas: {sum(1 for i in self.idea_memory.ideas if i.success)}")
-        print(f"  Ensemble size: {len(self.solution_ensemble.variants)}")
+        directory = Path(__file__).resolve().parents[1] / 'output/meta-solver'
+        directory.mkdir(parents=True, exist_ok=True)
+        state = {'iteration': self.iteration, 'config': self.current_config, 'score': self.current_score,
+                 'results': self.last_results, 'ideas': [dict(id=i.id, attempted=i.attempted, success=i.success,
+                     scoreDelta=i.score_delta, approach=i.extracted_approach) for i in self.idea_memory.ideas]}
+        pending = directory / 'checkpoint.pending.json'
+        pending.write_text(json.dumps(state, indent=2, allow_nan=False) + '\n')
+        pending.replace(directory / 'checkpoint.json')
 
 
 # ============================================================================

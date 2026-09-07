@@ -45,7 +45,6 @@ namespace coil
             var lastProgress = st.Elapsed;
 
             var current = LevelConfiguration.SegPicker.PickSeg(null, null, stats, false);
-            var tweakct = 0;
             var lastLoopCt = 0;
             while (current != null)
             {
@@ -119,29 +118,10 @@ namespace coil
 
         public void PossiblySaveDuringTweak(bool saveState, int saveEvery, TweakStats stats, List<(int,int)> neighbors = null, bool newLoop = false)
         {
-            if ((saveState && stats.SuccessCt % saveEvery == 0) || newLoop)
+            if (saveState && stats.SuccessCt % saveEvery == 0 && !newLoop)
             {
-                var loopText = "";
-                if (newLoop)
-                {
-                    if (false)
-                    {
-                        //bit of a hack here - but i want to see details about progress per loop
-                        var repdata = GetReport(this, TimeSpan.FromSeconds(0), stats);
-                        var rep = Report(repdata, multiline: true);
-                        loopText = $"loop={stats.loopct} ";
-                        var pathfn = $"{Paths.Root}/output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p-{loopText}.png";
-                        SaveWithPath(this, pathfn, subtitle: rep, quiet: true);
-                    }
-                }
-                else
-                {
-                    var pathfn = $"{Paths.Root}/output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p.png";
-                    SaveWithPath(this, pathfn, subtitle: $"{loopText}SegCt:{Segs.Count}", highlights: neighbors);
-                }
-
-                //var fn = $"{Paths.Root}/output/{Width - 2}x{Height - 2}/Tweaks-{Index}-{tweakct}-empty.png";
-                //SaveEmpty(this, fn);
+                var pathfn = $"{Paths.Root}/output/{Width - 2}x{Height - 2}/t-{LevelConfiguration.GetStr()}-i{Index}-l{stats.loopct}-tw{stats.SuccessCt}-p.png";
+                SaveWithPath(this, pathfn, subtitle: $"SegCt:{Segs.Count}", highlights: neighbors);
             }
         }
 

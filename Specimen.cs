@@ -7,6 +7,9 @@ using System.Text;
 using System.Text.Json;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.Fonts;
 
 namespace coil
 {
@@ -35,13 +38,12 @@ namespace coil
             ImageUtil.SaveMap(level, Path.Combine(dir, "map.png"), 1);
             using (var image = Image.Load(Path.Combine(dir, "map.png")))
             {
-                using (var detail = image.Clone(c => c.Crop(new Rectangle(Math.Max(0, side / 2 - 64), Math.Max(0, side / 2 - 64), Math.Min(128, side), Math.Min(128, side)))
-                    .Resize(512, 512, KnownResamplers.NearestNeighbor))) detail.Save(Path.Combine(dir, "detail.png"));
+                SaveDetail(image, Path.Combine(dir, "detail.png"));
                 image.Mutate(c => c.Resize(480, 480, KnownResamplers.Box));
                 image.Save(Path.Combine(dir, "preview.png"));
             }
             File.WriteAllText(Path.Combine(dir, "stats.pending.json"), JsonSerializer.Serialize(new {
-                schemaVersion = 1, side, seed, options = opts, generationSeconds,
+                schemaVersion = 1, side, seed, options = opts, generationSeconds, generationPolicy = GenerationQuality.Policy,
                 boardSha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(board))).ToLowerInvariant(),
                 validation = "Debug.DoDebug + CoilFormat.Validate; persisted gzip pair replayed", stats
             }, new JsonSerializerOptions { WriteIndented = true }));
@@ -50,6 +52,39 @@ namespace coil
             Console.WriteLine($"{Path.GetFileName(dir)} complete in {sw.Elapsed.TotalSeconds:0.0}s");
             return 0;
         }
+        static void SaveDetail(Image map, string path)
+        {
+            int width = Math.Min(128, map.Width), height = Math.Min(128, map.Height);
+            int x = Math.Max(0, map.Width / 2 - 64), y = Math.Max(0, map.Height / 2 - 64);
+            bool cropped = width < map.Width || height < map.Height;
+            using var crop = map.Clone(c => c.Crop(new Rectangle(x, y, width, height)).Resize(384, 384, KnownResamplers.NearestNeighbor));
+            using var frame = new Image<Rgba32>(512, 512, Color.ParseHex("14291f"));
+            var font = new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 17, FontStyle.Bold);
+            var small = new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 13);
+            frame.Mutate(c => c
+                .Fill(Color.ParseHex("a5eac6"), new RectangleF(60, 60, 392, 392))
+                .DrawImage(crop, new Point(64, 64), 1f)
+                .DrawText($"{(cropped ? "CROP" : "WHOLE BOARD")} · {width} x {height} of {map.Width} x {map.Height}", font, Color.White, new PointF(24, 18))
+                .DrawText($"x={x}..{x + width - 1}, y={y}..{y + height - 1} (zero-based)", small, Color.White, new PointF(24, 467))
+                .DrawText(cropped ? "The board continues beyond the marked crop frame." : "Every board cell is shown within the frame.", small, Color.White, new PointF(24, 488)));
+            frame.Save(path);
+        }
+
+        static int RefreshDetails(string[] args)
+        {
+            if (args.Length != 1) throw new ArgumentException("refresh-details <gallery-directory>");
+            int count = 0;
+            foreach (var file in Directory.GetFiles(Path.GetFullPath(args[0], Paths.Root), "stats.json", SearchOption.AllDirectories))
+            {
+                string dir = Path.GetDirectoryName(file);
+                using var map = Image.Load(Path.Combine(dir, "map.png"));
+                SaveDetail(map, Path.Combine(dir, "detail.png"));
+                count++;
+            }
+            Console.WriteLine($"Refreshed {count} visibly labeled crop images");
+            return 0;
+        }
+
         static void WriteGzip(string path, string value)
         {
             using var file = File.Create(path);

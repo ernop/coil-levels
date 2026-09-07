@@ -153,3 +153,25 @@ are `--wander-full`, `--wander-max N`, and `--wander-steps N`.
 `BoardCharacterization.cs` implements exact compact board-only geometry for
 large boards. It complements the Python proof prototype; room decomposition,
 proof metrics, and motif analysis are not included in this compact pass.
+
+## Real evaluation and visual inspection (2026-09-06)
+
+The [Python evaluation bridge](meta_solver/README.md) now runs bounded C#
+search, independently replays solutions, and records measured results. Run
+`python3 -m meta_solver.examples.coil_integration --compare` after building.
+The native `evaluate` command accepts a board on stdin and returns JSON.
+
+The [board wall](web/board-wall.html) shows all 32 saved 500-square boards at
+once and supports every size in `gallery/boards`. The [visual stats lab](web/stats-lab.html)
+compares exact 500-square cell masks with measurement overlays, labeled cell
+details, close numerical matches, and within-recipe seed variation.
+
+The central gallery crop PNGs contain a visible CROP label, coordinates, and frame. The full
+maps retain exact cells. A crop boundary must never be interpreted as a board
+wall; click a whole map in the lab for cell-level context.
+
+The tweak-based generator limits full-slide initial walks to eight segments
+by default and rejects all-open squares exceeding one fifth of the board side
+(with an eight-cell allowance on small boards). This is a collection quality
+policy in addition to game-rule validity. See [the repair record](gallery/REPAIRS.md) for the affected specimens'
+before/after hashes and geometry.

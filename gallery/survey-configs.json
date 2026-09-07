@@ -666,7 +666,8 @@
     "picker": "rnd99",
     "segpicker": "Weighted4",
     "lim": "20",
-    "wander-full": true
+    "wander-full": true,
+    "wander-steps": "8"
   },
   {
     "id": "control-rnd99-wander8steps",
@@ -720,7 +721,8 @@
     "picker": "last",
     "segpicker": "Weighted4",
     "lim": "20",
-    "wander-full": true
+    "wander-full": true,
+    "wander-steps": "8"
   },
   {
     "id": "control-last-wander8steps",
@@ -774,7 +776,8 @@
     "picker": "2lim10",
     "segpicker": "Weighted4",
     "lim": "20",
-    "wander-full": true
+    "wander-full": true,
+    "wander-steps": "8"
   },
   {
     "id": "control-2lim10-wander8steps",

@@ -58,8 +58,11 @@ Final verification passed for all 424 specimens on 2026-09-06:
 330 survey boards, 82 preliminary/selected boards through 2000 square,
 and all 12 large boards. [verification.json](verification.json) records the
 checks and verifier source hashes. C# regressions, the seven Python analysis
-tests, JavaScript syntax, and browser interactions also passed. The build
-retains 11 pre-existing compiler warnings.
+tests, JavaScript syntax, and browser interactions also passed. The current Release build has no warnings. The real evaluator has additional exhaustive tiny-board and subprocess-contract regressions; see [the bridge documentation](../meta_solver/README.md).
+
+The [board wall](../web/board-wall.html) shows all 32 saved 500-square boards together. The [visual stats lab](../web/stats-lab.html) compares exact cell overlays, nearby metric values, and observed seed ranges. Crops are visibly marked on the image, including the lab’s movable cell detail.
+
+The original full-slide walk produced oversized open regions. All 18 affected specimens were regenerated using eight initial segments; before/after hashes and measurements are in [REPAIRS.md](REPAIRS.md). The tweak-based generator now rejects oversized all-open squares before export. This is a collection quality policy, separate from Coil validity. Selection choices and their original means remain frozen; the catalog, paired effects, and findings use repaired boards. The survey covers the original 53 picker names; the current command builder also offers the separately named `len23-10th-exact`.
 
 ## Files in a specimen
 
@@ -69,7 +72,7 @@ retains 11 pre-existing compiler warnings.
 | `level.solution.gz` | Gzip-compressed coilbench solution; validation certificate, not a blind-test secret |
 | `map.png` | Whole board, exactly one pixel per cell, white open and black wall |
 | `preview.png` | 480-square full-board preview using box resampling; gray means mixed occupancy |
-| `detail.png` | Central 128-square crop enlarged to 512 square with nearest-neighbor resampling |
+| `detail.png` | Central 128-square crop enlarged to 384 square inside a 512-square frame; CROP and zero-based coordinates are printed on the PNG |
 | `stats.json` | Dimensions, seed, explicit options, generation time, board hash, validation statement, exact geometry |
 
 The compact geometry pass counts occupancy, degrees, isolated walls, open
@@ -96,15 +99,18 @@ dotnet run -c Release -- specimen output/example 300 101 --picker rnd99 --segpic
 # --wander-full  --wander-max 5  --wander-steps 8
 
 # Replay and verify the saved collection (includes the 100-million-cell boards):
-dotnet run -c Release -- verify-collection gallery
+dotnet run -c Release -- verify-collection gallery/boards
+dotnet run -c Release -- verify-collection gallery/survey
 
 # Reuse complete survey specimens; new ones run in three bounded subprocesses:
 python3 scripts/explore_styles.py
-python3 scripts/select_collection.py
+python3 scripts/select_collection.py  # reuses the frozen selection; --reselect deliberately recalculates it
 # Up to two jobs through 5000 square, then serial 10000 jobs; complete specimens reused:
 python3 scripts/generate_selected.py
 python3 scripts/report_survey.py
 python3 scripts/build_catalog.py --require-complete
+python3 scripts/build_stats_lab.py
+python3 scripts/build_picker_catalog.py --check
 
 # Extract a board without changing the checked-in compressed artifact:
 gzip -dc gallery/boards/10000-tweak-rnd99-s101/level.board.gz > /tmp/coil-10000.board

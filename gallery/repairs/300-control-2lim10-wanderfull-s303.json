@@ -1,0 +1,19 @@
+{
+  "id": "300-control-2lim10-wanderfull-s303",
+  "side": 300,
+  "beforeSha256": "da9a8b354d830fca6f59659839f28a8f17bb50d3036cae4700e226e00c6c7fed",
+  "afterSha256": "14eb39103729f97ae98bd4d97affd79e7e70abd0545a982467d23dfd0361d45e",
+  "beforeOpenFraction": 0.9922111111111112,
+  "afterOpenFraction": 0.7143222222222222,
+  "beforeOpenSquare": 244,
+  "afterOpenSquare": 5,
+  "seconds": 1.58,
+  "validation": "Persisted pair replayed; geometry, hashes, and map cells verified",
+  "options": {
+    "picker": "2lim10",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": "true",
+    "wander-steps": "8"
+  }
+}

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System;
 using System.Linq;
-using System.Collections.Generic;
 
 
 namespace coil
@@ -38,11 +36,6 @@ namespace coil
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2<6 ? 100+tw.Len2+tw.Len3 : tw.Len2+tw.Len3);
                         return ordered.First();
                     } , "2lim5"),
-                new TweakPicker((List<Tweak> tweaks) =>
-                    {
-                        var ordered = tweaks.OrderByDescending(tw=>tw.Len2<26 ? 1000+tw.Len2+tw.Len3 : tw.Len2+tw.Len3);
-                        return ordered.First();
-                    } , "2lim25"),
                 new TweakPicker((List<Tweak> tweaks) =>
                     {
                         var ordered = tweaks.OrderByDescending(tw=>tw.Len2<26 ? 1000+tw.Len2+tw.Len3 : tw.Len2+tw.Len3);
@@ -169,8 +162,9 @@ namespace coil
                 new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + random.Next(3), "sz23rnd3"),
                 new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(2, random), "len23-half"),
                 new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(3, random), "len23-third"),
+                // Preserve historical 1-in-5 behavior; the explicit name below exposes the formerly shadowed 1-in-10 recipe.
                 new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(5, random), "len23-10th"),
-                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(10, random), "len23-10th"),
+                new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(10, random), "len23-10th-exact"),
                 new TweakPicker((Tweak tw, Random random) => tw.Len2 + tw.Len3 + OneFraction(20, random), "len23-20th"),
                 //new TweakPicker((Tweak tw) => tw.Right ? 1000+tw.Len2 + tw.Len3 : -1*(1000+tw.Len2 + tw.Len3), "turndir-right-sz"),
                 //new TweakPicker((Tweak tw) => tw.Right ? -1*(1000 + tw.Len2 + tw.Len3) : 1000 + tw.Len2 + tw.Len3, "turndir-left-sz"),

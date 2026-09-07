@@ -60,6 +60,7 @@ namespace coil
             var w = int.Parse(q["x"]);
             var h = int.Parse(q["y"]);
             var board = q["board"];
+            if (w < 1 || h < 1 || (long)w * h > int.MaxValue) throw new FormatException("Board dimensions must be positive and fit an array");
             if (board.Length != w * h)
             {
                 throw new FormatException($"board has {board.Length} chars, expected {w}x{h}={w * h}");
@@ -93,7 +94,8 @@ namespace coil
                 {
                     throw new FormatException($"no '=' in '{part}'");
                 }
-                d[part.Substring(0, eq)] = part.Substring(eq + 1);
+                if (!d.TryAdd(part.Substring(0, eq), part.Substring(eq + 1)))
+                    throw new FormatException("Duplicate query key");
             }
             return d;
         }

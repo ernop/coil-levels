@@ -9,6 +9,9 @@ static class RegressionTests
     static void Main()
     {
         CharacterizationTests.Run();
+        SolverEvaluationTests.Run();
+        GenerationQualityTests.Run();
+        ImageRenderingTests.Run();
         SolutionLimits();
         HardnessOrdering();
         IndexCaches();

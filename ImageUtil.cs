@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -64,7 +63,8 @@ namespace coil
             var st = Stopwatch.StartNew();
             //juggle the path to determine what should be written in each square.
 
-            var effectiveScale = overrideScale.HasValue ? overrideScale.Value : Scale;
+            var effectiveScale = overrideScale ?? Scale;
+            if (effectiveScale < 1) throw new ArgumentOutOfRangeException(nameof(overrideScale));
 
             var usingHeight = corner ? Math.Min(level.Height, 55) : level.Height;
             var usingWidth = corner ? Math.Min(level.Width, 80) : level.Width;
@@ -96,60 +96,41 @@ namespace coil
                 }
             }
             
-            //what if i created it in strips?
-
-            
-
-            using (var result = new Image<Rgba32>(imageWidth, imageHeight))
+            bool cropped = usingWidth < level.Width || usingHeight < level.Height;
+            int cropCaptionHeight = cropped ? 44 : 0;
+            using (var result = new Image<Rgba32>(imageWidth, imageHeight + cropCaptionHeight))
             {
                 if (outstrings != null)
                 {
-                    if (false) {
-                        Parallel.For(0, level.Height, yy =>
-                        //for (var yy = 0;yy < level.Height;yy++)
-                        {
-                        //for(var xx= 0;xx < level.Width;xx++)
-                        Parallel.For(0, level.Width, xx =>
-                            {
-                                var target = new Point(xx * effectiveScale, yy * effectiveScale);
-                                var key = outstrings[yy][xx];
-
-                                result.Mutate(oo => oo.DrawImage(images[key], target, 1f));
-
-                            });
-                        });
-                    }
-                    else
+                    var strips = new Image<Rgba32>[usingHeight];
+                    var scaledTiles = new Dictionary<string, Image>();
+                    try
                     {
-                        var strips = new ConcurrentDictionary<int,Image<Rgba32>>(); ;
-                        //this speeds things up a lot but there are still too many strips.
-                        Parallel.For(0, usingHeight, yy =>
+                        foreach (var pair in images)
+                            if (pair.Value.Width != effectiveScale || pair.Value.Height != effectiveScale)
+                                scaledTiles[pair.Key] = pair.Value.Clone(c => c.Resize(effectiveScale, effectiveScale, KnownResamplers.NearestNeighbor));
+                        Parallel.For(0, usingHeight, y =>
                         {
-                            var strip = new Image<Rgba32>(imageWidth, Scale);
-
-                            for (var xx = 0; xx < usingWidth; xx++)
+                            var strip = new Image<Rgba32>(imageWidth, effectiveScale);
+                            strips[y] = strip;
+                            for (int x = 0; x < usingWidth; x++)
                             {
-                                var target = new Point(xx * effectiveScale, 0);
-                                var key = outstrings[yy][xx];
-
-                                strip.Mutate(oo => oo.DrawImage(images[key], target, 1f));
+                                string key = outstrings[y][x];
+                                var tile = scaledTiles.TryGetValue(key, out var resized) ? resized : images[key];
+                                strip.Mutate(c => c.DrawImage(tile, new Point(x * effectiveScale, 0), 1f));
                             }
-                            strips[yy]=strip;
-                        
                         });
-                        //WL($"Generated strips in {st.Elapsed}");
-                        //combine them all.
-                        var yy = 0;
-                        foreach (var key in strips.Keys)
+                        // Parallel completion order must never change board row order.
+                        for (int y = 0; y < usingHeight; y++)
                         {
-                            var pt = new Point(0, yy);
-                            var s2 = strips[key];
-                            result.Mutate(oo => oo.DrawImage(s2, pt, 1f));
-                            yy += Scale;
+                            int row = y;
+                            result.Mutate(c => c.DrawImage(strips[row], new Point(0, row * effectiveScale), 1f));
                         }
-
-                        //WL($"Combined at {st.Elapsed}");
-
+                    }
+                    finally
+                    {
+                        foreach (var strip in strips) strip?.Dispose();
+                        foreach (var tile in scaledTiles.Values) tile.Dispose();
                     }
                 }
                 if (writeSubtitle)
@@ -167,15 +148,7 @@ namespace coil
                     foreach (var line in lines)
                     {
                         var ul = new Vector2(0, imageHeight - extra.Value + currentLine * subtitleLineHeight);
-                        try
-                        {
-                            result.Mutate(oo => oo.DrawText(line, font, color, ul));
-                        }
-                        catch (Exception ex)
-                        {
-                            //imagesharp throws exceptions even when it writes.
-                            //but failures will break the next line writing.
-                        }
+                        result.Mutate(oo => oo.DrawText(line, font, color, ul));
                         currentLine++;
                     }
                 }
@@ -187,7 +160,7 @@ namespace coil
                     {
                         //arrow width scales with board height+width.
                         int arrowWidth = (int)((usingHeight + usingWidth) * 0.003)+1;
-                        PointText? lastPoint = null;
+                        PointText lastPoint = null;
                         foreach (var pt in pointTexts)
                         {
                             if (lastPoint!=null)
@@ -206,7 +179,16 @@ namespace coil
                     }
                 }
 
-                result.Save($"{fn}");
+                if (cropped)
+                {
+                    string label = imageWidth >= 500
+                        ? $"CROP · upper-left detail of {level.Width - 2} x {level.Height - 2} board"
+                        : "CROP";
+                    result.Mutate(c => c
+                        .Fill(Color.ParseHex("14291f"), new RectangleF(0, imageHeight, imageWidth, cropCaptionHeight))
+                        .DrawText(label, Font, Color.White, new PointF(8, imageHeight + 12)));
+                }
+                result.Save(fn);
             }
 
             if (!quiet)
@@ -230,17 +212,10 @@ namespace coil
 
             var location = new PointF(0, 0);
             //result.Mutate(oo => oo.DrawText(subtitle, font, color, location));
-            try {
-                var pointful = new PointF(point.Item1 * effectiveScale - 5, point.Item2 * effectiveScale - 5);
-                var pointf = new PointF(point.Item1 * effectiveScale, point.Item2* effectiveScale);
-                image.Mutate(oo => oo.DrawText(text, BigFont, SixLabors.ImageSharp.Color.Yellow, pointful));
-                image.Mutate(oo => oo.DrawText(text, MedFont, SixLabors.ImageSharp.Color.Black, pointf));
-            }
-            catch (Exception ex)
-            {
-                var aa = 0;
-                //silly imagesharp, writing even when you claim you can't.
-            }
+            var pointful = new PointF(point.Item1 * effectiveScale - 5, point.Item2 * effectiveScale - 5);
+            var pointf = new PointF(point.Item1 * effectiveScale, point.Item2 * effectiveScale);
+            image.Mutate(oo => oo.DrawText(text, BigFont, SixLabors.ImageSharp.Color.Yellow, pointful));
+            image.Mutate(oo => oo.DrawText(text, MedFont, SixLabors.ImageSharp.Color.Black, pointf));
         }
 
         public static Dictionary<string, Image> GetImages()

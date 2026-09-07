@@ -272,11 +272,13 @@
       "picker": "2lim10",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 101,
-    "seconds": 0.6826216720000957,
-    "output": "300-control-2lim10-wanderfull-s101 complete in 0.6s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-2lim10-wanderfull-s202",
@@ -287,11 +289,13 @@
       "picker": "2lim10",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 202,
-    "seconds": 0.4796531160027371,
-    "output": "300-control-2lim10-wanderfull-s202 complete in 0.4s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-2lim10-wanderfull-s303",
@@ -302,11 +306,13 @@
       "picker": "2lim10",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 303,
-    "seconds": 0.45925807199819246,
-    "output": "300-control-2lim10-wanderfull-s303 complete in 0.4s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-last-keepends-s101",
@@ -581,11 +587,13 @@
       "picker": "last",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 101,
-    "seconds": 0.7406423560023541,
-    "output": "300-control-last-wanderfull-s101 complete in 0.7s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-last-wanderfull-s202",
@@ -596,11 +604,13 @@
       "picker": "last",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 202,
-    "seconds": 0.5281296620014473,
-    "output": "300-control-last-wanderfull-s202 complete in 0.5s\n"
+    "seconds": 1.63,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-last-wanderfull-s303",
@@ -611,11 +621,13 @@
       "picker": "last",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 303,
-    "seconds": 0.48141314899839927,
-    "output": "300-control-last-wanderfull-s303 complete in 0.4s\n"
+    "seconds": 1.63,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-rnd99-keepends-s101",
@@ -890,11 +902,13 @@
       "picker": "rnd99",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 101,
-    "seconds": 0.7386890449997736,
-    "output": "300-control-rnd99-wanderfull-s101 complete in 0.7s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-rnd99-wanderfull-s202",
@@ -905,11 +919,13 @@
       "picker": "rnd99",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 202,
-    "seconds": 0.4924011939947377,
-    "output": "300-control-rnd99-wanderfull-s202 complete in 0.5s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-control-rnd99-wanderfull-s303",
@@ -920,11 +936,13 @@
       "picker": "rnd99",
       "segpicker": "Weighted4",
       "lim": "20",
-      "wander-full": true
+      "wander-full": true,
+      "wander-steps": "8"
     },
     "seed": 303,
-    "seconds": 0.48002004199952353,
-    "output": "300-control-rnd99-wanderfull-s303 complete in 0.4s\n"
+    "seconds": 1.58,
+    "output": "Repaired with eight full-slide initial segments; persisted replay and geometry verification passed.",
+    "generationPolicy": "bounded-initial-walk-v1"
   },
   {
     "id": "300-seg-2lim10-First-s101",

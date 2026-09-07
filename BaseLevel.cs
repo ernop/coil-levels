@@ -175,6 +175,7 @@ namespace coil
                 max = LevelConfiguration.InitialWanderSetup.MaxLen;
             }
             var segCount = 0;
+            var stepLimit = lc.InitialWanderSetup.StepLimit ?? (lc.InitialWanderSetup.GoMax ? GenerationQuality.FullWalkDefaultSteps : (int?)null);
             while (true)
             {
                 var seg = MakeRandomSegFrom(start, nextDirs, max:max);
@@ -201,7 +202,7 @@ namespace coil
                     default:
                         throw new Exception("Bad");
                 }
-                if (LevelConfiguration.InitialWanderSetup.StepLimit.HasValue && LevelConfiguration.InitialWanderSetup.StepLimit.Value == segCount) {
+                if (stepLimit.HasValue && stepLimit.Value == segCount) {
                     break;
                 }
             }
@@ -355,22 +356,6 @@ namespace coil
                 }
             }
 
-            if (false)
-            {
-                (int, int)? last = null;
-                foreach (var el in res)
-                {
-                    if (last != null)
-                    {
-                        var d = GridDist(el, last.Value);
-                        if (d != 1)
-                        {
-                            WL("A");
-                        }
-                    }
-                    last = el;
-                }
-            }
             return res;
 
         }

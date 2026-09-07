@@ -1,6 +1,7 @@
 """Choose coverage representatives in measured descriptor space, never a difficulty score."""
 import itertools
 import json
+import argparse
 import math
 from pathlib import Path
 import statistics
@@ -13,6 +14,10 @@ def vector(s):
         s['tileDensity']['variance'],s['largestWallSquare'][2],s['largestOpenSquare'][2],
         s['edgeLayers'][0]['openFraction']-s['openFraction']]
 def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--reselect',action='store_true');args=parser.parse_args()
+    if (ROOT/'gallery/selection.json').exists() and not args.reselect:
+        print('Using the recorded representative selection; --reselect explicitly recomputes it from current measurements.')
+        return
     configs=json.loads((ROOT/'gallery/survey-configs.json').read_text())
     results=json.loads((ROOT/'gallery/survey-results.json').read_text())
     if len(results)!=len(configs)*3:raise RuntimeError('Survey not complete')

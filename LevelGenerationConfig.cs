@@ -15,7 +15,7 @@ namespace coil
         public int arrowLengthMin = 50;
         public bool saveEmpty = false;
         //save a 100x100 square from the upper left corner
-        internal bool saveEmptyUpperCorner;
+        internal bool saveEmptyUpperCorner = false;
         public bool saveWithPath = false;
         
         /// <summary>

@@ -12,6 +12,7 @@ from enum import Enum
 import time
 import json
 import hashlib
+import math
 
 
 class Difficulty(Enum):
@@ -198,9 +199,18 @@ class Comparator:
         Compare baseline vs candidate results.
         Returns (should_accept, reason, improvement_delta)
         """
-        if len(baseline_results) != len(candidate_results):
-            return False, "Mismatched result counts", 0.0
-        
+        if not baseline_results or not candidate_results:
+            return False, "Empty evaluation results", 0.0
+        baseline = {r.test_case_id: r for r in baseline_results}
+        candidate = {r.test_case_id: r for r in candidate_results}
+        if len(baseline) != len(baseline_results) or len(candidate) != len(candidate_results):
+            return False, "Duplicate test-case IDs", 0.0
+        if baseline.keys() != candidate.keys():
+            return False, "Mismatched test-case IDs", 0.0
+        if any(not math.isfinite(r.score) for r in baseline_results + candidate_results):
+            return False, "Non-finite evaluation score", 0.0
+        candidate_results = [candidate[r.test_case_id] for r in baseline_results]
+
         baseline_avg = sum(r.score for r in baseline_results) / len(baseline_results)
         candidate_avg = sum(r.score for r in candidate_results) / len(candidate_results)
         
@@ -210,7 +220,7 @@ class Comparator:
         if self.require_no_regression:
             regressions = []
             for b, c in zip(baseline_results, candidate_results):
-                if c.score < b.score - self.regression_tolerance:
+                if (b.success and not c.success) or c.score < b.score - self.regression_tolerance:
                     regressions.append(b.test_case_id)
             
             if regressions:

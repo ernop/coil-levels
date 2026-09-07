@@ -31,3 +31,9 @@ The [board style collection](gallery/README.md) and
 and selected large specimens. `specimen` exports validated gzip boards and
 geometry; `verify-collection` replays and verifies the saved collection.
 `gallery/` is deliberately versioned, unlike ordinary `output/` runs.
+
+For real solver evaluation use [meta_solver/README.md](meta_solver/README.md).
+The [visual stats lab](web/stats-lab.html) overlays exact cell measurements;
+the [board wall](web/board-wall.html) starts with every saved 500-square board.
+The tweak-based generator's `GenerationQuality` policy is separate from game
+validity. Cropped previews must visibly label their crop on the image itself.

@@ -10,21 +10,8 @@ DLL = str(ROOT / 'bin/Release/net10.0/coil-levels-csharp.dll')
 SEEDS = (101, 202, 303)
 
 def configurations():
-    names = subprocess.check_output(['dotnet', DLL, 'pickers'], text=True).splitlines()[0].split(':', 1)[1].split()
-    configs = []
-    for name in names:
-        configs.append(dict(id=f'tweak-{name}', family='tweak survey', picker=name, segpicker='Weighted4', lim='20'))
-    for name in ('rnd99', 'last', 'first', '2lim10', 'equal23short', 'sz2-3'):
-        for seg in ('First', 'Last', 'Longest', 'Weighted', 'Weighted2', 'Weighted3'):
-            configs.append(dict(id=f'seg-{name}-{seg}', family='segment interaction', picker=name, segpicker=seg, lim='20'))
-    for name in ('rnd99', 'last', '2lim10'):
-        for variant, options in [
-            ('unlimited', {'lim':'none'}), ('lim5', {'lim':'5'}),
-            ('onepass', {'loops':'1'}), ('keepends', {'keep-deadends':True}),
-            ('wander5', {'wander-max':'5'}), ('wanderfull', {'wander-full':True}),
-            ('wander8steps', {'wander-steps':'8'})]:
-            configs.append(dict(id=f'control-{name}-{variant}', family='generation control', picker=name, segpicker='Weighted4', lim='20') | options)
-    return configs
+    # Reproduction uses the recorded study, even when new picker names are added later.
+    return json.loads((ROOT/'gallery/survey-configs.json').read_text())
 
 def run(config, seed):
     name = f'300-{config["id"]}-s{seed}'

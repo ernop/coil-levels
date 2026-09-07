@@ -1,0 +1,19 @@
+{
+  "id": "2000-control-rnd99-wanderfull-s303",
+  "side": 2000,
+  "beforeSha256": "4049fed901762342b9e01c0caa92bbfa4939954d268dee43b3b34abe3498a7a2",
+  "afterSha256": "1bcebc3e3fff54a1da046e22bd327331794039a133cc9b7af8474d46b80499b7",
+  "beforeOpenFraction": 0.992427,
+  "afterOpenFraction": 0.660098,
+  "beforeOpenSquare": 1875,
+  "afterOpenSquare": 6,
+  "seconds": 18.51,
+  "validation": "Persisted pair replayed; geometry, hashes, and map cells verified",
+  "options": {
+    "picker": "rnd99",
+    "segpicker": "Weighted4",
+    "lim": "20",
+    "wander-full": "true",
+    "wander-steps": "8"
+  }
+}

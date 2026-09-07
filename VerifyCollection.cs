@@ -41,6 +41,7 @@ namespace coil
                                 if (row[x].PackedValue != (wall[y * w + x] ? 0 : 255)) throw new InvalidDataException($"Map cell mismatch: {dir} {x},{y}");
                         }
                     });
+                    VerifyDetail(map, dir);
                 }
                 foreach (var name in new[] { "detail.png", "preview.png" })
                 {
@@ -51,8 +52,44 @@ namespace coil
                 done++;
                 if (done % 25 == 0 || w >= 5000) Console.WriteLine($"Verified {done}/{files.Length}: {Path.GetFileName(dir)}");
             }
-            Console.WriteLine($"Verified all {done} specimens: gzip replay, board hashes, exact geometry, map cells, preview dimensions.");
+            Console.WriteLine($"Verified all {done} specimens: gzip replay, board hashes, exact geometry, map and crop cells, visible crop frames, preview dimensions.");
             return 0;
+        }
+
+        static void VerifyDetail(Image<L8> map, string directory)
+        {
+            using var detail = Image.Load<Rgba32>(Path.Combine(directory, "detail.png"));
+            if (detail.Width != 512 || detail.Height != 512)
+                throw new InvalidDataException($"Invalid detail dimensions: {directory}");
+            // Caption regions must contain text over the baked-in frame, even when
+            // the PNG is opened outside the HTML page. Do not depend on font rasterization.
+            var background = new Rgba32(0x14, 0x29, 0x1f);
+            if (!detail[0, 0].Equals(background) ||
+                !HasCaption(24, 18, 488, 44) || !HasCaption(24, 467, 488, 510))
+                throw new InvalidDataException($"Missing crop frame or caption: {directory}");
+            if (map.Width >= 128 && map.Height >= 128)
+            {
+                int sx = map.Width / 2 - 64, sy = map.Height / 2 - 64;
+                for (int y = 0; y < 384; y++)
+                    for (int x = 0; x < 384; x++)
+                    {
+                        byte expected = map[sx + x / 3, sy + y / 3].PackedValue;
+                        var actual = detail[64 + x, 64 + y];
+                        if (actual.R != expected || actual.G != expected || actual.B != expected || actual.A != 255)
+                            throw new InvalidDataException($"Crop cell mismatch: {directory} {x},{y}");
+                    }
+            }
+
+            bool HasCaption(int x0, int y0, int x1, int y1)
+            {
+                int lightPixels = 0;
+                for (int y = y0; y < y1; y++) for (int x = x0; x < x1; x++)
+                {
+                    var p = detail[x, y];
+                    if (p.R > 150 && p.G > 150 && p.B > 150) lightPixels++;
+                }
+                return lightPixels > 100;
+            }
         }
     }
 }
