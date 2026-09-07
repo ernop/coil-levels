@@ -60,7 +60,11 @@ and all 12 large boards. [verification.json](verification.json) records the
 checks and verifier source hashes. C# regressions, the seven Python analysis
 tests, JavaScript syntax, and browser interactions also passed. The current Release build has no warnings. The real evaluator has additional exhaustive tiny-board and subprocess-contract regressions; see [the bridge documentation](../meta_solver/README.md).
 
-The [board wall](../web/board-wall.html) shows all 32 saved 500-square boards together. The [visual stats lab](../web/stats-lab.html) compares exact cell overlays, nearby metric values, and observed seed ranges. Crops are visibly marked on the image, including the lab’s movable cell detail.
+The [board wall](../web/board-wall.html) shows all 32 saved 500-square boards together. The [visual stats lab](../web/stats-lab.html) shows one full board beside an adjustable zoom, with the same overlay in both views. Click or drag the full map to position the zoom; drag the zoom to pan, or use its coordinates and arrow keys. The CROP label and coordinates are printed on its canvas.
+
+Below the viewer, all eleven headline values appear together. The complete measurement ledger includes every saved field: degrees, both run histograms, all square placement counts and witnesses, tile summaries, six symmetry values, every edge layer, and generation metadata. Exact-value tables and the full-precision JSON remain expandable. Buttons jump to square witnesses or specific edge layers. The board, overlay, zoom size, and position are retained in the URL; older `?left=ID` links still work. No geometry is recomputed from the crop.
+
+`node scripts/check_stats_lab.js` checks every packed board mask and saved metadata record, then checks each displayed field against the source JSON and rejects any omitted fields. This keeps newly added characterization fields from silently disappearing from the inspector.
 
 The original full-slide walk produced oversized open regions. All 18 affected specimens were regenerated using eight initial segments; before/after hashes and measurements are in [REPAIRS.md](REPAIRS.md). The tweak-based generator now rejects oversized all-open squares before export. This is a collection quality policy, separate from Coil validity. Selection choices and their original means remain frozen; the catalog, paired effects, and findings use repaired boards. The survey covers the original 53 picker names; the current command builder also offers the separately named `len23-10th-exact`.
 
@@ -110,6 +114,7 @@ python3 scripts/generate_selected.py
 python3 scripts/report_survey.py
 python3 scripts/build_catalog.py --require-complete
 python3 scripts/build_stats_lab.py
+node scripts/check_stats_lab.js
 python3 scripts/build_picker_catalog.py --check
 
 # Extract a board without changing the checked-in compressed artifact:

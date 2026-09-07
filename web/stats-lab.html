@@ -1,10 +1,51 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Coil — Visual stats lab</title><link rel="stylesheet" href="atlas.css?v=20260906-repairs-1"><link rel="stylesheet" href="stats-lab.css?v=20260906-repairs-1"><script defer src="../gallery/stats-lab-data.js?v=20260906-repairs-1"></script><script defer src="stats-lab.js?v=20260906-repairs-1"></script></head>
-<body><main><header><p class="eyebrow">Coil · inspect what the numbers measure</p><h1>Does this stat explain<br>what you see?</h1><p class="lead">Compare two saved 500×500 boards. Switch between their wall maps and an overlay of the exact cells, runs, or regions being measured. Both panels use the same colors and scale.</p><nav><a href="board-wall.html">All 500×500 boards</a><a href="gallery-guide.html#guide">Complete stats guide</a></nav></header>
-<div class="controls lab-controls"><label>Measurement<select id="lab-metric"></select></label><label>Display<select id="lab-display"><option value="overlay">Measurement overlay</option><option value="raw">Original walls</option></select></label><label id="run-control" hidden>Highlight runs at least<input id="run-min" type="range" min="2" max="100" value="10"><span id="run-value">10 cells</span></label><label id="layer-control" hidden>Distance from border<input id="edge-distance" type="range" min="0" max="249" value="0"><span id="layer-value">0 cells</span></label></div>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coil — Visual stats lab</title>
+<link rel="stylesheet" href="atlas.css?v=20260906-repairs-1">
+<link rel="stylesheet" href="stats-lab.css?v=20260907-inspector-1">
+<script defer src="../gallery/stats-lab-data.js?v=20260907-inspector-1"></script>
+<script defer src="stats-ledger.js?v=20260907-inspector-2"></script>
+<script defer src="stats-lab.js?v=20260907-inspector-2"></script>
+</head>
+<body><main>
+<header><p class="eyebrow">Coil · inspect what the numbers measure</p>
+<h1>One board. Every measurement.</h1>
+<p class="lead">Explore the full board beside a movable cell detail. Inspect its measurements, their distributions, and the patterns they describe.</p>
+<nav><a href="board-wall.html">All 500×500 boards</a><a href="#all-stats">This board’s complete stats</a><a href="gallery-guide.html#guide">Stats guide</a></nav></header>
+<div class="board-selection controls">
+<label for="lab-board">Board<select id="lab-board"></select></label>
+<button id="previous-board" type="button">Previous board</button><button id="next-board" type="button">Next board</button><button id="next-seed" type="button">Another seed</button>
+</div>
+<div class="controls lab-controls">
+<label for="lab-metric">Measurement overlay<select id="lab-metric"></select></label>
+<label for="lab-display">Display<select id="lab-display"><option value="overlay">Measurement overlay</option><option value="raw">Original walls</option></select></label>
+<label id="run-control" for="run-min" hidden>Highlight runs at least<input id="run-min" type="range" min="2" max="100" value="10"><output id="run-value" for="run-min">10 cells</output></label>
+<label id="layer-control" for="edge-distance" hidden>Distance from border<input id="edge-distance" type="range" min="0" max="249" value="0"><output id="layer-value" for="edge-distance">0 cells</output></label>
+</div>
 <p id="lab-legend" class="legend"></p>
-<div class="lab-pair"><article><label>Left board<select id="lab-left"></select></label><div class="canvas-box"><canvas id="left-map" width="500" height="500" aria-label="Left board measurement overlay"></canvas></div><p class="measurement" id="left-value"></p><p id="left-detail"></p><div id="left-links" class="links"></div></article><article><label>Right board<select id="lab-right"></select></label><div class="canvas-box"><canvas id="right-map" width="500" height="500" aria-label="Right board measurement overlay"></canvas></div><p class="measurement" id="right-value"></p><p id="right-detail"></p><div id="right-links" class="links"></div></article></div>
-<div class="controls"><button id="compare-near" type="button">Find closest number to left board</button><button id="compare-far" type="button">Find most different number</button><button id="compare-seed" type="button">Compare another seed of this recipe</button><button id="example-full" type="button">Example: ordered pattern vs fine texture</button></div><p id="comparison-note" class="muted" role="status"></p>
-<div class="guide-grid"><article><h2>What is counted</h2><p id="metric-definition"></p><p id="metric-readout"></p></article><article><h2>What it misses</h2><p id="metric-limits"></p><p><strong>Try it:</strong> switch back to original walls after finding a close numerical match. If the boards still look different, this measurement captures only part of the style. No single metric is presented as a style or difficulty score.</p></article></div>
-<section><h2>Do recipe differences exceed seed variation?</h2><p>These descriptive ranges come from the separate 300×300 survey, using the same three seeds per recipe. They help judge sensitivity without pretending that three seeds establish a stable distribution.</p><label>Survey comparison<select id="survey-scope"><option value="tweaks">53 tweak choices, fixed segment ordering and initial walk</option><option value="all">All 110 configurations, including full initial slides</option></select></label><div id="survey-readout" class="three"></div><p class="muted">A wide range of recipe means indicates sensitivity somewhere in this sample. The median seed range shows typical observed variability within a recipe. Neither proves that the statistic distinguishes every visible style, and a few unusual configurations can dominate the all-configurations view. Square sizes here belong to 300-square survey boards, while the two maps above are 500 square.</p></section>
-<footer>Overlays are computed from the exact saved wall masks. No solution path is used to calculate these geometry metrics.</footer></main></body></html>
+<div class="inspector" id="viewer">
+<article class="view-panel"><div class="panel-heading"><h2>Full board</h2><span>500 × 500 cells</span></div>
+<div class="canvas-box"><canvas id="board-map" width="500" height="500" tabindex="0" aria-label="Full board. Click or drag to move the zoom; arrow keys move one cell, Shift moves ten."></canvas></div>
+<p class="view-hint">Click or drag to move the cyan zoom frame. Arrow keys move one cell; Shift moves ten.</p>
+<div class="selected-measurement"><strong id="board-value"></strong><span id="board-value-label"></span></div>
+<p id="board-detail"></p><div id="board-links" class="links"></div></article>
+<article class="view-panel"><div class="panel-heading"><h2>Zoomed area <span class="badge">CROP</span></h2><span id="zoom-summary"></span></div>
+<div class="canvas-box"><canvas id="board-zoom" width="640" height="640" tabindex="0" aria-label="Labeled zoom of the selected board. Drag to pan; arrow keys move one cell."></canvas></div>
+<div class="controls zoom-controls"><label for="zoom-size">Window size<select id="zoom-size"><option value="12">12 × 12 cells</option><option value="24">24 × 24 cells</option><option value="48" selected>48 × 48 cells</option><option value="96">96 × 96 cells</option><option value="144">144 × 144 cells</option></select></label>
+<label for="focus-x">Focus x<input id="focus-x" type="number" min="0" max="499" value="314"></label><label for="focus-y">Focus y<input id="focus-y" type="number" min="0" max="499" value="283"></label>
+<label class="check"><input id="zoom-grid" type="checkbox" checked>Cell grid</label></div>
+<p id="zoom-coordinates" class="view-hint"></p><p class="view-hint">The zoom uses the same display as the full board. Drag here to pan. All stats below describe the entire board.</p></article>
+</div>
+<div class="guide-grid metric-explanation"><article><h2>What this overlay counts</h2><p id="metric-definition"></p><p id="metric-readout" class="muted"></p></article><article><h2>What this number misses</h2><p id="metric-limits"></p></article></div>
+<p id="navigation-note" role="status" class="muted"></p>
+<section id="all-stats"><h2>This board’s complete stats</h2><p id="stats-board-name" class="stats-board-name"></p>
+<p>Every saved geometry measurement appears below. Values describe all 250,000 cells, regardless of the zoom. Select a headline value to see its overlay; expand a distribution table for every exact count.</p>
+<div id="headline-stats" class="headline-stats"></div>
+<div id="stats-ledger" class="stats-ledger"></div>
+<details class="raw-record"><summary>Exact saved record · full precision and field names</summary><p>Complete contents of this board’s stats.json, including its generation settings and validation record.</p><pre id="raw-stats"></pre></details>
+</section>
+<section id="survey"><h2>How sensitive is the selected metric to recipe and seed?</h2><p>The separate 300×300 survey uses the same three seeds per recipe. These descriptive ranges help judge sensitivity; three seeds do not establish a stable distribution.</p><label for="survey-scope">Survey comparison<select id="survey-scope"><option value="tweaks">53 tweak choices, fixed ordering and initial walk</option><option value="all">All 110 configurations</option></select></label><div id="survey-readout" class="three"></div><p class="muted">These ranges belong to 300-square survey boards. The inspected board is 500 square. A range of recipe means and a median seed range measure different things; neither proves that a metric captures every visible style or predicts solving difficulty.</p></section>
+<footer>Geometry comes from the exact saved board. The zoom does not change its measurements. No solution path is used to calculate these stats.</footer>
+</main></body></html>

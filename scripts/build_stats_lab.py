@@ -24,13 +24,16 @@ def main():
         path=ROOT/b['path'][3:]/'level.board.gz'
         text=gzip.decompress(path.read_bytes()).decode().strip()
         assert hashlib.sha256(text.encode()).hexdigest()==b['boardSha256']
+        saved=json.loads(path.with_name('stats.json').read_text())
+        assert saved['stats']==b['stats'] and saved['boardSha256']==b['boardSha256'], b['id']
         cells=text.split('&board=',1)[1]
         assert len(cells)==250000
         mask=bytearray((len(cells)+7)//8)
         for i,c in enumerate(cells):
             if c=='X':mask[i//8]|=1<<(i%8)
         boards.append({'id':b['id'],'recipe':b['recipe']['id'],'seed':b['seed'],'path':b['path'],
-                       'side':500,'boardSha256':b['boardSha256'],'wallsBase64':base64.b64encode(mask).decode(),'stats':b['stats']})
+                       'side':500,'boardSha256':b['boardSha256'],'wallsBase64':base64.b64encode(mask).decode(),
+                       'metadata':{k:v for k,v in saved.items() if k!='stats'},'stats':saved['stats']})
     ranges={}
     for scope in ('all','tweaks'):
         groups=defaultdict(list)

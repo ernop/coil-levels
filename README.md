@@ -163,8 +163,9 @@ The native `evaluate` command accepts a board on stdin and returns JSON.
 
 The [board wall](web/board-wall.html) shows all 32 saved 500-square boards at
 once and supports every size in `gallery/boards`. The [visual stats lab](web/stats-lab.html)
-compares exact 500-square cell masks with measurement overlays, labeled cell
-details, close numerical matches, and within-recipe seed variation.
+shows one exact 500-square board beside an adjustable labeled zoom, followed
+by every saved measurement, complete distributions, generation metadata, and
+observed recipe/seed ranges. Both views use the selected measurement overlay.
 
 The central gallery crop PNGs contain a visible CROP label, coordinates, and frame. The full
 maps retain exact cells. A crop boundary must never be interpreted as a board

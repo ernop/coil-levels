@@ -77,7 +77,7 @@ All 424 central detail PNGs now have **CROP**, source dimensions, zero-based
 coordinates, and a visible frame baked into the image. The 128×128 cell window
 is enlarged exactly threefold within a 512×512 labeled image. The wall starts
 with whole-board views in square containers. The [stats lab](../web/stats-lab.html?left=500-random-s101)
-shows a movable 22×22 cell detail, with its crop label printed on the canvas
+shows an adjustable 12–144-cell-square detail, with its crop label printed on the canvas
 and its position outlined in cyan on the whole-board map. Its initial detail
 includes the corridor beside the reported crop boundary.
 
@@ -106,8 +106,11 @@ replacement measurements.
 The [visual stats lab](../web/stats-lab.html) includes all 32 saved 500-square
 boards. Eleven overlays show the cells, runs, boundaries, tile densities,
 reflection mismatches, or square witnesses behind the measurements. Each
-explains its formula and what information it discards. Closest-number and
-most-different-number comparisons make scalar limitations visible. Descriptive
+explains its formula and what information it discards. The September 7 revision
+shows one board beside its zoom, with all headline values and a complete
+measurement ledger below it. Board and seed controls support sequential
+inspection. Every run histogram, square count, edge layer, and metadata field
+remains accessible at full precision. Descriptive
 ranges compare recipe means with observed variation among three seeds at 300
 square, without claiming statistical significance or solving difficulty.
 
