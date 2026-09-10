@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "160x90 seed=0 lc=len23-third New",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len23-third New"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/160x90 seed=0 lc=len23-third New.coil",
+      "line": 1,
+      "heading": "160x90 - len23-third New",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 160,
+  "height": 90,
+  "boardSha256": "f2d11c8507c262e2784563680e17c177a2295bb7c57517a4b8b8f68de7d95b25",
+  "solutionAvailable": false
+}

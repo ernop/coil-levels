@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=1stlast10 s-Weighted o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-Weighted o-flim3",
+    "23lim10 s-Weighted o-flim3",
+    "23lim25 s-Weighted o-flim3",
+    "2lim10 s-Weighted o-flim3",
+    "2lim25 s-Weighted o-flim3",
+    "2lim50 s-Weighted o-flim3",
+    "3lim10 s-Weighted o-flim3",
+    "3lim50 s-Weighted o-flim3",
+    "len23 s-Weighted o-flim3",
+    "sz23rnd3 s-Weighted o-flim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=1stlast10 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 1stlast10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim10 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 23lim10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim10 s-Weighted o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - 23lim10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim25 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 23lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim25 s-Weighted o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - 23lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim10 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim10 s-Weighted o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-flim3.coil",
+      "line": 23,
+      "heading": "14x10 - 2lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-flim3.coil",
+      "line": 34,
+      "heading": "14x10 - 2lim25 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim50 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim50 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim50 s-Weighted o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim50 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=3lim10 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 3lim10 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=3lim50 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 3lim50 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23 s-Weighted o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=sz23rnd3 s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - sz23rnd3 s-Weighted o-flim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "51f53d70f05263916adb5183aa01ba03af1e7882c0fd1da1191f3da6f9868ef9",
+  "solutionAvailable": false
+}

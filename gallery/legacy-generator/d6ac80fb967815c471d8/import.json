@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "title": "12x12 seed=0 lc=1stlast10 s-New o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-New o-tlim1000",
+    "1stlast10 s-New o-tnolim",
+    "23lim10 s-New o-tlim1000",
+    "23lim10 s-New o-tnolim",
+    "23lim25 s-New o-tlim1000",
+    "23lim25 s-New o-tnolim",
+    "2lim10 s-New o-tlim1000",
+    "2lim10 s-New o-tnolim",
+    "2lim25 s-New o-tlim1000",
+    "2lim25 s-New o-tnolim",
+    "2lim50 s-New o-tlim1000",
+    "2lim50 s-New o-tnolim",
+    "3lim10 s-New o-tlim1000",
+    "3lim10 s-New o-tnolim",
+    "3lim50 s-New o-tlim1000",
+    "3lim50 s-New o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 1stlast10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 1stlast10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim25 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim25 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 14,
+      "heading": "12x12 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 14,
+      "heading": "12x12 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim50 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim50 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim50 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim50 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim50 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim50 s-New o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 12,
+  "height": 12,
+  "boardSha256": "d6ac80fb967815c471d8373c17b2d6aaaca9b4d366cd4c6a125fbbf1140e2428",
+  "solutionAvailable": false
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=len23-3rd Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len23-3rd Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=len23-3rd Longest.coil",
+      "line": 24,
+      "heading": "22x22 - len23-3rd Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23-3rd Longest.coil",
+      "line": 70,
+      "heading": "22x22 - len23-3rd Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "a8b693375670df88965f8c2b9f428e9f00c7f7013d874bf85fa7130688ed31d6",
+  "solutionAvailable": false
+}

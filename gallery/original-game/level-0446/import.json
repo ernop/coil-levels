@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 446",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 446,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/446",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 151,
+  "height": 151,
+  "boardSha256": "cfdd7b9d901d2ec4c099c837f6bf806047215dfc55898bb47fc2f307eadfd8e4",
+  "solutionAvailable": false
+}

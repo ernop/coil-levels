@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=len12rnd3 Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len12rnd3 Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=len12rnd3 Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - len12rnd3 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len12rnd3 Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - len12rnd3 Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "3a00642ae6d9d72f5a292076790dcefc28db937cf9a9c1ba04f1c22b51fd35b5",
+  "solutionAvailable": false
+}

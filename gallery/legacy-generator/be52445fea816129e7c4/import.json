@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=rnd100lim5 s-Weighted o-lim1",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd100lim5 s-Weighted o-lim1",
+    "sz23-opt s-Weighted o-lim1"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=rnd100lim5 s-Weighted o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - rnd100lim5 s-Weighted o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=sz23-opt s-Weighted o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - sz23-opt s-Weighted o-lim1",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "be52445fea816129e7c4c0eaa62bd36d3e0bf5f3dedb3bf284a88ae0a8cee1b5",
+  "solutionAvailable": false
+}

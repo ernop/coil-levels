@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "120x55 seed=0 lc=sz3-1 Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "sz3-1 Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/120x55 seed=0 lc=sz3-1 Longest.coil",
+      "line": 1,
+      "heading": "120x55 - sz3-1 Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 120,
+  "height": 55,
+  "boardSha256": "0c09b0ce9b17e550d85a0937024e76b627cc88112407f135c403fef9a7c37afd",
+  "solutionAvailable": false
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "70x55 seed=0 lc=equalrem s-New o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "equalrem s-New o-tlim1000"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/70x55 seed=0 lc=equalrem s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "70x55 - equalrem s-New o-tlim1000",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 70,
+  "height": 55,
+  "boardSha256": "fd57e96de62ff212a8bef6ac72b72f0f14ee2f32ef7fb41edfe740a2f9bcdd17",
+  "solutionAvailable": false
+}

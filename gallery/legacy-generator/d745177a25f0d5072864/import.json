@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "1000x1000 seed=0 lc=rnd99 Weighted4 lim200",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 Weighted4 lim200"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/1000x1000 seed=0 lc=rnd99 Weighted4 lim200.coil",
+      "line": 1,
+      "heading": "1000x1000 - rnd99 Weighted4 lim200",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 1000,
+  "height": 1000,
+  "boardSha256": "d745177a25f0d5072864675aa710a2a03fe5bd8e44725f7102de940652485ed1",
+  "solutionAvailable": false
+}

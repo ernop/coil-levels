@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=1stlast10 s-Weighted o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-Weighted o-tlim3",
+    "23lim10 s-Weighted o-tlim3",
+    "23lim25 s-Weighted o-tlim3",
+    "2lim10 s-Weighted o-tlim3",
+    "2lim25 s-Weighted o-tlim3",
+    "2lim5 s-Weighted o-tlim3",
+    "2lim50 s-Weighted o-tlim3",
+    "3lim10 s-Weighted o-tlim3",
+    "3lim50 s-Weighted o-tlim3",
+    "len23 s-Weighted o-tlim3",
+    "len23-10th s-Weighted o-tlim3",
+    "len23-20th s-Weighted o-tlim3",
+    "len2lim50rnd s-Weighted o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=1stlast10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 1stlast10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 23lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim10 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 23lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim25 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 23lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=23lim25 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 23lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim10 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 23,
+      "heading": "14x10 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 34,
+      "heading": "14x10 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim5 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim5 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim5 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim5 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim50 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 2lim50 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=2lim50 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 2lim50 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=3lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 3lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=3lim10 s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - 3lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=3lim50 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - 3lim50 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23-10th s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23-10th s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23-10th s-Weighted o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - len23-10th s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23-20th s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23-20th s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len2lim50rnd s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - len2lim50rnd s-Weighted o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "ecaa13b0df20b2763fa69169734f4dc126c683fb0df0f0a21121c07611f99819",
+  "solutionAvailable": false
+}

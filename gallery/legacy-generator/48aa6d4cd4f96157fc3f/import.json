@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "160x90 seed=0 lc=sz2-13 Weighted",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "sz2-13 Weighted"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/160x90 seed=0 lc=sz2-13 Weighted.coil",
+      "line": 1,
+      "heading": "160x90 - sz2-13 Weighted",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 160,
+  "height": 90,
+  "boardSha256": "48aa6d4cd4f96157fc3f4d714b4e99dc3a202e3c2480cdf9e418e7791c2342c9",
+  "solutionAvailable": false
+}

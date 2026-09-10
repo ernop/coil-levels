@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=rnd99 s-New o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 s-New o-flim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-New o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - rnd99 s-New o-flim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "b02eab00cf1311a099e5387b6bebcbd947b33c8511cd4892ede89f681c68667b",
+  "solutionAvailable": false
+}

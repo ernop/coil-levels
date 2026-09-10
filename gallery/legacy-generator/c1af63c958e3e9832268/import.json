@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=equal23short s-Longest o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "equal23short s-Longest o-tlim1000",
+    "equal23short s-Longest o-tlim3",
+    "equal23short s-Longest o-tnolim",
+    "first s-Longest o-tlim1000",
+    "first s-Longest o-tlim3",
+    "first s-Longest o-tnolim",
+    "rnd2 s-Longest o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - equal23short s-Longest o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - equal23short s-Longest o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - equal23short s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - equal23short s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - equal23short s-Longest o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=equal23short s-Longest o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - equal23short s-Longest o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - first s-Longest o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - first s-Longest o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - first s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - first s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - first s-Longest o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=first s-Longest o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - first s-Longest o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd2 s-Longest o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - rnd2 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd2 s-Longest o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - rnd2 s-Longest o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "c1af63c958e3e9832268cdd9ce24e2504ae34d1c7cb5559397abf161e4e6a3a6",
+  "solutionAvailable": false
+}

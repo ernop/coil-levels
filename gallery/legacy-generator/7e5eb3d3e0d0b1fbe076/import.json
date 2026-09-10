@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=23lim30 s-Weighted o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim30 s-Weighted o-tlim1000",
+    "23lim30 s-Weighted o-tnolim",
+    "23lim60 s-Weighted o-tlim1000",
+    "23lim60 s-Weighted o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-Weighted o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim30 s-Weighted o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-Weighted o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim30 s-Weighted o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-Weighted o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim30 s-Weighted o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-Weighted o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim30 s-Weighted o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-Weighted o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim60 s-Weighted o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-Weighted o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim60 s-Weighted o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-Weighted o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim60 s-Weighted o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-Weighted o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim60 s-Weighted o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "7e5eb3d3e0d0b1fbe0768f9ac40efd74f7154c991bb5665609fd1aa1ab860cf1",
+  "solutionAvailable": false
+}

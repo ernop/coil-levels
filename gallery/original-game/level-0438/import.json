@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 438",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 438,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/438",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 149,
+  "height": 148,
+  "boardSha256": "f90b442e8cb596a29b8c7e0bb39fd14f62597d5689191afb4b0a4500ff08c0c7",
+  "solutionAvailable": false
+}

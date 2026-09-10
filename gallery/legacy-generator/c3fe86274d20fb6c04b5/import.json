@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "51x40 seed=20 lc=odd Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 20,
+  "archiveSettings": [
+    "odd Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/51x40 seed=20 lc=odd Weighted4.coil",
+      "line": 1,
+      "heading": "51x40 - odd Weighted4",
+      "seed": 20
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 51,
+  "height": 40,
+  "boardSha256": "c3fe86274d20fb6c04b512fe489cb7356278e5d87889d49e85c6f7783419713c",
+  "solutionAvailable": false
+}

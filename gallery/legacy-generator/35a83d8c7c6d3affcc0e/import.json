@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "60x60 seed=0 lc=first Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "first Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/60x60 seed=0 lc=first Longest.coil",
+      "line": 1,
+      "heading": "60x60 - first Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 60,
+  "height": 60,
+  "boardSha256": "35a83d8c7c6d3affcc0e2ac2db0d6fae48c18b164f367596ac47a59fbf230811",
+  "solutionAvailable": false
+}

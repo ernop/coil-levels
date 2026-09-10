@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 737",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 737,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/737",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 248,
+  "height": 248,
+  "boardSha256": "7c179e0cd1ad0385fc90d75fa86f606de62eebc25bbb97315a738c61185911c2",
+  "solutionAvailable": false
+}

@@ -2,12 +2,12 @@
 // The ledger reads the complete saved record; it never measures the selected crop.
 window.CoilStatsLedger = (() => {
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const number = value => value === null ? 'undefined' : value.toLocaleString(undefined, {maximumSignificantDigits:8});
+  const number = value => value == null ? '—' : typeof value==='number'&&value!==0&&Math.abs(value)<.01 ? value.toExponential(1) : value.toLocaleString(undefined, {maximumFractionDigits:2});
   const percent = value => value === null ? 'undefined' : number(value * 100) + '%';
   const valueCell = (path, value, text = number(value)) => `<td class="value" data-stat-path="${esc(path)}" data-value="${esc(JSON.stringify(value))}" title="Saved value: ${esc(JSON.stringify(value))}">${esc(text)}</td>`;
-  const row = (path, label, value, explanation, text) => `<tr><th scope="row">${esc(label)}<code>${esc(path.replace(/^stats\./,''))}</code>${explanation ? `<span class="measure-note">${esc(explanation)}</span>` : ''}</th>${valueCell(path,value,text)}</tr>`;
+  const row = (path, label, value, explanation, text) => `<tr><th scope="row" title="${esc(path)}${explanation?' · '+esc(explanation):''}">${esc(label)}</th>${valueCell(path,value,text)}</tr>`;
   const table = rows => `<table><tbody>${rows}</tbody></table>`;
-  const group = (title, description, content, wide = false) => `<article class="stat-group${wide ? ' wide-group' : ''}"><h3>${title}</h3><p>${description}</p>${content}</article>`;
+  const group = (title, description, content, wide = false) => `<article class="stat-group${wide ? ' wide-group' : ''}"><h3>${title}</h3><details class="stat-notes"><summary>Notes</summary><p>${description}</p></details>${content}</article>`;
 
   function distributionChart(series, xLabel) {
     const allKeys = [...new Set(series.flatMap(s => Object.keys(s.values)))].map(Number).sort((a,b)=>a-b);
@@ -81,12 +81,12 @@ window.CoilStatsLedger = (() => {
       edgeChart(s) + `<details><summary>All ${s.edgeLayers.length} layers · exact values and inspect controls</summary><div class="distribution-table"><table><thead><tr><th>Distance</th><th>Open fraction</th><th>Overlay</th></tr></thead><tbody>${s.edgeLayers.map((layer,index)=>`<tr><th scope="row" data-stat-path="stats.edgeLayers[${index}].distance" data-value="${layer.distance}">${layer.distance}</th>${valueCell(`stats.edgeLayers[${index}].openFraction`,layer.openFraction,percent(layer.openFraction))}<td><button data-edge-layer="${layer.distance}">Inspect layer ${layer.distance}</button></td></tr>`).join('')}</tbody></table></div></details>`);
 
     const metadataRows = Object.entries(board.metadata).map(([key,value])=>{
-      const formatted = typeof value === 'object' ? JSON.stringify(value) : String(value);
-      return `<tr><th scope="row">${esc(key)}</th><td data-stat-path="${esc(key)}" data-value="${esc(JSON.stringify(value))}">${esc(formatted)}</td></tr>`;
+      const formatted = typeof value === 'object' && value !== null ? `<details><summary>${esc(key)} · complete saved values</summary><pre>${esc(JSON.stringify(value,null,2))}</pre></details>` : esc(String(value));
+      return `<tr><th scope="row">${esc(key)}</th><td data-stat-path="${esc(key)}" data-value="${esc(JSON.stringify(value))}">${formatted}</td></tr>`;
     }).join('');
     html += group('Scope, generation settings, and provenance', 'These fields identify the saved specimen. Generation time depends on the machine and load; it is not a board-geometry or difficulty measurement.',
       `<p data-stat-path="stats.scope" data-value="${esc(JSON.stringify(s.scope))}">${esc(s.scope)}</p><table class="identity-table"><tbody>${metadataRows}</tbody></table>`, true);
     return html;
   }
-  return {render};
+  return {render,number};
 })();

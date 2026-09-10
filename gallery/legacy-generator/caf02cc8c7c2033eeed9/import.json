@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=1st-last s-New o-lim1",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1st-last s-New o-lim1",
+    "23lim10 s-New o-lim1",
+    "23lim25 s-New o-lim1",
+    "2lim10 s-New o-lim1",
+    "2lim25 s-New o-lim1",
+    "2lim5 s-New o-lim1",
+    "2lim50 s-New o-lim1",
+    "3lim10 s-New o-lim1",
+    "3lim50 s-New o-lim1",
+    "len23 s-New o-lim1",
+    "len23-20th s-New o-lim1",
+    "len23-3rd s-New o-lim1",
+    "len23-5th s-New o-lim1",
+    "len2lim50rnd s-New o-lim1",
+    "sz23rnd2 s-New o-lim1"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=1st-last s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 1st-last s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=23lim10 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 23lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=23lim10 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 23lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=23lim25 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 23lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=23lim25 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 23lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim10 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 2lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim10 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 2lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim25 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 2lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim25 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 2lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim25 s-New o-lim1.coil",
+      "line": 63,
+      "heading": "40x30 - 2lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim25 s-New o-lim1.coil",
+      "line": 94,
+      "heading": "40x30 - 2lim25 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim5 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 2lim5 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim5 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 2lim5 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim50 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 2lim50 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim50 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 2lim50 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim10 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 3lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim10 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 3lim10 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim50 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - 3lim50 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim50 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - 3lim50 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - len23 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - len23 s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23-20th s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - len23-20th s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23-3rd s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - len23-3rd s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23-3rd s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - len23-3rd s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23-5th s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - len23-5th s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23-5th s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - len23-5th s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len2lim50rnd s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - len2lim50rnd s-New o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=sz23rnd2 s-New o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - sz23rnd2 s-New o-lim1",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "caf02cc8c7c2033eeed96c1c3cad48c50096a4aa30952887bf8de8efb8c94cae",
+  "solutionAvailable": false
+}

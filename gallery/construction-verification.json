@@ -1,0 +1,317 @@
+{
+  "format": "coil-construction-v1",
+  "specimens": [
+    {
+      "board": "backward-v1/1000-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/1000-backward-v1-s1/construction.code.json",
+      "hexDigits": 15,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/1000-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/1000-backward-v1-s2/construction.code.json",
+      "hexDigits": 18,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/1000-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/1000-backward-v1-s3/construction.code.json",
+      "hexDigits": 35,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/128-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/128-backward-v1-s1/construction.code.json",
+      "hexDigits": 12,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/128-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/128-backward-v1-s2/construction.code.json",
+      "hexDigits": 12,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/128-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/128-backward-v1-s3/construction.code.json",
+      "hexDigits": 29,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/16-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/16-backward-v1-s1/construction.code.json",
+      "hexDigits": 9,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/16-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/16-backward-v1-s2/construction.code.json",
+      "hexDigits": 9,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/16-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/16-backward-v1-s3/construction.code.json",
+      "hexDigits": 14,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/2-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/2-backward-v1-s1/construction.code.json",
+      "hexDigits": 1,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/2-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/2-backward-v1-s2/construction.code.json",
+      "hexDigits": 1,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/2-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/2-backward-v1-s3/construction.code.json",
+      "hexDigits": 1,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/256-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/256-backward-v1-s1/construction.code.json",
+      "hexDigits": 13,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/256-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/256-backward-v1-s2/construction.code.json",
+      "hexDigits": 16,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/256-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/256-backward-v1-s3/construction.code.json",
+      "hexDigits": 34,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/32-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/32-backward-v1-s1/construction.code.json",
+      "hexDigits": 10,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/32-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/32-backward-v1-s2/construction.code.json",
+      "hexDigits": 10,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/32-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/32-backward-v1-s3/construction.code.json",
+      "hexDigits": 27,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/4-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/4-backward-v1-s1/construction.code.json",
+      "hexDigits": 6,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/4-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/4-backward-v1-s2/construction.code.json",
+      "hexDigits": 4,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/4-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/4-backward-v1-s3/construction.code.json",
+      "hexDigits": 2,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/512-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/512-backward-v1-s1/construction.code.json",
+      "hexDigits": 14,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/512-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/512-backward-v1-s2/construction.code.json",
+      "hexDigits": 17,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/512-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/512-backward-v1-s3/construction.code.json",
+      "hexDigits": 35,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/64-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/64-backward-v1-s1/construction.code.json",
+      "hexDigits": 11,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/64-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/64-backward-v1-s2/construction.code.json",
+      "hexDigits": 11,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/64-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/64-backward-v1-s3/construction.code.json",
+      "hexDigits": 28,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/8-backward-v1-s1/level.board.gz",
+      "code": "backward-v1/8-backward-v1-s1/construction.code.json",
+      "hexDigits": 8,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/8-backward-v1-s2/level.board.gz",
+      "code": "backward-v1/8-backward-v1-s2/construction.code.json",
+      "hexDigits": 6,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "backward-v1/8-backward-v1-s3/level.board.gz",
+      "code": "backward-v1/8-backward-v1-s3/construction.code.json",
+      "hexDigits": 5,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/1000-reversible-a1-s1/level.board.gz",
+      "code": "reversible-v1/1000-reversible-a1-s1/construction.code.json",
+      "hexDigits": 282600,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/1000-reversible-a1-s2/level.board.gz",
+      "code": "reversible-v1/1000-reversible-a1-s2/construction.code.json",
+      "hexDigits": 282785,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/1000-reversible-a2-s1/level.board.gz",
+      "code": "reversible-v1/1000-reversible-a2-s1/construction.code.json",
+      "hexDigits": 283846,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/1000-reversible-a2-s2/level.board.gz",
+      "code": "reversible-v1/1000-reversible-a2-s2/construction.code.json",
+      "hexDigits": 283746,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/16-reversible-a1-s1/level.board.gz",
+      "code": "reversible-v1/16-reversible-a1-s1/construction.code.json",
+      "hexDigits": 78,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/16-reversible-a1-s2/level.board.gz",
+      "code": "reversible-v1/16-reversible-a1-s2/construction.code.json",
+      "hexDigits": 77,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/16-reversible-a2-s1/level.board.gz",
+      "code": "reversible-v1/16-reversible-a2-s1/construction.code.json",
+      "hexDigits": 81,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/16-reversible-a2-s2/level.board.gz",
+      "code": "reversible-v1/16-reversible-a2-s2/construction.code.json",
+      "hexDigits": 82,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/256-reversible-a1-s1/level.board.gz",
+      "code": "reversible-v1/256-reversible-a1-s1/construction.code.json",
+      "hexDigits": 18476,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/256-reversible-a1-s2/level.board.gz",
+      "code": "reversible-v1/256-reversible-a1-s2/construction.code.json",
+      "hexDigits": 18457,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/256-reversible-a2-s1/level.board.gz",
+      "code": "reversible-v1/256-reversible-a2-s1/construction.code.json",
+      "hexDigits": 18711,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/256-reversible-a2-s2/level.board.gz",
+      "code": "reversible-v1/256-reversible-a2-s2/construction.code.json",
+      "hexDigits": 18680,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/512-reversible-a1-s1/level.board.gz",
+      "code": "reversible-v1/512-reversible-a1-s1/construction.code.json",
+      "hexDigits": 73926,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/512-reversible-a1-s2/level.board.gz",
+      "code": "reversible-v1/512-reversible-a1-s2/construction.code.json",
+      "hexDigits": 73932,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/512-reversible-a2-s1/level.board.gz",
+      "code": "reversible-v1/512-reversible-a2-s1/construction.code.json",
+      "hexDigits": 74431,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/512-reversible-a2-s2/level.board.gz",
+      "code": "reversible-v1/512-reversible-a2-s2/construction.code.json",
+      "hexDigits": 74420,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/64-reversible-a1-s1/level.board.gz",
+      "code": "reversible-v1/64-reversible-a1-s1/construction.code.json",
+      "hexDigits": 1155,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/64-reversible-a1-s2/level.board.gz",
+      "code": "reversible-v1/64-reversible-a1-s2/construction.code.json",
+      "hexDigits": 1143,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/64-reversible-a2-s1/level.board.gz",
+      "code": "reversible-v1/64-reversible-a2-s1/construction.code.json",
+      "hexDigits": 1191,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/64-reversible-a2-s2/level.board.gz",
+      "code": "reversible-v1/64-reversible-a2-s2/construction.code.json",
+      "hexDigits": 1188,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/controls/64-singleton-a2-s1/level.board.gz",
+      "code": "reversible-v1/controls/64-singleton-a2-s1/construction.code.json",
+      "hexDigits": 204,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    },
+    {
+      "board": "reversible-v1/controls/64-stripes-a2-s1/level.board.gz",
+      "code": "reversible-v1/controls/64-stripes-a2-s1/construction.code.json",
+      "hexDigits": 1272,
+      "verified": "Production encoder and decoder; exact board and solution replay; both validators passed"
+    }
+  ]
+}

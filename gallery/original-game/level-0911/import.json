@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 911",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 911,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/911",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 306,
+  "height": 306,
+  "boardSha256": "0dc16492b0dbec02fc3bd4d7b0b7dceb523d7f53e2ed76e91a9b0ba8103d5fe2",
+  "solutionAvailable": false
+}

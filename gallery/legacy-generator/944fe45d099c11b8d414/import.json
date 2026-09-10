@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "35x35 seed=0 lc=sz23-1 s-New o-nolim",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "sz23-1 s-New o-nolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/35x35 seed=0 lc=sz23-1 s-New o-nolim.coil",
+      "line": 1,
+      "heading": "35x35 - sz23-1 s-New o-nolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 35,
+  "height": 35,
+  "boardSha256": "944fe45d099c11b8d414d2f32ba6e14c3db35963c51451e37ed04cdc9ec64bd4",
+  "solutionAvailable": false
+}

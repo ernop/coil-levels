@@ -1,0 +1,21 @@
+{
+  "side": 32,
+  "steps": 2000000,
+  "activity": 2,
+  "observations": 200,
+  "initializations": [
+    "singleton",
+    "backward",
+    "horizontal",
+    "vertical"
+  ],
+  "kernels": [
+    "legacy",
+    "deep"
+  ],
+  "seeds": [
+    "4af5e1f19a698133297f737c3be3859e020ea296b8c8e6c27156881762469ae14b8b53ce3fc09127383c9833cdcaf0f6b6866d6c71e8ec4775210016653231ea",
+    "959f02a0932355b06451a89b9d71b937de8308b25cfd2d258c1fab5f4bde2765cb3652813385a96e469287887807aa25f16454291c7ede1f3318d3640228018a"
+  ],
+  "seedDerivation": "sha512-base-and-initialization-v1"
+}

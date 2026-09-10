@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "60x40 seed=0 lc=1st-last s-Weighted o-lim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1st-last s-Weighted o-lim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/60x40 seed=0 lc=1st-last s-Weighted o-lim3.coil",
+      "line": 1,
+      "heading": "60x40 - 1st-last s-Weighted o-lim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 60,
+  "height": 40,
+  "boardSha256": "1aa70bcdd5831eb564b9f28dd1f66182e9fc8d0a3854ee2a6a6b5c2f3747d5b4",
+  "solutionAvailable": false
+}

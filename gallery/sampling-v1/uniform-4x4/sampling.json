@@ -1,0 +1,251 @@
+{
+  "generator": "exact-uniform-board-v1",
+  "side": 4,
+  "count": 48,
+  "seedHex": "cffc08aa2ebddc287a0e829c05371072e10788bb4cefdfc0ece7bbb4f133b276357ef885a55cf6db14a6a7fd03a77425a018ced3f482fcd8e891acf591d99efb",
+  "randomAlgorithm": "sha256-counter-v1",
+  "catalogueSize": 3503,
+  "distribution": "uniform solvable masks; independent bounded-index draws under ideal random choices",
+  "samples": [
+    {
+      "index": 1,
+      "mask": 25567,
+      "openCells": 11
+    },
+    {
+      "index": 2,
+      "mask": 30195,
+      "openCells": 11
+    },
+    {
+      "index": 3,
+      "mask": 52992,
+      "openCells": 6
+    },
+    {
+      "index": 4,
+      "mask": 54,
+      "openCells": 4
+    },
+    {
+      "index": 5,
+      "mask": 63942,
+      "openCells": 10
+    },
+    {
+      "index": 6,
+      "mask": 26160,
+      "openCells": 6
+    },
+    {
+      "index": 7,
+      "mask": 65515,
+      "openCells": 14
+    },
+    {
+      "index": 8,
+      "mask": 28343,
+      "openCells": 11
+    },
+    {
+      "index": 9,
+      "mask": 13302,
+      "openCells": 10
+    },
+    {
+      "index": 10,
+      "mask": 39327,
+      "openCells": 10
+    },
+    {
+      "index": 11,
+      "mask": 28198,
+      "openCells": 8
+    },
+    {
+      "index": 12,
+      "mask": 28625,
+      "openCells": 10
+    },
+    {
+      "index": 13,
+      "mask": 14289,
+      "openCells": 9
+    },
+    {
+      "index": 14,
+      "mask": 13895,
+      "openCells": 8
+    },
+    {
+      "index": 15,
+      "mask": 52899,
+      "openCells": 9
+    },
+    {
+      "index": 16,
+      "mask": 13655,
+      "openCells": 9
+    },
+    {
+      "index": 17,
+      "mask": 54646,
+      "openCells": 10
+    },
+    {
+      "index": 18,
+      "mask": 13271,
+      "openCells": 10
+    },
+    {
+      "index": 19,
+      "mask": 50961,
+      "openCells": 7
+    },
+    {
+      "index": 20,
+      "mask": 65459,
+      "openCells": 13
+    },
+    {
+      "index": 21,
+      "mask": 1763,
+      "openCells": 7
+    },
+    {
+      "index": 22,
+      "mask": 3440,
+      "openCells": 6
+    },
+    {
+      "index": 23,
+      "mask": 3744,
+      "openCells": 5
+    },
+    {
+      "index": 24,
+      "mask": 26568,
+      "openCells": 8
+    },
+    {
+      "index": 25,
+      "mask": 3200,
+      "openCells": 3
+    },
+    {
+      "index": 26,
+      "mask": 64392,
+      "openCells": 9
+    },
+    {
+      "index": 27,
+      "mask": 1134,
+      "openCells": 6
+    },
+    {
+      "index": 28,
+      "mask": 4091,
+      "openCells": 11
+    },
+    {
+      "index": 29,
+      "mask": 59959,
+      "openCells": 10
+    },
+    {
+      "index": 30,
+      "mask": 63760,
+      "openCells": 7
+    },
+    {
+      "index": 31,
+      "mask": 32702,
+      "openCells": 13
+    },
+    {
+      "index": 32,
+      "mask": 30327,
+      "openCells": 11
+    },
+    {
+      "index": 33,
+      "mask": 2291,
+      "openCells": 7
+    },
+    {
+      "index": 34,
+      "mask": 1763,
+      "openCells": 7
+    },
+    {
+      "index": 35,
+      "mask": 9983,
+      "openCells": 11
+    },
+    {
+      "index": 36,
+      "mask": 16,
+      "openCells": 1
+    },
+    {
+      "index": 37,
+      "mask": 53150,
+      "openCells": 11
+    },
+    {
+      "index": 38,
+      "mask": 3263,
+      "openCells": 9
+    },
+    {
+      "index": 39,
+      "mask": 61070,
+      "openCells": 10
+    },
+    {
+      "index": 40,
+      "mask": 11878,
+      "openCells": 8
+    },
+    {
+      "index": 41,
+      "mask": 17646,
+      "openCells": 8
+    },
+    {
+      "index": 42,
+      "mask": 30502,
+      "openCells": 9
+    },
+    {
+      "index": 43,
+      "mask": 64291,
+      "openCells": 10
+    },
+    {
+      "index": 44,
+      "mask": 63958,
+      "openCells": 11
+    },
+    {
+      "index": 45,
+      "mask": 27872,
+      "openCells": 7
+    },
+    {
+      "index": 46,
+      "mask": 886,
+      "openCells": 7
+    },
+    {
+      "index": 47,
+      "mask": 65395,
+      "openCells": 13
+    },
+    {
+      "index": 48,
+      "mask": 60960,
+      "openCells": 7
+    }
+  ]
+}

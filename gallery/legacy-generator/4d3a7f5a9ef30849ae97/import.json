@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "title": "60x40 seed=0 lc=2lim5 s-Longest o-lim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "2lim5 s-Longest o-lim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/60x40 seed=0 lc=2lim5 s-Longest o-lim3.coil",
+      "line": 1,
+      "heading": "60x40 - 2lim5 s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=2lim5 s-Longest o-lim3.coil",
+      "line": 42,
+      "heading": "60x40 - 2lim5 s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=2lim5 s-Longest o-lim3.coil",
+      "line": 83,
+      "heading": "60x40 - 2lim5 s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=2lim5 s-Longest o-lim3.coil",
+      "line": 124,
+      "heading": "60x40 - 2lim5 s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=2lim5 s-Longest o-lim3.coil",
+      "line": 165,
+      "heading": "60x40 - 2lim5 s-Longest o-lim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 60,
+  "height": 40,
+  "boardSha256": "4d3a7f5a9ef30849ae97a5c9398763e617649d0d21e77b9963ca00196b223061",
+  "solutionAvailable": false
+}

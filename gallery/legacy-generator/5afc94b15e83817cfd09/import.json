@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "160x90 seed=0 lc=odd New",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "odd New"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/160x90 seed=0 lc=odd New.coil",
+      "line": 1,
+      "heading": "160x90 - odd New",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 160,
+  "height": 90,
+  "boardSha256": "5afc94b15e83817cfd095c211ff58f26a7642a073d25b401c8eeb948d6a6086e",
+  "solutionAvailable": false
+}

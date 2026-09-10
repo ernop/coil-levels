@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "title": "120x55 seed=0 lc=rnd99 Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/120x55 seed=0 lc=rnd99 Longest.coil",
+      "line": 1,
+      "heading": "120x55 - rnd99 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/120x55 seed=0 lc=rnd99 Longest.coil",
+      "line": 57,
+      "heading": "120x55 - rnd99 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/120x55 seed=0 lc=rnd99 Longest.coil",
+      "line": 113,
+      "heading": "120x55 - rnd99 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/120x55 seed=0 lc=rnd99 Longest.coil",
+      "line": 169,
+      "heading": "120x55 - rnd99 Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 120,
+  "height": 55,
+  "boardSha256": "f223c2f19ca369d27cd0503eff3a0a763a759d410c029cfa0b5ad25270d253d6",
+  "solutionAvailable": false
+}

@@ -27,13 +27,17 @@ purpose; do not commit smoke-test levels (`gen` writes a `.coil` into
 `levels/` on every run).
 
 The [board style collection](gallery/README.md) and
-[HTML atlas](web/gallery-guide.html) contain a controlled picker/seed survey
+[Board explorer](web/gallery.html) contain a controlled picker/seed survey
 and selected large specimens. `specimen` exports validated gzip boards and
 geometry; `verify-collection` replays and verifies the saved collection.
 `gallery/` is deliberately versioned, unlike ordinary `output/` runs.
 
 For real solver evaluation use [meta_solver/README.md](meta_solver/README.md).
-The [visual stats lab](web/stats-lab.html) overlays exact cell measurements;
-the [board wall](web/board-wall.html) starts with every saved 500-square board.
+The [Board explorer](web/gallery.html) combines configuration selection,
+thumbnails, full-board and exact zoom views, parameters, methods, all stats,
+comparisons, and research for all 4,864 board entries. Sources distinguish original-game levels and this project’s generator. See
+[archive coverage](gallery/ARCHIVES.md); absent solution certificates must stay
+explicit, and rectangular boards must not be padded into squares. The old stats-lab,
+board-wall, and gallery-guide HTML files are bookmark-preserving redirects.
 The tweak-based generator's `GenerationQuality` policy is separate from game
 validity. Cropped previews must visibly label their crop on the image itself.

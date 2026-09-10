@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=len2lim50rnd s-Longest o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len2lim50rnd s-Longest o-flim3",
+    "len2lim50rnd s-Longest o-tlim3",
+    "rnd100 s-Longest o-tlim3",
+    "rnd99 s-Longest o-flim3",
+    "rnd99 s-Longest o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=len2lim50rnd s-Longest o-flim3.coil",
+      "line": 12,
+      "heading": "14x10 - len2lim50rnd s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len2lim50rnd s-Longest o-tlim3.coil",
+      "line": 12,
+      "heading": "14x10 - len2lim50rnd s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd100 s-Longest o-tlim3.coil",
+      "line": 23,
+      "heading": "14x10 - rnd100 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd100 s-Longest o-tlim3.coil",
+      "line": 34,
+      "heading": "14x10 - rnd100 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd100 s-Longest o-tlim3.coil",
+      "line": 45,
+      "heading": "14x10 - rnd100 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 45,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 56,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 67,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 78,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 89,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 100,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 111,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 122,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 133,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 221,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 232,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 243,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 34,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 78,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 89,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 100,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 111,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 122,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 144,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 166,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 199,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 210,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 221,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "a75c6373cd8b67747e6b1a02cbc23cbebdb096d63aae47f416de6f04f3a6b361",
+  "solutionAvailable": false
+}

@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "generator": "reversible-path-v1",
+  "sampler": "symmetric-edit-metropolis-v1",
+  "dynamics": {
+    "activity": 2,
+    "steps": 25600,
+    "initialization": "stripes",
+    "spacing": 2,
+    "initialOpenCells": 135,
+    "endpointMax": 8,
+    "rectangleMax": 12,
+    "heightMax": 3,
+    "lazyProbability": 0.5,
+    "operationOrder": [
+      "start-grow",
+      "start-delete",
+      "finish-grow",
+      "finish-delete",
+      "rectangle-grow",
+      "rectangle-delete"
+    ],
+    "attempted": [
+      2087,
+      2131,
+      2172,
+      2045,
+      2135,
+      2169
+    ],
+    "accepted": [
+      69,
+      64,
+      69,
+      68,
+      4,
+      0
+    ],
+    "reindexes": 0,
+    "trace": [
+      {
+        "step": 0,
+        "openCells": 135
+      },
+      {
+        "step": 1280,
+        "openCells": 160
+      },
+      {
+        "step": 2560,
+        "openCells": 158
+      },
+      {
+        "step": 3840,
+        "openCells": 163
+      },
+      {
+        "step": 5120,
+        "openCells": 163
+      },
+      {
+        "step": 6400,
+        "openCells": 162
+      },
+      {
+        "step": 7680,
+        "openCells": 167
+      },
+      {
+        "step": 8960,
+        "openCells": 166
+      },
+      {
+        "step": 10240,
+        "openCells": 165
+      },
+      {
+        "step": 11520,
+        "openCells": 165
+      },
+      {
+        "step": 12800,
+        "openCells": 166
+      },
+      {
+        "step": 14080,
+        "openCells": 167
+      },
+      {
+        "step": 15360,
+        "openCells": 167
+      },
+      {
+        "step": 16640,
+        "openCells": 167
+      },
+      {
+        "step": 17920,
+        "openCells": 166
+      },
+      {
+        "step": 19200,
+        "openCells": 165
+      },
+      {
+        "step": 20480,
+        "openCells": 162
+      },
+      {
+        "step": 21760,
+        "openCells": 169
+      },
+      {
+        "step": 23040,
+        "openCells": 168
+      },
+      {
+        "step": 24320,
+        "openCells": 166
+      },
+      {
+        "step": 25600,
+        "openCells": 167
+      }
+    ],
+    "stationaryTarget": "ordered-solution weight activity^openCells; board weight solutionCount * activity^openCells",
+    "mixing": "Finite run; convergence not established. Initialization can strongly influence output."
+  },
+  "side": 16,
+  "seedHex": "4af5e1f19a698133297f737c3be3859e020ea296b8c8e6c27156881762469ae14b8b53ce3fc09127383c9833cdcaf0f6b6866d6c71e8ec4775210016653231ea",
+  "seedBits": 512,
+  "randomAlgorithm": "sha256-counter-v1",
+  "generationPolicy": "complete-unfiltered-v1",
+  "generationSeconds": 0.0298548,
+  "choiceCount": 78561,
+  "targetOpenCells": 256,
+  "stopReason": "step-budget",
+  "legalExtensions": [],
+  "occupiedBounds": {
+    "x": 0,
+    "y": 0,
+    "width": 16,
+    "height": 16
+  },
+  "occupiedBoundsFill": 0.65234375,
+  "solutionSlides": 35,
+  "start": {
+    "x": 14,
+    "y": 1
+  },
+  "finish": {
+    "x": 12,
+    "y": 15
+  },
+  "boardSha256": "46e215a5d4a0009e29b86925a94a8feea7a42e4eeff7974641a5fbbbb3de50db",
+  "validation": "Debug.DoDebug \u002B CoilFormat.Validate; persisted recipe and gzip pair replayed",
+  "stats": {
+    "width": 16,
+    "height": 16,
+    "openCells": 167,
+    "openFraction": 0.65234375,
+    "degreeCounts": [
+      0,
+      0,
+      67,
+      78,
+      22
+    ],
+    "isolatedWallFraction": 0,
+    "interfacePerOpen": 1.2694610778443114,
+    "axisBias": 0.2631578947368421,
+    "horizontalRuns": {
+      "count": 23,
+      "mean": 7.260869565217392,
+      "max": 16,
+      "histogram": {
+        "1": 5,
+        "2": 1,
+        "4": 3,
+        "5": 2,
+        "6": 1,
+        "7": 3,
+        "9": 1,
+        "13": 2,
+        "14": 2,
+        "16": 3
+      }
+    },
+    "verticalRuns": {
+      "count": 83,
+      "mean": 2.0120481927710845,
+      "max": 7,
+      "histogram": {
+        "1": 36,
+        "2": 24,
+        "3": 13,
+        "4": 8,
+        "5": 1,
+        "7": 1
+      }
+    },
+    "largestOpenSquare": [
+      3,
+      0,
+      4
+    ],
+    "largestWallSquare": [
+      0,
+      0,
+      2
+    ],
+    "openSquareCounts": {
+      "1": 167,
+      "2": 59,
+      "3": 19,
+      "4": 6
+    },
+    "wallSquareCounts": {
+      "1": 89,
+      "2": 12
+    },
+    "edgeLayers": [
+      {
+        "distance": 0,
+        "openFraction": 0.8
+      },
+      {
+        "distance": 1,
+        "openFraction": 0.7692307692307693
+      },
+      {
+        "distance": 2,
+        "openFraction": 0.5
+      },
+      {
+        "distance": 3,
+        "openFraction": 0.5833333333333334
+      },
+      {
+        "distance": 4,
+        "openFraction": 0.5357142857142857
+      },
+      {
+        "distance": 5,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 6,
+        "openFraction": 0.3333333333333333
+      },
+      {
+        "distance": 7,
+        "openFraction": 0.5
+      }
+    ],
+    "tileDensity": {
+      "side": 32,
+      "columns": 1,
+      "rows": 1,
+      "min": 0.65234375,
+      "max": 0.65234375,
+      "variance": 0
+    },
+    "symmetry": {
+      "mirrorX": 0.5349525667765592,
+      "mirrorY": -0.3262463836372199,
+      "rotate180": -0.22290250958756644,
+      "rawMirrorX": 0.7890625,
+      "rawMirrorY": 0.3984375,
+      "rawRotate180": 0.4453125
+    },
+    "scope": "Exact full-board geometry. Density variance uses nonoverlapping 32-cell tiles, including partial edge tiles equally. No room or proof analysis."
+  }
+}

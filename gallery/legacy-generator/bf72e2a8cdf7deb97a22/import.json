@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "1000x1000 seed=0 lc=1stlast10 Longest lim200",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 Longest lim200"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/1000x1000 seed=0 lc=1stlast10 Longest lim200.coil",
+      "line": 1,
+      "heading": "1000x1000 - 1stlast10 Longest lim200",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 1000,
+  "height": 1000,
+  "boardSha256": "bf72e2a8cdf7deb97a22d11891ac26924680623e38a9831a4e4be75dcd741fe9",
+  "solutionAvailable": false
+}

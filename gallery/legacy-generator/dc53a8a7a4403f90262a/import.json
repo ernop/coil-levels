@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "title": "12x12 seed=0 lc=23lim30 s-Weighted o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim30 s-Weighted o-tlim3",
+    "23lim60 s-Weighted o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/12x12 seed=0 lc=23lim30 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim30 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim60 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim60 s-Weighted o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 12,
+  "height": 12,
+  "boardSha256": "dc53a8a7a4403f90262a3d1c0f6d3e6843ef6975830d7850379ced995b63c21a",
+  "solutionAvailable": false
+}

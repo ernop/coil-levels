@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=even Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "even Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=even Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - even Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=even Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - even Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "cf0e66263be496325b1582fe6ba4a7b45e71df780aaed53dc5619e5e3ae95a37",
+  "solutionAvailable": false
+}

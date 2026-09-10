@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=rnd99 s-New o-lim1",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 s-New o-lim1"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=rnd99 s-New o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - rnd99 s-New o-lim1",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "779927248422975161b86cc27b4ff8fa67fe0216eb8fc3530310d858baddc3e6",
+  "solutionAvailable": false
+}

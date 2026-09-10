@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "51x40 seed=4 lc=odd Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 4,
+  "archiveSettings": [
+    "odd Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/51x40 seed=4 lc=odd Longest.coil",
+      "line": 1,
+      "heading": "51x40 - odd Longest",
+      "seed": 4
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 51,
+  "height": 40,
+  "boardSha256": "70e2ae612eeb6bdcf6ade625eaf83bf7ac52bd302a262c7a42ac99b35e6cbada",
+  "solutionAvailable": false
+}

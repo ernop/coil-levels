@@ -16,6 +16,31 @@ namespace coil
   gen   <width> <height> [seed] [--picker NAME] [--segpicker NAME] [--lim N] [--loops N] [--keep-deadends] [--path] [--quiet]
         generate one level into output/<w>x<h>/ (png corner, .coil, .board, .solution). Defaults: 5000 5000 0 rnd99 Weighted4 lim 20.
         Path ends that are one-exit pockets are trimmed unless --keep-deadends. --path also saves the solution png.
+  gen-any <width> <height> [--code HEX | --sampler deep|edits|backward] [--steps N] [--activity N] [--out STEM]
+  gen-any --code-file FILE [--out STEM]
+        every legal board has a direct construction code. Default: 100*area steps with exact small-region resampling, activity 2.
+        Saves a variable-length construction code; dense sampling is biased, not uniform. No trimming.
+  encode-board <file.board[.gz]> <file.solution[.gz]> [--out FILE]
+        turn any validated board and solution into a gen-any construction code.
+  gen-backward <width> <height> [--seed N | --seed-hex HEX] [--out STEM]
+  gen-backward --recipe FILE [--out STEM]
+        complete backward construction; emits validated .board, .solution, and replay recipe.
+        Allows non-maximal boards and singletons. No trimming. Default randomness is not limited to a 32-bit seed.
+  backward-specimen <new-directory> <side> [--seed-hex HEX]
+        backward-growth-v1 specimen: 512-bit seed by default, maps, occupied-region crops, solution colors, exact stats, and recipe.
+  deep-specimen <new-directory> <side> [--steps N] [--activity N] [--init horizontal|vertical|singleton|backward] [--kernel deep|legacy]
+        exact conditional 2..4 square route replacements plus legacy edits; saves geometry and mixing traces.
+  deep-distribution-study <new-json-file>
+        enumerate the complete 3x3 transition matrix of the deeper sampler.
+  sample-uniform-rejection <width> <height> <new-directory> [--count N] [--max-attempts N] [--seed-hex HEX]
+        independent uniform boards by fair-bit rejection and exact solving; at most 64 cells; may be slow.
+  sample-uniform <side> <new-directory> [--count N] [--seed-hex HEX] [--method exact|chain] [--burn-in N] [--stride N]
+        exact uniform samples of solvable boards; exhaustive catalogue, side 1..4.
+  sampling-study <new-json-file>
+        exact uniform-board and solution-edit distribution studies; writes JSON and .paths.json.
+  reversible-specimen <new-directory> <side> [--seed-hex HEX] [--steps N] [--activity N] [--init stripes|singleton|backward] [--spacing N]
+        validated undoable solution edits, maps, recipes, and diagnostics. Target: solutionCount * activity^openCells per board.
+        Defaults: activity 2, 20*area steps, stripe initialization. Finite runs have no large-board mixing guarantee.
   solve <file.board> [--budget NODES] [--all MAX]
         run the reference solver on a coilbench board; prints effort. --all counts solutions up to MAX.
   evaluate [--budget NODES] [--timeout-ms MS] [--max-cells N] [--depth-limit N] [--directions URDL] [--starts natural|reverse|low-degree|high-degree] [--pruning on|off]
@@ -28,6 +53,10 @@ namespace coil
         generate seedCount levels, score each for solver hardness, keep the N hardest (default 10) as
         output/hardest/<w>x<h>/rankNN-seedS.board/.solution plus a summary. Defaults: --picker last --lim none,
         --score exact up to 34x34 (full-tree reference-solver effort, budget 20M nodes) else proxy. See HARDNESS.md.
+  prepare-archive-gallery
+        characterize imported original-game and historical layouts without regeneration.
+  prepare-sampling-gallery
+        validate saved uniform/chain draws and export exact stats and labeled images for the gallery.
   refresh-details <gallery-directory>
         rebuild detail PNGs from full maps with visible crop labels and coordinates.
   verify-collection <gallery-directory>
@@ -51,6 +80,19 @@ No subcommand: `<width> <height> [seed]` behaves as gen.";
             switch (args[0])
             {
                 case "gen": return Gen(args.Skip(1).ToArray());
+                case "gen-any": return GenAny(args.Skip(1).ToArray());
+                case "encode-board": return EncodeBoard(args.Skip(1).ToArray());
+                case "gen-backward": return GenBackward(args.Skip(1).ToArray());
+                case "backward-specimen": return BackwardSpecimen(args.Skip(1).ToArray());
+                case "deep-specimen": return DeepSpecimen(args.Skip(1).ToArray());
+                case "deep-distribution-study": return DeepDistributionStudy(args.Skip(1).ToArray());
+                case "sample-uniform-rejection": return UniformRejection(args.Skip(1).ToArray());
+                case "sample-uniform": return SampleUniform(args.Skip(1).ToArray());
+                case "sampling-study": return SamplingStudy(args.Skip(1).ToArray());
+                case "reversible-specimen": return ReversibleSpecimen(args.Skip(1).ToArray());
+                case "prepare-archive-gallery": return PrepareArchiveGallery(args.Skip(1).ToArray());
+                case "prepare-sampling-gallery": return PrepareSamplingGallery(args.Skip(1).ToArray());
+                case "refresh-sampling-details": return RefreshSamplingDetails(args.Skip(1).ToArray());
                 case "solve": return Solve(args.Skip(1).ToArray());
                 case "evaluate": return Evaluate(args.Skip(1).ToArray());
                 case "stats": return Stats(args.Skip(1).ToArray());

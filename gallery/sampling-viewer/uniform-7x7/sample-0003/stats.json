@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "side": 7,
+  "generator": "uniform-board-rejection-v1",
+  "sourceBoard": "gallery/deep-v1/uniform-7x7/sample-0003.board",
+  "sourceSolution": "gallery/deep-v1/uniform-7x7/sample-0003.solution",
+  "samplingBatch": {
+    "generator": "uniform-board-rejection-v1",
+    "Width": 7,
+    "Height": 7,
+    "requested": 12,
+    "completed": false,
+    "Attempts": 10000000,
+    "Disconnected": 9913206,
+    "Unsolvable": 86788,
+    "Accepted": 6,
+    "SolverNodes": 194601,
+    "seconds": 31.517557,
+    "SeedHex": "9c558e4a3ca1682b334122e23346013738656ad0503ade45ab6155e609f53d20ae9434202b6c4023e6655e46150b71b942f062c6de182b2267f66a6612d7c300",
+    "distribution": "Independent uniform solvable boards under ideal fair bits; repeats retained; incomplete solver decisions abort."
+  },
+  "sampleRecord": {
+    "index": 3,
+    "openCells": 23,
+    "attempt": 1612961
+  },
+  "solutionSlides": 9,
+  "boardSha256": "2192d48d91669e72e682b5a6a04b3622ab9da3436b828b032f17e29d41dcca08",
+  "validation": "Debug.DoDebug \u002B CoilFormat.Validate; exact saved draw, no regeneration",
+  "stats": {
+    "width": 7,
+    "height": 7,
+    "openCells": 23,
+    "openFraction": 0.46938775510204084,
+    "degreeCounts": [
+      0,
+      1,
+      9,
+      11,
+      2
+    ],
+    "isolatedWallFraction": 0,
+    "interfacePerOpen": 1.391304347826087,
+    "axisBias": 0.06666666666666667,
+    "horizontalRuns": {
+      "count": 7,
+      "mean": 3.2857142857142856,
+      "max": 5,
+      "histogram": {
+        "1": 1,
+        "2": 2,
+        "4": 2,
+        "5": 2
+      }
+    },
+    "verticalRuns": {
+      "count": 9,
+      "mean": 2.5555555555555554,
+      "max": 5,
+      "histogram": {
+        "1": 3,
+        "3": 5,
+        "5": 1
+      }
+    },
+    "largestOpenSquare": [
+      1,
+      0,
+      3
+    ],
+    "largestWallSquare": [
+      5,
+      0,
+      2
+    ],
+    "openSquareCounts": {
+      "1": 23,
+      "2": 8,
+      "3": 2
+    },
+    "wallSquareCounts": {
+      "1": 26,
+      "2": 4
+    },
+    "edgeLayers": [
+      {
+        "distance": 0,
+        "openFraction": 0.25
+      },
+      {
+        "distance": 1,
+        "openFraction": 0.6875
+      },
+      {
+        "distance": 2,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 3,
+        "openFraction": 0
+      }
+    ],
+    "tileDensity": {
+      "side": 32,
+      "columns": 1,
+      "rows": 1,
+      "min": 0.46938775510204084,
+      "max": 0.46938775510204084,
+      "variance": 0
+    },
+    "symmetry": {
+      "mirrorX": 0.42642140468227435,
+      "mirrorY": 0.34448160535117056,
+      "rotate180": 0.5903010033444817,
+      "rawMirrorX": 0.7142857142857143,
+      "rawMirrorY": 0.673469387755102,
+      "rawRotate180": 0.7959183673469388
+    },
+    "scope": "Exact full-board geometry. Density variance uses nonoverlapping 32-cell tiles, including partial edge tiles equally. No room or proof analysis."
+  }
+}

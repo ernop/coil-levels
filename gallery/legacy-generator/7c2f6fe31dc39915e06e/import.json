@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "title": "100x99 seed=0 lc=odd First",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "odd First"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/100x99 seed=0 lc=odd First.coil",
+      "line": 1,
+      "heading": "100x99 - odd First",
+      "seed": 0
+    },
+    {
+      "file": "levels/100x99 seed=0 lc=odd First.coil",
+      "line": 101,
+      "heading": "100x99 - odd First",
+      "seed": 0
+    },
+    {
+      "file": "levels/100x99 seed=0 lc=odd First.coil",
+      "line": 201,
+      "heading": "100x99 - odd First",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 100,
+  "height": 99,
+  "boardSha256": "7c2f6fe31dc39915e06e29941f79df096ab1daae97521c8bacafe4e44f8b9fc0",
+  "solutionAvailable": false
+}

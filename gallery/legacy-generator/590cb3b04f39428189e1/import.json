@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "60x60 seed=0 lc=equalrem Weighted",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "equalrem Weighted"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/60x60 seed=0 lc=equalrem Weighted.coil",
+      "line": 1,
+      "heading": "60x60 - equalrem Weighted",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 60,
+  "height": 60,
+  "boardSha256": "590cb3b04f39428189e1829a43b254525a9d98b9298e39be7ae7d2c4da663add",
+  "solutionAvailable": false
+}

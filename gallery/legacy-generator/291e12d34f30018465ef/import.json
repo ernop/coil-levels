@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "120x90 seed=0 lc=2lim10 s-New o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "2lim10 s-New o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/120x90 seed=0 lc=2lim10 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "120x90 - 2lim10 s-New o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 120,
+  "height": 90,
+  "boardSha256": "291e12d34f30018465ef4fda07c6bf8e82e69611d39d9a39e9ef3fe5d19ec211",
+  "solutionAvailable": false
+}

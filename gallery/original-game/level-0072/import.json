@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 72",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 72,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/72",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 28,
+  "height": 26,
+  "boardSha256": "06a05425b0c2e3225307385442ca40c1df058ea9b8a3695daa393bcfa6b47ba1",
+  "solutionAvailable": false
+}

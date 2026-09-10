@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "title": "120x55 seed=0 lc=23lim25 Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim25 Longest",
+    "2lim25 Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/120x55 seed=0 lc=23lim25 Longest.coil",
+      "line": 1,
+      "heading": "120x55 - 23lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/120x55 seed=0 lc=2lim25 Longest.coil",
+      "line": 1,
+      "heading": "120x55 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/120x55 seed=0 lc=2lim25 Longest.coil",
+      "line": 57,
+      "heading": "120x55 - 2lim25 Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 120,
+  "height": 55,
+  "boardSha256": "1d319702b58a9a68c4b419b4d39f96036f132697cf33ae3f8772295ca7f5ca76",
+  "solutionAvailable": false
+}

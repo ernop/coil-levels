@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 487",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 487,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/487",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 166,
+  "height": 164,
+  "boardSha256": "07d22bf8bb166ca06414c3f684519c7ac08184a7d62ed83c9f1f38220ef28760",
+  "solutionAvailable": false
+}

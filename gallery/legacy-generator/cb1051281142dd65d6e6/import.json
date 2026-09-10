@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=23lim30 s-New o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim30 s-New o-tlim3",
+    "23lim60 s-New o-tlim3",
+    "len12rnd3 s-New o-tlim3",
+    "len23rnd100 s-New o-tlim3",
+    "rnd100 s-New o-tlim3",
+    "rnd100lim20 s-New o-tlim3",
+    "rnd100lim5 s-New o-tlim3",
+    "rnd99 s-New o-tlim3",
+    "shortrnd s-New o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim30 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim30 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim30 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim60 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim60 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim60 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len12rnd3 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - len12rnd3 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len12rnd3 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - len12rnd3 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23rnd100 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - len23rnd100 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23rnd100 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - len23rnd100 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100lim20 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100lim20 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim5 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100lim5 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim5 s-New o-tlim3.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100lim5 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd99 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - rnd99 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=shortrnd s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - shortrnd s-New o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "cb1051281142dd65d6e6aba1e95ff0c40f0d37797e8c532d7536aae6a673addc",
+  "solutionAvailable": false
+}

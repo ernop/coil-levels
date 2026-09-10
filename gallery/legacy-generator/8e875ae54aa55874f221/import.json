@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "12x12 seed=0 lc=2lim100 s-Longest o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "2lim100 s-Longest o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/12x12 seed=0 lc=2lim100 s-Longest o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim100 s-Longest o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 12,
+  "height": 12,
+  "boardSha256": "8e875ae54aa55874f22121e519cb5620be7c192cecd03897fc185123b0bf6e31",
+  "solutionAvailable": false
+}

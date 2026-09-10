@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=len23-10th s-New o-nolim",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len23-10th s-New o-nolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=len23-10th s-New o-nolim.coil",
+      "line": 63,
+      "heading": "40x30 - len23-10th s-New o-nolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "c7f56d73dd91a9f2764a9915324857b45902f4ac5519d8089cd3bbc9eb7a265a",
+  "solutionAvailable": false
+}

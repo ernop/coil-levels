@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=len23-half s-Weighted o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len23-half s-Weighted o-flim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=len23-half s-Weighted o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23-half s-Weighted o-flim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "78d3ec6e9a8b84a1f535ab59a0b4ec015b36758b21bb99da16ba7e2b01f21e01",
+  "solutionAvailable": false
+}

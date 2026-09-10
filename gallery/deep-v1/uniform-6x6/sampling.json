@@ -1,0 +1,257 @@
+{
+  "generator": "uniform-board-rejection-v1",
+  "Width": 6,
+  "Height": 6,
+  "requested": 48,
+  "completed": true,
+  "Attempts": 463325,
+  "Disconnected": 451736,
+  "Unsolvable": 11541,
+  "Accepted": 48,
+  "SolverNodes": 55510,
+  "seconds": 1.6559694,
+  "SeedHex": "e0c2ee19bd89ae2fab7d40d0eaf0b816e3933c176a855039738e900f133be9dae1e6fbfbd8dbc1eb8f9a49e565aa7ee62628a37d17bc1b9a684366a68a71f82a",
+  "distribution": "Independent uniform solvable boards under ideal fair bits; repeats retained; incomplete solver decisions abort.",
+  "samples": [
+    {
+      "index": 1,
+      "openCells": 15,
+      "attempt": 13799
+    },
+    {
+      "index": 2,
+      "openCells": 15,
+      "attempt": 38486
+    },
+    {
+      "index": 3,
+      "openCells": 21,
+      "attempt": 40576
+    },
+    {
+      "index": 4,
+      "openCells": 20,
+      "attempt": 49270
+    },
+    {
+      "index": 5,
+      "openCells": 24,
+      "attempt": 59072
+    },
+    {
+      "index": 6,
+      "openCells": 20,
+      "attempt": 90562
+    },
+    {
+      "index": 7,
+      "openCells": 22,
+      "attempt": 90726
+    },
+    {
+      "index": 8,
+      "openCells": 21,
+      "attempt": 108538
+    },
+    {
+      "index": 9,
+      "openCells": 17,
+      "attempt": 110855
+    },
+    {
+      "index": 10,
+      "openCells": 17,
+      "attempt": 116694
+    },
+    {
+      "index": 11,
+      "openCells": 20,
+      "attempt": 129653
+    },
+    {
+      "index": 12,
+      "openCells": 21,
+      "attempt": 154074
+    },
+    {
+      "index": 13,
+      "openCells": 25,
+      "attempt": 162459
+    },
+    {
+      "index": 14,
+      "openCells": 13,
+      "attempt": 162559
+    },
+    {
+      "index": 15,
+      "openCells": 24,
+      "attempt": 174956
+    },
+    {
+      "index": 16,
+      "openCells": 24,
+      "attempt": 177834
+    },
+    {
+      "index": 17,
+      "openCells": 20,
+      "attempt": 177902
+    },
+    {
+      "index": 18,
+      "openCells": 22,
+      "attempt": 178550
+    },
+    {
+      "index": 19,
+      "openCells": 14,
+      "attempt": 181517
+    },
+    {
+      "index": 20,
+      "openCells": 26,
+      "attempt": 188026
+    },
+    {
+      "index": 21,
+      "openCells": 26,
+      "attempt": 200089
+    },
+    {
+      "index": 22,
+      "openCells": 21,
+      "attempt": 201100
+    },
+    {
+      "index": 23,
+      "openCells": 21,
+      "attempt": 208521
+    },
+    {
+      "index": 24,
+      "openCells": 25,
+      "attempt": 216056
+    },
+    {
+      "index": 25,
+      "openCells": 19,
+      "attempt": 217451
+    },
+    {
+      "index": 26,
+      "openCells": 19,
+      "attempt": 221976
+    },
+    {
+      "index": 27,
+      "openCells": 19,
+      "attempt": 228524
+    },
+    {
+      "index": 28,
+      "openCells": 14,
+      "attempt": 234206
+    },
+    {
+      "index": 29,
+      "openCells": 21,
+      "attempt": 239411
+    },
+    {
+      "index": 30,
+      "openCells": 22,
+      "attempt": 239647
+    },
+    {
+      "index": 31,
+      "openCells": 17,
+      "attempt": 241518
+    },
+    {
+      "index": 32,
+      "openCells": 21,
+      "attempt": 244072
+    },
+    {
+      "index": 33,
+      "openCells": 12,
+      "attempt": 250997
+    },
+    {
+      "index": 34,
+      "openCells": 17,
+      "attempt": 284718
+    },
+    {
+      "index": 35,
+      "openCells": 27,
+      "attempt": 298816
+    },
+    {
+      "index": 36,
+      "openCells": 19,
+      "attempt": 299959
+    },
+    {
+      "index": 37,
+      "openCells": 25,
+      "attempt": 302647
+    },
+    {
+      "index": 38,
+      "openCells": 28,
+      "attempt": 303500
+    },
+    {
+      "index": 39,
+      "openCells": 17,
+      "attempt": 358964
+    },
+    {
+      "index": 40,
+      "openCells": 16,
+      "attempt": 391489
+    },
+    {
+      "index": 41,
+      "openCells": 17,
+      "attempt": 404758
+    },
+    {
+      "index": 42,
+      "openCells": 25,
+      "attempt": 413594
+    },
+    {
+      "index": 43,
+      "openCells": 25,
+      "attempt": 424129
+    },
+    {
+      "index": 44,
+      "openCells": 15,
+      "attempt": 424277
+    },
+    {
+      "index": 45,
+      "openCells": 24,
+      "attempt": 440597
+    },
+    {
+      "index": 46,
+      "openCells": 20,
+      "attempt": 452168
+    },
+    {
+      "index": 47,
+      "openCells": 11,
+      "attempt": 453138
+    },
+    {
+      "index": 48,
+      "openCells": 22,
+      "attempt": 463325
+    }
+  ]
+}

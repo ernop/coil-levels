@@ -1,0 +1,19 @@
+{
+  "side": 32,
+  "steps": 20000000,
+  "activity": 2,
+  "observations": 400,
+  "initializations": [
+    "singleton",
+    "backward",
+    "horizontal",
+    "vertical"
+  ],
+  "kernels": [
+    "deep"
+  ],
+  "seeds": [
+    "4af5e1f19a698133297f737c3be3859e020ea296b8c8e6c27156881762469ae14b8b53ce3fc09127383c9833cdcaf0f6b6866d6c71e8ec4775210016653231ea"
+  ],
+  "seedDerivation": "sha512-base-and-initialization-v1"
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "title": "300x200 seed=0 lc=1stlast10 s-New o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-New o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/300x200 seed=0 lc=1stlast10 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "300x200 - 1stlast10 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/300x200 seed=0 lc=1stlast10 s-New o-tlim3.coil",
+      "line": 202,
+      "heading": "300x200 - 1stlast10 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/300x200 seed=0 lc=1stlast10 s-New o-tlim3.coil",
+      "line": 403,
+      "heading": "300x200 - 1stlast10 s-New o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 300,
+  "height": 200,
+  "boardSha256": "cd12ef21373a37fcf9a8ed958623f8c0bb7293ee02d8d78a989282a04e07eeae",
+  "solutionAvailable": false
+}

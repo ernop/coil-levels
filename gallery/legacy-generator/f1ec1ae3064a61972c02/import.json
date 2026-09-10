@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=1stlast2 Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast2 Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=1stlast2 Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - 1stlast2 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=1stlast2 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 1stlast2 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=1stlast2 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 1stlast2 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=1stlast2 Weighted4.coil",
+      "line": 116,
+      "heading": "22x22 - 1stlast2 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=1stlast2 Weighted4.coil",
+      "line": 162,
+      "heading": "22x22 - 1stlast2 Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "f1ec1ae3064a61972c02d3c661e292a81d8434dab20c567e42ee54b56de31397",
+  "solutionAvailable": false
+}

@@ -1,0 +1,254 @@
+{
+  "generator": "uniform-board-chain-v1",
+  "method": "chain",
+  "side": 4,
+  "count": 48,
+  "seedHex": "c81ec8d4c547b56fe3463ed2970909f437c6b872b12de4ef151b1539758a3cf14376cf8e9f6c506d2c01d79ac5fcad81c8efd279aa560ba7cf6d37d57b836cdb",
+  "randomAlgorithm": "sha256-counter-v1",
+  "catalogueSize": 3503,
+  "burnIn": 4096,
+  "stride": 128,
+  "distribution": "uniform stationary board distribution; finite burn-in; correlated chain samples; all stays counted",
+  "samples": [
+    {
+      "index": 1,
+      "mask": 13056,
+      "openCells": 4
+    },
+    {
+      "index": 2,
+      "mask": 4912,
+      "openCells": 5
+    },
+    {
+      "index": 3,
+      "mask": 4048,
+      "openCells": 7
+    },
+    {
+      "index": 4,
+      "mask": 567,
+      "openCells": 6
+    },
+    {
+      "index": 5,
+      "mask": 14178,
+      "openCells": 8
+    },
+    {
+      "index": 6,
+      "mask": 30044,
+      "openCells": 9
+    },
+    {
+      "index": 7,
+      "mask": 32158,
+      "openCells": 11
+    },
+    {
+      "index": 8,
+      "mask": 60406,
+      "openCells": 12
+    },
+    {
+      "index": 9,
+      "mask": 13024,
+      "openCells": 6
+    },
+    {
+      "index": 10,
+      "mask": 2040,
+      "openCells": 8
+    },
+    {
+      "index": 11,
+      "mask": 44736,
+      "openCells": 7
+    },
+    {
+      "index": 12,
+      "mask": 61164,
+      "openCells": 11
+    },
+    {
+      "index": 13,
+      "mask": 15295,
+      "openCells": 12
+    },
+    {
+      "index": 14,
+      "mask": 823,
+      "openCells": 7
+    },
+    {
+      "index": 15,
+      "mask": 14832,
+      "openCells": 8
+    },
+    {
+      "index": 16,
+      "mask": 14288,
+      "openCells": 8
+    },
+    {
+      "index": 17,
+      "mask": 62438,
+      "openCells": 11
+    },
+    {
+      "index": 18,
+      "mask": 14179,
+      "openCells": 9
+    },
+    {
+      "index": 19,
+      "mask": 32031,
+      "openCells": 11
+    },
+    {
+      "index": 20,
+      "mask": 28620,
+      "openCells": 10
+    },
+    {
+      "index": 21,
+      "mask": 19630,
+      "openCells": 8
+    },
+    {
+      "index": 22,
+      "mask": 4899,
+      "openCells": 6
+    },
+    {
+      "index": 23,
+      "mask": 304,
+      "openCells": 3
+    },
+    {
+      "index": 24,
+      "mask": 2556,
+      "openCells": 8
+    },
+    {
+      "index": 25,
+      "mask": 374,
+      "openCells": 6
+    },
+    {
+      "index": 26,
+      "mask": 14328,
+      "openCells": 10
+    },
+    {
+      "index": 27,
+      "mask": 18226,
+      "openCells": 7
+    },
+    {
+      "index": 28,
+      "mask": 30480,
+      "openCells": 7
+    },
+    {
+      "index": 29,
+      "mask": 64364,
+      "openCells": 11
+    },
+    {
+      "index": 30,
+      "mask": 61812,
+      "openCells": 9
+    },
+    {
+      "index": 31,
+      "mask": 63347,
+      "openCells": 12
+    },
+    {
+      "index": 32,
+      "mask": 2015,
+      "openCells": 10
+    },
+    {
+      "index": 33,
+      "mask": 25126,
+      "openCells": 6
+    },
+    {
+      "index": 34,
+      "mask": 8878,
+      "openCells": 7
+    },
+    {
+      "index": 35,
+      "mask": 50,
+      "openCells": 3
+    },
+    {
+      "index": 36,
+      "mask": 26079,
+      "openCells": 11
+    },
+    {
+      "index": 37,
+      "mask": 27366,
+      "openCells": 9
+    },
+    {
+      "index": 38,
+      "mask": 25324,
+      "openCells": 8
+    },
+    {
+      "index": 39,
+      "mask": 36544,
+      "openCells": 6
+    },
+    {
+      "index": 40,
+      "mask": 27839,
+      "openCells": 11
+    },
+    {
+      "index": 41,
+      "mask": 51343,
+      "openCells": 8
+    },
+    {
+      "index": 42,
+      "mask": 63647,
+      "openCells": 11
+    },
+    {
+      "index": 43,
+      "mask": 3212,
+      "openCells": 5
+    },
+    {
+      "index": 44,
+      "mask": 65367,
+      "openCells": 13
+    },
+    {
+      "index": 45,
+      "mask": 60386,
+      "openCells": 10
+    },
+    {
+      "index": 46,
+      "mask": 60278,
+      "openCells": 11
+    },
+    {
+      "index": 47,
+      "mask": 19703,
+      "openCells": 10
+    },
+    {
+      "index": 48,
+      "mask": 60103,
+      "openCells": 10
+    }
+  ]
+}

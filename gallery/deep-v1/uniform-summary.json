@@ -1,0 +1,35 @@
+[
+  {
+    "side": 5,
+    "accepted": 48,
+    "requested": 48,
+    "attempts": 14398,
+    "seconds": 0.1510272,
+    "completed": true,
+    "meanOpenCells": 14.1875,
+    "image": "uniform-5x5/boards.png",
+    "metadata": "uniform-5x5/sampling.json"
+  },
+  {
+    "side": 6,
+    "accepted": 48,
+    "requested": 48,
+    "attempts": 463325,
+    "seconds": 1.6559694,
+    "completed": true,
+    "meanOpenCells": 20.125,
+    "image": "uniform-6x6/boards.png",
+    "metadata": "uniform-6x6/sampling.json"
+  },
+  {
+    "side": 7,
+    "accepted": 6,
+    "requested": 12,
+    "attempts": 10000000,
+    "seconds": 31.517557,
+    "completed": false,
+    "meanOpenCells": 28.666666666666668,
+    "image": "uniform-7x7/boards.png",
+    "metadata": "uniform-7x7/sampling.json"
+  }
+]

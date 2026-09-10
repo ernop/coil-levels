@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=23lim30 Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim30 Longest",
+    "23lim60 Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=23lim30 Longest.coil",
+      "line": 24,
+      "heading": "22x22 - 23lim30 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim30 Longest.coil",
+      "line": 70,
+      "heading": "22x22 - 23lim30 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim30 Longest.coil",
+      "line": 116,
+      "heading": "22x22 - 23lim30 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim30 Longest.coil",
+      "line": 162,
+      "heading": "22x22 - 23lim30 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim60 Longest.coil",
+      "line": 24,
+      "heading": "22x22 - 23lim60 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim60 Longest.coil",
+      "line": 70,
+      "heading": "22x22 - 23lim60 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim60 Longest.coil",
+      "line": 116,
+      "heading": "22x22 - 23lim60 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim60 Longest.coil",
+      "line": 162,
+      "heading": "22x22 - 23lim60 Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "359e32cc5c420a784016d6672617e84a890a851d97d0355668a426901544e228",
+  "solutionAvailable": false
+}

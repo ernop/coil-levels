@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 625",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 625,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/625",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 212,
+  "height": 210,
+  "boardSha256": "655e3fe98284f97f82f8d80cf5e92715a4808e7bbcb586e84398a22d1a823d06",
+  "solutionAvailable": false
+}

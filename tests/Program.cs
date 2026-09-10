@@ -8,6 +8,9 @@ static class RegressionTests
 {
     static void Main()
     {
+        BackwardGenerationTests.Run();
+        SamplingTests.Run();
+        DeepSamplingTests.Run();
         CharacterizationTests.Run();
         SolverEvaluationTests.Run();
         GenerationQualityTests.Run();

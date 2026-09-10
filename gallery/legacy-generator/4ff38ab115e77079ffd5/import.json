@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=23lim10 Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim10 Weighted4",
+    "23lim25 Weighted4",
+    "2lim10 Weighted4",
+    "2lim25 Weighted4",
+    "2lim50 Weighted4",
+    "3lim10 Weighted4",
+    "3lim50 Weighted4",
+    "len23 Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - 23lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Weighted4.coil",
+      "line": 93,
+      "heading": "22x22 - 23lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Weighted4.coil",
+      "line": 139,
+      "heading": "22x22 - 23lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Weighted4.coil",
+      "line": 185,
+      "heading": "22x22 - 23lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 23lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 23lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Weighted4.coil",
+      "line": 116,
+      "heading": "22x22 - 23lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Weighted4.coil",
+      "line": 162,
+      "heading": "22x22 - 23lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 2lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 2lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Weighted4.coil",
+      "line": 116,
+      "heading": "22x22 - 2lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Weighted4.coil",
+      "line": 162,
+      "heading": "22x22 - 2lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 116,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 162,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 208,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 254,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 300,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Weighted4.coil",
+      "line": 346,
+      "heading": "22x22 - 2lim25 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim50 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 2lim50 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim50 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 2lim50 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim10 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 3lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim10 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 3lim10 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim50 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - 3lim50 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim50 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - 3lim50 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23 Weighted4.coil",
+      "line": 24,
+      "heading": "22x22 - len23 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23 Weighted4.coil",
+      "line": 70,
+      "heading": "22x22 - len23 Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "4ff38ab115e77079ffd5f55c960c43ac844e9d405dd4b9324cf176d936042eda",
+  "solutionAvailable": false
+}

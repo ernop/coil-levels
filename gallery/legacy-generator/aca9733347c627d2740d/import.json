@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=2lim50 s-New o-nolim",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "2lim50 s-New o-nolim",
+    "3lim50 s-New o-nolim",
+    "len23 s-New o-nolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=2lim50 s-New o-nolim.coil",
+      "line": 1,
+      "heading": "40x30 - 2lim50 s-New o-nolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=2lim50 s-New o-nolim.coil",
+      "line": 32,
+      "heading": "40x30 - 2lim50 s-New o-nolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim50 s-New o-nolim.coil",
+      "line": 1,
+      "heading": "40x30 - 3lim50 s-New o-nolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=3lim50 s-New o-nolim.coil",
+      "line": 32,
+      "heading": "40x30 - 3lim50 s-New o-nolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23 s-New o-nolim.coil",
+      "line": 1,
+      "heading": "40x30 - len23 s-New o-nolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=len23 s-New o-nolim.coil",
+      "line": 32,
+      "heading": "40x30 - len23 s-New o-nolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "aca9733347c627d2740d7f084d6eeb8858f946f2236bf67f5a259e1a1229884c",
+  "solutionAvailable": false
+}

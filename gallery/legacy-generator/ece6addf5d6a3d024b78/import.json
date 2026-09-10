@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "title": "101x101 seed=0 lc=odd Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "odd Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 1,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 103,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 205,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 307,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 409,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 511,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 613,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/101x101 seed=0 lc=odd Weighted4.coil",
+      "line": 715,
+      "heading": "101x101 - odd Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 101,
+  "height": 101,
+  "boardSha256": "ece6addf5d6a3d024b78d6fb7ce20f1048ee8fcac894413819b463ca8fa30713",
+  "solutionAvailable": false
+}

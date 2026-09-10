@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "generator": "backward-growth-v1",
+  "sampler": "uniform-legal-cell-v1",
+  "side": 16,
+  "seedHex": "959f02a0932355b06451a89b9d71b937de8308b25cfd2d258c1fab5f4bde2765cb3652813385a96e469287887807aa25f16454291c7ede1f3318d3640228018a",
+  "seedBits": 512,
+  "randomAlgorithm": "sha256-counter-v1",
+  "generationPolicy": "complete-unfiltered-v1",
+  "generationSeconds": 0.0089858,
+  "choiceCount": 13,
+  "targetOpenCells": 116,
+  "stopReason": "trapped",
+  "legalExtensions": [],
+  "occupiedBounds": {
+    "x": 13,
+    "y": 5,
+    "width": 3,
+    "height": 4
+  },
+  "occupiedBoundsFill": 1,
+  "solutionSlides": 6,
+  "start": {
+    "x": 15,
+    "y": 5
+  },
+  "finish": {
+    "x": 14,
+    "y": 7
+  },
+  "boardSha256": "10861efd1e99678ee841b7a3230b46dd54aa837c2995f437fe71389265673278",
+  "validation": "Debug.DoDebug \u002B CoilFormat.Validate; persisted recipe and gzip pair replayed",
+  "stats": {
+    "width": 16,
+    "height": 16,
+    "openCells": 12,
+    "openFraction": 0.046875,
+    "degreeCounts": [
+      0,
+      0,
+      4,
+      6,
+      2
+    ],
+    "isolatedWallFraction": 0,
+    "interfacePerOpen": 1.1666666666666667,
+    "axisBias": -0.058823529411764705,
+    "horizontalRuns": {
+      "count": 4,
+      "mean": 3,
+      "max": 3,
+      "histogram": {
+        "3": 4
+      }
+    },
+    "verticalRuns": {
+      "count": 3,
+      "mean": 4,
+      "max": 4,
+      "histogram": {
+        "4": 3
+      }
+    },
+    "largestOpenSquare": [
+      13,
+      5,
+      3
+    ],
+    "largestWallSquare": [
+      0,
+      0,
+      13
+    ],
+    "openSquareCounts": {
+      "1": 12,
+      "2": 6,
+      "3": 2
+    },
+    "wallSquareCounts": {
+      "1": 244,
+      "2": 210,
+      "3": 178,
+      "4": 148,
+      "5": 120,
+      "6": 94,
+      "7": 73,
+      "8": 54,
+      "9": 40,
+      "10": 28,
+      "11": 18,
+      "12": 10,
+      "13": 4
+    },
+    "edgeLayers": [
+      {
+        "distance": 0,
+        "openFraction": 0.06666666666666667
+      },
+      {
+        "distance": 1,
+        "openFraction": 0.07692307692307693
+      },
+      {
+        "distance": 2,
+        "openFraction": 0.09090909090909091
+      },
+      {
+        "distance": 3,
+        "openFraction": 0
+      },
+      {
+        "distance": 4,
+        "openFraction": 0
+      },
+      {
+        "distance": 5,
+        "openFraction": 0
+      },
+      {
+        "distance": 6,
+        "openFraction": 0
+      },
+      {
+        "distance": 7,
+        "openFraction": 0
+      }
+    ],
+    "tileDensity": {
+      "side": 32,
+      "columns": 1,
+      "rows": 1,
+      "min": 0.046875,
+      "max": 0.046875,
+      "variance": 0
+    },
+    "symmetry": {
+      "mirrorX": -0.04918032786885246,
+      "mirrorY": 0.47540983606557374,
+      "rotate180": -0.04918032786885246,
+      "rawMirrorX": 0.90625,
+      "rawMirrorY": 0.953125,
+      "rawRotate180": 0.90625
+    },
+    "scope": "Exact full-board geometry. Density variance uses nonoverlapping 32-cell tiles, including partial edge tiles equally. No room or proof analysis."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "title": "100x99 seed=0 lc=odd Weighted3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "odd Weighted3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/100x99 seed=0 lc=odd Weighted3.coil",
+      "line": 1,
+      "heading": "100x99 - odd Weighted3",
+      "seed": 0
+    },
+    {
+      "file": "levels/100x99 seed=0 lc=odd Weighted3.coil",
+      "line": 101,
+      "heading": "100x99 - odd Weighted3",
+      "seed": 0
+    },
+    {
+      "file": "levels/100x99 seed=0 lc=odd Weighted3.coil",
+      "line": 201,
+      "heading": "100x99 - odd Weighted3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 100,
+  "height": 99,
+  "boardSha256": "5117d5263db42cc0c7d043f91179fd3b2f914b1e3a76c379298aa8f33195b6e7",
+  "solutionAvailable": false
+}

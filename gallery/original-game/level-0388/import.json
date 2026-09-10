@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 388",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 388,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/388",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 133,
+  "height": 131,
+  "boardSha256": "9dbb7f303ec38cd7c875fe2f4593e92d39fd2acb10b5a485167286f7e0a15b96",
+  "solutionAvailable": false
+}

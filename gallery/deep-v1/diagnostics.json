@@ -1,0 +1,442 @@
+[
+  {
+    "collection": "independent-controls",
+    "kernel": "legacy",
+    "chains": 8,
+    "stepsPerChain": 2000000,
+    "meanSeconds": 0.6149772,
+    "finalOpenRange": [
+      440,
+      686
+    ],
+    "discardedTraceFraction": 0.5,
+    "diagnostics": {
+      "openFraction": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 3.805409498845873,
+        "rankSplitRHat": 3.805409498845873,
+        "foldedSplitRHat": 3.449266437260313,
+        "bulkEss": 8.693504806937721,
+        "chainMeans": [
+          0.5060546875,
+          0.406826171875,
+          0.664169921875,
+          0.659677734375,
+          0.47865234375,
+          0.407080078125,
+          0.651640625,
+          0.666318359375
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "adjacencyAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 4.246636926063752,
+        "rankSplitRHat": 4.246636926063752,
+        "foldedSplitRHat": 3.6927669742664655,
+        "bulkEss": 8.576966877946917,
+        "chainMeans": [
+          -0.024474697377119586,
+          0.027138258019790456,
+          0.18134168953953586,
+          0.21040894148305947,
+          0.015814201438404413,
+          -0.0866579748111336,
+          -0.19535675961639085,
+          -0.1891347813820214
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "absoluteAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 3.5726406544202085,
+        "rankSplitRHat": 3.5726406544202085,
+        "foldedSplitRHat": 2.893723356252838,
+        "bulkEss": 8.813667608700971,
+        "chainMeans": [
+          0.024474697377119586,
+          0.027138258019790456,
+          0.18134168953953586,
+          0.21040894148305947,
+          0.02446204997939252,
+          0.0866579748111336,
+          0.19535675961639085,
+          0.1891347813820214
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "pathAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 4.111401110371797,
+        "rankSplitRHat": 4.111401110371797,
+        "foldedSplitRHat": 3.4791410091857276,
+        "bulkEss": 8.597501310077662,
+        "chainMeans": [
+          -0.03669229106161712,
+          0.12577541449102048,
+          0.6247903442394313,
+          0.6376085726557144,
+          -0.05465114291026967,
+          -0.11817592515185124,
+          -0.620898928239842,
+          -0.6260319049995482
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "solutionSlides": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 2.9996558765799977,
+        "rankSplitRHat": 2.9996558765799977,
+        "foldedSplitRHat": 1.7498037637711295,
+        "bulkEss": 9.117848577103963,
+        "chainMeans": [
+          232.9,
+          178.95,
+          208.94,
+          202.08,
+          224.71,
+          186.7,
+          197.93,
+          208.48
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      }
+    },
+    "streams": "SHA-512(base seed bytes || ASCII initialization), distinct within each diagnostic group"
+  },
+  {
+    "collection": "independent-controls",
+    "kernel": "deep",
+    "chains": 8,
+    "stepsPerChain": 2000000,
+    "meanSeconds": 1.193472875,
+    "finalOpenRange": [
+      724,
+      739
+    ],
+    "discardedTraceFraction": 0.5,
+    "diagnostics": {
+      "openFraction": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 1.4447177304677348,
+        "rankSplitRHat": 1.4447177304677348,
+        "foldedSplitRHat": 1.115678053659324,
+        "bulkEss": 16.136918417454257,
+        "chainMeans": [
+          0.727509765625,
+          0.69935546875,
+          0.717021484375,
+          0.7131640625,
+          0.711455078125,
+          0.71244140625,
+          0.728828125,
+          0.7287109375
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "adjacencyAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 2.615031251242627,
+        "rankSplitRHat": 2.615031251242627,
+        "foldedSplitRHat": 1.9262848083895923,
+        "bulkEss": 9.534810494903253,
+        "chainMeans": [
+          0.003089286129127598,
+          -0.012772575738824152,
+          0.09594234459836047,
+          0.09753847462661659,
+          0.007556486523703168,
+          -0.001729512035657259,
+          -0.08017770772081317,
+          -0.08230073488948343
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "absoluteAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 1.9109078019229309,
+        "rankSplitRHat": 1.9109078019229309,
+        "foldedSplitRHat": 1.189225142767412,
+        "bulkEss": 11.350182214404994,
+        "chainMeans": [
+          0.008500631614452811,
+          0.013329297433040174,
+          0.09594234459836047,
+          0.09753847462661659,
+          0.009187041217673294,
+          0.00936951145114534,
+          0.08017770772081317,
+          0.08230073488948343
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "pathAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 3.849048327885874,
+        "rankSplitRHat": 3.849048327885874,
+        "foldedSplitRHat": 2.585868786247143,
+        "bulkEss": 8.707160586611215,
+        "chainMeans": [
+          -0.0054952257789965915,
+          -0.039446432336873914,
+          0.44571835815323646,
+          0.4655220210459979,
+          0.09784507720170978,
+          0.016189706576726436,
+          -0.46548165751293996,
+          -0.42296642074015633
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "solutionSlides": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 2.4578548224595633,
+        "rankSplitRHat": 2.4578548224595633,
+        "foldedSplitRHat": 1.5029167518690343,
+        "bulkEss": 9.758792241014032,
+        "chainMeans": [
+          364.99,
+          354.26,
+          303.19,
+          281.78,
+          345.21,
+          365.76,
+          284.35,
+          308.66
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      }
+    },
+    "streams": "SHA-512(base seed bytes || ASCII initialization), distinct within each diagnostic group"
+  },
+  {
+    "collection": "effort-controls",
+    "kernel": "legacy",
+    "chains": 8,
+    "stepsPerChain": 4000000,
+    "meanSeconds": 1.0879358125,
+    "finalOpenRange": [
+      546,
+      691
+    ],
+    "discardedTraceFraction": 0.5,
+    "diagnostics": {
+      "openFraction": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 3.37267798380484,
+        "rankSplitRHat": 3.37267798380484,
+        "foldedSplitRHat": 2.4029056869845458,
+        "bulkEss": 8.887105318768503,
+        "chainMeans": [
+          0.54751953125,
+          0.511953125,
+          0.666669921875,
+          0.674697265625,
+          0.52953125,
+          0.503876953125,
+          0.6634375,
+          0.665947265625
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "adjacencyAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 4.279530128173723,
+        "rankSplitRHat": 4.279530128173723,
+        "foldedSplitRHat": 3.052106376676578,
+        "bulkEss": 8.571958264455917,
+        "chainMeans": [
+          -0.00396313299082815,
+          0.02822546081343819,
+          0.1708491696478831,
+          0.1852750046949755,
+          0.00594389072193458,
+          -0.07584372860181295,
+          -0.17081027612072816,
+          -0.18010494195952215
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "absoluteAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 3.0252708697433497,
+        "rankSplitRHat": 3.0252708697433497,
+        "foldedSplitRHat": 2.350885676710771,
+        "bulkEss": 9.107063767337957,
+        "chainMeans": [
+          0.004439125261360031,
+          0.02822546081343819,
+          0.1708491696478831,
+          0.1852750046949755,
+          0.008626337248813617,
+          0.07584372860181295,
+          0.17081027612072816,
+          0.18010494195952215
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "pathAnisotropy": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 4.186055724118119,
+        "rankSplitRHat": 4.186055724118119,
+        "foldedSplitRHat": 3.448931182269995,
+        "bulkEss": 8.58651153207977,
+        "chainMeans": [
+          -0.00907262601382461,
+          0.13221515731290914,
+          0.6156655644355875,
+          0.6010319680544127,
+          -0.0725881180399511,
+          -0.10916044117570793,
+          -0.5945409455965763,
+          -0.6112034573910301
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "solutionSlides": {
+        "chains": 8,
+        "retainedPerChain": 100,
+        "rHat": 2.0926847790498178,
+        "rankSplitRHat": 2.0926847790498178,
+        "foldedSplitRHat": 1.465959711799204,
+        "bulkEss": 10.587626174156428,
+        "chainMeans": [
+          266.95,
+          235.42,
+          217.77,
+          235.3,
+          257.19,
+          236.05,
+          222.9,
+          221.2
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      }
+    },
+    "streams": "SHA-512(base seed bytes || ASCII initialization), distinct within each diagnostic group"
+  },
+  {
+    "collection": "long-controls",
+    "kernel": "deep",
+    "chains": 4,
+    "stepsPerChain": 20000000,
+    "meanSeconds": 9.086775525,
+    "finalOpenRange": [
+      747,
+      784
+    ],
+    "discardedTraceFraction": 0.5,
+    "diagnostics": {
+      "openFraction": {
+        "chains": 4,
+        "retainedPerChain": 200,
+        "rHat": 1.4876732216414714,
+        "rankSplitRHat": 1.4876732216414714,
+        "foldedSplitRHat": 1.085917777662002,
+        "bulkEss": 7.562512996110049,
+        "chainMeans": [
+          0.73435546875,
+          0.754873046875,
+          0.73375,
+          0.7591259765625
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "adjacencyAnisotropy": {
+        "chains": 4,
+        "retainedPerChain": 200,
+        "rHat": 2.5625577990984416,
+        "rankSplitRHat": 2.5625577990984416,
+        "foldedSplitRHat": 1.8206093188360888,
+        "bulkEss": 4.7633168210985035,
+        "chainMeans": [
+          -0.004914995377198766,
+          0.028003506014621395,
+          -0.0020934102674092284,
+          -0.04495214764747663
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "absoluteAnisotropy": {
+        "chains": 4,
+        "retainedPerChain": 200,
+        "rHat": 1.8211839280639366,
+        "rankSplitRHat": 1.8211839280639366,
+        "foldedSplitRHat": 1.3768640162990324,
+        "bulkEss": 5.809465191838632,
+        "chainMeans": [
+          0.008951966130795491,
+          0.028063147243695376,
+          0.008341655616631258,
+          0.04495214764747663
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "pathAnisotropy": {
+        "chains": 4,
+        "retainedPerChain": 200,
+        "rHat": 2.7661759521584486,
+        "rankSplitRHat": 2.7661759521584486,
+        "foldedSplitRHat": 2.1349242846797885,
+        "bulkEss": 4.661310727426691,
+        "chainMeans": [
+          -0.04253890327920983,
+          0.2939554004265669,
+          -0.025024001597182693,
+          -0.40382318321366234
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      },
+      "solutionSlides": {
+        "chains": 4,
+        "retainedPerChain": 200,
+        "rHat": 2.0554750218545967,
+        "rankSplitRHat": 2.0554750218545967,
+        "foldedSplitRHat": 1.2319169870855042,
+        "bulkEss": 5.33473450863364,
+        "chainMeans": [
+          341.28,
+          307.51,
+          346.655,
+          293.69
+        ],
+        "status": "between-chain-or-within-chain-disagreement",
+        "scope": "Scalar observables only; low R-hat does not prove board mixing. ESS assumes a stationary target and is capped at retained draws."
+      }
+    },
+    "streams": "SHA-512(base seed bytes || ASCII initialization), distinct within each diagnostic group"
+  }
+]

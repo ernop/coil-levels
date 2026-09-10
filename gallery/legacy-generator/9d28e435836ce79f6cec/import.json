@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=rnd99 s-Longest o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 s-Longest o-flim3",
+    "rnd99 s-Longest o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 144,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 155,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 166,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 177,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 188,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 199,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-flim3.coil",
+      "line": 210,
+      "heading": "14x10 - rnd99 s-Longest o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=rnd99 s-Longest o-tlim3.coil",
+      "line": 188,
+      "heading": "14x10 - rnd99 s-Longest o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "9d28e435836ce79f6cecef7d431ce7c4a3138c32449e16195fe19ea11094b9ac",
+  "solutionAvailable": false
+}

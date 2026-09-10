@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 780",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 780,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/780",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 263,
+  "height": 262,
+  "boardSha256": "19a50d247a222a9e5a6ff02292613d1ed5ed1609aa711b3f0cfb54c479ad854d",
+  "solutionAvailable": false
+}

@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=23lim10 Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim10 Longest",
+    "23lim25 Longest",
+    "2lim10 Longest",
+    "2lim25 Longest",
+    "2lim50 Longest",
+    "3lim10 Longest",
+    "3lim50 Longest",
+    "len23 Longest",
+    "len23-5th Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 23lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Longest.coil",
+      "line": 24,
+      "heading": "22x22 - 23lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Longest.coil",
+      "line": 70,
+      "heading": "22x22 - 23lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Longest.coil",
+      "line": 116,
+      "heading": "22x22 - 23lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim10 Longest.coil",
+      "line": 162,
+      "heading": "22x22 - 23lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 23lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 23lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Longest.coil",
+      "line": 93,
+      "heading": "22x22 - 23lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=23lim25 Longest.coil",
+      "line": 139,
+      "heading": "22x22 - 23lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 2lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 2lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Longest.coil",
+      "line": 93,
+      "heading": "22x22 - 2lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim10 Longest.coil",
+      "line": 139,
+      "heading": "22x22 - 2lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 93,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 139,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 185,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 231,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 277,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim25 Longest.coil",
+      "line": 323,
+      "heading": "22x22 - 2lim25 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim50 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 2lim50 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=2lim50 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 2lim50 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim10 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 3lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim10 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 3lim10 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim50 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - 3lim50 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=3lim50 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - 3lim50 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23 Longest.coil",
+      "line": 1,
+      "heading": "22x22 - len23 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23 Longest.coil",
+      "line": 47,
+      "heading": "22x22 - len23 Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23-5th Longest.coil",
+      "line": 1,
+      "heading": "22x22 - len23-5th Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=len23-5th Longest.coil",
+      "line": 47,
+      "heading": "22x22 - len23-5th Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "a7658b5db1eca939354101b380b0b9979223b69536c386197367bf6b4561a783",
+  "solutionAvailable": false
+}

@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=1stlast10 s-New o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-New o-tlim1000",
+    "1stlast10 s-New o-tnolim",
+    "23lim10 s-New o-tlim1000",
+    "23lim10 s-New o-tnolim",
+    "23lim25 s-New o-tlim1000",
+    "23lim25 s-New o-tnolim",
+    "2lim10 s-New o-tlim1000",
+    "2lim10 s-New o-tnolim",
+    "2lim25 s-New o-tlim1000",
+    "2lim25 s-New o-tnolim",
+    "2lim5 s-New o-tlim1000",
+    "2lim5 s-New o-tnolim",
+    "2lim50 s-New o-tlim1000",
+    "2lim50 s-New o-tnolim",
+    "3lim10 s-New o-tlim1000",
+    "3lim10 s-New o-tnolim",
+    "3lim50 s-New o-tlim1000",
+    "3lim50 s-New o-tnolim",
+    "len23 s-New o-tlim1000",
+    "len23 s-New o-tnolim",
+    "len23-10th s-New o-tlim1000",
+    "len23-10th s-New o-tnolim",
+    "len23-20th s-New o-tlim1000",
+    "len23-20th s-New o-tnolim",
+    "len2lim50rnd s-New o-tlim1000",
+    "len2lim50rnd s-New o-tnolim",
+    "sz2-1 s-New o-tlim1000",
+    "sz2-1 s-New o-tnolim",
+    "sz23-1 s-New o-tlim1000",
+    "sz23-1 s-New o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=1stlast10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 1stlast10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=1stlast10 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 1stlast10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=1stlast10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 1stlast10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=1stlast10 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 1stlast10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim10 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim10 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim25 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim25 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim25 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 23lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=23lim25 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 23lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim10 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim10 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 19,
+      "heading": "10x8 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tlim1000.coil",
+      "line": 28,
+      "heading": "10x8 - 2lim25 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 19,
+      "heading": "10x8 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim25 s-New o-tnolim.coil",
+      "line": 28,
+      "heading": "10x8 - 2lim25 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim5 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim5 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim5 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim5 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim5 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim5 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim5 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim5 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim50 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim50 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim50 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim50 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim50 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim50 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim10 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 3lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim10 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 3lim10 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 3lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim10 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 3lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim50 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 3lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim50 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 3lim50 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim50 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 3lim50 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=3lim50 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 3lim50 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - len23 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - len23 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - len23 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - len23 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - len23-10th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - len23-10th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tlim1000.coil",
+      "line": 19,
+      "heading": "10x8 - len23-10th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tlim1000.coil",
+      "line": 28,
+      "heading": "10x8 - len23-10th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - len23-10th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - len23-10th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tnolim.coil",
+      "line": 19,
+      "heading": "10x8 - len23-10th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-10th s-New o-tnolim.coil",
+      "line": 28,
+      "heading": "10x8 - len23-10th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-20th s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - len23-20th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-20th s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - len23-20th s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-20th s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - len23-20th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len23-20th s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - len23-20th s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len2lim50rnd s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - len2lim50rnd s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len2lim50rnd s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - len2lim50rnd s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len2lim50rnd s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - len2lim50rnd s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=len2lim50rnd s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - len2lim50rnd s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=sz2-1 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - sz2-1 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=sz2-1 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - sz2-1 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=sz23-1 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - sz23-1 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=sz23-1 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - sz23-1 s-New o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "53f5fdce9405b532fc2730fd241b9b1cdee4252d800342717344b495a6a43612",
+  "solutionAvailable": false
+}

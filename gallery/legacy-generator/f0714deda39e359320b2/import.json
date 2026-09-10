@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "title": "12x12 seed=0 lc=1stlast10 s-Weighted o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 s-Weighted o-tlim3",
+    "23lim10 s-Weighted o-tlim3",
+    "23lim25 s-Weighted o-tlim3",
+    "2lim10 s-Weighted o-tlim3",
+    "2lim25 s-Weighted o-tlim3",
+    "2lim50 s-Weighted o-tlim3",
+    "3lim10 s-Weighted o-tlim3",
+    "3lim50 s-Weighted o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 1stlast10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-Weighted o-tlim3.coil",
+      "line": 14,
+      "heading": "12x12 - 1stlast10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-Weighted o-tlim3.coil",
+      "line": 27,
+      "heading": "12x12 - 1stlast10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=1stlast10 s-Weighted o-tlim3.coil",
+      "line": 40,
+      "heading": "12x12 - 1stlast10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=23lim25 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 23lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim25 s-Weighted o-tlim3.coil",
+      "line": 14,
+      "heading": "12x12 - 2lim25 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=2lim50 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 2lim50 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim10 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim10 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/12x12 seed=0 lc=3lim50 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "12x12 - 3lim50 s-Weighted o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 12,
+  "height": 12,
+  "boardSha256": "f0714deda39e359320b2d2c81426d6a81bca3f2ee9a31ea1950f33d3ade2b5b0",
+  "solutionAvailable": false
+}

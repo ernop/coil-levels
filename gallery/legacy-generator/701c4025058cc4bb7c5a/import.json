@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=rnd100 Weighted4",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd100 Weighted4",
+    "rnd100lim20 Weighted4",
+    "rnd99 Weighted4"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=rnd100 Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - rnd100 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=rnd100 Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - rnd100 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=rnd100lim20 Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - rnd100lim20 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=rnd100lim20 Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - rnd100lim20 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=rnd99 Weighted4.coil",
+      "line": 1,
+      "heading": "22x22 - rnd99 Weighted4",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=rnd99 Weighted4.coil",
+      "line": 47,
+      "heading": "22x22 - rnd99 Weighted4",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "701c4025058cc4bb7c5a453b0b90990eda6fdc0f1cc5cd40c496a11dc646d55a",
+  "solutionAvailable": false
+}

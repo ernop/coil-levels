@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "title": "14x10 seed=0 lc=1st-last s-New o-flim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1st-last s-New o-flim3",
+    "len23-half s-New o-tlim3",
+    "len23-third s-New o-flim3",
+    "sz3-1 s-New o-flim3",
+    "sz3-1 s-New o-tlim3",
+    "sz3-2 s-New o-flim3",
+    "sz3-2 s-New o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/14x10 seed=0 lc=1st-last s-New o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - 1st-last s-New o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23-half s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23-half s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=len23-third s-New o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - len23-third s-New o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=sz3-1 s-New o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - sz3-1 s-New o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=sz3-1 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - sz3-1 s-New o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=sz3-2 s-New o-flim3.coil",
+      "line": 1,
+      "heading": "14x10 - sz3-2 s-New o-flim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/14x10 seed=0 lc=sz3-2 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "14x10 - sz3-2 s-New o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 14,
+  "height": 10,
+  "boardSha256": "ca16afa8d571ee6c6342c02d8870295415bf8eb59b152c21d96e19fb904c7087",
+  "solutionAvailable": false
+}

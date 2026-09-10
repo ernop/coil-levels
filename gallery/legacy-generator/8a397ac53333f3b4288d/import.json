@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "120x55 seed=0 lc=rnd99 Weighted",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd99 Weighted"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/120x55 seed=0 lc=rnd99 Weighted.coil",
+      "line": 1,
+      "heading": "120x55 - rnd99 Weighted",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 120,
+  "height": 55,
+  "boardSha256": "8a397ac53333f3b4288d5b29c28606efd6db3b5d5dbc40e0b92d2e567206f59e",
+  "solutionAvailable": false
+}

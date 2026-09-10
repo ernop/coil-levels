@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=2lim100 s-New o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "2lim100 s-New o-tlim1000",
+    "2lim100 s-New o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=2lim100 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim100 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim100 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim100 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim100 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - 2lim100 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=2lim100 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - 2lim100 s-New o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "1e664a82998fdbca3ffd6882183ca439e244881e382480246885e2605521f0ef",
+  "solutionAvailable": false
+}

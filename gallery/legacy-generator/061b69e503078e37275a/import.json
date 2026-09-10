@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=rnd100 s-New o-tlim1000",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "rnd100 s-New o-tlim1000",
+    "rnd100 s-New o-tnolim",
+    "rnd100lim20 s-New o-tlim1000",
+    "rnd100lim20 s-New o-tnolim",
+    "rnd99 s-New o-tlim1000",
+    "rnd99 s-New o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100lim20 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tlim1000.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100lim20 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - rnd100lim20 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd100lim20 s-New o-tnolim.coil",
+      "line": 10,
+      "heading": "10x8 - rnd100lim20 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd99 s-New o-tlim1000.coil",
+      "line": 1,
+      "heading": "10x8 - rnd99 s-New o-tlim1000",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=rnd99 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "10x8 - rnd99 s-New o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "061b69e503078e37275a4147292c4a316c7c3da1b1cc07b0bd3c951ba1ab2c33",
+  "solutionAvailable": false
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "title": "30x30-rank01-seed261",
+  "generator": "hardness-selected-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "saved-hard",
+  "sourceBoard": "levels/hard/30x30-rank01-seed261.board",
+  "sourceSolution": "levels/hard/30x30-rank01-seed261.solution",
+  "settingsStatus": "An earlier generated board selected by solver effort; the saved board and solution are retained.",
+  "width": 30,
+  "height": 30,
+  "boardSha256": "2158223c46022cc4e9664d78c3a59a6fb12c711dfcaae0fa33f1bcd9fc0716ca",
+  "solutionAvailable": true
+}

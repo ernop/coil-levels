@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "70x55 seed=0 lc=23lim10 s-New o-tnolim",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "23lim10 s-New o-tnolim"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/70x55 seed=0 lc=23lim10 s-New o-tnolim.coil",
+      "line": 1,
+      "heading": "70x55 - 23lim10 s-New o-tnolim",
+      "seed": 0
+    },
+    {
+      "file": "levels/70x55 seed=0 lc=23lim10 s-New o-tnolim.coil",
+      "line": 57,
+      "heading": "70x55 - 23lim10 s-New o-tnolim",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 70,
+  "height": 55,
+  "boardSha256": "9f5d7dfbb5a6608714f58239730e1fa9ba811f65b19e55d3112380119b9233bf",
+  "solutionAvailable": false
+}

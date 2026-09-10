@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "title": "10x8 seed=0 lc=sz3-1 s-Weighted o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "sz3-1 s-Weighted o-tlim3",
+    "sz3-2 s-Weighted o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/10x8 seed=0 lc=sz3-1 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - sz3-1 s-Weighted o-tlim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/10x8 seed=0 lc=sz3-2 s-Weighted o-tlim3.coil",
+      "line": 1,
+      "heading": "10x8 - sz3-2 s-Weighted o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 10,
+  "height": 8,
+  "boardSha256": "9d38ea4464f1787445483ba6e4f48d6d5b56de04dab8e410f6810cbab53e478e",
+  "solutionAvailable": false
+}

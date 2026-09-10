@@ -1,0 +1,523 @@
+[
+  {
+    "width": 2,
+    "height": 2,
+    "solvableBoards": 13,
+    "occupancyCounts": [
+      0,
+      4,
+      4,
+      4,
+      1
+    ],
+    "meanOpenCells": 2.1538461538461537,
+    "probabilityAtLeastHalfOpen": 0.6923076923076923,
+    "chain": "lazy uniform-cell flip; unsolvable proposals stay; all stays counted",
+    "studies": [
+      {
+        "startMask": 1,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.9230769230769228,
+            "meanOpenCells": 1
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.769230769230769,
+            "meanOpenCells": 1.25
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.675480769230769,
+            "meanOpenCells": 1.4375
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.4842998798076922,
+            "meanOpenCells": 1.7041015625
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.27238903595851016,
+            "meanOpenCells": 1.9779160022735596
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.08822531690237959,
+            "meanOpenCells": 2.12703535492183
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.010086927618741283,
+            "meanOpenCells": 2.153223730804389
+          },
+          {
+            "step": 64,
+            "totalVariation": 0.00013888066544542194,
+            "meanOpenCells": 2.1538458183894837
+          },
+          {
+            "step": 128,
+            "totalVariation": 2.697137847784692E-08,
+            "meanOpenCells": 2.153846153846057
+          },
+          {
+            "step": 256,
+            "totalVariation": 1.1449174941446927E-15,
+            "meanOpenCells": 2.1538461538461524
+          },
+          {
+            "step": 512,
+            "totalVariation": 2.498001805406602E-16,
+            "meanOpenCells": 2.153846153846153
+          },
+          {
+            "step": 1024,
+            "totalVariation": 2.498001805406602E-16,
+            "meanOpenCells": 2.153846153846153
+          },
+          {
+            "step": 2048,
+            "totalVariation": 2.498001805406602E-16,
+            "meanOpenCells": 2.153846153846153
+          },
+          {
+            "step": 4096,
+            "totalVariation": 2.498001805406602E-16,
+            "meanOpenCells": 2.153846153846153
+          }
+        ]
+      },
+      {
+        "startMask": 15,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.923076923076923,
+            "meanOpenCells": 4
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.6153846153846154,
+            "meanOpenCells": 3.5
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.4903846153846154,
+            "meanOpenCells": 3.1875
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.2970252403846154,
+            "meanOpenCells": 2.7880859375
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.11399082037118766,
+            "meanOpenCells": 2.3999993801116943
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.017341644688260577,
+            "meanOpenCells": 2.19133337238587
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.0004025885466599696,
+            "meanOpenCells": 2.1547164303679858
+          },
+          {
+            "step": 64,
+            "totalVariation": 2.1697624352085E-07,
+            "meanOpenCells": 2.153846622884163
+          },
+          {
+            "step": 128,
+            "totalVariation": 6.306066779870889E-14,
+            "meanOpenCells": 2.153846153846289
+          },
+          {
+            "step": 256,
+            "totalVariation": 4.163336342344337E-16,
+            "meanOpenCells": 2.1538461538461524
+          },
+          {
+            "step": 512,
+            "totalVariation": 4.163336342344337E-16,
+            "meanOpenCells": 2.1538461538461524
+          },
+          {
+            "step": 1024,
+            "totalVariation": 4.163336342344337E-16,
+            "meanOpenCells": 2.1538461538461524
+          },
+          {
+            "step": 2048,
+            "totalVariation": 4.163336342344337E-16,
+            "meanOpenCells": 2.1538461538461524
+          },
+          {
+            "step": 4096,
+            "totalVariation": 4.163336342344337E-16,
+            "meanOpenCells": 2.1538461538461524
+          }
+        ]
+      }
+    ],
+    "scope": "Exact finite catalogue and propagated probabilities; no Monte Carlo error. Does not bound large-board mixing."
+  },
+  {
+    "width": 3,
+    "height": 3,
+    "solvableBoards": 171,
+    "occupancyCounts": [
+      0,
+      9,
+      12,
+      22,
+      28,
+      36,
+      28,
+      30,
+      5,
+      1
+    ],
+    "meanOpenCells": 4.783625730994152,
+    "probabilityAtLeastHalfOpen": 0.5847953216374269,
+    "chain": "lazy uniform-cell flip; unsolvable proposals stay; all stays counted",
+    "studies": [
+      {
+        "startMask": 1,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.994152046783621,
+            "meanOpenCells": 1
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.9824561403508726,
+            "meanOpenCells": 1.1111111111111112
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.9580896686159801,
+            "meanOpenCells": 1.2160493827160497
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.9281078782919776,
+            "meanOpenCells": 1.4125133363816484
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.8587872003997757,
+            "meanOpenCells": 1.7708411322723032
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.7089246048649447,
+            "meanOpenCells": 2.3980146612913247
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.4589361492885616,
+            "meanOpenCells": 3.3476999673569368
+          },
+          {
+            "step": 64,
+            "totalVariation": 0.16917720443570022,
+            "meanOpenCells": 4.302847579008401
+          },
+          {
+            "step": 128,
+            "totalVariation": 0.019854900639856673,
+            "meanOpenCells": 4.732823408429608
+          },
+          {
+            "step": 256,
+            "totalVariation": 0.00025182010095125586,
+            "meanOpenCells": 4.783056825645088
+          },
+          {
+            "step": 512,
+            "totalVariation": 4.1257663202509676E-08,
+            "meanOpenCells": 4.783625657899161
+          },
+          {
+            "step": 1024,
+            "totalVariation": 1.3353033956331473E-15,
+            "meanOpenCells": 4.7836257309941494
+          },
+          {
+            "step": 2048,
+            "totalVariation": 1.0065732969355423E-15,
+            "meanOpenCells": 4.783625730994148
+          },
+          {
+            "step": 4096,
+            "totalVariation": 1.0065732969355423E-15,
+            "meanOpenCells": 4.783625730994148
+          }
+        ]
+      },
+      {
+        "startMask": 511,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.9941520467836235,
+            "meanOpenCells": 9
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.9649122807017524,
+            "meanOpenCells": 8.722222222222221
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.8447043534762824,
+            "meanOpenCells": 8.413580246913579
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.7356709102431429,
+            "meanOpenCells": 7.865112025605853
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.573498665692122,
+            "meanOpenCells": 7.120320084891022
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.4032770654669914,
+            "meanOpenCells": 6.351136007064307
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.20744773455719723,
+            "meanOpenCells": 5.628144353123142
+          },
+          {
+            "step": 64,
+            "totalVariation": 0.06333396143656381,
+            "meanOpenCells": 5.052922928060002
+          },
+          {
+            "step": 128,
+            "totalVariation": 0.006661777433813068,
+            "meanOpenCells": 4.812248457463554
+          },
+          {
+            "step": 256,
+            "totalVariation": 7.569561252985472E-05,
+            "meanOpenCells": 4.783951932504631
+          },
+          {
+            "step": 512,
+            "totalVariation": 9.778661180272208E-09,
+            "meanOpenCells": 4.783625773172981
+          },
+          {
+            "step": 1024,
+            "totalVariation": 1.1969591984239969E-15,
+            "meanOpenCells": 4.783625730994159
+          },
+          {
+            "step": 2048,
+            "totalVariation": 1.1969591984239969E-15,
+            "meanOpenCells": 4.783625730994159
+          },
+          {
+            "step": 4096,
+            "totalVariation": 1.1969591984239969E-15,
+            "meanOpenCells": 4.783625730994159
+          }
+        ]
+      }
+    ],
+    "scope": "Exact finite catalogue and propagated probabilities; no Monte Carlo error. Does not bound large-board mixing."
+  },
+  {
+    "width": 4,
+    "height": 4,
+    "solvableBoards": 3503,
+    "occupancyCounts": [
+      0,
+      16,
+      24,
+      52,
+      89,
+      168,
+      248,
+      384,
+      442,
+      596,
+      504,
+      548,
+      235,
+      136,
+      44,
+      16,
+      1
+    ],
+    "meanOpenCells": 8.85526691407365,
+    "probabilityAtLeastHalfOpen": 0.7199543248644019,
+    "chain": "lazy uniform-cell flip; unsolvable proposals stay; all stays counted",
+    "studies": [
+      {
+        "startMask": 1,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.9997145304025254,
+            "meanOpenCells": 1
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.9991435912075497,
+            "meanOpenCells": 1.0625
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.9971453040251346,
+            "meanOpenCells": 1.123046875
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.9944921728205616,
+            "meanOpenCells": 1.2394561767578125
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.9882477686138857,
+            "meanOpenCells": 1.4595166882463673
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.9687669486783818,
+            "meanOpenCells": 1.875211135127535
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.9110248543144988,
+            "meanOpenCells": 2.677069014146614
+          },
+          {
+            "step": 64,
+            "totalVariation": 0.7566544203313043,
+            "meanOpenCells": 4.171262537205286
+          },
+          {
+            "step": 128,
+            "totalVariation": 0.4503865298038919,
+            "meanOpenCells": 6.361834416069159
+          },
+          {
+            "step": 256,
+            "totalVariation": 0.13254398739898388,
+            "meanOpenCells": 8.203938201118529
+          },
+          {
+            "step": 512,
+            "totalVariation": 0.009796875608674916,
+            "meanOpenCells": 8.809713893263948
+          },
+          {
+            "step": 1024,
+            "totalVariation": 5.1991937519743435E-05,
+            "meanOpenCells": 8.855014186653301
+          },
+          {
+            "step": 2048,
+            "totalVariation": 1.5684801620214402E-09,
+            "meanOpenCells": 8.855266905801694
+          },
+          {
+            "step": 4096,
+            "totalVariation": 3.786305036862503E-15,
+            "meanOpenCells": 8.855266914073864
+          }
+        ]
+      },
+      {
+        "startMask": 65535,
+        "points": [
+          {
+            "step": 0,
+            "totalVariation": 0.9997145304025231,
+            "meanOpenCells": 16
+          },
+          {
+            "step": 1,
+            "totalVariation": 0.9951470168427171,
+            "meanOpenCells": 15.5
+          },
+          {
+            "step": 2,
+            "totalVariation": 0.9825863545532506,
+            "meanOpenCells": 15.1796875
+          },
+          {
+            "step": 4,
+            "totalVariation": 0.9455504094809178,
+            "meanOpenCells": 14.761528015136719
+          },
+          {
+            "step": 8,
+            "totalVariation": 0.8984482083456576,
+            "meanOpenCells": 14.205232637577865
+          },
+          {
+            "step": 16,
+            "totalVariation": 0.7883798541935472,
+            "meanOpenCells": 13.410416962990533
+          },
+          {
+            "step": 32,
+            "totalVariation": 0.6035756930728028,
+            "meanOpenCells": 12.3189567853246
+          },
+          {
+            "step": 64,
+            "totalVariation": 0.3959066454612288,
+            "meanOpenCells": 11.037807838833404
+          },
+          {
+            "step": 128,
+            "totalVariation": 0.19041331332097677,
+            "meanOpenCells": 9.87911930946124
+          },
+          {
+            "step": 256,
+            "totalVariation": 0.05043777702597919,
+            "meanOpenCells": 9.126851044767857
+          },
+          {
+            "step": 512,
+            "totalVariation": 0.0037780696364026053,
+            "meanOpenCells": 8.875886200854644
+          },
+          {
+            "step": 1024,
+            "totalVariation": 2.1606687787276103E-05,
+            "meanOpenCells": 8.85538540817735
+          },
+          {
+            "step": 2048,
+            "totalVariation": 7.089074034554149E-10,
+            "meanOpenCells": 8.855266917962808
+          },
+          {
+            "step": 4096,
+            "totalVariation": 4.0141230183560195E-15,
+            "meanOpenCells": 8.85526691407385
+          }
+        ]
+      }
+    ],
+    "scope": "Exact finite catalogue and propagated probabilities; no Monte Carlo error. Does not bound large-board mixing."
+  }
+]

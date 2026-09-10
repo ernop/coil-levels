@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 203",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 203,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/203",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 70,
+  "height": 70,
+  "boardSha256": "56dd8fc9763d95d1db39ca76a7fae3e91543e3a1640dbd1a8dbe9b8a733ff151",
+  "solutionAvailable": false
+}

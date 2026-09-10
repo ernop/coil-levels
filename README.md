@@ -1,7 +1,29 @@
 # coil-levels
 
-Level generator for Mortal Coil (the puzzle: one path that visits every open
-square, turning only at walls). Generates a level by random walk plus repeated
+Level generator for Mortal Coil: visit every open square, sliding until a wall,
+boundary, or previously visited square blocks movement.
+
+[`gen-any`](UNIVERSAL-GENERATOR.md) can construct **every nonempty solvable
+board**, including boards whose solutions cannot be played backward and boards
+that permit more digging. It saves an arbitrary-length construction code that
+replays the exact board and solution. Its default sampler uses undoable solution
+edits to produce dense samples; their distribution is biased, not uniform.
+
+The default now includes exact resampling of small regions. The
+[deeper sampling study](DEEP-SAMPLING.md) compares independent starts, longer
+runs, geometry and convergence diagnostics, and independent uniform boards
+through 6x6. Saved 1000-square comparisons include the remaining directional bias.
+
+```sh
+dotnet run -c Release -- gen-any 1000 1000 --out output/any-1000
+dotnet run -c Release -- gen-any --code-file output/any-1000.code.json --out output/any-1000-replay
+```
+
+[Terms, commands, proof, and checks](UNIVERSAL-GENERATOR.md) explain the
+coverage guarantee. "Mask" means a board's wall/open layout; "reversible"
+describes undoing generator edits, not playing a solution backward.
+
+The original `gen` command generates a level by random walk plus repeated
 "tweaks", then writes the board as text (`levels/*.coil`), a PNG of the upper
 corner (`output/<w>x<h>/*.png`), a stats row (`output/<w>x<h>/results.csv`),
 and a log (`logs/`).
@@ -10,6 +32,68 @@ The current analysis goal is to describe visual style and the deductions a
 board permits. See [`STYLE.md`](STYLE.md) for parameter definitions, the
 board-only prototype, validation, and the next step toward compositional
 room solving. The historical DFS experiments remain in `HARDNESS.md`.
+
+[Generation completeness](GENERATION-COMPLETENESS.md) audits the current
+generator and proves that legal backward growth can reach every solvable
+board, with an exhaustive small-board reference check.
+
+[Implemented sampling methods](SAMPLING.md) adds exact uniform small-board
+sampling, a uniform board-state chain, and undoable endpoint/rectangle edits
+for large boards. [Measured distributions](gallery/sampling-v1/README.md) and
+[22 solution-edit specimens through 1000 square](gallery/reversible-v1/README.md)
+show occupancy, convergence, and initialization dependence with images and
+gallery manifests. The large sampler targets weighted solution paths, and is
+not labeled uniform over boards.
+
+`gen-backward` implements that construction in C#. It starts with a singleton
+in a wall-filled board, legally grows the start backward, and can stop while
+more digging is possible. It never trims or tweaks the result. Every output
+passes the cell-path `Debug.DoDebug` overload and `CoilFormat.Validate`.
+
+```sh
+dotnet run -c Release -- gen-backward 40 30
+dotnet run -c Release -- gen-backward 40 30 --seed 123 --out output/backward-example
+dotnet run -c Release -- gen-backward --recipe output/backward-example.recipe.json --out output/backward-replayed
+```
+
+Output is `.board`, `.solution`, and `.recipe.json`; existing output files
+are rejected. By default the command creates and saves a 512-bit seed from
+the system cryptographic random source, expanded by `sha256-counter-v1`.
+`--seed-hex HEX` accepts an arbitrary-length hex seed of at least 256 bits.
+`--seed` provides deterministic experiments, but a fixed-width seed alone
+does not cover every possible board. Recipes expose every legal construction
+sequence without that seed limitation. A recipe's `Growth` string uses URDL
+for the direction in which the **start grows**, not the forward solution.
+The recipe ends exactly where generation must stop, even on an extensible
+board. For example, this produces the three-cell L, preserving its dead ends:
+
+```json
+{"Width":2,"Height":2,"FinishX":1,"FinishY":0,"Growth":"LD"}
+```
+
+Random generation chooses a target open-cell count uniformly from 1 through
+the board area, then uniformly chooses legal additions until that count or
+until trapped. It does not guarantee the target size or uniform board sampling.
+The existing `gen`, gallery, and style-survey commands retain their earlier
+generator; use `gen-any` for the unrestricted interface, or `gen-backward`
+to supply an explicit growth recipe.
+
+[The backward-growth survey](gallery/backward-v1/README.md) contains 30
+unselected samples at ten square sizes through 1000, with full maps, labeled
+occupied-region crops, solution-order colors, exact geometry, and replay
+recipes. It records early trapping rather than treating canvas dimensions as
+the size of the occupied puzzle. The separate generator label and manifest
+are ready for gallery integration.
+
+```sh
+dotnet run -c Release -- backward-specimen NEW-DIRECTORY 1000
+python3 scripts/build_backward_collection.py NEW-COLLECTION --plan gallery/backward-v1/plan.json
+```
+
+The random-stream definition is SHA-256(seed bytes followed by an eight-byte
+big-endian counter starting at zero), consumed as little-endian 32-bit words
+with rejection sampling for bounded choices. Even a 512-bit seed is finite:
+the unbounded construction recipe remains the basis for all-board coverage.
 
 ## Build and run
 
@@ -138,10 +222,10 @@ written; a failure throws.
 
 ## Board style atlas (2026-09-06)
 
-Open [the HTML atlas](web/gallery-guide.html) for the measured picker/seed
+Open [the Board explorer](web/gallery.html) for the measured picker/seed
 survey and selected large square boards. [Collection documentation](gallery/README.md)
 links the reproduction commands, exact metric definitions, selection record,
-and [measured findings](gallery/FINDINGS.md). The atlas compares geometry and
+and [measured findings](gallery/FINDINGS.md). The explorer compares geometry and
 seed variation; it does not use a single hardness score.
 
 `specimen <new-dir> <side> <seed> [gen options]` exports gzip board/solution
@@ -161,11 +245,25 @@ search, independently replays solutions, and records measured results. Run
 `python3 -m meta_solver.examples.coil_integration --compare` after building.
 The native `evaluate` command accepts a board on stdin and returns JSON.
 
-The [board wall](web/board-wall.html) shows all 32 saved 500-square boards at
-once and supports every size in `gallery/boards`. The [visual stats lab](web/stats-lab.html)
-shows one exact 500-square board beside an adjustable labeled zoom, followed
-by every saved measurement, complete distributions, generation metadata, and
-observed recipe/seed ranges. Both views use the selected measurement overlay.
+The unified [Board explorer](web/gallery.html) includes **4,864 board entries**:
+1,208 original-game levels, 2,924 distinct historical generator layouts, twelve
+earlier solver-selected boards, and the 720 study specimens and sampling draws.
+Each board explicitly identifies its source: Original game or coil-levels
+generator. [Archive provenance](gallery/ARCHIVES.md) records complete coverage
+and every repeated historical occurrence.
+
+Source, search, and thumbnails are the main browsing controls. Filters expands
+the configuration and other detailed choices. One View menu selects the board,
+saved solution, or a measurement overlay. Full board, movable close-up,
+parameters, complete stats, and comparisons share one selection. Rectangular
+boards retain their exact dimensions. Cell inspection supports all sizes
+through 10000×10000. Visit-order colors require a supplied solution and dimensions
+through 1000×1000; historical layouts without certificates are labeled.
+Its [research section](web/gallery.html#sampling-research) integrates the
+completeness proof, sampling targets, figures, diagnostics, and comparisons.
+Per-board records load on demand; it also works directly from local files.
+The three former gallery pages redirect here and preserve bookmarked selections.
+See [gallery rebuild instructions](gallery/README.md).
 
 The central gallery crop PNGs contain a visible CROP label, coordinates, and frame. The full
 maps retain exact cells. A crop boundary must never be interpreted as a board

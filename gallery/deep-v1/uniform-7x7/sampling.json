@@ -1,0 +1,47 @@
+{
+  "generator": "uniform-board-rejection-v1",
+  "Width": 7,
+  "Height": 7,
+  "requested": 12,
+  "completed": false,
+  "Attempts": 10000000,
+  "Disconnected": 9913206,
+  "Unsolvable": 86788,
+  "Accepted": 6,
+  "SolverNodes": 194601,
+  "seconds": 31.517557,
+  "SeedHex": "9c558e4a3ca1682b334122e23346013738656ad0503ade45ab6155e609f53d20ae9434202b6c4023e6655e46150b71b942f062c6de182b2267f66a6612d7c300",
+  "distribution": "Independent uniform solvable boards under ideal fair bits; repeats retained; incomplete solver decisions abort.",
+  "samples": [
+    {
+      "index": 1,
+      "openCells": 22,
+      "attempt": 472875
+    },
+    {
+      "index": 2,
+      "openCells": 34,
+      "attempt": 974511
+    },
+    {
+      "index": 3,
+      "openCells": 23,
+      "attempt": 1612961
+    },
+    {
+      "index": 4,
+      "openCells": 35,
+      "attempt": 5465281
+    },
+    {
+      "index": 5,
+      "openCells": 33,
+      "attempt": 6384799
+    },
+    {
+      "index": 6,
+      "openCells": 25,
+      "attempt": 6888320
+    }
+  ]
+}

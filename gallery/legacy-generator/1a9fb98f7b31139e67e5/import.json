@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "1000x1000 seed=0 lc=1stlast10 Weighted4 lim2",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast10 Weighted4 lim2"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/1000x1000 seed=0 lc=1stlast10 Weighted4 lim2.coil",
+      "line": 1,
+      "heading": "1000x1000 - 1stlast10 Weighted4 lim2",
+      "seed": 0
+    },
+    {
+      "file": "levels/1000x1000 seed=0 lc=1stlast10 Weighted4 lim2.coil",
+      "line": 1002,
+      "heading": "1000x1000 - 1stlast10 Weighted4 lim2",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 1000,
+  "height": 1000,
+  "boardSha256": "1a9fb98f7b31139e67e579ed8905064021963189f6feafd11f4f4566d53d7a5c",
+  "solutionAvailable": false
+}

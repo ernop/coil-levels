@@ -6,7 +6,7 @@ using static coil.Coilutil;
 
 namespace coil
 {
-    public static class Debug
+    public static partial class Debug
     {
         /// <summary>
         /// Rebuild Rows and Hits from the Segs list alone and compare with the level's incremental bookkeeping.

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "title": "Level 990",
+  "generator": "original-game",
+  "source": {
+    "id": "original-game",
+    "label": "Original game",
+    "description": "Mortal Coil \u00b7 hacker.org",
+    "url": "https://www.hacker.org/coil/"
+  },
+  "collection": "original-game",
+  "levelNumber": 990,
+  "archiveUrl": "https://github.com/adum/coilbench/releases/download/data-v1.0/boards.zip",
+  "archiveSha256": "9f8b26c225b55b5ebd84b7cd481954a93f25096133c5022b49db4f2b79b181c2",
+  "archiveMember": "boards/990",
+  "settingsStatus": "The archive supplies the layout, not the original generation settings or a solution.",
+  "width": 333,
+  "height": 332,
+  "boardSha256": "77f071d9e9ad5f8605b16067d165276f4884de314fa263dc4452611ea993099c",
+  "solutionAvailable": false
+}

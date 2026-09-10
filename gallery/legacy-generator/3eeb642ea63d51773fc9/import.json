@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "40x30 seed=0 lc=even s-Longest o-lim1",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "even s-Longest o-lim1"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/40x30 seed=0 lc=even s-Longest o-lim1.coil",
+      "line": 1,
+      "heading": "40x30 - even s-Longest o-lim1",
+      "seed": 0
+    },
+    {
+      "file": "levels/40x30 seed=0 lc=even s-Longest o-lim1.coil",
+      "line": 32,
+      "heading": "40x30 - even s-Longest o-lim1",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 40,
+  "height": 30,
+  "boardSha256": "3eeb642ea63d51773fc9b085767efb16437c4b84f2c4649cfdc2ced8e3ba8976",
+  "solutionAvailable": false
+}

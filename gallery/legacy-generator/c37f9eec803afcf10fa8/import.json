@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "title": "60x40 seed=0 lc=len2lim50rnd s-Longest o-lim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "len2lim50rnd s-Longest o-lim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/60x40 seed=0 lc=len2lim50rnd s-Longest o-lim3.coil",
+      "line": 1,
+      "heading": "60x40 - len2lim50rnd s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=len2lim50rnd s-Longest o-lim3.coil",
+      "line": 42,
+      "heading": "60x40 - len2lim50rnd s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=len2lim50rnd s-Longest o-lim3.coil",
+      "line": 83,
+      "heading": "60x40 - len2lim50rnd s-Longest o-lim3",
+      "seed": 0
+    },
+    {
+      "file": "levels/60x40 seed=0 lc=len2lim50rnd s-Longest o-lim3.coil",
+      "line": 124,
+      "heading": "60x40 - len2lim50rnd s-Longest o-lim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 60,
+  "height": 40,
+  "boardSha256": "c37f9eec803afcf10fa8abbb8c7bf6e16fc162f639c112d21aea62f1c0865fe2",
+  "solutionAvailable": false
+}

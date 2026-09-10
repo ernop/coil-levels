@@ -1,0 +1,3319 @@
+{
+  "schemaVersion": 1,
+  "generator": "block-solution-edits-v1",
+  "sampler": "block-heat-bath-mixture-v1",
+  "dynamics": {
+    "kernel": "deep",
+    "steps": 100000000,
+    "activity": 2,
+    "initialization": "horizontal",
+    "initialOpenCells": 500499,
+    "blockProbability": 0.125,
+    "blockSides": [
+      2,
+      3,
+      4
+    ],
+    "BlockAttempts": 12499060,
+    "BlockEligible": 1932486,
+    "BlockChanges": 283917,
+    "BlockCandidates": 2745397,
+    "attempted": [
+      7292369,
+      7286165,
+      7295799,
+      7290697,
+      7291698,
+      7286497
+    ],
+    "accepted": [
+      227411,
+      227306,
+      226950,
+      226699,
+      6566,
+      380
+    ],
+    "trace": [
+      {
+        "step": 0,
+        "openCells": 500499,
+        "openFraction": 0.500499,
+        "adjacencyAnisotropy": 0.9960119720758125,
+        "absoluteAnisotropy": 0.9960119720758125,
+        "pathAnisotropy": 0.9960119720758125,
+        "solutionSlides": 999,
+        "changedFractionSincePrevious": 0,
+        "BlockChanges": 0
+      },
+      {
+        "step": 1000000,
+        "openCells": 515721,
+        "openFraction": 0.515721,
+        "adjacencyAnisotropy": 0.8335889486341358,
+        "absoluteAnisotropy": 0.8335889486341358,
+        "pathAnisotropy": 0.9425502210501823,
+        "solutionSlides": 28583,
+        "changedFractionSincePrevious": 0.044212,
+        "BlockChanges": 5829
+      },
+      {
+        "step": 2000000,
+        "openCells": 526946,
+        "openFraction": 0.526946,
+        "adjacencyAnisotropy": 0.7322770935194086,
+        "absoluteAnisotropy": 0.7322770935194086,
+        "pathAnisotropy": 0.9011661558606686,
+        "solutionSlides": 50861,
+        "changedFractionSincePrevious": 0.033425,
+        "BlockChanges": 11139
+      },
+      {
+        "step": 3000000,
+        "openCells": 536430,
+        "openFraction": 0.53643,
+        "adjacencyAnisotropy": 0.6575782035674589,
+        "absoluteAnisotropy": 0.6575782035674589,
+        "pathAnisotropy": 0.8675612243185957,
+        "solutionSlides": 69611,
+        "changedFractionSincePrevious": 0.027944,
+        "BlockChanges": 16082
+      },
+      {
+        "step": 4000000,
+        "openCells": 544490,
+        "openFraction": 0.54449,
+        "adjacencyAnisotropy": 0.6009954667288567,
+        "absoluteAnisotropy": 0.6009954667288567,
+        "pathAnisotropy": 0.8398792262102632,
+        "solutionSlides": 85507,
+        "changedFractionSincePrevious": 0.023904,
+        "BlockChanges": 20621
+      },
+      {
+        "step": 5000000,
+        "openCells": 551473,
+        "openFraction": 0.551473,
+        "adjacencyAnisotropy": 0.5555817623481838,
+        "absoluteAnisotropy": 0.5555817623481838,
+        "pathAnisotropy": 0.8165926828560652,
+        "solutionSlides": 99231,
+        "changedFractionSincePrevious": 0.021013,
+        "BlockChanges": 25010
+      },
+      {
+        "step": 6000000,
+        "openCells": 557534,
+        "openFraction": 0.557534,
+        "adjacencyAnisotropy": 0.5186811988440497,
+        "absoluteAnisotropy": 0.5186811988440497,
+        "pathAnisotropy": 0.7968478995862128,
+        "solutionSlides": 111117,
+        "changedFractionSincePrevious": 0.018993,
+        "BlockChanges": 29144
+      },
+      {
+        "step": 7000000,
+        "openCells": 562573,
+        "openFraction": 0.562573,
+        "adjacencyAnisotropy": 0.4897315314619459,
+        "absoluteAnisotropy": 0.4897315314619459,
+        "pathAnisotropy": 0.7807214009940061,
+        "solutionSlides": 120965,
+        "changedFractionSincePrevious": 0.016405,
+        "BlockChanges": 32897
+      },
+      {
+        "step": 8000000,
+        "openCells": 567353,
+        "openFraction": 0.567353,
+        "adjacencyAnisotropy": 0.46351796710759546,
+        "absoluteAnisotropy": 0.46351796710759546,
+        "pathAnisotropy": 0.7657327373482423,
+        "solutionSlides": 130301,
+        "changedFractionSincePrevious": 0.015902,
+        "BlockChanges": 36625
+      },
+      {
+        "step": 9000000,
+        "openCells": 571554,
+        "openFraction": 0.571554,
+        "adjacencyAnisotropy": 0.4413396747054235,
+        "absoluteAnisotropy": 0.4413396747054235,
+        "pathAnisotropy": 0.7527438400288338,
+        "solutionSlides": 138457,
+        "changedFractionSincePrevious": 0.014569,
+        "BlockChanges": 40180
+      },
+      {
+        "step": 10000000,
+        "openCells": 575364,
+        "openFraction": 0.575364,
+        "adjacencyAnisotropy": 0.42220162789643134,
+        "absoluteAnisotropy": 0.42220162789643134,
+        "pathAnisotropy": 0.7411095256385969,
+        "solutionSlides": 145835,
+        "changedFractionSincePrevious": 0.013804,
+        "BlockChanges": 43699
+      },
+      {
+        "step": 11000000,
+        "openCells": 578834,
+        "openFraction": 0.578834,
+        "adjacencyAnisotropy": 0.4054708641971852,
+        "absoluteAnisotropy": 0.4054708641971852,
+        "pathAnisotropy": 0.7306787968204992,
+        "solutionSlides": 152521,
+        "changedFractionSincePrevious": 0.013048,
+        "BlockChanges": 47114
+      },
+      {
+        "step": 12000000,
+        "openCells": 582088,
+        "openFraction": 0.582088,
+        "adjacencyAnisotropy": 0.3903949139119792,
+        "absoluteAnisotropy": 0.3903949139119792,
+        "pathAnisotropy": 0.7209970330895553,
+        "solutionSlides": 158733,
+        "changedFractionSincePrevious": 0.012458,
+        "BlockChanges": 50447
+      },
+      {
+        "step": 13000000,
+        "openCells": 584898,
+        "openFraction": 0.584898,
+        "adjacencyAnisotropy": 0.3774708923600159,
+        "absoluteAnisotropy": 0.3774708923600159,
+        "pathAnisotropy": 0.7127220690138606,
+        "solutionSlides": 164195,
+        "changedFractionSincePrevious": 0.01145,
+        "BlockChanges": 53671
+      },
+      {
+        "step": 14000000,
+        "openCells": 587626,
+        "openFraction": 0.587626,
+        "adjacencyAnisotropy": 0.36533997945283664,
+        "absoluteAnisotropy": 0.36533997945283664,
+        "pathAnisotropy": 0.7047708998085513,
+        "solutionSlides": 169387,
+        "changedFractionSincePrevious": 0.011512,
+        "BlockChanges": 56915
+      },
+      {
+        "step": 15000000,
+        "openCells": 590101,
+        "openFraction": 0.590101,
+        "adjacencyAnisotropy": 0.35442014414861217,
+        "absoluteAnisotropy": 0.35442014414861217,
+        "pathAnisotropy": 0.6976037959667853,
+        "solutionSlides": 174113,
+        "changedFractionSincePrevious": 0.011245,
+        "BlockChanges": 60139
+      },
+      {
+        "step": 16000000,
+        "openCells": 592426,
+        "openFraction": 0.592426,
+        "adjacencyAnisotropy": 0.3447367153765069,
+        "absoluteAnisotropy": 0.3447367153765069,
+        "pathAnisotropy": 0.6909515972485969,
+        "solutionSlides": 178523,
+        "changedFractionSincePrevious": 0.010403,
+        "BlockChanges": 63145
+      },
+      {
+        "step": 17000000,
+        "openCells": 594578,
+        "openFraction": 0.594578,
+        "adjacencyAnisotropy": 0.3357661518514484,
+        "absoluteAnisotropy": 0.3357661518514484,
+        "pathAnisotropy": 0.6847977637883739,
+        "solutionSlides": 182609,
+        "changedFractionSincePrevious": 0.01085,
+        "BlockChanges": 66341
+      },
+      {
+        "step": 18000000,
+        "openCells": 596596,
+        "openFraction": 0.596596,
+        "adjacencyAnisotropy": 0.32755653170157384,
+        "absoluteAnisotropy": 0.32755653170157384,
+        "pathAnisotropy": 0.6791190003268549,
+        "solutionSlides": 186389,
+        "changedFractionSincePrevious": 0.010016,
+        "BlockChanges": 69343
+      },
+      {
+        "step": 19000000,
+        "openCells": 598442,
+        "openFraction": 0.598442,
+        "adjacencyAnisotropy": 0.3203558590894595,
+        "absoluteAnisotropy": 0.3203558590894595,
+        "pathAnisotropy": 0.6739394526778747,
+        "solutionSlides": 189815,
+        "changedFractionSincePrevious": 0.009706,
+        "BlockChanges": 72333
+      },
+      {
+        "step": 20000000,
+        "openCells": 600163,
+        "openFraction": 0.600163,
+        "adjacencyAnisotropy": 0.3138962108839008,
+        "absoluteAnisotropy": 0.3138962108839008,
+        "pathAnisotropy": 0.669122670212376,
+        "solutionSlides": 192993,
+        "changedFractionSincePrevious": 0.009491,
+        "BlockChanges": 75232
+      },
+      {
+        "step": 21000000,
+        "openCells": 601899,
+        "openFraction": 0.601899,
+        "adjacencyAnisotropy": 0.30738930714774587,
+        "absoluteAnisotropy": 0.30738930714774587,
+        "pathAnisotropy": 0.6643019249108653,
+        "solutionSlides": 196253,
+        "changedFractionSincePrevious": 0.009324,
+        "BlockChanges": 78131
+      },
+      {
+        "step": 22000000,
+        "openCells": 603496,
+        "openFraction": 0.603496,
+        "adjacencyAnisotropy": 0.30140149777401576,
+        "absoluteAnisotropy": 0.30140149777401576,
+        "pathAnisotropy": 0.6599010762309547,
+        "solutionSlides": 199129,
+        "changedFractionSincePrevious": 0.009209,
+        "BlockChanges": 81015
+      },
+      {
+        "step": 23000000,
+        "openCells": 604908,
+        "openFraction": 0.604908,
+        "adjacencyAnisotropy": 0.2961725375354317,
+        "absoluteAnisotropy": 0.2961725375354317,
+        "pathAnisotropy": 0.6560264635720863,
+        "solutionSlides": 201645,
+        "changedFractionSincePrevious": 0.009276,
+        "BlockChanges": 83966
+      },
+      {
+        "step": 24000000,
+        "openCells": 606408,
+        "openFraction": 0.606408,
+        "adjacencyAnisotropy": 0.2908104840052569,
+        "absoluteAnisotropy": 0.2908104840052569,
+        "pathAnisotropy": 0.6519235430989418,
+        "solutionSlides": 204387,
+        "changedFractionSincePrevious": 0.009112,
+        "BlockChanges": 86888
+      },
+      {
+        "step": 25000000,
+        "openCells": 607673,
+        "openFraction": 0.607673,
+        "adjacencyAnisotropy": 0.2862551343709048,
+        "absoluteAnisotropy": 0.2862551343709048,
+        "pathAnisotropy": 0.6484748351084137,
+        "solutionSlides": 206679,
+        "changedFractionSincePrevious": 0.008545,
+        "BlockChanges": 89614
+      },
+      {
+        "step": 26000000,
+        "openCells": 608965,
+        "openFraction": 0.608965,
+        "adjacencyAnisotropy": 0.2818255896287878,
+        "absoluteAnisotropy": 0.2818255896287878,
+        "pathAnisotropy": 0.6449773714045494,
+        "solutionSlides": 209009,
+        "changedFractionSincePrevious": 0.008782,
+        "BlockChanges": 92456
+      },
+      {
+        "step": 27000000,
+        "openCells": 610283,
+        "openFraction": 0.610283,
+        "adjacencyAnisotropy": 0.27747700514036266,
+        "absoluteAnisotropy": 0.27747700514036266,
+        "pathAnisotropy": 0.64141822960533,
+        "solutionSlides": 211359,
+        "changedFractionSincePrevious": 0.008534,
+        "BlockChanges": 95235
+      },
+      {
+        "step": 28000000,
+        "openCells": 611534,
+        "openFraction": 0.611534,
+        "adjacencyAnisotropy": 0.27344633338717494,
+        "absoluteAnisotropy": 0.27344633338717494,
+        "pathAnisotropy": 0.6380702267907047,
+        "solutionSlides": 213569,
+        "changedFractionSincePrevious": 0.008561,
+        "BlockChanges": 98023
+      },
+      {
+        "step": 29000000,
+        "openCells": 612608,
+        "openFraction": 0.612608,
+        "adjacencyAnisotropy": 0.2698956235352134,
+        "absoluteAnisotropy": 0.2698956235352134,
+        "pathAnisotropy": 0.6351853635364924,
+        "solutionSlides": 215515,
+        "changedFractionSincePrevious": 0.008308,
+        "BlockChanges": 100789
+      },
+      {
+        "step": 30000000,
+        "openCells": 613700,
+        "openFraction": 0.6137,
+        "adjacencyAnisotropy": 0.2664049664513702,
+        "absoluteAnisotropy": 0.2664049664513702,
+        "pathAnisotropy": 0.6322887930402363,
+        "solutionSlides": 217475,
+        "changedFractionSincePrevious": 0.00838,
+        "BlockChanges": 103572
+      },
+      {
+        "step": 31000000,
+        "openCells": 614703,
+        "openFraction": 0.614703,
+        "adjacencyAnisotropy": 0.2631386760906483,
+        "absoluteAnisotropy": 0.2631386760906483,
+        "pathAnisotropy": 0.6296156511610504,
+        "solutionSlides": 219221,
+        "changedFractionSincePrevious": 0.008273,
+        "BlockChanges": 106340
+      },
+      {
+        "step": 32000000,
+        "openCells": 615700,
+        "openFraction": 0.6157,
+        "adjacencyAnisotropy": 0.26012868433426,
+        "absoluteAnisotropy": 0.26012868433426,
+        "pathAnisotropy": 0.6269605765154727,
+        "solutionSlides": 221005,
+        "changedFractionSincePrevious": 0.007995,
+        "BlockChanges": 109047
+      },
+      {
+        "step": 33000000,
+        "openCells": 616686,
+        "openFraction": 0.616686,
+        "adjacencyAnisotropy": 0.2572474854901024,
+        "absoluteAnisotropy": 0.2572474854901024,
+        "pathAnisotropy": 0.6243657620989647,
+        "solutionSlides": 222717,
+        "changedFractionSincePrevious": 0.00837,
+        "BlockChanges": 111822
+      },
+      {
+        "step": 34000000,
+        "openCells": 617760,
+        "openFraction": 0.61776,
+        "adjacencyAnisotropy": 0.25421664481705236,
+        "absoluteAnisotropy": 0.25421664481705236,
+        "pathAnisotropy": 0.6215417339124156,
+        "solutionSlides": 224553,
+        "changedFractionSincePrevious": 0.008252,
+        "BlockChanges": 114577
+      },
+      {
+        "step": 35000000,
+        "openCells": 618708,
+        "openFraction": 0.618708,
+        "adjacencyAnisotropy": 0.2513623009123241,
+        "absoluteAnisotropy": 0.2513623009123241,
+        "pathAnisotropy": 0.6190506976646458,
+        "solutionSlides": 226167,
+        "changedFractionSincePrevious": 0.008234,
+        "BlockChanges": 117350
+      },
+      {
+        "step": 36000000,
+        "openCells": 619560,
+        "openFraction": 0.61956,
+        "adjacencyAnisotropy": 0.2488617865107663,
+        "absoluteAnisotropy": 0.2488617865107663,
+        "pathAnisotropy": 0.6168242249729243,
+        "solutionSlides": 227645,
+        "changedFractionSincePrevious": 0.00812,
+        "BlockChanges": 120122
+      },
+      {
+        "step": 37000000,
+        "openCells": 620409,
+        "openFraction": 0.620409,
+        "adjacencyAnisotropy": 0.24647067877481915,
+        "absoluteAnisotropy": 0.24647067877481915,
+        "pathAnisotropy": 0.6146020038426326,
+        "solutionSlides": 229073,
+        "changedFractionSincePrevious": 0.008155,
+        "BlockChanges": 122903
+      },
+      {
+        "step": 38000000,
+        "openCells": 621322,
+        "openFraction": 0.621322,
+        "adjacencyAnisotropy": 0.24379660300838502,
+        "absoluteAnisotropy": 0.24379660300838502,
+        "pathAnisotropy": 0.6122326462488794,
+        "solutionSlides": 230579,
+        "changedFractionSincePrevious": 0.008049,
+        "BlockChanges": 125620
+      },
+      {
+        "step": 39000000,
+        "openCells": 622073,
+        "openFraction": 0.622073,
+        "adjacencyAnisotropy": 0.24148064992904117,
+        "absoluteAnisotropy": 0.24148064992904117,
+        "pathAnisotropy": 0.6102701938039327,
+        "solutionSlides": 231843,
+        "changedFractionSincePrevious": 0.007675,
+        "BlockChanges": 128327
+      },
+      {
+        "step": 40000000,
+        "openCells": 622845,
+        "openFraction": 0.622845,
+        "adjacencyAnisotropy": 0.23924350170903066,
+        "absoluteAnisotropy": 0.23924350170903066,
+        "pathAnisotropy": 0.6082678808818902,
+        "solutionSlides": 233113,
+        "changedFractionSincePrevious": 0.007478,
+        "BlockChanges": 130935
+      },
+      {
+        "step": 41000000,
+        "openCells": 623734,
+        "openFraction": 0.623734,
+        "adjacencyAnisotropy": 0.23677725072226127,
+        "absoluteAnisotropy": 0.23677725072226127,
+        "pathAnisotropy": 0.605959601303763,
+        "solutionSlides": 234565,
+        "changedFractionSincePrevious": 0.007809,
+        "BlockChanges": 133636
+      },
+      {
+        "step": 42000000,
+        "openCells": 624527,
+        "openFraction": 0.624527,
+        "adjacencyAnisotropy": 0.2347229611844933,
+        "absoluteAnisotropy": 0.2347229611844933,
+        "pathAnisotropy": 0.6039300205275681,
+        "solutionSlides": 235879,
+        "changedFractionSincePrevious": 0.007719,
+        "BlockChanges": 136332
+      },
+      {
+        "step": 43000000,
+        "openCells": 625152,
+        "openFraction": 0.625152,
+        "adjacencyAnisotropy": 0.23300415073929345,
+        "absoluteAnisotropy": 0.23300415073929345,
+        "pathAnisotropy": 0.602336075604134,
+        "solutionSlides": 236867,
+        "changedFractionSincePrevious": 0.007849,
+        "BlockChanges": 139107
+      },
+      {
+        "step": 44000000,
+        "openCells": 625907,
+        "openFraction": 0.625907,
+        "adjacencyAnisotropy": 0.23104242982945586,
+        "absoluteAnisotropy": 0.23104242982945586,
+        "pathAnisotropy": 0.6004000600729184,
+        "solutionSlides": 238097,
+        "changedFractionSincePrevious": 0.007729,
+        "BlockChanges": 141789
+      },
+      {
+        "step": 45000000,
+        "openCells": 626700,
+        "openFraction": 0.6267,
+        "adjacencyAnisotropy": 0.2290135195166915,
+        "absoluteAnisotropy": 0.2290135195166915,
+        "pathAnisotropy": 0.598384551435378,
+        "solutionSlides": 239341,
+        "changedFractionSincePrevious": 0.007785,
+        "BlockChanges": 144543
+      },
+      {
+        "step": 46000000,
+        "openCells": 627348,
+        "openFraction": 0.627348,
+        "adjacencyAnisotropy": 0.22736259486634117,
+        "absoluteAnisotropy": 0.22736259486634117,
+        "pathAnisotropy": 0.596720794074093,
+        "solutionSlides": 240403,
+        "changedFractionSincePrevious": 0.007916,
+        "BlockChanges": 147362
+      },
+      {
+        "step": 47000000,
+        "openCells": 627912,
+        "openFraction": 0.627912,
+        "adjacencyAnisotropy": 0.22586546003016592,
+        "absoluteAnisotropy": 0.22586546003016592,
+        "pathAnisotropy": 0.595299333822787,
+        "solutionSlides": 241297,
+        "changedFractionSincePrevious": 0.007426,
+        "BlockChanges": 149988
+      },
+      {
+        "step": 48000000,
+        "openCells": 628483,
+        "openFraction": 0.628483,
+        "adjacencyAnisotropy": 0.22443904396198885,
+        "absoluteAnisotropy": 0.22443904396198885,
+        "pathAnisotropy": 0.593853125467396,
+        "solutionSlides": 242203,
+        "changedFractionSincePrevious": 0.007605,
+        "BlockChanges": 152621
+      },
+      {
+        "step": 49000000,
+        "openCells": 629121,
+        "openFraction": 0.629121,
+        "adjacencyAnisotropy": 0.22276363697599477,
+        "absoluteAnisotropy": 0.22276363697599477,
+        "pathAnisotropy": 0.5922367751780264,
+        "solutionSlides": 243209,
+        "changedFractionSincePrevious": 0.007278,
+        "BlockChanges": 155218
+      },
+      {
+        "step": 50000000,
+        "openCells": 629766,
+        "openFraction": 0.629766,
+        "adjacencyAnisotropy": 0.22100146730738288,
+        "absoluteAnisotropy": 0.22100146730738288,
+        "pathAnisotropy": 0.5906155470691449,
+        "solutionSlides": 244161,
+        "changedFractionSincePrevious": 0.007523,
+        "BlockChanges": 157893
+      },
+      {
+        "step": 51000000,
+        "openCells": 630253,
+        "openFraction": 0.630253,
+        "adjacencyAnisotropy": 0.21967426975682341,
+        "absoluteAnisotropy": 0.21967426975682341,
+        "pathAnisotropy": 0.5893896409690093,
+        "solutionSlides": 244925,
+        "changedFractionSincePrevious": 0.007055,
+        "BlockChanges": 160432
+      },
+      {
+        "step": 52000000,
+        "openCells": 630931,
+        "openFraction": 0.630931,
+        "adjacencyAnisotropy": 0.21809826709296076,
+        "absoluteAnisotropy": 0.21809826709296076,
+        "pathAnisotropy": 0.5876753364081594,
+        "solutionSlides": 245959,
+        "changedFractionSincePrevious": 0.007508,
+        "BlockChanges": 163086
+      },
+      {
+        "step": 53000000,
+        "openCells": 631427,
+        "openFraction": 0.631427,
+        "adjacencyAnisotropy": 0.21696064074594304,
+        "absoluteAnisotropy": 0.21696064074594304,
+        "pathAnisotropy": 0.5864281800242626,
+        "solutionSlides": 246707,
+        "changedFractionSincePrevious": 0.00724,
+        "BlockChanges": 165653
+      },
+      {
+        "step": 54000000,
+        "openCells": 631972,
+        "openFraction": 0.631972,
+        "adjacencyAnisotropy": 0.21567171573080518,
+        "absoluteAnisotropy": 0.21567171573080518,
+        "pathAnisotropy": 0.5850505798525565,
+        "solutionSlides": 247537,
+        "changedFractionSincePrevious": 0.007343,
+        "BlockChanges": 168274
+      },
+      {
+        "step": 55000000,
+        "openCells": 632538,
+        "openFraction": 0.632538,
+        "adjacencyAnisotropy": 0.21432487972803516,
+        "absoluteAnisotropy": 0.21432487972803516,
+        "pathAnisotropy": 0.5836322618281619,
+        "solutionSlides": 248397,
+        "changedFractionSincePrevious": 0.007046,
+        "BlockChanges": 170812
+      },
+      {
+        "step": 56000000,
+        "openCells": 633056,
+        "openFraction": 0.633056,
+        "adjacencyAnisotropy": 0.21313985048331033,
+        "absoluteAnisotropy": 0.21313985048331033,
+        "pathAnisotropy": 0.5823301292936632,
+        "solutionSlides": 249209,
+        "changedFractionSincePrevious": 0.007154,
+        "BlockChanges": 173375
+      },
+      {
+        "step": 57000000,
+        "openCells": 633695,
+        "openFraction": 0.633695,
+        "adjacencyAnisotropy": 0.21177104047335196,
+        "absoluteAnisotropy": 0.21177104047335196,
+        "pathAnisotropy": 0.5807629549908947,
+        "solutionSlides": 250161,
+        "changedFractionSincePrevious": 0.007407,
+        "BlockChanges": 175995
+      },
+      {
+        "step": 58000000,
+        "openCells": 634246,
+        "openFraction": 0.634246,
+        "adjacencyAnisotropy": 0.21039763772051423,
+        "absoluteAnisotropy": 0.21039763772051423,
+        "pathAnisotropy": 0.5793802079637995,
+        "solutionSlides": 250973,
+        "changedFractionSincePrevious": 0.007119,
+        "BlockChanges": 178569
+      },
+      {
+        "step": 59000000,
+        "openCells": 634773,
+        "openFraction": 0.634773,
+        "adjacencyAnisotropy": 0.20906755033445687,
+        "absoluteAnisotropy": 0.20906755033445687,
+        "pathAnisotropy": 0.578072126684857,
+        "solutionSlides": 251763,
+        "changedFractionSincePrevious": 0.006985,
+        "BlockChanges": 181087
+      },
+      {
+        "step": 60000000,
+        "openCells": 635200,
+        "openFraction": 0.6352,
+        "adjacencyAnisotropy": 0.20811687542916676,
+        "absoluteAnisotropy": 0.20811687542916676,
+        "pathAnisotropy": 0.5770081502017478,
+        "solutionSlides": 252391,
+        "changedFractionSincePrevious": 0.006869,
+        "BlockChanges": 183583
+      },
+      {
+        "step": 61000000,
+        "openCells": 635750,
+        "openFraction": 0.63575,
+        "adjacencyAnisotropy": 0.20674879042601355,
+        "absoluteAnisotropy": 0.20674879042601355,
+        "pathAnisotropy": 0.5756438468640926,
+        "solutionSlides": 253197,
+        "changedFractionSincePrevious": 0.007296,
+        "BlockChanges": 186172
+      },
+      {
+        "step": 62000000,
+        "openCells": 636214,
+        "openFraction": 0.636214,
+        "adjacencyAnisotropy": 0.20579216635948128,
+        "absoluteAnisotropy": 0.20579216635948128,
+        "pathAnisotropy": 0.5744947053895472,
+        "solutionSlides": 253801,
+        "changedFractionSincePrevious": 0.0072,
+        "BlockChanges": 188754
+      },
+      {
+        "step": 63000000,
+        "openCells": 636668,
+        "openFraction": 0.636668,
+        "adjacencyAnisotropy": 0.2048567620799868,
+        "absoluteAnisotropy": 0.2048567620799868,
+        "pathAnisotropy": 0.5733468202372669,
+        "solutionSlides": 254429,
+        "changedFractionSincePrevious": 0.006986,
+        "BlockChanges": 191302
+      },
+      {
+        "step": 64000000,
+        "openCells": 637094,
+        "openFraction": 0.637094,
+        "adjacencyAnisotropy": 0.2039137836580093,
+        "absoluteAnisotropy": 0.2039137836580093,
+        "pathAnisotropy": 0.5722885041901261,
+        "solutionSlides": 255051,
+        "changedFractionSincePrevious": 0.007086,
+        "BlockChanges": 193875
+      },
+      {
+        "step": 65000000,
+        "openCells": 637459,
+        "openFraction": 0.637459,
+        "adjacencyAnisotropy": 0.20302366149304468,
+        "absoluteAnisotropy": 0.20302366149304468,
+        "pathAnisotropy": 0.5713913700981085,
+        "solutionSlides": 255597,
+        "changedFractionSincePrevious": 0.006967,
+        "BlockChanges": 196388
+      },
+      {
+        "step": 66000000,
+        "openCells": 637994,
+        "openFraction": 0.637994,
+        "adjacencyAnisotropy": 0.20189257019260723,
+        "absoluteAnisotropy": 0.20189257019260723,
+        "pathAnisotropy": 0.5700642483538221,
+        "solutionSlides": 256321,
+        "changedFractionSincePrevious": 0.006931,
+        "BlockChanges": 198915
+      },
+      {
+        "step": 67000000,
+        "openCells": 638463,
+        "openFraction": 0.638463,
+        "adjacencyAnisotropy": 0.20088191372460623,
+        "absoluteAnisotropy": 0.20088191372460623,
+        "pathAnisotropy": 0.5689140465681591,
+        "solutionSlides": 256951,
+        "changedFractionSincePrevious": 0.007237,
+        "BlockChanges": 201520
+      },
+      {
+        "step": 68000000,
+        "openCells": 638884,
+        "openFraction": 0.638884,
+        "adjacencyAnisotropy": 0.19989914507863166,
+        "absoluteAnisotropy": 0.19989914507863166,
+        "pathAnisotropy": 0.56788332135931,
+        "solutionSlides": 257567,
+        "changedFractionSincePrevious": 0.007063,
+        "BlockChanges": 204104
+      },
+      {
+        "step": 69000000,
+        "openCells": 639278,
+        "openFraction": 0.639278,
+        "adjacencyAnisotropy": 0.19906878544924542,
+        "absoluteAnisotropy": 0.19906878544924542,
+        "pathAnisotropy": 0.5669044874131245,
+        "solutionSlides": 258173,
+        "changedFractionSincePrevious": 0.006764,
+        "BlockChanges": 206568
+      },
+      {
+        "step": 70000000,
+        "openCells": 639650,
+        "openFraction": 0.63965,
+        "adjacencyAnisotropy": 0.19836919305958906,
+        "absoluteAnisotropy": 0.19836919305958906,
+        "pathAnisotropy": 0.5659932244090118,
+        "solutionSlides": 258723,
+        "changedFractionSincePrevious": 0.007054,
+        "BlockChanges": 209128
+      },
+      {
+        "step": 71000000,
+        "openCells": 640054,
+        "openFraction": 0.640054,
+        "adjacencyAnisotropy": 0.19759523912542667,
+        "absoluteAnisotropy": 0.19759523912542667,
+        "pathAnisotropy": 0.5649985235597677,
+        "solutionSlides": 259249,
+        "changedFractionSincePrevious": 0.006906,
+        "BlockChanges": 211671
+      },
+      {
+        "step": 72000000,
+        "openCells": 640443,
+        "openFraction": 0.640443,
+        "adjacencyAnisotropy": 0.1968382512716389,
+        "absoluteAnisotropy": 0.1968382512716389,
+        "pathAnisotropy": 0.5640510772247916,
+        "solutionSlides": 259773,
+        "changedFractionSincePrevious": 0.007027,
+        "BlockChanges": 214237
+      },
+      {
+        "step": 73000000,
+        "openCells": 640849,
+        "openFraction": 0.640849,
+        "adjacencyAnisotropy": 0.1960349312566593,
+        "absoluteAnisotropy": 0.1960349312566593,
+        "pathAnisotropy": 0.5630664369710134,
+        "solutionSlides": 260363,
+        "changedFractionSincePrevious": 0.00706,
+        "BlockChanges": 216847
+      },
+      {
+        "step": 74000000,
+        "openCells": 641273,
+        "openFraction": 0.641273,
+        "adjacencyAnisotropy": 0.19496283552636948,
+        "absoluteAnisotropy": 0.19496283552636948,
+        "pathAnisotropy": 0.5620329594930077,
+        "solutionSlides": 260931,
+        "changedFractionSincePrevious": 0.006674,
+        "BlockChanges": 219302
+      },
+      {
+        "step": 75000000,
+        "openCells": 641686,
+        "openFraction": 0.641686,
+        "adjacencyAnisotropy": 0.1941757633976654,
+        "absoluteAnisotropy": 0.1941757633976654,
+        "pathAnisotropy": 0.5610431909737644,
+        "solutionSlides": 261453,
+        "changedFractionSincePrevious": 0.006883,
+        "BlockChanges": 221782
+      },
+      {
+        "step": 76000000,
+        "openCells": 642006,
+        "openFraction": 0.642006,
+        "adjacencyAnisotropy": 0.1935780766576956,
+        "absoluteAnisotropy": 0.1935780766576956,
+        "pathAnisotropy": 0.5602588764885009,
+        "solutionSlides": 261895,
+        "changedFractionSincePrevious": 0.006978,
+        "BlockChanges": 224359
+      },
+      {
+        "step": 77000000,
+        "openCells": 642426,
+        "openFraction": 0.642426,
+        "adjacencyAnisotropy": 0.19287220513392805,
+        "absoluteAnisotropy": 0.19287220513392805,
+        "pathAnisotropy": 0.559238821652333,
+        "solutionSlides": 262491,
+        "changedFractionSincePrevious": 0.006976,
+        "BlockChanges": 226873
+      },
+      {
+        "step": 78000000,
+        "openCells": 642794,
+        "openFraction": 0.642794,
+        "adjacencyAnisotropy": 0.19218007249448626,
+        "absoluteAnisotropy": 0.19218007249448626,
+        "pathAnisotropy": 0.5583523778261431,
+        "solutionSlides": 262993,
+        "changedFractionSincePrevious": 0.006634,
+        "BlockChanges": 229335
+      },
+      {
+        "step": 79000000,
+        "openCells": 643112,
+        "openFraction": 0.643112,
+        "adjacencyAnisotropy": 0.19149903978370475,
+        "absoluteAnisotropy": 0.19149903978370475,
+        "pathAnisotropy": 0.5575755973696609,
+        "solutionSlides": 263455,
+        "changedFractionSincePrevious": 0.006774,
+        "BlockChanges": 231793
+      },
+      {
+        "step": 80000000,
+        "openCells": 643356,
+        "openFraction": 0.643356,
+        "adjacencyAnisotropy": 0.19104529535913908,
+        "absoluteAnisotropy": 0.19104529535913908,
+        "pathAnisotropy": 0.5569786509780759,
+        "solutionSlides": 263725,
+        "changedFractionSincePrevious": 0.006764,
+        "BlockChanges": 234296
+      },
+      {
+        "step": 81000000,
+        "openCells": 643764,
+        "openFraction": 0.643764,
+        "adjacencyAnisotropy": 0.19018360845641472,
+        "absoluteAnisotropy": 0.19018360845641472,
+        "pathAnisotropy": 0.555979452065434,
+        "solutionSlides": 264315,
+        "changedFractionSincePrevious": 0.007024,
+        "BlockChanges": 236899
+      },
+      {
+        "step": 82000000,
+        "openCells": 644200,
+        "openFraction": 0.6442,
+        "adjacencyAnisotropy": 0.18925286365429944,
+        "absoluteAnisotropy": 0.18925286365429944,
+        "pathAnisotropy": 0.554926350397936,
+        "solutionSlides": 264945,
+        "changedFractionSincePrevious": 0.006788,
+        "BlockChanges": 239432
+      },
+      {
+        "step": 83000000,
+        "openCells": 644631,
+        "openFraction": 0.644631,
+        "adjacencyAnisotropy": 0.1884355856944186,
+        "absoluteAnisotropy": 0.1884355856944186,
+        "pathAnisotropy": 0.5538836231636752,
+        "solutionSlides": 265575,
+        "changedFractionSincePrevious": 0.006783,
+        "BlockChanges": 241943
+      },
+      {
+        "step": 84000000,
+        "openCells": 644991,
+        "openFraction": 0.644991,
+        "adjacencyAnisotropy": 0.18783958602846054,
+        "absoluteAnisotropy": 0.18783958602846054,
+        "pathAnisotropy": 0.5530163258345091,
+        "solutionSlides": 266019,
+        "changedFractionSincePrevious": 0.006784,
+        "BlockChanges": 244447
+      },
+      {
+        "step": 85000000,
+        "openCells": 645303,
+        "openFraction": 0.645303,
+        "adjacencyAnisotropy": 0.1872410553746229,
+        "absoluteAnisotropy": 0.1872410553746229,
+        "pathAnisotropy": 0.5522592522570827,
+        "solutionSlides": 266355,
+        "changedFractionSincePrevious": 0.00648,
+        "BlockChanges": 246833
+      },
+      {
+        "step": 86000000,
+        "openCells": 645623,
+        "openFraction": 0.645623,
+        "adjacencyAnisotropy": 0.1866888526809446,
+        "absoluteAnisotropy": 0.1866888526809446,
+        "pathAnisotropy": 0.551477489924445,
+        "solutionSlides": 266735,
+        "changedFractionSincePrevious": 0.006862,
+        "BlockChanges": 249348
+      },
+      {
+        "step": 87000000,
+        "openCells": 645909,
+        "openFraction": 0.645909,
+        "adjacencyAnisotropy": 0.18619119336546738,
+        "absoluteAnisotropy": 0.18619119336546738,
+        "pathAnisotropy": 0.5507781293930405,
+        "solutionSlides": 267119,
+        "changedFractionSincePrevious": 0.006798,
+        "BlockChanges": 251880
+      },
+      {
+        "step": 88000000,
+        "openCells": 646377,
+        "openFraction": 0.646377,
+        "adjacencyAnisotropy": 0.1852497223389134,
+        "absoluteAnisotropy": 0.1852497223389134,
+        "pathAnisotropy": 0.5496553089842444,
+        "solutionSlides": 267715,
+        "changedFractionSincePrevious": 0.006892,
+        "BlockChanges": 254445
+      },
+      {
+        "step": 89000000,
+        "openCells": 646759,
+        "openFraction": 0.646759,
+        "adjacencyAnisotropy": 0.1845041319938322,
+        "absoluteAnisotropy": 0.1845041319938322,
+        "pathAnisotropy": 0.5487400233162945,
+        "solutionSlides": 268259,
+        "changedFractionSincePrevious": 0.006964,
+        "BlockChanges": 256963
+      },
+      {
+        "step": 90000000,
+        "openCells": 647068,
+        "openFraction": 0.647068,
+        "adjacencyAnisotropy": 0.18378919892651005,
+        "absoluteAnisotropy": 0.18378919892651005,
+        "pathAnisotropy": 0.5479911662934441,
+        "solutionSlides": 268653,
+        "changedFractionSincePrevious": 0.006813,
+        "BlockChanges": 259506
+      },
+      {
+        "step": 91000000,
+        "openCells": 647335,
+        "openFraction": 0.647335,
+        "adjacencyAnisotropy": 0.1834286645893561,
+        "absoluteAnisotropy": 0.1834286645893561,
+        "pathAnisotropy": 0.5473619491638011,
+        "solutionSlides": 269023,
+        "changedFractionSincePrevious": 0.006595,
+        "BlockChanges": 261960
+      },
+      {
+        "step": 92000000,
+        "openCells": 647662,
+        "openFraction": 0.647662,
+        "adjacencyAnisotropy": 0.18283023889719988,
+        "absoluteAnisotropy": 0.18283023889719988,
+        "pathAnisotropy": 0.5465652555889579,
+        "solutionSlides": 269461,
+        "changedFractionSincePrevious": 0.006753,
+        "BlockChanges": 264464
+      },
+      {
+        "step": 93000000,
+        "openCells": 647926,
+        "openFraction": 0.647926,
+        "adjacencyAnisotropy": 0.1822948015514061,
+        "absoluteAnisotropy": 0.1822948015514061,
+        "pathAnisotropy": 0.5459042327429873,
+        "solutionSlides": 269787,
+        "changedFractionSincePrevious": 0.006332,
+        "BlockChanges": 266863
+      },
+      {
+        "step": 94000000,
+        "openCells": 648227,
+        "openFraction": 0.648227,
+        "adjacencyAnisotropy": 0.1817675633563998,
+        "absoluteAnisotropy": 0.1817675633563998,
+        "pathAnisotropy": 0.5451894863828356,
+        "solutionSlides": 270201,
+        "changedFractionSincePrevious": 0.006759,
+        "BlockChanges": 269326
+      },
+      {
+        "step": 95000000,
+        "openCells": 648572,
+        "openFraction": 0.648572,
+        "adjacencyAnisotropy": 0.18108150493544373,
+        "absoluteAnisotropy": 0.18108150493544373,
+        "pathAnisotropy": 0.5443644566284955,
+        "solutionSlides": 270665,
+        "changedFractionSincePrevious": 0.006451,
+        "BlockChanges": 271711
+      },
+      {
+        "step": 96000000,
+        "openCells": 648921,
+        "openFraction": 0.648921,
+        "adjacencyAnisotropy": 0.18035655467720685,
+        "absoluteAnisotropy": 0.18035655467720685,
+        "pathAnisotropy": 0.5435307896196757,
+        "solutionSlides": 271131,
+        "changedFractionSincePrevious": 0.006197,
+        "BlockChanges": 274045
+      },
+      {
+        "step": 97000000,
+        "openCells": 649193,
+        "openFraction": 0.649193,
+        "adjacencyAnisotropy": 0.17977506260007153,
+        "absoluteAnisotropy": 0.17977506260007153,
+        "pathAnisotropy": 0.5428779159324206,
+        "solutionSlides": 271449,
+        "changedFractionSincePrevious": 0.006704,
+        "BlockChanges": 276528
+      },
+      {
+        "step": 98000000,
+        "openCells": 649588,
+        "openFraction": 0.649588,
+        "adjacencyAnisotropy": 0.17896981889510255,
+        "absoluteAnisotropy": 0.17896981889510255,
+        "pathAnisotropy": 0.5419428036583245,
+        "solutionSlides": 271987,
+        "changedFractionSincePrevious": 0.006761,
+        "BlockChanges": 279010
+      },
+      {
+        "step": 99000000,
+        "openCells": 649816,
+        "openFraction": 0.649816,
+        "adjacencyAnisotropy": 0.17854559147392082,
+        "absoluteAnisotropy": 0.17854559147392082,
+        "pathAnisotropy": 0.5413894723882952,
+        "solutionSlides": 272301,
+        "changedFractionSincePrevious": 0.006558,
+        "BlockChanges": 281467
+      },
+      {
+        "step": 100000000,
+        "openCells": 650155,
+        "openFraction": 0.650155,
+        "adjacencyAnisotropy": 0.17793629603112804,
+        "absoluteAnisotropy": 0.17793629603112804,
+        "pathAnisotropy": 0.5406134546584348,
+        "solutionSlides": 272737,
+        "changedFractionSincePrevious": 0.006623,
+        "BlockChanges": 283917
+      }
+    ],
+    "stationaryTarget": "solutionCount(board) * activity^openCells(board)",
+    "mixing": "No certified mixing time. Compare multiple initializations, geometry, and within-chain persistence."
+  },
+  "constructionFormat": "coil-construction-v1",
+  "constructionCode": "construction.code.json",
+  "constructionHexDigits": 324588,
+  "side": 1000,
+  "seedHex": "4af5e1f19a698133297f737c3be3859e020ea296b8c8e6c27156881762469ae14b8b53ce3fc09127383c9833cdcaf0f6b6866d6c71e8ec4775210016653231ea",
+  "seedBits": 512,
+  "randomAlgorithm": "sha256-counter-v1",
+  "generationPolicy": "complete-unfiltered-v1",
+  "generationSeconds": 54.1972649,
+  "choiceCount": 420779198,
+  "targetOpenCells": 1000000,
+  "stopReason": "step-budget",
+  "legalExtensions": [],
+  "occupiedBounds": {
+    "x": 0,
+    "y": 0,
+    "width": 1000,
+    "height": 1000
+  },
+  "occupiedBoundsFill": 0.650155,
+  "solutionSlides": 272737,
+  "start": {
+    "x": 997,
+    "y": 1
+  },
+  "finish": {
+    "x": 411,
+    "y": 997
+  },
+  "boardSha256": "1bc52af0fc4da11d19b348bc1f774a1b2b09b650185adae78941e8d1990947ae",
+  "validation": "Debug.DoDebug \u002B CoilFormat.Validate; persisted recipe and gzip pair replayed",
+  "stats": {
+    "width": 1000,
+    "height": 1000,
+    "openCells": 650155,
+    "openFraction": 0.650155,
+    "degreeCounts": [
+      0,
+      0,
+      229175,
+      387968,
+      33012
+    ],
+    "isolatedWallFraction": 0.09641126784718947,
+    "interfacePerOpen": 1.3017172828017933,
+    "axisBias": 0.17793629603112804,
+    "horizontalRuns": {
+      "count": 133541,
+      "mean": 4.8685796871372835,
+      "max": 1000,
+      "histogram": {
+        "1": 4599,
+        "2": 4343,
+        "3": 45149,
+        "4": 25014,
+        "5": 17704,
+        "6": 11464,
+        "7": 7684,
+        "8": 5225,
+        "9": 3514,
+        "10": 2397,
+        "11": 1771,
+        "12": 1288,
+        "13": 920,
+        "14": 606,
+        "15": 517,
+        "16": 339,
+        "17": 245,
+        "18": 186,
+        "19": 135,
+        "20": 111,
+        "21": 77,
+        "22": 69,
+        "23": 46,
+        "24": 35,
+        "25": 22,
+        "26": 17,
+        "27": 14,
+        "28": 5,
+        "29": 10,
+        "30": 9,
+        "31": 4,
+        "32": 1,
+        "33": 4,
+        "34": 1,
+        "35": 4,
+        "36": 1,
+        "37": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "43": 1,
+        "405": 2,
+        "416": 1,
+        "995": 1,
+        "999": 1,
+        "1000": 1
+      }
+    },
+    "verticalRuns": {
+      "count": 289618,
+      "mean": 2.244870829851736,
+      "max": 18,
+      "histogram": {
+        "1": 107756,
+        "2": 73257,
+        "3": 73347,
+        "4": 17658,
+        "5": 8471,
+        "6": 4894,
+        "7": 2216,
+        "8": 1065,
+        "9": 506,
+        "10": 232,
+        "11": 111,
+        "12": 52,
+        "13": 24,
+        "14": 16,
+        "15": 6,
+        "16": 4,
+        "17": 2,
+        "18": 1
+      }
+    },
+    "largestOpenSquare": [
+      208,
+      0,
+      5
+    ],
+    "largestWallSquare": [
+      861,
+      5,
+      3
+    ],
+    "openSquareCounts": {
+      "1": 650155,
+      "2": 160751,
+      "3": 11826,
+      "4": 274,
+      "5": 3
+    },
+    "wallSquareCounts": {
+      "1": 349845,
+      "2": 17462,
+      "3": 35
+    },
+    "edgeLayers": [
+      {
+        "distance": 0,
+        "openFraction": 0.6579079079079079
+      },
+      {
+        "distance": 1,
+        "openFraction": 0.7730692076228686
+      },
+      {
+        "distance": 2,
+        "openFraction": 0.7494974874371859
+      },
+      {
+        "distance": 3,
+        "openFraction": 0.7021651560926485
+      },
+      {
+        "distance": 4,
+        "openFraction": 0.5837537840565086
+      },
+      {
+        "distance": 5,
+        "openFraction": 0.6440849342770475
+      },
+      {
+        "distance": 6,
+        "openFraction": 0.6494427558257345
+      },
+      {
+        "distance": 7,
+        "openFraction": 0.650761421319797
+      },
+      {
+        "distance": 8,
+        "openFraction": 0.6464903357070193
+      },
+      {
+        "distance": 9,
+        "openFraction": 0.6493374108053007
+      },
+      {
+        "distance": 10,
+        "openFraction": 0.6478549540347294
+      },
+      {
+        "distance": 11,
+        "openFraction": 0.650460593654043
+      },
+      {
+        "distance": 12,
+        "openFraction": 0.6548717948717949
+      },
+      {
+        "distance": 13,
+        "openFraction": 0.6513360739979445
+      },
+      {
+        "distance": 14,
+        "openFraction": 0.6557672502574665
+      },
+      {
+        "distance": 15,
+        "openFraction": 0.6292569659442725
+      },
+      {
+        "distance": 16,
+        "openFraction": 0.6633919338159255
+      },
+      {
+        "distance": 17,
+        "openFraction": 0.6619170984455959
+      },
+      {
+        "distance": 18,
+        "openFraction": 0.6484942886812046
+      },
+      {
+        "distance": 19,
+        "openFraction": 0.6436004162330905
+      },
+      {
+        "distance": 20,
+        "openFraction": 0.6590198123044838
+      },
+      {
+        "distance": 21,
+        "openFraction": 0.6528213166144201
+      },
+      {
+        "distance": 22,
+        "openFraction": 0.6416230366492146
+      },
+      {
+        "distance": 23,
+        "openFraction": 0.6406086044071354
+      },
+      {
+        "distance": 24,
+        "openFraction": 0.6445846477392219
+      },
+      {
+        "distance": 25,
+        "openFraction": 0.6393572181243414
+      },
+      {
+        "distance": 26,
+        "openFraction": 0.6496832101372756
+      },
+      {
+        "distance": 27,
+        "openFraction": 0.6481481481481481
+      },
+      {
+        "distance": 28,
+        "openFraction": 0.647136797454931
+      },
+      {
+        "distance": 29,
+        "openFraction": 0.6644527098831031
+      },
+      {
+        "distance": 30,
+        "openFraction": 0.6466986155484558
+      },
+      {
+        "distance": 31,
+        "openFraction": 0.6459445037353255
+      },
+      {
+        "distance": 32,
+        "openFraction": 0.6596256684491979
+      },
+      {
+        "distance": 33,
+        "openFraction": 0.65005359056806
+      },
+      {
+        "distance": 34,
+        "openFraction": 0.6573576799140709
+      },
+      {
+        "distance": 35,
+        "openFraction": 0.6453175457481163
+      },
+      {
+        "distance": 36,
+        "openFraction": 0.6583063646170443
+      },
+      {
+        "distance": 37,
+        "openFraction": 0.6521621621621622
+      },
+      {
+        "distance": 38,
+        "openFraction": 0.6495124593716143
+      },
+      {
+        "distance": 39,
+        "openFraction": 0.6376221498371335
+      },
+      {
+        "distance": 40,
+        "openFraction": 0.6596844396082698
+      },
+      {
+        "distance": 41,
+        "openFraction": 0.6518538713195202
+      },
+      {
+        "distance": 42,
+        "openFraction": 0.6508196721311476
+      },
+      {
+        "distance": 43,
+        "openFraction": 0.6393756845564075
+      },
+      {
+        "distance": 44,
+        "openFraction": 0.6572447859495061
+      },
+      {
+        "distance": 45,
+        "openFraction": 0.6476897689768977
+      },
+      {
+        "distance": 46,
+        "openFraction": 0.6502205071664829
+      },
+      {
+        "distance": 47,
+        "openFraction": 0.644475138121547
+      },
+      {
+        "distance": 48,
+        "openFraction": 0.6514396456256921
+      },
+      {
+        "distance": 49,
+        "openFraction": 0.6512208657047724
+      },
+      {
+        "distance": 50,
+        "openFraction": 0.6415461624026696
+      },
+      {
+        "distance": 51,
+        "openFraction": 0.6396321070234113
+      },
+      {
+        "distance": 52,
+        "openFraction": 0.6497206703910614
+      },
+      {
+        "distance": 53,
+        "openFraction": 0.6497760358342665
+      },
+      {
+        "distance": 54,
+        "openFraction": 0.6641414141414141
+      },
+      {
+        "distance": 55,
+        "openFraction": 0.6633858267716536
+      },
+      {
+        "distance": 56,
+        "openFraction": 0.640924464487035
+      },
+      {
+        "distance": 57,
+        "openFraction": 0.6632768361581921
+      },
+      {
+        "distance": 58,
+        "openFraction": 0.6472253680634201
+      },
+      {
+        "distance": 59,
+        "openFraction": 0.6316685584562997
+      },
+      {
+        "distance": 60,
+        "openFraction": 0.6572810011376564
+      },
+      {
+        "distance": 61,
+        "openFraction": 0.6490877993158495
+      },
+      {
+        "distance": 62,
+        "openFraction": 0.6491428571428571
+      },
+      {
+        "distance": 63,
+        "openFraction": 0.6503436426116839
+      },
+      {
+        "distance": 64,
+        "openFraction": 0.6598737083811711
+      },
+      {
+        "distance": 65,
+        "openFraction": 0.6619677790563866
+      },
+      {
+        "distance": 66,
+        "openFraction": 0.6430219146482122
+      },
+      {
+        "distance": 67,
+        "openFraction": 0.6482658959537573
+      },
+      {
+        "distance": 68,
+        "openFraction": 0.6494785631517961
+      },
+      {
+        "distance": 69,
+        "openFraction": 0.6559233449477352
+      },
+      {
+        "distance": 70,
+        "openFraction": 0.6519208381839348
+      },
+      {
+        "distance": 71,
+        "openFraction": 0.6406067677946324
+      },
+      {
+        "distance": 72,
+        "openFraction": 0.6573099415204678
+      },
+      {
+        "distance": 73,
+        "openFraction": 0.6439038686987104
+      },
+      {
+        "distance": 74,
+        "openFraction": 0.6477673325499412
+      },
+      {
+        "distance": 75,
+        "openFraction": 0.6487043580683156
+      },
+      {
+        "distance": 76,
+        "openFraction": 0.6387249114521841
+      },
+      {
+        "distance": 77,
+        "openFraction": 0.6476331360946745
+      },
+      {
+        "distance": 78,
+        "openFraction": 0.6524317912218268
+      },
+      {
+        "distance": 79,
+        "openFraction": 0.6554696789536266
+      },
+      {
+        "distance": 80,
+        "openFraction": 0.6376638855780691
+      },
+      {
+        "distance": 81,
+        "openFraction": 0.6502389486260454
+      },
+      {
+        "distance": 82,
+        "openFraction": 0.6407185628742516
+      },
+      {
+        "distance": 83,
+        "openFraction": 0.6464585834333734
+      },
+      {
+        "distance": 84,
+        "openFraction": 0.6519253910950662
+      },
+      {
+        "distance": 85,
+        "openFraction": 0.6486731001206273
+      },
+      {
+        "distance": 86,
+        "openFraction": 0.6590084643288996
+      },
+      {
+        "distance": 87,
+        "openFraction": 0.6424242424242425
+      },
+      {
+        "distance": 88,
+        "openFraction": 0.6452004860267315
+      },
+      {
+        "distance": 89,
+        "openFraction": 0.6495127892813642
+      },
+      {
+        "distance": 90,
+        "openFraction": 0.6510989010989011
+      },
+      {
+        "distance": 91,
+        "openFraction": 0.6575887392900857
+      },
+      {
+        "distance": 92,
+        "openFraction": 0.650920245398773
+      },
+      {
+        "distance": 93,
+        "openFraction": 0.6442189421894219
+      },
+      {
+        "distance": 94,
+        "openFraction": 0.6445745992601726
+      },
+      {
+        "distance": 95,
+        "openFraction": 0.6585290482076638
+      },
+      {
+        "distance": 96,
+        "openFraction": 0.6511771995043371
+      },
+      {
+        "distance": 97,
+        "openFraction": 0.6450310559006212
+      },
+      {
+        "distance": 98,
+        "openFraction": 0.662826899128269
+      },
+      {
+        "distance": 99,
+        "openFraction": 0.6466916354556804
+      },
+      {
+        "distance": 100,
+        "openFraction": 0.6508135168961201
+      },
+      {
+        "distance": 101,
+        "openFraction": 0.6468005018820577
+      },
+      {
+        "distance": 102,
+        "openFraction": 0.6462264150943396
+      },
+      {
+        "distance": 103,
+        "openFraction": 0.6459646910466582
+      },
+      {
+        "distance": 104,
+        "openFraction": 0.6472819216182049
+      },
+      {
+        "distance": 105,
+        "openFraction": 0.6460709759188846
+      },
+      {
+        "distance": 106,
+        "openFraction": 0.6540660736975857
+      },
+      {
+        "distance": 107,
+        "openFraction": 0.6535031847133758
+      },
+      {
+        "distance": 108,
+        "openFraction": 0.6500638569604087
+      },
+      {
+        "distance": 109,
+        "openFraction": 0.6574903969270166
+      },
+      {
+        "distance": 110,
+        "openFraction": 0.6501925545571245
+      },
+      {
+        "distance": 111,
+        "openFraction": 0.6528314028314028
+      },
+      {
+        "distance": 112,
+        "openFraction": 0.6351612903225806
+      },
+      {
+        "distance": 113,
+        "openFraction": 0.6435963777490298
+      },
+      {
+        "distance": 114,
+        "openFraction": 0.6653696498054474
+      },
+      {
+        "distance": 115,
+        "openFraction": 0.6469440832249674
+      },
+      {
+        "distance": 116,
+        "openFraction": 0.6551499348109517
+      },
+      {
+        "distance": 117,
+        "openFraction": 0.6418300653594772
+      },
+      {
+        "distance": 118,
+        "openFraction": 0.6549803407601573
+      },
+      {
+        "distance": 119,
+        "openFraction": 0.6514454664914586
+      },
+      {
+        "distance": 120,
+        "openFraction": 0.6462450592885376
+      },
+      {
+        "distance": 121,
+        "openFraction": 0.6446499339498019
+      },
+      {
+        "distance": 122,
+        "openFraction": 0.6456953642384106
+      },
+      {
+        "distance": 123,
+        "openFraction": 0.6550464807436919
+      },
+      {
+        "distance": 124,
+        "openFraction": 0.6491344873501997
+      },
+      {
+        "distance": 125,
+        "openFraction": 0.6562082777036048
+      },
+      {
+        "distance": 126,
+        "openFraction": 0.642235609103079
+      },
+      {
+        "distance": 127,
+        "openFraction": 0.6503355704697986
+      },
+      {
+        "distance": 128,
+        "openFraction": 0.6477119784656796
+      },
+      {
+        "distance": 129,
+        "openFraction": 0.6474358974358975
+      },
+      {
+        "distance": 130,
+        "openFraction": 0.6532476319350473
+      },
+      {
+        "distance": 131,
+        "openFraction": 0.6543419267299865
+      },
+      {
+        "distance": 132,
+        "openFraction": 0.6445578231292517
+      },
+      {
+        "distance": 133,
+        "openFraction": 0.6442701227830833
+      },
+      {
+        "distance": 134,
+        "openFraction": 0.6484268125854993
+      },
+      {
+        "distance": 135,
+        "openFraction": 0.6580932784636488
+      },
+      {
+        "distance": 136,
+        "openFraction": 0.6392709766162311
+      },
+      {
+        "distance": 137,
+        "openFraction": 0.6462068965517241
+      },
+      {
+        "distance": 138,
+        "openFraction": 0.6462655601659751
+      },
+      {
+        "distance": 139,
+        "openFraction": 0.651872399445215
+      },
+      {
+        "distance": 140,
+        "openFraction": 0.6512517385257302
+      },
+      {
+        "distance": 141,
+        "openFraction": 0.6537656903765691
+      },
+      {
+        "distance": 142,
+        "openFraction": 0.6454545454545455
+      },
+      {
+        "distance": 143,
+        "openFraction": 0.6367461430575035
+      },
+      {
+        "distance": 144,
+        "openFraction": 0.6627988748241913
+      },
+      {
+        "distance": 145,
+        "openFraction": 0.6456276445698167
+      },
+      {
+        "distance": 146,
+        "openFraction": 0.6347241867043847
+      },
+      {
+        "distance": 147,
+        "openFraction": 0.648936170212766
+      },
+      {
+        "distance": 148,
+        "openFraction": 0.6539829302987198
+      },
+      {
+        "distance": 149,
+        "openFraction": 0.6444365192582026
+      },
+      {
+        "distance": 150,
+        "openFraction": 0.657725321888412
+      },
+      {
+        "distance": 151,
+        "openFraction": 0.6624820659971306
+      },
+      {
+        "distance": 152,
+        "openFraction": 0.6406474820143885
+      },
+      {
+        "distance": 153,
+        "openFraction": 0.6608946608946609
+      },
+      {
+        "distance": 154,
+        "openFraction": 0.6396526772793053
+      },
+      {
+        "distance": 155,
+        "openFraction": 0.6422351233671988
+      },
+      {
+        "distance": 156,
+        "openFraction": 0.6499272197962155
+      },
+      {
+        "distance": 157,
+        "openFraction": 0.6459854014598541
+      },
+      {
+        "distance": 158,
+        "openFraction": 0.6577598828696926
+      },
+      {
+        "distance": 159,
+        "openFraction": 0.6640969162995595
+      },
+      {
+        "distance": 160,
+        "openFraction": 0.6413843888070693
+      },
+      {
+        "distance": 161,
+        "openFraction": 0.646602658788774
+      },
+      {
+        "distance": 162,
+        "openFraction": 0.6466666666666666
+      },
+      {
+        "distance": 163,
+        "openFraction": 0.6474739970282318
+      },
+      {
+        "distance": 164,
+        "openFraction": 0.6482861400894188
+      },
+      {
+        "distance": 165,
+        "openFraction": 0.6464872944693573
+      },
+      {
+        "distance": 166,
+        "openFraction": 0.6697901049475262
+      },
+      {
+        "distance": 167,
+        "openFraction": 0.6548872180451127
+      },
+      {
+        "distance": 168,
+        "openFraction": 0.6530920060331825
+      },
+      {
+        "distance": 169,
+        "openFraction": 0.6584720121028744
+      },
+      {
+        "distance": 170,
+        "openFraction": 0.650227617602428
+      },
+      {
+        "distance": 171,
+        "openFraction": 0.632420091324201
+      },
+      {
+        "distance": 172,
+        "openFraction": 0.6564885496183206
+      },
+      {
+        "distance": 173,
+        "openFraction": 0.6500765696784073
+      },
+      {
+        "distance": 174,
+        "openFraction": 0.6551459293394777
+      },
+      {
+        "distance": 175,
+        "openFraction": 0.6456086286594761
+      },
+      {
+        "distance": 176,
+        "openFraction": 0.6394899536321483
+      },
+      {
+        "distance": 177,
+        "openFraction": 0.6422480620155039
+      },
+      {
+        "distance": 178,
+        "openFraction": 0.6473561430793157
+      },
+      {
+        "distance": 179,
+        "openFraction": 0.6540561622464899
+      },
+      {
+        "distance": 180,
+        "openFraction": 0.6588419405320813
+      },
+      {
+        "distance": 181,
+        "openFraction": 0.6475667189952904
+      },
+      {
+        "distance": 182,
+        "openFraction": 0.6318897637795275
+      },
+      {
+        "distance": 183,
+        "openFraction": 0.6433649289099526
+      },
+      {
+        "distance": 184,
+        "openFraction": 0.6652139461172741
+      },
+      {
+        "distance": 185,
+        "openFraction": 0.6514308426073132
+      },
+      {
+        "distance": 186,
+        "openFraction": 0.6483253588516746
+      },
+      {
+        "distance": 187,
+        "openFraction": 0.6476
+      },
+      {
+        "distance": 188,
+        "openFraction": 0.6569020866773676
+      },
+      {
+        "distance": 189,
+        "openFraction": 0.6509661835748792
+      },
+      {
+        "distance": 190,
+        "openFraction": 0.6526655896607432
+      },
+      {
+        "distance": 191,
+        "openFraction": 0.6341166936790924
+      },
+      {
+        "distance": 192,
+        "openFraction": 0.6650406504065041
+      },
+      {
+        "distance": 193,
+        "openFraction": 0.6488580750407831
+      },
+      {
+        "distance": 194,
+        "openFraction": 0.6403436988543372
+      },
+      {
+        "distance": 195,
+        "openFraction": 0.6408045977011494
+      },
+      {
+        "distance": 196,
+        "openFraction": 0.6503294892915981
+      },
+      {
+        "distance": 197,
+        "openFraction": 0.6396694214876033
+      },
+      {
+        "distance": 198,
+        "openFraction": 0.6716417910447762
+      },
+      {
+        "distance": 199,
+        "openFraction": 0.6505823627287853
+      },
+      {
+        "distance": 200,
+        "openFraction": 0.6481636060100167
+      },
+      {
+        "distance": 201,
+        "openFraction": 0.6520100502512562
+      },
+      {
+        "distance": 202,
+        "openFraction": 0.6436974789915967
+      },
+      {
+        "distance": 203,
+        "openFraction": 0.6517706576728499
+      },
+      {
+        "distance": 204,
+        "openFraction": 0.6514382402707276
+      },
+      {
+        "distance": 205,
+        "openFraction": 0.6468590831918506
+      },
+      {
+        "distance": 206,
+        "openFraction": 0.6545996592844975
+      },
+      {
+        "distance": 207,
+        "openFraction": 0.6615384615384615
+      },
+      {
+        "distance": 208,
+        "openFraction": 0.6415094339622641
+      },
+      {
+        "distance": 209,
+        "openFraction": 0.6596385542168675
+      },
+      {
+        "distance": 210,
+        "openFraction": 0.6325561312607945
+      },
+      {
+        "distance": 211,
+        "openFraction": 0.6468804159445407
+      },
+      {
+        "distance": 212,
+        "openFraction": 0.671304347826087
+      },
+      {
+        "distance": 213,
+        "openFraction": 0.6631762652705061
+      },
+      {
+        "distance": 214,
+        "openFraction": 0.6418563922942206
+      },
+      {
+        "distance": 215,
+        "openFraction": 0.648506151142355
+      },
+      {
+        "distance": 216,
+        "openFraction": 0.6569664902998237
+      },
+      {
+        "distance": 217,
+        "openFraction": 0.6384955752212389
+      },
+      {
+        "distance": 218,
+        "openFraction": 0.6585257548845471
+      },
+      {
+        "distance": 219,
+        "openFraction": 0.6510695187165776
+      },
+      {
+        "distance": 220,
+        "openFraction": 0.6592128801431127
+      },
+      {
+        "distance": 221,
+        "openFraction": 0.6472172351885098
+      },
+      {
+        "distance": 222,
+        "openFraction": 0.6572072072072072
+      },
+      {
+        "distance": 223,
+        "openFraction": 0.6464737793851718
+      },
+      {
+        "distance": 224,
+        "openFraction": 0.6483666061705989
+      },
+      {
+        "distance": 225,
+        "openFraction": 0.6434426229508197
+      },
+      {
+        "distance": 226,
+        "openFraction": 0.6320840950639853
+      },
+      {
+        "distance": 227,
+        "openFraction": 0.6564220183486239
+      },
+      {
+        "distance": 228,
+        "openFraction": 0.6441068139963168
+      },
+      {
+        "distance": 229,
+        "openFraction": 0.6455637707948244
+      },
+      {
+        "distance": 230,
+        "openFraction": 0.6442486085343229
+      },
+      {
+        "distance": 231,
+        "openFraction": 0.6322160148975792
+      },
+      {
+        "distance": 232,
+        "openFraction": 0.6738317757009346
+      },
+      {
+        "distance": 233,
+        "openFraction": 0.6627579737335835
+      },
+      {
+        "distance": 234,
+        "openFraction": 0.6332391713747646
+      },
+      {
+        "distance": 235,
+        "openFraction": 0.6550094517958412
+      },
+      {
+        "distance": 236,
+        "openFraction": 0.6394686907020873
+      },
+      {
+        "distance": 237,
+        "openFraction": 0.6385714285714286
+      },
+      {
+        "distance": 238,
+        "openFraction": 0.6606118546845124
+      },
+      {
+        "distance": 239,
+        "openFraction": 0.6377159309021113
+      },
+      {
+        "distance": 240,
+        "openFraction": 0.6526974951830443
+      },
+      {
+        "distance": 241,
+        "openFraction": 0.6552224371373307
+      },
+      {
+        "distance": 242,
+        "openFraction": 0.6315533980582524
+      },
+      {
+        "distance": 243,
+        "openFraction": 0.6505847953216374
+      },
+      {
+        "distance": 244,
+        "openFraction": 0.6418786692759295
+      },
+      {
+        "distance": 245,
+        "openFraction": 0.6483300589390962
+      },
+      {
+        "distance": 246,
+        "openFraction": 0.6563116370808678
+      },
+      {
+        "distance": 247,
+        "openFraction": 0.6450495049504951
+      },
+      {
+        "distance": 248,
+        "openFraction": 0.6466202783300199
+      },
+      {
+        "distance": 249,
+        "openFraction": 0.654690618762475
+      },
+      {
+        "distance": 250,
+        "openFraction": 0.6523046092184369
+      },
+      {
+        "distance": 251,
+        "openFraction": 0.6403420523138833
+      },
+      {
+        "distance": 252,
+        "openFraction": 0.6631313131313131
+      },
+      {
+        "distance": 253,
+        "openFraction": 0.6566937119675457
+      },
+      {
+        "distance": 254,
+        "openFraction": 0.6527494908350305
+      },
+      {
+        "distance": 255,
+        "openFraction": 0.6584867075664622
+      },
+      {
+        "distance": 256,
+        "openFraction": 0.6401437371663244
+      },
+      {
+        "distance": 257,
+        "openFraction": 0.6474226804123712
+      },
+      {
+        "distance": 258,
+        "openFraction": 0.6537267080745341
+      },
+      {
+        "distance": 259,
+        "openFraction": 0.6626819126819127
+      },
+      {
+        "distance": 260,
+        "openFraction": 0.6362212943632568
+      },
+      {
+        "distance": 261,
+        "openFraction": 0.6588050314465409
+      },
+      {
+        "distance": 262,
+        "openFraction": 0.6378947368421053
+      },
+      {
+        "distance": 263,
+        "openFraction": 0.6474630021141649
+      },
+      {
+        "distance": 264,
+        "openFraction": 0.6454352441613588
+      },
+      {
+        "distance": 265,
+        "openFraction": 0.6567164179104478
+      },
+      {
+        "distance": 266,
+        "openFraction": 0.6423982869379015
+      },
+      {
+        "distance": 267,
+        "openFraction": 0.656989247311828
+      },
+      {
+        "distance": 268,
+        "openFraction": 0.6576673866090713
+      },
+      {
+        "distance": 269,
+        "openFraction": 0.6469631236442517
+      },
+      {
+        "distance": 270,
+        "openFraction": 0.6557734204793029
+      },
+      {
+        "distance": 271,
+        "openFraction": 0.6433260393873085
+      },
+      {
+        "distance": 272,
+        "openFraction": 0.6302197802197802
+      },
+      {
+        "distance": 273,
+        "openFraction": 0.6368653421633554
+      },
+      {
+        "distance": 274,
+        "openFraction": 0.667960088691796
+      },
+      {
+        "distance": 275,
+        "openFraction": 0.628619153674833
+      },
+      {
+        "distance": 276,
+        "openFraction": 0.6644295302013423
+      },
+      {
+        "distance": 277,
+        "openFraction": 0.6601123595505618
+      },
+      {
+        "distance": 278,
+        "openFraction": 0.6405191873589164
+      },
+      {
+        "distance": 279,
+        "openFraction": 0.6564625850340136
+      },
+      {
+        "distance": 280,
+        "openFraction": 0.6406605922551253
+      },
+      {
+        "distance": 281,
+        "openFraction": 0.618421052631579
+      },
+      {
+        "distance": 282,
+        "openFraction": 0.671264367816092
+      },
+      {
+        "distance": 283,
+        "openFraction": 0.6605080831408776
+      },
+      {
+        "distance": 284,
+        "openFraction": 0.6368909512761021
+      },
+      {
+        "distance": 285,
+        "openFraction": 0.6509324009324009
+      },
+      {
+        "distance": 286,
+        "openFraction": 0.6498829039812647
+      },
+      {
+        "distance": 287,
+        "openFraction": 0.6547058823529411
+      },
+      {
+        "distance": 288,
+        "openFraction": 0.6341607565011821
+      },
+      {
+        "distance": 289,
+        "openFraction": 0.6371733966745843
+      },
+      {
+        "distance": 290,
+        "openFraction": 0.6533412887828163
+      },
+      {
+        "distance": 291,
+        "openFraction": 0.6354916067146283
+      },
+      {
+        "distance": 292,
+        "openFraction": 0.6367469879518072
+      },
+      {
+        "distance": 293,
+        "openFraction": 0.6543583535108959
+      },
+      {
+        "distance": 294,
+        "openFraction": 0.6478102189781022
+      },
+      {
+        "distance": 295,
+        "openFraction": 0.64119804400978
+      },
+      {
+        "distance": 296,
+        "openFraction": 0.6695331695331695
+      },
+      {
+        "distance": 297,
+        "openFraction": 0.6401234567901235
+      },
+      {
+        "distance": 298,
+        "openFraction": 0.640818858560794
+      },
+      {
+        "distance": 299,
+        "openFraction": 0.6477556109725686
+      },
+      {
+        "distance": 300,
+        "openFraction": 0.6578947368421053
+      },
+      {
+        "distance": 301,
+        "openFraction": 0.6467254408060453
+      },
+      {
+        "distance": 302,
+        "openFraction": 0.6474683544303798
+      },
+      {
+        "distance": 303,
+        "openFraction": 0.678117048346056
+      },
+      {
+        "distance": 304,
+        "openFraction": 0.6483375959079284
+      },
+      {
+        "distance": 305,
+        "openFraction": 0.6426735218508998
+      },
+      {
+        "distance": 306,
+        "openFraction": 0.650516795865633
+      },
+      {
+        "distance": 307,
+        "openFraction": 0.6474025974025974
+      },
+      {
+        "distance": 308,
+        "openFraction": 0.6527415143603134
+      },
+      {
+        "distance": 309,
+        "openFraction": 0.6535433070866141
+      },
+      {
+        "distance": 310,
+        "openFraction": 0.6510554089709762
+      },
+      {
+        "distance": 311,
+        "openFraction": 0.653183023872679
+      },
+      {
+        "distance": 312,
+        "openFraction": 0.64
+      },
+      {
+        "distance": 313,
+        "openFraction": 0.6367292225201072
+      },
+      {
+        "distance": 314,
+        "openFraction": 0.6583557951482479
+      },
+      {
+        "distance": 315,
+        "openFraction": 0.6646341463414634
+      },
+      {
+        "distance": 316,
+        "openFraction": 0.6389645776566758
+      },
+      {
+        "distance": 317,
+        "openFraction": 0.6561643835616439
+      },
+      {
+        "distance": 318,
+        "openFraction": 0.6584022038567493
+      },
+      {
+        "distance": 319,
+        "openFraction": 0.6475069252077562
+      },
+      {
+        "distance": 320,
+        "openFraction": 0.6511142061281338
+      },
+      {
+        "distance": 321,
+        "openFraction": 0.6484593837535014
+      },
+      {
+        "distance": 322,
+        "openFraction": 0.6485915492957747
+      },
+      {
+        "distance": 323,
+        "openFraction": 0.636685552407932
+      },
+      {
+        "distance": 324,
+        "openFraction": 0.6545584045584045
+      },
+      {
+        "distance": 325,
+        "openFraction": 0.666189111747851
+      },
+      {
+        "distance": 326,
+        "openFraction": 0.6512968299711815
+      },
+      {
+        "distance": 327,
+        "openFraction": 0.6420289855072464
+      },
+      {
+        "distance": 328,
+        "openFraction": 0.6399416909620991
+      },
+      {
+        "distance": 329,
+        "openFraction": 0.6385630498533724
+      },
+      {
+        "distance": 330,
+        "openFraction": 0.6600294985250738
+      },
+      {
+        "distance": 331,
+        "openFraction": 0.658753709198813
+      },
+      {
+        "distance": 332,
+        "openFraction": 0.6388059701492538
+      },
+      {
+        "distance": 333,
+        "openFraction": 0.6373873873873874
+      },
+      {
+        "distance": 334,
+        "openFraction": 0.6661631419939577
+      },
+      {
+        "distance": 335,
+        "openFraction": 0.6588145896656535
+      },
+      {
+        "distance": 336,
+        "openFraction": 0.6399082568807339
+      },
+      {
+        "distance": 337,
+        "openFraction": 0.6523076923076923
+      },
+      {
+        "distance": 338,
+        "openFraction": 0.6563467492260062
+      },
+      {
+        "distance": 339,
+        "openFraction": 0.6448598130841121
+      },
+      {
+        "distance": 340,
+        "openFraction": 0.6449843260188087
+      },
+      {
+        "distance": 341,
+        "openFraction": 0.6608832807570978
+      },
+      {
+        "distance": 342,
+        "openFraction": 0.6214285714285714
+      },
+      {
+        "distance": 343,
+        "openFraction": 0.6437699680511182
+      },
+      {
+        "distance": 344,
+        "openFraction": 0.662379421221865
+      },
+      {
+        "distance": 345,
+        "openFraction": 0.6537216828478964
+      },
+      {
+        "distance": 346,
+        "openFraction": 0.6270358306188925
+      },
+      {
+        "distance": 347,
+        "openFraction": 0.6450819672131147
+      },
+      {
+        "distance": 348,
+        "openFraction": 0.6584158415841584
+      },
+      {
+        "distance": 349,
+        "openFraction": 0.6362126245847176
+      },
+      {
+        "distance": 350,
+        "openFraction": 0.6496655518394648
+      },
+      {
+        "distance": 351,
+        "openFraction": 0.6439393939393939
+      },
+      {
+        "distance": 352,
+        "openFraction": 0.6635593220338983
+      },
+      {
+        "distance": 353,
+        "openFraction": 0.6621160409556314
+      },
+      {
+        "distance": 354,
+        "openFraction": 0.6391752577319587
+      },
+      {
+        "distance": 355,
+        "openFraction": 0.6384083044982699
+      },
+      {
+        "distance": 356,
+        "openFraction": 0.6306620209059234
+      },
+      {
+        "distance": 357,
+        "openFraction": 0.6605263157894737
+      },
+      {
+        "distance": 358,
+        "openFraction": 0.6439929328621908
+      },
+      {
+        "distance": 359,
+        "openFraction": 0.6574733096085409
+      },
+      {
+        "distance": 360,
+        "openFraction": 0.6281362007168458
+      },
+      {
+        "distance": 361,
+        "openFraction": 0.648014440433213
+      },
+      {
+        "distance": 362,
+        "openFraction": 0.6372727272727273
+      },
+      {
+        "distance": 363,
+        "openFraction": 0.6565934065934066
+      },
+      {
+        "distance": 364,
+        "openFraction": 0.6522140221402214
+      },
+      {
+        "distance": 365,
+        "openFraction": 0.6533457249070632
+      },
+      {
+        "distance": 366,
+        "openFraction": 0.6479400749063671
+      },
+      {
+        "distance": 367,
+        "openFraction": 0.6471698113207547
+      },
+      {
+        "distance": 368,
+        "openFraction": 0.6387832699619772
+      },
+      {
+        "distance": 369,
+        "openFraction": 0.6417624521072797
+      },
+      {
+        "distance": 370,
+        "openFraction": 0.6467181467181468
+      },
+      {
+        "distance": 371,
+        "openFraction": 0.6391050583657587
+      },
+      {
+        "distance": 372,
+        "openFraction": 0.6558823529411765
+      },
+      {
+        "distance": 373,
+        "openFraction": 0.6482213438735178
+      },
+      {
+        "distance": 374,
+        "openFraction": 0.6424302788844621
+      },
+      {
+        "distance": 375,
+        "openFraction": 0.6526104417670683
+      },
+      {
+        "distance": 376,
+        "openFraction": 0.6325910931174089
+      },
+      {
+        "distance": 377,
+        "openFraction": 0.6714285714285714
+      },
+      {
+        "distance": 378,
+        "openFraction": 0.6512345679012346
+      },
+      {
+        "distance": 379,
+        "openFraction": 0.6524896265560166
+      },
+      {
+        "distance": 380,
+        "openFraction": 0.6621338912133892
+      },
+      {
+        "distance": 381,
+        "openFraction": 0.6571729957805907
+      },
+      {
+        "distance": 382,
+        "openFraction": 0.6329787234042553
+      },
+      {
+        "distance": 383,
+        "openFraction": 0.6502145922746781
+      },
+      {
+        "distance": 384,
+        "openFraction": 0.6396103896103896
+      },
+      {
+        "distance": 385,
+        "openFraction": 0.6353711790393013
+      },
+      {
+        "distance": 386,
+        "openFraction": 0.6497797356828194
+      },
+      {
+        "distance": 387,
+        "openFraction": 0.6455555555555555
+      },
+      {
+        "distance": 388,
+        "openFraction": 0.6569506726457399
+      },
+      {
+        "distance": 389,
+        "openFraction": 0.6402714932126696
+      },
+      {
+        "distance": 390,
+        "openFraction": 0.6529680365296804
+      },
+      {
+        "distance": 391,
+        "openFraction": 0.6209677419354839
+      },
+      {
+        "distance": 392,
+        "openFraction": 0.663953488372093
+      },
+      {
+        "distance": 393,
+        "openFraction": 0.6807511737089202
+      },
+      {
+        "distance": 394,
+        "openFraction": 0.6374407582938388
+      },
+      {
+        "distance": 395,
+        "openFraction": 0.6303827751196173
+      },
+      {
+        "distance": 396,
+        "openFraction": 0.6714975845410628
+      },
+      {
+        "distance": 397,
+        "openFraction": 0.6658536585365854
+      },
+      {
+        "distance": 398,
+        "openFraction": 0.6403940886699507
+      },
+      {
+        "distance": 399,
+        "openFraction": 0.6281094527363185
+      },
+      {
+        "distance": 400,
+        "openFraction": 0.6494974874371859
+      },
+      {
+        "distance": 401,
+        "openFraction": 0.6522842639593909
+      },
+      {
+        "distance": 402,
+        "openFraction": 0.6435897435897436
+      },
+      {
+        "distance": 403,
+        "openFraction": 0.6489637305699482
+      },
+      {
+        "distance": 404,
+        "openFraction": 0.6230366492146597
+      },
+      {
+        "distance": 405,
+        "openFraction": 0.6322751322751323
+      },
+      {
+        "distance": 406,
+        "openFraction": 0.6564171122994652
+      },
+      {
+        "distance": 407,
+        "openFraction": 0.6608108108108108
+      },
+      {
+        "distance": 408,
+        "openFraction": 0.6420765027322405
+      },
+      {
+        "distance": 409,
+        "openFraction": 0.6256906077348067
+      },
+      {
+        "distance": 410,
+        "openFraction": 0.6759776536312849
+      },
+      {
+        "distance": 411,
+        "openFraction": 0.6567796610169492
+      },
+      {
+        "distance": 412,
+        "openFraction": 0.6228571428571429
+      },
+      {
+        "distance": 413,
+        "openFraction": 0.6502890173410405
+      },
+      {
+        "distance": 414,
+        "openFraction": 0.6652046783625731
+      },
+      {
+        "distance": 415,
+        "openFraction": 0.643491124260355
+      },
+      {
+        "distance": 416,
+        "openFraction": 0.6601796407185628
+      },
+      {
+        "distance": 417,
+        "openFraction": 0.6393939393939394
+      },
+      {
+        "distance": 418,
+        "openFraction": 0.6625766871165644
+      },
+      {
+        "distance": 419,
+        "openFraction": 0.6304347826086957
+      },
+      {
+        "distance": 420,
+        "openFraction": 0.6713836477987422
+      },
+      {
+        "distance": 421,
+        "openFraction": 0.6162420382165605
+      },
+      {
+        "distance": 422,
+        "openFraction": 0.6774193548387096
+      },
+      {
+        "distance": 423,
+        "openFraction": 0.6568627450980392
+      },
+      {
+        "distance": 424,
+        "openFraction": 0.6589403973509934
+      },
+      {
+        "distance": 425,
+        "openFraction": 0.6610738255033557
+      },
+      {
+        "distance": 426,
+        "openFraction": 0.6428571428571429
+      },
+      {
+        "distance": 427,
+        "openFraction": 0.6293103448275862
+      },
+      {
+        "distance": 428,
+        "openFraction": 0.6748251748251748
+      },
+      {
+        "distance": 429,
+        "openFraction": 0.6631205673758865
+      },
+      {
+        "distance": 430,
+        "openFraction": 0.5953237410071942
+      },
+      {
+        "distance": 431,
+        "openFraction": 0.6386861313868614
+      },
+      {
+        "distance": 432,
+        "openFraction": 0.6555555555555556
+      },
+      {
+        "distance": 433,
+        "openFraction": 0.6691729323308271
+      },
+      {
+        "distance": 434,
+        "openFraction": 0.6278625954198473
+      },
+      {
+        "distance": 435,
+        "openFraction": 0.6608527131782945
+      },
+      {
+        "distance": 436,
+        "openFraction": 0.6456692913385826
+      },
+      {
+        "distance": 437,
+        "openFraction": 0.624
+      },
+      {
+        "distance": 438,
+        "openFraction": 0.6585365853658537
+      },
+      {
+        "distance": 439,
+        "openFraction": 0.6756198347107438
+      },
+      {
+        "distance": 440,
+        "openFraction": 0.6323529411764706
+      },
+      {
+        "distance": 441,
+        "openFraction": 0.6410256410256411
+      },
+      {
+        "distance": 442,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 443,
+        "openFraction": 0.6216814159292036
+      },
+      {
+        "distance": 444,
+        "openFraction": 0.6621621621621622
+      },
+      {
+        "distance": 445,
+        "openFraction": 0.6697247706422018
+      },
+      {
+        "distance": 446,
+        "openFraction": 0.647196261682243
+      },
+      {
+        "distance": 447,
+        "openFraction": 0.6619047619047619
+      },
+      {
+        "distance": 448,
+        "openFraction": 0.6213592233009708
+      },
+      {
+        "distance": 449,
+        "openFraction": 0.6138613861386139
+      },
+      {
+        "distance": 450,
+        "openFraction": 0.6540404040404041
+      },
+      {
+        "distance": 451,
+        "openFraction": 0.6417525773195877
+      },
+      {
+        "distance": 452,
+        "openFraction": 0.6342105263157894
+      },
+      {
+        "distance": 453,
+        "openFraction": 0.6155913978494624
+      },
+      {
+        "distance": 454,
+        "openFraction": 0.6620879120879121
+      },
+      {
+        "distance": 455,
+        "openFraction": 0.651685393258427
+      },
+      {
+        "distance": 456,
+        "openFraction": 0.6264367816091954
+      },
+      {
+        "distance": 457,
+        "openFraction": 0.6529411764705882
+      },
+      {
+        "distance": 458,
+        "openFraction": 0.677710843373494
+      },
+      {
+        "distance": 459,
+        "openFraction": 0.6419753086419753
+      },
+      {
+        "distance": 460,
+        "openFraction": 0.6424050632911392
+      },
+      {
+        "distance": 461,
+        "openFraction": 0.6753246753246753
+      },
+      {
+        "distance": 462,
+        "openFraction": 0.6166666666666667
+      },
+      {
+        "distance": 463,
+        "openFraction": 0.6541095890410958
+      },
+      {
+        "distance": 464,
+        "openFraction": 0.6338028169014085
+      },
+      {
+        "distance": 465,
+        "openFraction": 0.6702898550724637
+      },
+      {
+        "distance": 466,
+        "openFraction": 0.6417910447761194
+      },
+      {
+        "distance": 467,
+        "openFraction": 0.6307692307692307
+      },
+      {
+        "distance": 468,
+        "openFraction": 0.6309523809523809
+      },
+      {
+        "distance": 469,
+        "openFraction": 0.6311475409836066
+      },
+      {
+        "distance": 470,
+        "openFraction": 0.6483050847457628
+      },
+      {
+        "distance": 471,
+        "openFraction": 0.5921052631578947
+      },
+      {
+        "distance": 472,
+        "openFraction": 0.65
+      },
+      {
+        "distance": 473,
+        "openFraction": 0.6650943396226415
+      },
+      {
+        "distance": 474,
+        "openFraction": 0.6715686274509803
+      },
+      {
+        "distance": 475,
+        "openFraction": 0.6275510204081632
+      },
+      {
+        "distance": 476,
+        "openFraction": 0.648936170212766
+      },
+      {
+        "distance": 477,
+        "openFraction": 0.6555555555555556
+      },
+      {
+        "distance": 478,
+        "openFraction": 0.6976744186046512
+      },
+      {
+        "distance": 479,
+        "openFraction": 0.6341463414634146
+      },
+      {
+        "distance": 480,
+        "openFraction": 0.6858974358974359
+      },
+      {
+        "distance": 481,
+        "openFraction": 0.5540540540540541
+      },
+      {
+        "distance": 482,
+        "openFraction": 0.6357142857142857
+      },
+      {
+        "distance": 483,
+        "openFraction": 0.6818181818181818
+      },
+      {
+        "distance": 484,
+        "openFraction": 0.6451612903225806
+      },
+      {
+        "distance": 485,
+        "openFraction": 0.5862068965517241
+      },
+      {
+        "distance": 486,
+        "openFraction": 0.6481481481481481
+      },
+      {
+        "distance": 487,
+        "openFraction": 0.66
+      },
+      {
+        "distance": 488,
+        "openFraction": 0.6086956521739131
+      },
+      {
+        "distance": 489,
+        "openFraction": 0.6666666666666666
+      },
+      {
+        "distance": 490,
+        "openFraction": 0.618421052631579
+      },
+      {
+        "distance": 491,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 492,
+        "openFraction": 0.6
+      },
+      {
+        "distance": 493,
+        "openFraction": 0.6730769230769231
+      },
+      {
+        "distance": 494,
+        "openFraction": 0.6818181818181818
+      },
+      {
+        "distance": 495,
+        "openFraction": 0.75
+      },
+      {
+        "distance": 496,
+        "openFraction": 0.32142857142857145
+      },
+      {
+        "distance": 497,
+        "openFraction": 0.55
+      },
+      {
+        "distance": 498,
+        "openFraction": 0.5833333333333334
+      },
+      {
+        "distance": 499,
+        "openFraction": 1
+      }
+    ],
+    "tileDensity": {
+      "side": 32,
+      "columns": 32,
+      "rows": 32,
+      "min": 0.609375,
+      "max": 0.693359375,
+      "variance": 0.0001269802369279205
+    },
+    "symmetry": {
+      "mirrorX": 0.06591447288608523,
+      "mirrorY": -0.07093109461546893,
+      "rotate180": -0.06387910302411469,
+      "rawMirrorX": 0.575078,
+      "rawMirrorY": 0.512826,
+      "rawRotate180": 0.516034
+    },
+    "scope": "Exact full-board geometry. Density variance uses nonoverlapping 32-cell tiles, including partial edge tiles equally. No room or proof analysis."
+  }
+}

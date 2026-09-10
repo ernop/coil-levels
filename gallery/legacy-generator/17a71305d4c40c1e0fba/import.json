@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "title": "300x200 seed=0 lc=1stlast2 s-New o-tlim3",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "1stlast2 s-New o-tlim3"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/300x200 seed=0 lc=1stlast2 s-New o-tlim3.coil",
+      "line": 1,
+      "heading": "300x200 - 1stlast2 s-New o-tlim3",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 300,
+  "height": 200,
+  "boardSha256": "17a71305d4c40c1e0fba939037756f1ee67a56d89084774303e3fc26301b6670",
+  "solutionAvailable": false
+}

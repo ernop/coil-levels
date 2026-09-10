@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "title": "22x22 seed=0 lc=even Longest",
+  "generator": "archived-tweak-generator",
+  "source": {
+    "id": "coil-levels-generator",
+    "label": "coil-levels generator",
+    "description": "Boards created by this project",
+    "url": "https://github.com/ernop/coil-levels"
+  },
+  "collection": "legacy-generator",
+  "seed": 0,
+  "archiveSettings": [
+    "even Longest"
+  ],
+  "sourceRecords": [
+    {
+      "file": "levels/22x22 seed=0 lc=even Longest.coil",
+      "line": 1,
+      "heading": "22x22 - even Longest",
+      "seed": 0
+    },
+    {
+      "file": "levels/22x22 seed=0 lc=even Longest.coil",
+      "line": 47,
+      "heading": "22x22 - even Longest",
+      "seed": 0
+    }
+  ],
+  "settingsStatus": "Settings are preserved exactly as written in the archived headings and filenames. Other settings and the solution were not saved.",
+  "width": 22,
+  "height": 22,
+  "boardSha256": "f57e5fec127551fb8da3f7ba2cefa16a86e11a9eb2aeb5f4611afddb6e47f170",
+  "solutionAvailable": false
+}
