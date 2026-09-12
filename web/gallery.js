@@ -19,8 +19,8 @@ const metrics={
  runs:{name:'Mean open run (cells)',value:s=>(s.horizontalRuns.mean+s.verticalRuns.mean)/2,definition:'Find every maximal horizontal and vertical run of open cells. Average each orientation’s run lengths, then average the two means. The slider highlights the long-run tail; it does not change the reported mean.',limits:'These are geometric runs, not legal solution segments. A mean can hide a small number of extremely long runs and does not show how runs join.',legend:'Orange: horizontal runs above the chosen length. Blue: vertical runs. Purple: both. Unhighlighted open cells are gray.'},
  pillars:{name:'Isolated wall cells (%)',value:s=>s.isolatedWallFraction===null?null:100*s.isolatedWallFraction,definition:'Count wall cells without any orthogonally adjacent wall; divide by all wall cells. The overlay highlights each counted wall cell.',limits:'Diagonal contact is ignored. It does not distinguish arrangement, spacing, repeated motifs, or the shape of larger wall clusters.',legend:'Red: isolated wall cell. Other walls are black; open cells are gray.'},
  degree:{name:'Degree-two open cells (%)',value:s=>100*s.degreeCounts[2]/s.openCells,definition:'Count open cells with exactly two orthogonal open neighbors; divide by all open cells. Every highlighted cell contributes once.',limits:'Degree two includes both bends and straight corridors. It does not by itself force two solution edges because the cell may be an endpoint.',legend:'Green: open cell with exactly two open neighbors. Other open cells are gray.'},
- squares:{name:'Largest open square (side)',value:s=>s.largestOpenSquare[2],definition:'Find the largest completely open, axis-aligned square. The highlighted square is the exact coordinate witness saved in the stats.',limits:'One maximum can be an outlier. It ignores long thin open areas and the organization of the rest of the board. Square side is not area or a room decomposition.',legend:'Amber frame and tint: exact largest all-open square. Click the map to inspect cells in a labeled detail.'},
- walls:{name:'Largest wall square (side)',value:s=>s.largestWallSquare[2],definition:'Find the largest completely blocked, axis-aligned square. The red outline identifies the exact witness.',limits:'A large thin wall or diagonal barrier can still have a maximum square of side one. This is not wall component area.',legend:'Red frame and tint: exact largest all-wall square. Small squares are easiest to inspect in the labeled cell detail.'},
+ squares:{name:'Largest open square (side %)',value:s=>100*s.largestOpenSquare[2]/Math.min(s.width,s.height),definition:'Find the largest completely open, axis-aligned square. Divide its side by the smaller board dimension and report a percentage. The highlight marks the exact saved witness.',limits:'One maximum can be an outlier. It ignores long thin open areas and the organization of the rest of the board. Square side is not area or a room decomposition.',legend:'Amber frame and tint: exact largest all-open square. Click the map to inspect cells in a labeled detail.'},
+ walls:{name:'Largest wall square (side %)',value:s=>100*s.largestWallSquare[2]/Math.min(s.width,s.height),definition:'Find the largest completely blocked, axis-aligned square. Divide its side by the smaller board dimension and report a percentage. The red outline identifies the exact witness.',limits:'A large thin wall or diagonal barrier can still have a maximum square of side one. This is not wall component area.',legend:'Red frame and tint: exact largest all-wall square. Small squares are easiest to inspect in the labeled cell detail.'},
  interface:{name:'Interface sides per open cell',value:s=>s.interfacePerOpen,definition:'Count every open-cell side facing a wall or the board exterior and divide by the number of open cells. Equivalently (4N − 2E) / N, with E the open-to-open adjacency count.',limits:'It captures boundary density, not where boundaries occur. Different wall shapes and arrangements can produce the same value.',legend:'Open cells: yellow to red as their number of wall-facing sides rises from 0 to 4. Exterior boundaries count.'},
  axis:{name:'Horizontal axis bias',value:s=>s.axisBias,definition:'Count horizontal and vertical open adjacencies. Report (horizontal − vertical) / (horizontal + vertical). The overlay shows each cell’s local difference; global bias counts each adjacency once.',limits:'Opposing local orientations can cancel. A value near zero does not mean no directional structure, and orientation is not a measure of complexity.',legend:'Orange: more horizontal open neighbors. Blue: more vertical. Gray: balanced local counts. The color scale is the same for every board.'},
  symmetry:{name:'Adjusted left/right symmetry',value:s=>s.symmetry.mirrorX,definition:'Compare each cell to its reflected partner across the vertical midline. Adjust observed agreement for p² + (1−p)², the independent baseline at this occupancy.',limits:'A high raw agreement can come from an almost uniform board. This adjusted value tests one global reflection, not local repeated motifs, translation symmetry, or rotational structure.',legend:'Magenta: mismatch with the horizontally reflected cell. Matching cells retain their wall/open shade.'},
@@ -28,7 +28,7 @@ const metrics={
 };
 function cells(board) { return board.geometry ||= (board.side>1000?window.CoilBoardGeometry.inspectLarge(board):window.CoilBoardGeometry.decode(board)); }
 const format = window.CoilStatsLedger.number;
-const metricLabels={occupancy:'Open %',density:'Density variance',runs:'Mean run',pillars:'Pillars %',degree:'Degree 2 %',squares:'Open square',walls:'Wall square',interface:'Interface',axis:'Axis bias',symmetry:'Symmetry',edge:'Edge Δ pp'};
+const metricLabels={occupancy:'Open %',density:'Density variance',runs:'Mean run',pillars:'Pillars %',degree:'Degree 2 %',squares:'Open square %',walls:'Wall square %',interface:'Interface',axis:'Axis bias',symmetry:'Symmetry',edge:'Edge Δ pp'};
 const query = new URLSearchParams(location.search);
 const clamp = (n,low,high) => Math.max(low,Math.min(high,n));
 function queryInteger(key,fallback,low,high) {
@@ -55,6 +55,7 @@ let selectedDisplay = ['raw','overlay','solution'].includes(query.get('display')
 $('lab-view').innerHTML='<option value="raw">Board</option><optgroup label="Measurements">'+Object.entries(metrics).map(([key,m])=>`<option value="${key}">${m.name}</option>`).join('')+'</optgroup>';
 let solutionDetail=query.get('solutionDetail')==='sampled'?'sampled':'cells';
 let preferredSample=query.has('sample')?queryInteger('sample',100,1,100000000):null;
+let sampleTimer, sampleStride=1;
 let displayBeforeSolution='raw';
 let preferredZoom = queryInteger('zoom',48,1,10000);
 $('run-min').value = queryInteger('run',10,2,100);
@@ -116,7 +117,7 @@ function overviewBounds() {
   const scale=640/side();return {x:(640-width()*scale)/2,y:(640-height()*scale)/2,w:width()*scale,h:height()*scale,scale};
 }
 function sampledPoints() {
-  const board=currentBoard(),g=cells(board),stride=Number($('solution-step').value);
+  const board=currentBoard(),g=cells(board),stride=sampleStride;
   if(g.sampledSolution?.stride!==stride)g.sampledSolution={stride,points:window.CoilBoardGeometry.sampleSolution(board,stride,g)};
   return g.sampledSolution.points;
 }
@@ -170,7 +171,8 @@ function queueViews() {
 }
 function renderSurvey() {
   const r=data.ranges[$('survey-scope').value][selectedMetric];
-  $('survey-readout').innerHTML=`<article><h3>${r.configurations} recipe means</h3><div class="big">${format(r.minMean)} → ${format(r.maxMean)}</div><p>Range of three-seed means</p></article><article><h3>Typical seed variation</h3><div class="big">${format(r.medianSeedRange)}</div><p>Median within-recipe max − min</p></article><article><h3>Largest seed range</h3><div class="big">${format(r.widest.max-r.widest.min)}</div><p>${escapeText(r.widest.recipe)}</p></article>`;
+  const surveyValue=value=>format(value*(['squares','walls'].includes(selectedMetric)?100/300:1));
+  $('survey-readout').innerHTML=`<article><h3>${r.configurations} recipe means</h3><div class="big">${surveyValue(r.minMean)} → ${surveyValue(r.maxMean)}</div><p>Range of three-seed means</p></article><article><h3>Typical seed variation</h3><div class="big">${surveyValue(r.medianSeedRange)}</div><p>Median within-recipe max − min</p></article><article><h3>Largest seed range</h3><div class="big">${surveyValue(r.widest.max-r.widest.min)}</div><p>${escapeText(r.widest.recipe)}</p></article>`;
 }
 function renderMetric() {
   if (!activeBoard) return;
@@ -183,7 +185,7 @@ function renderMetric() {
   $('solution-detail').value=solutionDetail;
   $('sample-control').hidden=solutionDetail!=='sampled';
   $('lab-legend').hidden=selectedDisplay==='raw';
-  const solutionLegend=solutionDetail==='sampled'?`Sampled solution · every ${Number($('solution-step').value).toLocaleString()} cells, plus both endpoints. Blue S → orange F. Lines skip intermediate moves and may cross walls.`:'Legal solution · every cell in visit order. Blue start → orange finish.';
+  const solutionLegend=solutionDetail==='sampled'?`Sampled solution · every ${sampleStride.toLocaleString()} cells, plus both endpoints. Blue S → orange F. Lines skip intermediate moves and may cross walls.`:'Legal solution · every cell in visit order. Blue start → orange finish.';
   $('lab-legend').textContent=(selectedDisplay==='solution'?solutionLegend:raw?'Original board: white open, black wall.':m.legend)+' Cyan frame: close-up area.';
   $('metric-definition').textContent=m.definition;$('metric-limits').textContent=m.limits;
   $('metric-readout').textContent='The reported value always describes the complete board. Overlay controls change the highlighted cells; the zoom changes only the view.';
@@ -245,7 +247,7 @@ function renderRecord() {
   $('stats-board-name').textContent=board.id;
   $('stats-ledger').innerHTML=window.CoilStatsLedger.render(board);
   $('raw-stats').textContent=JSON.stringify(record,null,2);
-  $('headline-stats').innerHTML=Object.entries(metrics).map(([key,m])=>`<button class="stat-button" data-headline="${key}" aria-pressed="false" title="${escapeText(m.name)}: ${m.value(board.stats)??'undefined'} · click to show overlay"><span>${metricLabels[key]}</span><strong>${format(m.value(board.stats))}</strong></button>`).join('')+`<div class="compact-stat" title="Open cells in the whole board"><span>Open cells</span><strong>${format(board.stats.openCells)}</strong></div>`;
+  $('headline-stats').innerHTML=Object.entries(metrics).map(([key,m])=>`<button class="stat-button" data-headline="${key}" aria-pressed="false" title="${escapeText(m.name)}: ${m.value(board.stats)??'undefined'} · click to show overlay"><span>${metricLabels[key]}</span><strong>${format(m.value(board.stats))}</strong></button>`).join('')+`<div class="compact-stat" title="${format(board.width*board.height-board.stats.openCells)} wall cells / ${format(board.width*board.height)} total cells"><span>Wall %</span><strong>${format(100*(1-board.stats.openFraction))}</strong></div>`;
   window.CoilSamplingResearch.renderBoard(board);
   renderParameters(board);
   const names={map:'Full-resolution PNG',stats:'Exact stats JSON',board:'Board',solution:'Legal solution',constructionCode:'Construction code',recipe:'Replay recipe',solutionMap:'Solution colors PNG',samplingBatch:'Sampling batch'};
@@ -278,7 +280,8 @@ async function chooseBoard(id) {
     if(n>1000)solutionDetail='sampled';
     const minSample=Math.max(1,Math.ceil(board.stats.openCells/50000));
     $('solution-step').min=minSample;$('solution-step').max=board.stats.openCells;
-    $('solution-step').value=clamp(preferredSample??Math.max(1,Math.ceil(board.stats.openCells/600)),minSample,board.stats.openCells);
+    clearTimeout(sampleTimer);
+    syncSampleControls(clamp(preferredSample??Math.max(1,Math.ceil(board.stats.openCells/600)),minSample,board.stats.openCells));
     $('solution-status').textContent=board.solutionAvailable?'':'No saved solution';
     for(const id of ['focus-start','focus-finish'])$(id).disabled=!board.solutionAvailable;
     if(!board.solutionAvailable&&selectedDisplay==='solution')selectedDisplay='raw';
@@ -294,7 +297,7 @@ async function chooseBoard(id) {
     $('board-position').textContent=`${visibleBoards.findIndex(b=>b.id===id)+1} / ${visibleBoards.length}`;
     $('selected-subtitle').textContent=dimensions(board);
     $('selected-subtitle').title=board.configuration.methodLabel;
-    $('stats-scope').textContent=`Every saved geometry measurement appears below. Values describe all ${format(width()*height())} cells, regardless of the zoom. Select a headline value to see its overlay; expand a distribution table for every exact count.`;
+    $('stats-scope').textContent=`Measurements describe all ${format(width()*height())} cells, regardless of the zoom. Neighbor and distribution counts appear as percentages; table headings and Notes identify the denominator. Hover for exact saved counts, or open the full record.`;
     if (version===1 && query.has('x') && query.has('y')) focus={x:clamp(focus.x,0,width()-1),y:clamp(focus.y,0,height()-1)};
     else if (board.collection==='backward-v1') focus={...board.geometry.start};
     else focus={x:Math.floor(width()/2),y:Math.floor(height()/2)};
@@ -324,11 +327,35 @@ function toggleSolution() {
 }
 $('show-solution').addEventListener('change',toggleSolution);
 $('solution-detail').addEventListener('change',()=>{solutionDetail=$('solution-detail').value;renderMetric();});
-$('solution-step').addEventListener('change',()=>{
-  const value=Number($('solution-step').value);
-  preferredSample=clamp(Number.isFinite(value)?Math.round(value):1,Number($('solution-step').min),Number($('solution-step').max));
-  $('solution-step').value=preferredSample;renderMetric();
+function syncSampleControls(value,updateRange=true) {
+  const minimum=Number($('solution-step').min),maximum=Number($('solution-step').max);
+  sampleStride=value;
+  $('solution-step').value=value;
+  if(updateRange)$('solution-range').value=maximum<=minimum?0:Math.round(Math.log(value/minimum)/Math.log(maximum/minimum)*1000);
+  $('solution-range').disabled=maximum<=minimum;
+  $('solution-range').setAttribute('aria-valuetext',`Every ${value.toLocaleString()} cells`);
+}
+function setSample(value,updateRange=true,immediate=false) {
+  if(!activeBoard)return;
+  clearTimeout(sampleTimer);
+  preferredSample=clamp(Math.round(value),Number($('solution-step').min),Number($('solution-step').max));
+  syncSampleControls(preferredSample,updateRange);
+  // Large solutions replay to sample points. Update controls immediately, then
+  // redraw after a pause or release instead of replaying on every pointer event.
+  if(immediate)renderMetric();else sampleTimer=setTimeout(renderMetric,150);
+}
+$('solution-step').addEventListener('input',()=>{
+  clearTimeout(sampleTimer);
+  const input=$('solution-step');
+  if(input.value!==''&&input.validity.valid)setSample(input.valueAsNumber);
 });
+$('solution-step').addEventListener('change',()=>setSample(Number($('solution-step').value)||1,true,true));
+function sampleFromRange() {
+  const minimum=Number($('solution-step').min),maximum=Number($('solution-step').max);
+  return minimum*Math.exp(Number($('solution-range').value)/1000*Math.log(maximum/minimum));
+}
+$('solution-range').addEventListener('input',()=>setSample(sampleFromRange(),false));
+$('solution-range').addEventListener('change',()=>setSample(sampleFromRange(),false,true));
 document.addEventListener('keydown',event=>{
   if(event.key!=='s'||event.repeat||event.altKey||event.ctrlKey||event.metaKey||event.target.closest('input,select,textarea,[contenteditable]:not([contenteditable="false"])'))return;
   event.preventDefault();toggleSolution();
@@ -366,7 +393,7 @@ $('stats-ledger').addEventListener('click',event=>{
   if(button.dataset.focusSquare) {
     const key=button.dataset.focusSquare,[x,y,n]=currentBoard().stats[key==='squares'?'largestOpenSquare':'largestWallSquare'];
     focus={x:clamp(Math.floor(x+n/2),0,width()-1),y:clamp(Math.floor(y+n/2),0,height()-1)};
-    $('zoom-size').value=String([...$('zoom-size').options].map(o=>Number(o.value)).find(size=>size>=n+6)||Math.min(width(),height()));chooseMetric(key,true);
+    setZoom(n+6);chooseMetric(key,true);
   }
   if(button.dataset.edgeLayer!==undefined) {
     const layer=Number(button.dataset.edgeLayer);$('edge-distance').value=layer;focus={x:Math.floor(width()/2),y:layer};chooseMetric('edge',true);

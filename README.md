@@ -1,5 +1,10 @@
 # coil-levels
 
+[Open the live Board explorer](https://ernop.github.io/coil-levels/) to browse
+all 4,864 boards without installing anything. Select a board and open
+**Notes & files → Board** to download it; saved solutions are linked where
+available. [Hosting and publishing](HOSTING.md) describes automatic updates.
+
 Level generator for Mortal Coil: visit every open square, sliding until a wall,
 boundary, or previously visited square blocks movement.
 

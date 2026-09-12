@@ -3,7 +3,8 @@
 window.CoilStatsLedger = (() => {
   const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const number = value => value == null ? '—' : typeof value==='number'&&value!==0&&Math.abs(value)<.01 ? value.toExponential(1) : value.toLocaleString(undefined, {maximumFractionDigits:2});
-  const percent = value => value === null ? 'undefined' : number(value * 100) + '%';
+  const percent = value => value == null ? '—' : number(value * 100) + '%';
+  const share = (count,total) => total>0 ? count/total : null;
   const valueCell = (path, value, text = number(value)) => `<td class="value" data-stat-path="${esc(path)}" data-value="${esc(JSON.stringify(value))}" title="Saved value: ${esc(JSON.stringify(value))}">${esc(text)}</td>`;
   const row = (path, label, value, explanation, text) => `<tr><th scope="row" title="${esc(path)}${explanation?' · '+esc(explanation):''}">${esc(label)}</th>${valueCell(path,value,text)}</tr>`;
   const table = rows => `<table><tbody>${rows}</tbody></table>`;
@@ -11,19 +12,17 @@ window.CoilStatsLedger = (() => {
 
   function distributionChart(series, xLabel) {
     const allKeys = [...new Set(series.flatMap(s => Object.keys(s.values)))].map(Number).sort((a,b)=>a-b);
-    const maximum = Math.max(1,...allKeys), peak = Math.max(1,...series.flatMap(s=>Object.values(s.values)));
+    const maximum = Math.max(1,...allKeys);
     const x = n => 48 + (n - .5) / maximum * 490;
-    const y = n => 166 - Math.log10(1+n) / Math.log10(1+peak) * 125;
-    let svg = '<svg class="distribution-chart" viewBox="0 0 560 210" role="img" aria-label="Exact distribution; counts use a logarithmic scale"><text x="48" y="15" fill="#aec0b5" font-size="11">Count · log10(1 + count) scale</text>';
-    let lastTickY = Infinity;
-    for (let tick of [0,1,10,100,1000,10000,100000,1000000].filter(t=>t<=peak)) {
-      if (lastTickY-y(tick)<14) continue;
-      lastTickY=y(tick);
-      svg += `<path d="M48 ${y(tick)}H542" stroke="#35493e"/><text x="42" y="${y(tick)+4}" text-anchor="end" fill="#aec0b5" font-size="10">${number(tick)}</text>`;
+    const y = fraction => 166 - fraction * 125;
+    let svg = '<svg class="distribution-chart" viewBox="0 0 560 210" role="img" aria-label="Distribution percentages on a fixed zero to one hundred percent scale"><text x="48" y="15" fill="#aec0b5" font-size="11">Share · fixed 0–100% scale</text>';
+    for (const tick of [0,.25,.5,.75,1]) {
+      svg += `<path d="M48 ${y(tick)}H542" stroke="#35493e"/><text x="42" y="${y(tick)+4}" text-anchor="end" fill="#aec0b5" font-size="10">${percent(tick)}</text>`;
     }
     const width = 490 / maximum / series.length;
     for (const [index,seriesItem] of series.entries()) for (const [length,count] of Object.entries(seriesItem.values)) {
-      svg += `<rect x="${x(Number(length)) - 245/maximum + index*width}" y="${y(count)}" width="${Math.max(.35,width*.88)}" height="${166-y(count)}" fill="${seriesItem.color}"><title>${esc(seriesItem.name)} · ${length} cells: ${number(count)}</title></rect>`;
+      const total=seriesItem.total(Number(length)),fraction=share(count,total);
+      svg += `<rect x="${x(Number(length)) - 245/maximum + index*width}" y="${y(fraction??0)}" width="${Math.max(.35,width*.88)}" height="${166-y(fraction??0)}" fill="${seriesItem.color}"><title>${esc(seriesItem.name)} · ${length} cells: ${percent(fraction)} (${number(count)} / ${number(total)} ${esc(seriesItem.unit)})</title></rect>`;
     }
     svg += `<text x="48" y="185" fill="#aec0b5" font-size="11">1</text><text x="542" y="185" text-anchor="end" fill="#aec0b5" font-size="11">${maximum}</text><text x="295" y="204" text-anchor="middle" fill="#aec0b5" font-size="11">${xLabel}</text></svg>`;
     return svg;
@@ -37,32 +36,34 @@ window.CoilStatsLedger = (() => {
 
   function render(board) {
     const s = board.stats, area = s.width*s.height;
-    let html = group('Population and local connections', 'Orthogonal neighbors share an edge. Counts and fractions below use the whole board.', table(
+    let html = group('Population and local connections', 'Orthogonal neighbors share an edge. Each neighbor percentage divides by all open cells; the five percentages sum to 100% before rounding. The isolated-wall percentage divides by all wall cells. Hover values for exact saved counts; a dash means the denominator is zero.', table(
       row('stats.width','Width',s.width,'Cells across') + row('stats.height','Height',s.height,'Cells down') +
-      row('stats.openCells','Open cells',s.openCells,`${number(area-s.openCells)} wall cells; ${number(area)} cells in total`) +
+      row('stats.openCells','Open cells (count)',s.openCells,`${number(area-s.openCells)} wall cells; ${number(area)} cells in total`) +
       row('stats.openFraction','Open fraction',s.openFraction,'Open cells ÷ all cells',percent(s.openFraction)) +
-      s.degreeCounts.map((n,d)=>row(`stats.degreeCounts[${d}]`,`Open cells with ${d} open neighbors`,n,`${percent(n/s.openCells)} of open cells; degree ${d}`)).join('') +
+      s.degreeCounts.map((n,d)=>row(`stats.degreeCounts[${d}]`,`Open cells with ${d} open neighbors`,n,`${number(n)} ÷ ${number(s.openCells)} open cells`,percent(share(n,s.openCells)))).join('') +
       row('stats.isolatedWallFraction','Isolated wall fraction',s.isolatedWallFraction,'Wall cells with no orthogonal wall neighbor ÷ wall cells',percent(s.isolatedWallFraction)) +
       row('stats.interfacePerOpen','Interface sides per open cell',s.interfacePerOpen,'Wall-facing and exterior-facing sides ÷ open cells') +
       row('stats.axisBias','Horizontal axis bias',s.axisBias,'(Horizontal open adjacencies − vertical) ÷ their sum; opposing local orientations can cancel')
     ));
 
     const lengths = [...new Set([...Object.keys(s.horizontalRuns.histogram),...Object.keys(s.verticalRuns.histogram)])].map(Number).sort((a,b)=>a-b);
-    const histogramCell = (key,n) => Object.hasOwn(s[key].histogram,n) ? valueCell(`stats.${key}.histogram.${n}`,s[key].histogram[n]) : '<td class="value">0</td>';
-    html += group('Open runs', 'A run is a maximal uninterrupted row or column of open cells. These are geometric runs, not solution moves. The two means can hide very different tails.',
+    const histogramCell = (key,n) => Object.hasOwn(s[key].histogram,n) ? valueCell(`stats.${key}.histogram.${n}`,s[key].histogram[n],percent(share(s[key].histogram[n],s[key].count))) : `<td class="value">${percent(share(0,s[key].count))}</td>`;
+    const runTotal=s.horizontalRuns.count+s.verticalRuns.count;
+    html += group('Open runs', 'A run is a maximal uninterrupted row or column of open cells, not a solution move. Orientation shares divide by all horizontal and vertical runs combined. Each histogram divides by the run count in that orientation, so each orientation sums to 100% before rounding. Means and maxima retain cell units.',
       table(['horizontalRuns','verticalRuns'].map((key,i)=>{
         const label = i ? 'Vertical' : 'Horizontal';
-        return row(`stats.${key}.count`,`${label} run count`,s[key].count,'Each maximal run counts once') + row(`stats.${key}.mean`,`${label} mean length`,s[key].mean,'Cells per run') + row(`stats.${key}.max`,`${label} longest run`,s[key].max,'Cells');
+        return row(`stats.${key}.count`,`${label} share of all runs`,s[key].count,`${number(s[key].count)} ÷ ${number(runTotal)} runs in both orientations`,percent(share(s[key].count,runTotal))) + row(`stats.${key}.mean`,`${label} mean length (cells)`,s[key].mean,'Cells per run') + row(`stats.${key}.max`,`${label} longest run (cells)`,s[key].max,'Cells');
       }).join('')) + '<div class="chart-key"><span class="horizontal">Horizontal</span><span class="vertical">Vertical</span></div>' +
-      distributionChart([{name:'Horizontal',values:s.horizontalRuns.histogram,color:'#f89d42'},{name:'Vertical',values:s.verticalRuns.histogram,color:'#48a0f4'}],'Run length (cells)') +
-      `<details><summary>Every run length and exact count · ${lengths.length} observed lengths</summary><p>Absent lengths have zero runs. Counts partition the open cells separately in each orientation.</p><div class="distribution-table"><table><thead><tr><th>Length</th><th>Horizontal</th><th>Vertical</th></tr></thead><tbody>${lengths.map(n=>`<tr><th scope="row">${n}</th>${histogramCell('horizontalRuns',n)}${histogramCell('verticalRuns',n)}</tr>`).join('')}</tbody></table></div></details>`);
+      distributionChart([{name:'Horizontal',values:s.horizontalRuns.histogram,total:()=>s.horizontalRuns.count,unit:'horizontal runs',color:'#f89d42'},{name:'Vertical',values:s.verticalRuns.histogram,total:()=>s.verticalRuns.count,unit:'vertical runs',color:'#48a0f4'}],'Run length (cells)') +
+      `<details><summary>Run-length shares · ${lengths.length} observed lengths</summary><p>Each column is a percentage of that orientation’s runs. Hover for exact counts. Absent lengths have zero runs.</p><div class="distribution-table"><table><thead><tr><th>Length</th><th>% of horizontal runs</th><th>% of vertical runs</th></tr></thead><tbody>${lengths.map(n=>`<tr><th scope="row">${n}</th>${histogramCell('horizontalRuns',n)}${histogramCell('verticalRuns',n)}</tr>`).join('')}</tbody></table></div></details>`);
 
     const sizes = [...new Set([...Object.keys(s.openSquareCounts),...Object.keys(s.wallSquareCounts)])].map(Number).sort((a,b)=>a-b);
-    html += group('Open and wall squares', 'Counts include every overlapping axis-aligned placement of each exact size. They are not disjoint rooms. A witness records one largest square as [x, y, side], with zero-based coordinates.',
-      table(row('stats.largestOpenSquare','Largest open square',s.largestOpenSquare,'Top-left x, top-left y, side',`[${s.largestOpenSquare.join(', ')}]`) + row('stats.largestWallSquare','Largest wall square',s.largestWallSquare,'Top-left x, top-left y, side',`[${s.largestWallSquare.join(', ')}]`)) +
+    const placements=n=>(s.width-n+1)*(s.height-n+1);
+    html += group('Open and wall squares', 'Largest sides divide by the smaller board dimension. For each side n, placement percentages divide by (width − n + 1) × (height − n + 1), including overlaps. Mixed open/wall squares are the remainder; percentages across sizes do not sum to 100%. Hover a largest square for its saved [x, y, side] witness, with zero-based coordinates.',
+      table(['largestOpenSquare','largestWallSquare'].map((key,i)=>row(`stats.${key}`,`Largest ${i?'wall':'open'} square side / board`,s[key],`Side ÷ smaller board dimension (${number(Math.min(s.width,s.height))} cells); top-left (${s[key][0]}, ${s[key][1]})`,`${percent(share(s[key][2],Math.min(s.width,s.height)))} · ${number(s[key][2])} cells`)).join('')) +
       '<div class="controls"><button data-focus-square="squares">Inspect largest open square</button><button data-focus-square="walls">Inspect largest wall square</button></div>' +
-      '<div class="chart-key"><span class="horizontal">Open squares</span><span class="vertical">Wall squares</span></div>' + distributionChart([{name:'Open squares',values:s.openSquareCounts,color:'#f89d42'},{name:'Wall squares',values:s.wallSquareCounts,color:'#48a0f4'}],'Square side (cells)') +
-      `<details><summary>Every square size and placement count · ${sizes.length} sizes</summary><div class="distribution-table"><table><thead><tr><th>Side</th><th>All open</th><th>All wall</th></tr></thead><tbody>${sizes.map(n=>`<tr><th scope="row">${n} × ${n}</th>${['openSquareCounts','wallSquareCounts'].map(key=>Object.hasOwn(s[key],n)?valueCell(`stats.${key}.${n}`,s[key][n]):'<td class="value">0</td>').join('')}</tr>`).join('')}</tbody></table></div></details>`);
+      '<div class="chart-key"><span class="horizontal">Open squares</span><span class="vertical">Wall squares</span></div>' + distributionChart([{name:'Open squares',values:s.openSquareCounts,total:placements,unit:'possible placements',color:'#f89d42'},{name:'Wall squares',values:s.wallSquareCounts,total:placements,unit:'possible placements',color:'#48a0f4'}],'Square side (cells)') +
+      `<details><summary>Square placement shares · ${sizes.length} sizes</summary><p>Percentage of all possible placements of that size. Hover for exact counts.</p><div class="distribution-table"><table><thead><tr><th>Side</th><th>All open %</th><th>All wall %</th></tr></thead><tbody>${sizes.map(n=>`<tr><th scope="row">${n} × ${n}</th>${['openSquareCounts','wallSquareCounts'].map(key=>Object.hasOwn(s[key],n)?valueCell(`stats.${key}.${n}`,s[key][n],percent(share(s[key][n],placements(n)))):'<td class="value">0%</td>').join('')}</tr>`).join('')}</tbody></table></div></details>`);
 
     const t = s.tileDensity;
     html += group('Tile density', 'Nonoverlapping tiles summarize local open fractions. Partial edge tiles have the same weight as full tiles. Low variance can still hide very different patterns within each tile.', table(

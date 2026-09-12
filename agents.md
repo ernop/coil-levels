@@ -26,6 +26,10 @@ Generated `levels/*.coil` and the `levels/hard/` picks are tracked on
 purpose; do not commit smoke-test levels (`gen` writes a `.coil` into
 `levels/` on every run).
 
+Live viewer: <https://ernop.github.io/coil-levels/>. Pushing `master` publishes
+through `.github/workflows/pages.yml`; see [hosting instructions](HOSTING.md)
+for the static bundle, download paths, size limit, and verification procedure.
+
 The [board style collection](gallery/README.md) and
 [Board explorer](web/gallery.html) contain a controlled picker/seed survey
 and selected large specimens. `specimen` exports validated gzip boards and

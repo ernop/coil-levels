@@ -11,6 +11,15 @@ assert.equal(context.window.CoilStatsLedger.number(.00014),'1.4e-4');
 assert.equal(context.window.CoilStatsLedger.number(null),'—');
 const boards=context.window.COIL_STATS_LAB.boards,match=context.window.CoilGalleryBrowser.matches;
 const compare=context.window.CoilGalleryBrowser.compareBoards;
+const traitValue=context.window.CoilGalleryBrowser.traitValue;
+const squareFixture=[
+  {id:'large',title:'Large',width:100,height:50,traits:{squares:10,walls:5}},
+  {id:'small',title:'Small',width:4,height:3,traits:{squares:2,walls:1}}
+];
+assert.equal(traitValue(squareFixture[0],'squares'),20);
+assert.equal(traitValue(squareFixture[0],'walls'),10);
+assert.equal(traitValue(squareFixture[1],'squares'),200/3);
+assert.deepEqual([...squareFixture].sort((a,b)=>compare(a,b,'squares','desc')).map(b=>b.id),['small','large'],'Square sorting compares relative side lengths across rectangular boards');
 const orderFixture=[
   {id:'level-10',title:'Level 10',width:4,height:3,traits:{runs:2}},
   {id:'level-2',title:'Level 2',width:2,height:2,traits:{runs:null}},

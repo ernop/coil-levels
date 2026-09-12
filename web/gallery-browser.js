@@ -3,8 +3,9 @@ window.CoilGalleryBrowser = (() => {
   const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const $=id=>document.getElementById(id);
   const sizeKey=b=>b.width===b.height?String(b.width):`${b.width}x${b.height}`;
+  const traitValue=(board,key)=>board.traits[key]==null?null:['squares','walls'].includes(key)?100*board.traits[key]/Math.min(board.width,board.height):board.traits[key];
   function compareBoards(a,b,sort='id',order='asc') {
-    const value=board=>sort==='id'?board.width*board.height:sort==='name'?board.title:board.traits[sort];
+    const value=board=>sort==='id'?board.width*board.height:sort==='name'?board.title:traitValue(board,sort);
     const av=value(a),bv=value(b);
     if(av==null&&bv!=null)return 1;
     if(bv==null&&av!=null)return -1;
@@ -83,18 +84,18 @@ window.CoilGalleryBrowser = (() => {
     }
     function reveal(id){const b=data.boards.find(b=>b.id===id);if(!b)throw new Error('Unknown board '+id);$('lab-source').value='all';methodOptions();configurationOptions();$('lab-size').value='all';$('lab-collection').value='all';$('lab-search').value='';$('lab-has-solution').checked=false;apply(id);}
     function renderComparison() {
-      const xk=$('compare-x').value,yk=$('compare-y').value,svg=$('compare-scatter'),points=rows.filter(b=>b.traits[xk]!==null&&b.traits[yk]!==null);
+      const xk=$('compare-x').value,yk=$('compare-y').value,svg=$('compare-scatter'),points=rows.filter(b=>traitValue(b,xk)!==null&&traitValue(b,yk)!==null);
       if(!points.length){svg.innerHTML='<text x="40" y="60" fill="white">No matching measurements.</text>';$('configuration-ranges').innerHTML='';$('compare-caption').textContent='';return;}
-      let xmin=Math.min(...points.map(b=>b.traits[xk])),xmax=Math.max(...points.map(b=>b.traits[xk])),ymin=Math.min(...points.map(b=>b.traits[yk])),ymax=Math.max(...points.map(b=>b.traits[yk]));
+      let xmin=Math.min(...points.map(b=>traitValue(b,xk))),xmax=Math.max(...points.map(b=>traitValue(b,xk))),ymin=Math.min(...points.map(b=>traitValue(b,yk))),ymax=Math.max(...points.map(b=>traitValue(b,yk)));
       if(xmin===xmax){xmin-=.5;xmax+=.5;}if(ymin===ymax){ymin-=.5;ymax+=.5;}
       const x=v=>85+(v-xmin)/(xmax-xmin)*870,y=v=>290-(v-ymin)/(ymax-ymin)*255,n=window.CoilStatsLedger.number;
       let html='<title>Each point is one saved board. Select it to inspect that board.</title>';
       for(let i=0;i<=4;i++){const xv=xmin+(xmax-xmin)*i/4,yv=ymin+(ymax-ymin)*i/4;html+=`<path d="M85 ${y(yv)}H955" stroke="#35493e"/><text x="75" y="${y(yv)+4}" fill="#aec0b5" text-anchor="end" font-size="12">${n(yv)}</text><text x="${x(xv)}" y="313" fill="#aec0b5" text-anchor="middle" font-size="12">${n(xv)}</text>`;}
       html+=`<text x="500" y="345" text-anchor="middle" fill="white" font-size="14">${metrics[xk].name}</text><text x="85" y="18" fill="white" font-size="14">${metrics[yk].name}</text>`;
-      for(const b of points)html+=`<circle tabindex="0" role="button" data-board="${esc(b.id)}" data-color="${b.source.id==='original-game'?'#edbc78':'#a5eac6'}" aria-label="Inspect ${esc(b.id)}" cx="${x(b.traits[xk])}" cy="${y(b.traits[yk])}" r="${b.id===selectedId?7:4}" fill="${b.id===selectedId?'#00e9ff':b.source.id==='original-game'?'#edbc78':'#a5eac6'}" opacity=".8"><title>${esc(b.source.label)} · ${esc(b.title)}: ${n(b.traits[xk])}, ${n(b.traits[yk])}</title></circle>`;
+      for(const b of points)html+=`<circle tabindex="0" role="button" data-board="${esc(b.id)}" data-color="${b.source.id==='original-game'?'#edbc78':'#a5eac6'}" aria-label="Inspect ${esc(b.id)}" cx="${x(traitValue(b,xk))}" cy="${y(traitValue(b,yk))}" r="${b.id===selectedId?7:4}" fill="${b.id===selectedId?'#00e9ff':b.source.id==='original-game'?'#edbc78':'#a5eac6'}" opacity=".8"><title>${esc(b.source.label)} · ${esc(b.title)}: ${n(traitValue(b,xk))}, ${n(traitValue(b,yk))}</title></circle>`;
       svg.innerHTML=html;$('compare-caption').textContent=`${points.length.toLocaleString()} boards · gold: original game · green: coil-levels generator · cyan: selected. Coincident points can overlap.`;
       const groups=new Map();for(const b of points){if(!groups.has(b.configuration.id))groups.set(b.configuration.id,[]);groups.get(b.configuration.id).push(b);}
-      $('configuration-ranges').innerHTML=`<h3>${metrics[yk].name} by configuration</h3><p>Observed ranges summarize the saved boards at the selected sizes; they are not confidence intervals.</p><table><thead><tr><th>Configuration</th><th>Boards</th><th>Minimum</th><th>Mean</th><th>Maximum</th></tr></thead><tbody>${[...groups].map(([id,bs])=>{const vs=bs.map(b=>b.traits[yk]);return `<tr><th><button data-config="${id}">${esc(configurations.get(id).label)}</button></th><td>${bs.length}</td><td>${n(Math.min(...vs))}</td><td>${n(vs.reduce((a,b)=>a+b,0)/vs.length)}</td><td>${n(Math.max(...vs))}</td></tr>`;}).join('')}</tbody></table>`;
+      $('configuration-ranges').innerHTML=`<h3>${metrics[yk].name} by configuration</h3><p>Observed ranges summarize the saved boards at the selected sizes; they are not confidence intervals.</p><table><thead><tr><th>Configuration</th><th>Boards</th><th>Minimum</th><th>Mean</th><th>Maximum</th></tr></thead><tbody>${[...groups].map(([id,bs])=>{const vs=bs.map(b=>traitValue(b,yk));return `<tr><th><button data-config="${id}">${esc(configurations.get(id).label)}</button></th><td>${bs.length}</td><td>${n(Math.min(...vs))}</td><td>${n(vs.reduce((a,b)=>a+b,0)/vs.length)}</td><td>${n(Math.max(...vs))}</td></tr>`;}).join('')}</tbody></table>`;
     }
     for(const id of ['compare-x','compare-y']){$(id).innerHTML=Object.entries(metrics).map(([k,m])=>`<option value="${k}">${m.name}</option>`).join('');$(id).addEventListener('change',renderComparison);}
     $('compare-x').value='occupancy';$('compare-y').value='runs';
@@ -122,5 +123,5 @@ window.CoilGalleryBrowser = (() => {
     $('configuration-ranges').addEventListener('click',event=>{const button=event.target.closest('[data-config]');if(!button)return;methodOptions(configurations.get(button.dataset.config).method);configurationOptions(button.dataset.config);apply();});
     return {apply,select,reveal,state};
   }
-  return {init,matches,sizeKey,compareBoards};
+  return {init,matches,sizeKey,compareBoards,traitValue};
 })();

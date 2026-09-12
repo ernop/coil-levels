@@ -1,5 +1,11 @@
 # Board gallery and sampling collections
 
+[Open the live Board explorer](https://ernop.github.io/coil-levels/).
+Select a board, then use **Notes & files → Board** to download its level file.
+The **Legal solution** link appears when a saved solution exists. Gzip files
+can be decompressed for tools expecting plain board/solution text.
+[Publishing instructions](../HOSTING.md) cover GitHub Pages updates.
+
 Open [the Board explorer](../web/gallery.html) directly in a
 browser. The explorer uses the checked-in board index and local assets, with
 no remote libraries, API, or server requirement. A local server also works:
@@ -38,11 +44,18 @@ first, or A–Z/Z–A. Undefined measurements sort last. Filters and order are b
 
 The explorer fits the viewport, including the left chooser's internal scrolling
 area. Its controls stay fixed above the list. Both board views and all 11 headline
-measurements plus open-cell count stay visible while changing the lower detail tab.
+measurements plus wall percentage stay visible while changing the lower detail tab.
 The compact layout removes decorative panel padding and puts explanations and files
 under **Notes & files**. Stats use at most two decimal places, with two significant
 digits in scientific notation for nonzero magnitudes below 0.01. Exact integers,
 hover values, data attributes, and the complete saved record retain their precision.
+Neighbor counts are percentages of open cells. Run-length distributions are
+percentages of runs within each orientation; horizontal/vertical shares divide by
+the combined run count. Square placements divide by all possible placements of
+that size, including overlaps. Both distribution charts share a fixed 0–100% scale.
+Largest-square sides divide by the smaller board dimension in the headline stats,
+sorting, and comparisons. Dimensions, mean run lengths, and generation parameters
+retain their meaningful units. Each section's Notes explain the denominators.
 
 Close-up sizing uses a logarithmic slider for the whole range, an exact cell-count
 input, and −/+ buttons for one-cell adjustments. The window stays within the smaller
@@ -54,7 +67,10 @@ colors the complete visit order on boards through 1000×1000. **Sampled path** j
 every nth visited cell, always keeping both endpoints, with blue-to-orange color
 and direction arrows. These straight connecting lines summarize the route and may
 cross walls; they are not playable moves. The initial interval produces about 600
-points; the editable interval allows up to 50,001 points. Larger boards use sampled
+points; the exact number input and logarithmic slider allow up to 50,001 points.
+The slider gives more room to small intervals, and both controls stay synchronized.
+Paths redraw after a brief pause or on release to avoid replaying large solutions
+for every pointer movement. Larger boards use sampled
 paths, replaying the saved solution with the same legality checks and compact memory.
 The sample interval and display choice are preserved in bookmarked URLs.
 
@@ -151,7 +167,7 @@ tests, JavaScript syntax, and browser interactions also passed. The current Rele
 
 The [Board explorer](../web/gallery.html) shows one full board beside an adjustable zoom, with the same overlay in both views. Click or drag the full map to position the zoom; drag the zoom to pan, or use its coordinates and arrow keys. The CROP label and coordinates are printed on its canvas. Parameters & method shows the selected configuration and saved run; All stats contains the complete measurement ledger; Compare boards uses the same filtered specimens; Research & guide explains the generators and measurements.
 
-Four quick measurements appear below the viewer; all eleven overlays are available in View. The complete measurement ledger includes every saved field: degrees, both run histograms, all square placement counts and witnesses, tile summaries, six symmetry values, every edge layer, and generation metadata. Exact-value tables and the full-precision JSON remain expandable. Buttons jump to square witnesses or specific edge layers. The board, overlay, zoom size, and position are retained in the URL; older `?left=ID` links still work. No geometry is recomputed from the crop.
+All eleven measurements and wall percentage appear below the viewer; all eleven overlays are available in View. The complete measurement ledger includes every saved field: degrees, both run histograms, all square placement counts and witnesses, tile summaries, six symmetry values, every edge layer, and generation metadata. Exact-value tables and the full-precision JSON remain expandable. Buttons jump to square witnesses or specific edge layers. The board, overlay, zoom size, and position are retained in the URL; older `?left=ID` links still work. No geometry is recomputed from the crop.
 
 `node scripts/check_stats_lab.js` checks every packed board against its source cells and saved metadata, independently replays all 732 supplied solutions, compares overlay geometry against exact stats, checks each displayed field, rejects omitted fields, verifies all 296 source draws are present, and checks catalog assets and research links. Large-board accessor checks include runs crossing crop boundaries. `node scripts/check_gallery.js` checks configuration grouping, combined filters, bookmark redirects, and unified-page dependencies.
 
@@ -207,6 +223,7 @@ python3 scripts/build_catalog.py --require-complete
 python3 scripts/build_stats_lab.py
 node scripts/check_stats_lab.js
 node scripts/check_gallery.js
+node scripts/check_stat_proportions.js
 node scripts/check_solution_sampling.js
 # Reimport original-game and historical boards: see ARCHIVES.md.
 python3 scripts/build_picker_catalog.py --check
