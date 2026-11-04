@@ -172,6 +172,11 @@ written; a failure throws.
   in `ImageUtil.cs`: `SixLabors.Primitives` / `SixLabors.Shapes` types moved
   into `SixLabors.ImageSharp[.Drawing.Processing]`, `SystemFonts.Find` is now
   `SystemFonts.Get`, `DrawLines` is `DrawLine`.
+  **2026-11-03:** ImageSharp 3.2.0 now needs the same license key for
+  Release builds. It fixes six advisories against 3.1.12, published
+  2026-10-07: five in the TIFF codec and one in ICC profile parsing. None
+  reaches this program: it decodes only the PNGs it wrote itself, never
+  TIFF, and never reads ICC profile entries. It stays on 3.1.12.
 - **Font: `DejaVu Sans`** (`ImageUtil.FontFamilyName`), one name and no
   fallback list. The original was Comic Sans MS, which is not present on
   Linux; `SystemFonts.Get` throws if the family is missing, which is the

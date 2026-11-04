@@ -4,7 +4,7 @@ Mortal Coil level generator (C#, .NET 10) plus a separate Python meta-solver.
 
 Start with [`README.md`](README.md): build/run commands (subcommands `gen`,
 `solve`, `stats`, `bench`, `hardest`), layout, and the settled decisions
-(target framework, ImageSharp version and why not 4.x, font, repo-root path
+(target framework, ImageSharp version and why not 3.2+ or 4.x, font, repo-root path
 resolution, validation-throws, dead-end trimming, performance work).
 [`STYLE.md`](STYLE.md) defines the current goal: visual-style parameters and
 structural solving through explicit deductions and room analysis.
