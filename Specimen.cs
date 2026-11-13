@@ -5,11 +5,7 @@ using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.Fonts;
+using SkiaSharp;
 
 namespace coil
 {
@@ -36,11 +32,11 @@ namespace coil
             // Replay the persisted interchange, not just the in-memory strings.
             CoilFormat.Validate(ReadGzip(Path.Combine(dir, "level.board.gz")), ReadGzip(Path.Combine(dir, "level.solution.gz")));
             ImageUtil.SaveMap(level, Path.Combine(dir, "map.png"), 1);
-            using (var image = Image.Load(Path.Combine(dir, "map.png")))
+            using (var image = ImageUtil.Load(Path.Combine(dir, "map.png"), SKColorType.Gray8))
             {
                 SaveDetail(image, Path.Combine(dir, "detail.png"));
-                image.Mutate(c => c.Resize(480, 480, KnownResamplers.Box));
-                image.Save(Path.Combine(dir, "preview.png"));
+                using var preview = ImageUtil.ResizeBox(image, 480, 480);
+                ImageUtil.SavePng(preview, Path.Combine(dir, "preview.png"));
             }
             File.WriteAllText(Path.Combine(dir, "stats.pending.json"), JsonSerializer.Serialize(new {
                 schemaVersion = 1, side, seed, options = opts, generationSeconds, generationPolicy = GenerationQuality.Policy,
@@ -52,22 +48,25 @@ namespace coil
             Console.WriteLine($"{Path.GetFileName(dir)} complete in {sw.Elapsed.TotalSeconds:0.0}s");
             return 0;
         }
-        static void SaveDetail(Image map, string path)
+        static void SaveDetail(SKBitmap map, string path)
         {
             int width = Math.Min(128, map.Width), height = Math.Min(128, map.Height);
             int x = Math.Max(0, map.Width / 2 - 64), y = Math.Max(0, map.Height / 2 - 64);
             bool cropped = width < map.Width || height < map.Height;
-            using var crop = map.Clone(c => c.Crop(new Rectangle(x, y, width, height)).Resize(384, 384, KnownResamplers.NearestNeighbor));
-            using var frame = new Image<Rgba32>(512, 512, Color.ParseHex("14291f"));
-            var font = new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 17, FontStyle.Bold);
-            var small = new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 13);
-            frame.Mutate(c => c
-                .Fill(Color.ParseHex("a5eac6"), new RectangleF(60, 60, 392, 392))
-                .DrawImage(crop, new Point(64, 64), 1f)
-                .DrawText($"{(cropped ? "CROP" : "WHOLE BOARD")} · {width} x {height} of {map.Width} x {map.Height}", font, Color.White, new PointF(24, 18))
-                .DrawText($"x={x}..{x + width - 1}, y={y}..{y + height - 1} (zero-based)", small, Color.White, new PointF(24, 467))
-                .DrawText(cropped ? "The board continues beyond the marked crop frame." : "Every board cell is shown within the frame.", small, Color.White, new PointF(24, 488)));
-            frame.Save(path);
+            using var crop = ImageUtil.ResizeNearest(map, SKRectI.Create(x, y, width, height), 384, 384);
+            using var frame = ImageUtil.NewRgba(512, 512, ImageUtil.CropFrame);
+            using (var canvas = new SKCanvas(frame))
+            using (var font = ImageUtil.MakeFont(17, bold: true))
+            using (var small = ImageUtil.MakeFont(13))
+            using (var light = new SKPaint { Color = new SKColor(0xa5, 0xea, 0xc6) })
+            {
+                canvas.DrawRect(SKRect.Create(60, 60, 392, 392), light);
+                canvas.DrawBitmap(crop, 64, 64, ImageUtil.Unscaled);
+                ImageUtil.DrawText(canvas, $"{(cropped ? "CROP" : "WHOLE BOARD")} · {width} x {height} of {map.Width} x {map.Height}", font, SKColors.White, 24, 18);
+                ImageUtil.DrawText(canvas, $"x={x}..{x + width - 1}, y={y}..{y + height - 1} (zero-based)", small, SKColors.White, 24, 467);
+                ImageUtil.DrawText(canvas, cropped ? "The board continues beyond the marked crop frame." : "Every board cell is shown within the frame.", small, SKColors.White, 24, 488);
+            }
+            ImageUtil.SavePng(frame, path);
         }
 
         static int RefreshDetails(string[] args)
@@ -77,7 +76,7 @@ namespace coil
             foreach (var file in Directory.GetFiles(Path.GetFullPath(args[0], Paths.Root), "stats.json", SearchOption.AllDirectories))
             {
                 string dir = Path.GetDirectoryName(file);
-                using var map = Image.Load(Path.Combine(dir, "map.png"));
+                using var map = ImageUtil.Load(Path.Combine(dir, "map.png"), SKColorType.Gray8);
                 SaveDetail(map, Path.Combine(dir, "detail.png"));
                 count++;
             }

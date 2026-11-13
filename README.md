@@ -162,26 +162,29 @@ written; a failure throws.
 
 - **Target `net10.0`** (was `netcoreapp3.0`, end of life and not installable
   alongside the current SDK). No code change was required for the runtime.
-- **ImageSharp 3.1.12 + ImageSharp.Drawing 2.1.7.** The dependabot bump to
-  ImageSharp 2.1.8 had left Drawing at `1.0.0-beta0007` (compiled against
-  ImageSharp 1.0), which broke the build. ImageSharp 4 / Drawing 3 were
-  considered and rejected: they require a per-developer Six Labors license
-  key at build time (free tier exists, but it means a registration step on
-  every machine and a key file that must stay out of this public repo).
-  3.1 / 2.1 is the newest line without that requirement. API changes applied
-  in `ImageUtil.cs`: `SixLabors.Primitives` / `SixLabors.Shapes` types moved
-  into `SixLabors.ImageSharp[.Drawing.Processing]`, `SystemFonts.Find` is now
-  `SystemFonts.Get`, `DrawLines` is `DrawLine`.
-  **2026-11-03:** ImageSharp 3.2.0 now needs the same license key for
-  Release builds. It fixes six advisories against 3.1.12, published
-  2026-10-07: four in the TIFF codec, one in ICC profile parsing and one in
-  the `HistogramEqualization` processor. None reaches this program: it
-  decodes only the PNGs it wrote itself, never TIFF, never reads ICC profile
-  entries, and never applies histogram equalization. It stays on 3.1.12.
+- **Images: SkiaSharp 4.156.0 with `SkiaSharp.NativeAssets.Linux`**
+  (2026-11-13). MIT licensed, no license key, current with security fixes;
+  the native library needs fontconfig (`libfontconfig1`), present on desktop
+  Linux. Pixel arithmetic lives in `ImageUtil.cs` as explicit formulas, so
+  output never depends on a library's resampling: a nearest-neighbor resize
+  takes, for each output pixel, the source pixel at or before its left and
+  top edge (`(int)(x * (sourceWidth / (float)width))`); a box preview is the
+  mean of the source pixels whose centers lie within half an output pixel,
+  computed in integers and rounded half up; quarter turns and flips copy
+  bytes. Skia draws only text, lines, rectangles and unscaled bitmaps. Text
+  is placed by its line top: the baseline sits the font's OpenType
+  `sTypoAscender` plus half its `sTypoLineGap` below it (OS/2 table), the
+  line box the layouts are sized for. Decoding is strict: a map decodes as
+  8-bit gray, which refuses a color image, with no color conversion.
+  Verified at the switch by rendering all 14,988 PNGs of every image path
+  with both the previous renderer and this one: maps, tiles, previews and
+  crops are identical (one box-preview pixel differs by 1, at an exact .5
+  tie), and only antialiased text and lines differ.
 - **Font: `DejaVu Sans`** (`ImageUtil.FontFamilyName`), one name and no
   fallback list. The original was Comic Sans MS, which is not present on
-  Linux; `SystemFonts.Get` throws if the family is missing, which is the
-  intended behavior.
+  Linux. fontconfig answers a missing family with another one, so
+  `ImageUtil` throws when the family it gets back is not this one, which is
+  the intended behavior.
 - **Removed `Spark.NET`** (only a `using`, never called; .NET Framework-only
   package) and **`Microsoft.CodeAnalysis.FxCopAnalyzers`** (deprecated,
   produced 170+ style warnings and nothing else). **C5 to 3.0.0** (same

@@ -3,9 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.Json;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace coil
 {
@@ -32,14 +29,12 @@ namespace coil
                 }
                 else metadata["validation"] = "Archived layout checked for format and dimensions. No saved solution; solvability has not been independently verified by this import.";
                 metadata["stats"] = BoardCharacterization.Describe(width, height, walls);
-                using var map = new Image<L8>(width, height);
-                for (int y = 0; y < height; y++)
-                    for (int x = 0; x < width; x++) map[x, y] = new L8(walls[y * width + x] ? (byte)0 : (byte)255);
-                map.Save(Path.Combine(dir, "map.png"));
+                using var map = ImageUtil.WallMap(width, height, walls);
+                ImageUtil.SavePng(map, Path.Combine(dir, "map.png"));
                 // Preserve rectangular boards and keep cells square in previews.
                 double scale = Math.Min(1, 240.0 / Math.Max(width, height));
-                using var preview = map.Clone(c => c.Resize(Math.Max(1, (int)Math.Round(width * scale)), Math.Max(1, (int)Math.Round(height * scale)), KnownResamplers.Box));
-                preview.Save(Path.Combine(dir, "preview.png"));
+                using var preview = ImageUtil.ResizeBox(map, Math.Max(1, (int)Math.Round(width * scale)), Math.Max(1, (int)Math.Round(height * scale)));
+                ImageUtil.SavePng(preview, Path.Combine(dir, "preview.png"));
                 File.WriteAllText(Path.Combine(dir, "stats.json"), JsonSerializer.Serialize(metadata));
                 count++;
                 if (count % 250 == 0) Console.WriteLine($"Prepared {count} archived boards");

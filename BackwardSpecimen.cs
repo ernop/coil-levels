@@ -5,11 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using SixLabors.Fonts;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
+using SkiaSharp;
 
 namespace coil
 {
@@ -58,7 +54,7 @@ namespace coil
             var minY = path.Min(p => p / side);
             var maxX = path.Max(p => p % side);
             var maxY = path.Max(p => p / side);
-            var bounds = new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1);
+            var bounds = SKRectI.Create(minX, minY, maxX - minX + 1, maxY - minY + 1);
             var legalExtensions = Enumerable.Range(0, 4).Where(d => level.CanPrepend((Dir)d)).Select(d => CoilFormat.DirChar((Dir)d).ToString()).ToArray();
             Directory.CreateDirectory(dir);
             WriteGzip(Path.Combine(dir, "level.board.gz"), board);
@@ -75,27 +71,25 @@ namespace coil
                 persisted.SolutionString() != ReadGzip(Path.Combine(dir, "level.solution.gz")))
                 throw new InvalidDataException("Persisted recipe differs from exported board/solution.");
             CoilFormat.Validate(ReadGzip(Path.Combine(dir, "level.board.gz")), ReadGzip(Path.Combine(dir, "level.solution.gz")));
-            using var map = new Image<L8>(side, side);
-            map.ProcessPixelRows(accessor => {
-                for (var y = 0; y < side; y++)
-                {
-                    var row = accessor.GetRowSpan(y);
-                    for (var x = 0; x < side; x++) row[x] = new L8(walls[y * side + x] ? (byte)0 : (byte)255);
-                }
-            });
-            map.Save(Path.Combine(dir, "map.png"));
-            using (var preview = map.Clone(c => c.Resize(480, 480, side <= 480 ? KnownResamplers.NearestNeighbor : KnownResamplers.Box)))
-                preview.Save(Path.Combine(dir, "preview.png"));
+            using var map = ImageUtil.WallMap(side, side, walls);
+            ImageUtil.SavePng(map, Path.Combine(dir, "map.png"));
+            using (var preview = side <= 480 ? ImageUtil.ResizeNearest(map, 480, 480) : ImageUtil.ResizeBox(map, 480, 480))
+                ImageUtil.SavePng(preview, Path.Combine(dir, "preview.png"));
             if (generator != "backward-growth-v1") SaveDetail(map, Path.Combine(dir, "detail.png"));
             else SaveBackwardDetail(map, bounds, Path.Combine(dir, "detail.png"), "OPEN CELLS: WHITE / WALLS: BLACK");
-            using var colored = new Image<Rgb24>(side, side);
+            using var colored = ImageUtil.NewRgb(side, side);
+            var coloredPixels = colored.GetPixelSpan();
             for (var i = 0; i < path.Count; i++)
             {
                 var cell = path[path.Count - 1 - i];
                 var t = path.Count == 1 ? 0 : (double)i / (path.Count - 1);
-                colored[cell % side, cell / side] = new Rgb24((byte)(55 + 200 * t), (byte)(180 - 70 * t), (byte)(240 - 160 * t));
+                var pixel = coloredPixels.Slice(cell / side * colored.RowBytes + cell % side * 4, 4);
+                pixel[0] = (byte)(55 + 200 * t);
+                pixel[1] = (byte)(180 - 70 * t);
+                pixel[2] = (byte)(240 - 160 * t);
+                pixel[3] = 255;
             }
-            colored.Save(Path.Combine(dir, "solution-map.png"));
+            ImageUtil.SavePng(colored, Path.Combine(dir, "solution-map.png"));
             SaveBackwardDetail(colored, bounds, Path.Combine(dir, "solution-detail.png"), "FORWARD PLAY: BLUE START -> ORANGE FINISH");
             if (side > 128)
             {
@@ -124,24 +118,27 @@ namespace coil
             Console.WriteLine($"{Path.GetFileName(dir)}: {side}x{side}, open={level.Count}/{target}, bounds={bounds.Width}x{bounds.Height}, {metadata.stopReason}");
         }
 
-        static void SaveBackwardDetail(Image map, Rectangle occupied, string path, string legend)
+        static void SaveBackwardDetail(SKBitmap map, SKRectI occupied, string path, string legend)
         {
-            var x = Math.Max(0, occupied.X - 1);
-            var y = Math.Max(0, occupied.Y - 1);
+            var x = Math.Max(0, occupied.Left - 1);
+            var y = Math.Max(0, occupied.Top - 1);
             var cropWidth = Math.Min(map.Width, occupied.Right + 1) - x;
             var cropHeight = Math.Min(map.Height, occupied.Bottom + 1) - y;
             var scale = Math.Min(384.0 / cropWidth, 384.0 / cropHeight);
-            using var crop = map.Clone(c => c.Crop(new Rectangle(x, y, cropWidth, cropHeight))
-                .Resize(Math.Max(1, (int)(cropWidth * scale)), Math.Max(1, (int)(cropHeight * scale)), KnownResamplers.NearestNeighbor));
-            using var frame = new Image<Rgba32>(512, 512, Color.ParseHex("14291f"));
-            var font = new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 14);
-            frame.Mutate(c => c
-                .DrawImage(crop, new Point((512 - crop.Width) / 2, 64 + (384 - crop.Height) / 2), 1f)
-                .DrawText($"OCCUPIED-REGION CROP: {cropWidth} x {cropHeight}", font, Color.White, new PointF(18, 16))
-                .DrawText($"x={x}, y={y}; full board {map.Width} x {map.Height}", font, Color.White, new PointF(18, 38))
-                .DrawText(legend, new Font(SystemFonts.Get(ImageUtil.FontFamilyName), 12), Color.White, new PointF(18, 462))
-                .DrawText("Crop scale differs from the full-board preview.", font, Color.White, new PointF(18, 486)));
-            frame.Save(path);
+            using var crop = ImageUtil.ResizeNearest(map, SKRectI.Create(x, y, cropWidth, cropHeight),
+                Math.Max(1, (int)(cropWidth * scale)), Math.Max(1, (int)(cropHeight * scale)));
+            using var frame = ImageUtil.NewRgba(512, 512, ImageUtil.CropFrame);
+            using (var canvas = new SKCanvas(frame))
+            using (var font = ImageUtil.MakeFont(14))
+            using (var small = ImageUtil.MakeFont(12))
+            {
+                canvas.DrawBitmap(crop, (512 - crop.Width) / 2, 64 + (384 - crop.Height) / 2, ImageUtil.Unscaled);
+                ImageUtil.DrawText(canvas, $"OCCUPIED-REGION CROP: {cropWidth} x {cropHeight}", font, SKColors.White, 18, 16);
+                ImageUtil.DrawText(canvas, $"x={x}, y={y}; full board {map.Width} x {map.Height}", font, SKColors.White, 18, 38);
+                ImageUtil.DrawText(canvas, legend, small, SKColors.White, 18, 462);
+                ImageUtil.DrawText(canvas, "Crop scale differs from the full-board preview.", font, SKColors.White, 18, 486);
+            }
+            ImageUtil.SavePng(frame, path);
         }
     }
 }

@@ -4,9 +4,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
 
 namespace coil
 {
@@ -35,12 +32,10 @@ namespace coil
                     var (width, height, walls) = CoilFormat.ParseBoard(board);
                     var dir = Path.Combine(Paths.Root, "gallery", "sampling-viewer", Path.GetFileName(source), name);
                     Directory.CreateDirectory(dir);
-                    using var map = new Image<L8>(width, height);
-                    for (var y = 0; y < height; y++)
-                        for (var x = 0; x < width; x++) map[x, y] = new L8(walls[y * width + x] ? (byte)0 : (byte)255);
-                    map.Save(Path.Combine(dir, "map.png"));
-                    using (var preview = map.Clone(c => c.Resize(480, 480, KnownResamplers.NearestNeighbor)))
-                        preview.Save(Path.Combine(dir, "preview.png"));
+                    using var map = ImageUtil.WallMap(width, height, walls);
+                    ImageUtil.SavePng(map, Path.Combine(dir, "map.png"));
+                    using (var preview = ImageUtil.ResizeNearest(map, 480, 480))
+                        ImageUtil.SavePng(preview, Path.Combine(dir, "preview.png"));
                     SaveDetail(map, Path.Combine(dir, "detail.png"));
                     var metadata = new {
                         schemaVersion = 1, side = width,

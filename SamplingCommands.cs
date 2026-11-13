@@ -19,8 +19,8 @@ namespace coil
                     throw new ArgumentException("Expected reversible-path-v1 collection.");
                 if (data.RootElement.GetProperty("side").GetInt32() <= 128) continue;
                 var dir = Path.GetDirectoryName(file);
-                using var map = SixLabors.ImageSharp.Image.Load(Path.Combine(dir, "map.png"));
-                using var solution = SixLabors.ImageSharp.Image.Load(Path.Combine(dir, "solution-map.png"));
+                using var map = ImageUtil.Load(Path.Combine(dir, "map.png"), SkiaSharp.SKColorType.Gray8);
+                using var solution = ImageUtil.Load(Path.Combine(dir, "solution-map.png"), SkiaSharp.SKColorType.Rgba8888);
                 SaveDetail(map, Path.Combine(dir, "center-detail.png"));
                 SaveDetail(solution, Path.Combine(dir, "center-solution-detail.png"));
             }

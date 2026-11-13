@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-using SixLabors.ImageSharp;
-
 using static coil.Navigation;
 using System.Diagnostics;
 

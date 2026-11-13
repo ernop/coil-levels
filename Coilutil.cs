@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-using SixLabors.ImageSharp;
+using SkiaSharp;
 
 using static coil.Navigation;
 using static coil.Util;
@@ -13,7 +13,7 @@ namespace coil
 {
     public static class Coilutil
     {
-        private static Dictionary<string, Image> _Images = ImageUtil.GetImages();
+        private static Dictionary<string, SKBitmap> _Images = ImageUtil.GetImages();
 
         //for cmdline
         public static void Show(BaseLevel l)

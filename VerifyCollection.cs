@@ -4,8 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+using SkiaSharp;
 
 namespace coil
 {
@@ -30,24 +29,20 @@ namespace coil
                 string expected = JsonSerializer.Serialize(metadata.RootElement.GetProperty("stats"));
                 string actual = JsonSerializer.Serialize(BoardCharacterization.Describe(w, h, wall));
                 if (expected != actual) throw new InvalidDataException($"Characterization mismatch: {dir}");
-                using (var map = Image.Load<L8>(Path.Combine(dir, "map.png")))
+                using (var map = ImageUtil.Load(Path.Combine(dir, "map.png"), SKColorType.Gray8))
                 {
                     if (map.Width != w || map.Height != h) throw new InvalidDataException($"Map dimensions mismatch: {dir}");
-                    map.ProcessPixelRows(accessor => {
-                        for (int y = 0; y < h; y++)
-                        {
-                            var row = accessor.GetRowSpan(y);
-                            for (int x = 0; x < w; x++)
-                                if (row[x].PackedValue != (wall[y * w + x] ? 0 : 255)) throw new InvalidDataException($"Map cell mismatch: {dir} {x},{y}");
-                        }
-                    });
+                    ReadOnlySpan<byte> pixels = map.GetPixelSpan();
+                    for (int y = 0; y < h; y++)
+                        for (int x = 0; x < w; x++)
+                            if (pixels[y * map.RowBytes + x] != (wall[y * w + x] ? 0 : 255)) throw new InvalidDataException($"Map cell mismatch: {dir} {x},{y}");
                     VerifyDetail(map, dir);
                 }
                 foreach (var name in new[] { "detail.png", "preview.png" })
                 {
-                    var info = Image.Identify(Path.Combine(dir, name));
+                    var size = ImageUtil.Dimensions(Path.Combine(dir, name));
                     int side = name == "detail.png" ? 512 : 480;
-                    if (info.Width != side || info.Height != side) throw new InvalidDataException($"Invalid {name}: {dir}");
+                    if (size.Width != side || size.Height != side) throw new InvalidDataException($"Invalid {name}: {dir}");
                 }
                 done++;
                 if (done % 25 == 0 || w >= 5000) Console.WriteLine($"Verified {done}/{files.Length}: {Path.GetFileName(dir)}");
@@ -56,37 +51,39 @@ namespace coil
             return 0;
         }
 
-        static void VerifyDetail(Image<L8> map, string directory)
+        static void VerifyDetail(SKBitmap map, string directory)
         {
-            using var detail = Image.Load<Rgba32>(Path.Combine(directory, "detail.png"));
+            using var detail = ImageUtil.Load(Path.Combine(directory, "detail.png"), SKColorType.Rgba8888);
             if (detail.Width != 512 || detail.Height != 512)
                 throw new InvalidDataException($"Invalid detail dimensions: {directory}");
             // Caption regions must contain text over the baked-in frame, even when
             // the PNG is opened outside the HTML page. Do not depend on font rasterization.
-            var background = new Rgba32(0x14, 0x29, 0x1f);
-            if (!detail[0, 0].Equals(background) ||
+            if (detail.GetPixel(0, 0) != ImageUtil.CropFrame ||
                 !HasCaption(24, 18, 488, 44) || !HasCaption(24, 467, 488, 510))
                 throw new InvalidDataException($"Missing crop frame or caption: {directory}");
             if (map.Width >= 128 && map.Height >= 128)
             {
+                // Premultiplied bytes equal the stored color wherever alpha is 255, which every crop pixel must be.
+                ReadOnlySpan<byte> gray = map.GetPixelSpan(), rgba = detail.GetPixelSpan();
                 int sx = map.Width / 2 - 64, sy = map.Height / 2 - 64;
                 for (int y = 0; y < 384; y++)
                     for (int x = 0; x < 384; x++)
                     {
-                        byte expected = map[sx + x / 3, sy + y / 3].PackedValue;
-                        var actual = detail[64 + x, 64 + y];
-                        if (actual.R != expected || actual.G != expected || actual.B != expected || actual.A != 255)
+                        byte expected = gray[(sy + y / 3) * map.RowBytes + sx + x / 3];
+                        var actual = rgba.Slice((64 + y) * detail.RowBytes + (64 + x) * 4, 4);
+                        if (actual[0] != expected || actual[1] != expected || actual[2] != expected || actual[3] != 255)
                             throw new InvalidDataException($"Crop cell mismatch: {directory} {x},{y}");
                     }
             }
 
             bool HasCaption(int x0, int y0, int x1, int y1)
             {
+                ReadOnlySpan<byte> pixels = detail.GetPixelSpan();
                 int lightPixels = 0;
                 for (int y = y0; y < y1; y++) for (int x = x0; x < x1; x++)
                 {
-                    var p = detail[x, y];
-                    if (p.R > 150 && p.G > 150 && p.B > 150) lightPixels++;
+                    var p = pixels.Slice(y * detail.RowBytes + x * 4, 4);
+                    if (p[0] > 150 && p[1] > 150 && p[2] > 150) lightPixels++;
                 }
                 return lightPixels > 100;
             }
